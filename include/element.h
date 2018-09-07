@@ -7,5 +7,6 @@ public:
 
     Element(emscripten::val v);
     virtual ~Element();
+    static Element *create(emscripten::val v);
     void setAttribute(std::string qualifiedName, std::string value);
 };

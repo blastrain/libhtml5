@@ -3,6 +3,12 @@
 #include "html_source_element.h"
 #include "document.h"
 
+Document::Document(emscripten::val v) :
+    Node(v)
+{
+
+}
+
 emscripten::val Document::_document()
 {
     return emscripten::val::global("document");
@@ -22,4 +28,9 @@ Element *Document::createElement(std::string localName)
 HTMLElement *Document::body()
 {
     return HTMLElement::create(_document()["body"]);
+}
+
+Document *Document::create(emscripten::val v)
+{
+    return new Document(v);
 }

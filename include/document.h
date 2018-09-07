@@ -9,9 +9,9 @@ class HTMLElement;
 class Document : public Node {
 public:
 
-    Document();
+    Document(emscripten::val v);
     ~Document();
-
+    static Document *create(emscripten::val v);
     static Element *createElement(std::string localName);
     static HTMLElement *body();
 

@@ -9,6 +9,11 @@ Document::Document(emscripten::val v) :
 
 }
 
+Document::~Document()
+{
+
+}
+
 emscripten::val Document::_document()
 {
     return emscripten::val::global("document");

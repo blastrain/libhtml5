@@ -2,7 +2,11 @@ cmake_minimum_required (VERSION 3.0.2)
 
 include_directories(include)
 
-set(SOURCES src/event_target.cc
+set(SOURCES src/attr.cc
+            src/html_collection.cc
+            src/dom_token_list.cc
+            src/node_list.cc
+            src/event_target.cc
             src/event.cc
             src/node.cc
             src/element.cc

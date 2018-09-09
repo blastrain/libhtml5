@@ -16,7 +16,7 @@ static void createVideo()
     HTMLSourceElement *source = HTMLSourceElement::create();
     source->src = "http://clips.vorwaerts-gmbh.de/VfE_html5.mp4";
     video->appendChild(source);
-    static std::function<void(Event*)> f = [](Event *e){
+    static EventHandler f = [](Event *e){
         std::cout << "demo event fired!!!" << std::endl;
         std::cout << (std::string)e->type << std::endl;
         std::cout << e->bubbles << std::endl;
@@ -64,6 +64,7 @@ static AudioTrackList *toAudioTrackList(intptr_t ptr)
 EMSCRIPTEN_BINDINGS(createVideo) {
     emscripten::class_<EventTarget>("EventTarget")
         .property("_value", &EventTarget::getValue)
+        .function("addEventHandlerCallback", &EventTarget::addEventHandlerCallback)
         .function("addEventListenerCallback", &EventTarget::addEventListenerCallback);
     emscripten::class_<AudioTrackList>("AudioTrackList")
         .property("_value", &AudioTrackList::getValue)

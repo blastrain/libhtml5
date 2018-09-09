@@ -23,9 +23,24 @@ bool EventTarget::dispatchEvent(Event *event)
     return this->v.call<bool>("dispatchEvent", event->v);
 }
 
-void EventTarget::addEventListener(std::string type, std::function<void(Event*)> *callback, bool capture)
+void EventTarget::addEventListener(std::string type, EventHandler *handler, bool capture)
 {
-    this->listeners[type].push_back(callback);
+    if (!handler) return;
+
+    this->handlers[type].push_back(handler);
+    EM_ASM_({
+        const eventTarget = Module.toEventTarget($0);
+        const type = Module.toString($1);
+        const capture = $2;
+        eventTarget._value.addEventListener(type, function(e) { eventTarget.addEventHandlerCallback(e); }, capture);
+    }, this, type.c_str(), capture);
+}
+
+void EventTarget::addEventListener(std::string type, EventListener *listener, bool capture)
+{
+    if (!listener) return;
+
+    this->listeners[type].push_back(listener);
     EM_ASM_({
         const eventTarget = Module.toEventTarget($0);
         const type = Module.toString($1);
@@ -34,20 +49,40 @@ void EventTarget::addEventListener(std::string type, std::function<void(Event*)>
     }, this, type.c_str(), capture);
 }
 
-void EventTarget::addEventListenerCallback(emscripten::val v)
+void EventTarget::addEventHandlerCallback(emscripten::val v)
 {
     std::string type = v["type"].as<std::string>();
     Event *event = Event::create(v);
-    for (std::function<void(Event*)> *callback : this->listeners[type]) {
+    for (EventHandler *callback : this->handlers[type]) {
         (*callback)(event);
     }
 }
 
-void EventTarget::removeEventListener(std::string type, std::function<void(Event*)> *callback, bool capture)
+void EventTarget::addEventListenerCallback(emscripten::val v)
 {
-    std::vector<std::function<void(Event*)> *> removedCallbacks;
-    for (std::function<void(Event*)> *cb : this->listeners[type]) {
-        if (cb != callback) {
+    std::string type = v["type"].as<std::string>();
+    Event *event = Event::create(v);
+    for (EventListener *listener : this->listeners[type]) {
+        listener->handleEvent(event);
+    }
+}
+
+void EventTarget::removeEventListener(std::string type, EventHandler *handler, bool capture)
+{
+    std::vector<EventHandler *> removedCallbacks;
+    for (EventHandler *cb : this->handlers[type]) {
+        if (cb != handler) {
+            removedCallbacks.push_back(cb);
+        }
+    }
+    this->handlers[type] = removedCallbacks;
+}
+
+void EventTarget::removeEventListener(std::string type, EventListener *listener, bool capture)
+{
+    std::vector<EventListener *> removedCallbacks;
+    for (EventListener *cb : this->listeners[type]) {
+        if (cb != listener) {
             removedCallbacks.push_back(cb);
         }
     }

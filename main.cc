@@ -36,11 +36,51 @@ static EventTarget *toEventTarget(intptr_t ptr)
     return (EventTarget *)ptr;
 }
 
+static HTMLElement *toHTMLElement(intptr_t ptr)
+{
+    return (HTMLElement *)ptr;
+}
+
 EMSCRIPTEN_BINDINGS(createVideo) {
     emscripten::class_<EventTarget>("EventTarget")
         .property("_value", &EventTarget::getValue)
         .function("addEventListenerCallback", &EventTarget::addEventListenerCallback);
+    emscripten::class_<HTMLElement>("HTMLElement")
+        .property("_value", &HTMLElement::getValue)
+        .function("onAbortCallback", &HTMLElement::onAbortCallback)
+        .function("onAutoCompleteCallback", &HTMLElement::onAutoCompleteCallback)
+        .function("onAutoCompleteErrorCallback", &HTMLElement::onAutoCompleteErrorCallback)
+        .function("onBlurCallback", &HTMLElement::onBlurCallback)
+        .function("onCancelCallback", &HTMLElement::onCancelCallback)
+        .function("onCanplayCallback", &HTMLElement::onCanplayCallback)
+        .function("onCanplayThroughCallback", &HTMLElement::onCanplayThroughCallback)
+        .function("onChangeCallback", &HTMLElement::onChangeCallback)
+        .function("onClickCallback", &HTMLElement::onClickCallback)
+        .function("onCloseCallback", &HTMLElement::onCloseCallback)
+        .function("onContextMenuCallback", &HTMLElement::onContextMenuCallback)
+        .function("onCueChangeCallback", &HTMLElement::onCueChangeCallback)
+        .function("onDoubleClickCallback", &HTMLElement::onDoubleClickCallback)
+        .function("onDragCallback", &HTMLElement::onDragCallback)
+        .function("onDragEndCallback", &HTMLElement::onDragEndCallback)
+        .function("onDragEnterCallback", &HTMLElement::onDragEnterCallback)
+        .function("onDragExitCallback", &HTMLElement::onDragExitCallback)
+        .function("onDragLeaveCallback", &HTMLElement::onDragLeaveCallback)
+        .function("onDragOverCallback", &HTMLElement::onDragOverCallback)
+        .function("onDragStartCallback", &HTMLElement::onDragStartCallback)
+        .function("onDropCallback", &HTMLElement::onDropCallback)
+        .function("onDurationChangeCallback", &HTMLElement::onDurationChangeCallback)
+        .function("onEmptiedCallback", &HTMLElement::onEmptiedCallback)
+        .function("onEndedCallback", &HTMLElement::onEndedCallback)
+        .function("onErrorCallback", &HTMLElement::onErrorCallback)
+        .function("onFocusCallback", &HTMLElement::onFocusCallback)
+        .function("onInputCallback", &HTMLElement::onInputCallback)
+        .function("onInvalidCallback", &HTMLElement::onInvalidCallback)
+        .function("onKeyDownCallback", &HTMLElement::onKeyDownCallback)
+        .function("onKeyPressCallback", &HTMLElement::onKeyPressCallback)
+        .function("onKeyUpCallback", &HTMLElement::onKeyUpCallback)
+        .function("onLoadCallback", &HTMLElement::onLoadCallback);
     emscripten::function("createVideo", &createVideo);
     function("toEventTarget", &toEventTarget, emscripten::allow_raw_pointers());
+    function("toHTMLElement", &toHTMLElement, emscripten::allow_raw_pointers());
     function("toString", &toString, emscripten::allow_raw_pointers());
 }

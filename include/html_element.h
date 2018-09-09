@@ -1,6 +1,7 @@
 #pragma once
 
 #include "element.h"
+#include "event_handler.h"
 #include <functional>
 #include <emscripten/val.h>
 
@@ -10,9 +11,6 @@ class DOMSettableTokenList;
 class Event;
 class HTMLPropertiesCollection;
 class CSSStyleDeclaration;
-
-typedef std::function<void(Event*)> EventHandler;
-typedef std::function<void(Event*, std::string, unsigned long, unsigned long, void*)> OnErrorEventHandler;
 
 class HTMLElement : public Element {
 public:

@@ -4,6 +4,7 @@
 #include "html_video_element.h"
 #include "html_source_element.h"
 #include "html_image_element.h"
+#include "audio_track_list.h"
 #include "event.h"
 #include "event_target.h"
 #include <iostream>
@@ -55,10 +56,20 @@ static HTMLElement *toHTMLElement(intptr_t ptr)
     return (HTMLElement *)ptr;
 }
 
+static AudioTrackList *toAudioTrackList(intptr_t ptr)
+{
+    return (AudioTrackList *)ptr;
+}
+
 EMSCRIPTEN_BINDINGS(createVideo) {
     emscripten::class_<EventTarget>("EventTarget")
         .property("_value", &EventTarget::getValue)
         .function("addEventListenerCallback", &EventTarget::addEventListenerCallback);
+    emscripten::class_<AudioTrackList>("AudioTrackList")
+        .property("_value", &AudioTrackList::getValue)
+        .function("onAddTrackCallback", &AudioTrackList::onAddTrackCallback)
+        .function("onChangeCallback", &AudioTrackList::onChangeCallback)
+        .function("onRemoveTrackCallback", &AudioTrackList::onRemoveTrackCallback);
     emscripten::class_<HTMLElement>("HTMLElement")
         .property("_value", &HTMLElement::getValue)
         .function("onAbortCallback", &HTMLElement::onAbortCallback)

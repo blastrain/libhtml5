@@ -3,6 +3,8 @@
 #include "html_element.h"
 #include <string>
 
+class AudioTrackList;
+
 class HTMLMediaElement : public HTMLElement {
 public:
     typedef enum {
@@ -13,7 +15,14 @@ public:
         HAVE_ENOUGH_DATA  = 4,
     } READY_STATE;
 
-    void *audioTracks;
+    enum {
+        NETWORK_EMPTY     = 0,
+        NETWORK_IDLE      = 1,
+        NETWORK_LOADING   = 2,
+        NETWORK_NO_SOURCE = 3,
+    };
+
+    AudioTrackList *audioTracks;
     bool autoPlay;
     void *buffered;
     void *controller;

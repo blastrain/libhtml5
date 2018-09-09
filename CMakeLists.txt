@@ -3,6 +3,8 @@ cmake_minimum_required (VERSION 3.0.2)
 include_directories(include)
 
 set(SOURCES src/attr.cc
+            src/audio_track.cc
+            src/audio_track_list.cc
             src/html_collection.cc
             src/dom_token_list.cc
             src/node_list.cc

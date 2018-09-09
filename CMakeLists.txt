@@ -11,6 +11,7 @@ set(SOURCES src/attr.cc
             src/node.cc
             src/element.cc
             src/html_element.cc
+            src/html_image_element.cc
             src/html_media_element.cc
             src/document.cc
             src/html_video_element.cc

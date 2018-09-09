@@ -3,6 +3,7 @@
 #include "document.h"
 #include "html_video_element.h"
 #include "html_source_element.h"
+#include "html_image_element.h"
 #include "event.h"
 #include "event_target.h"
 #include <iostream>
@@ -24,6 +25,19 @@ static void createVideo()
     Document::body()->appendChild(video);
     Event *event = Event::create("demo");
     video->dispatchEvent(event);
+}
+
+static void createImage()
+{
+    HTMLImageElement *image = HTMLImageElement::create();
+    static EventHandler onload = [image](Event *e){
+        std::cout << "callback. onload" << std::endl;
+        std::cout << "width = " << image->width << std::endl;
+        std::cout << "height = " << image->height << std::endl;
+    };
+    image->onload = &onload;
+    image->src = "";
+    Document::body()->appendChild(image);
 }
 
 static emscripten::val toString(intptr_t ptr)
@@ -80,6 +94,7 @@ EMSCRIPTEN_BINDINGS(createVideo) {
         .function("onKeyUpCallback", &HTMLElement::onKeyUpCallback)
         .function("onLoadCallback", &HTMLElement::onLoadCallback);
     emscripten::function("createVideo", &createVideo);
+    emscripten::function("createImage", &createImage);
     function("toEventTarget", &toEventTarget, emscripten::allow_raw_pointers());
     function("toHTMLElement", &toHTMLElement, emscripten::allow_raw_pointers());
     function("toString", &toString, emscripten::allow_raw_pointers());

@@ -5,6 +5,12 @@ include_directories(include)
 set(SOURCES src/attr.cc
             src/audio_track.cc
             src/audio_track_list.cc
+            src/css_style_declaration.cc
+            src/css_rule.cc
+            src/css_rule_list.cc
+            src/style_sheet.cc
+            src/media_list.cc
+            src/time_ranges.cc
             src/html_collection.cc
             src/dom_token_list.cc
             src/node_list.cc

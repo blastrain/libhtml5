@@ -4,6 +4,7 @@
 #include <string>
 
 class AudioTrackList;
+class TimeRanges;
 
 class HTMLMediaElement : public HTMLElement {
 public:
@@ -22,9 +23,9 @@ public:
         NETWORK_NO_SOURCE = 3,
     };
 
-    AudioTrackList *audioTracks;
-    bool autoPlay;
-    void *buffered;
+    AudioTrackList *_audioTracks;
+    bool _autoPlay;
+    TimeRanges *_buffered;
     void *controller;
     bool controls;
     std::string crossOrigin;

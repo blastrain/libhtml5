@@ -1,6 +1,8 @@
 #include "event.h"
+#include "html_properties_collection.h"
 #include "html_menu_element.h"
 #include "html_element.h"
+#include "css_style_declaration.h"
 #include <emscripten/emscripten.h>
 
 HTMLElement::HTMLElement(emscripten::val v) :
@@ -930,79 +932,721 @@ void HTMLElement::onLoadCallback(emscripten::val e)
     (*this->_onload)(Event::create(e));
 }
 
-/*
-EventHandler *getOnLoadedData() const;
-void setOnLoadedData(EventHandler *value);
-EventHandler *getOnLoadedMetaData() const;
-void setOnLoadedMetaData(EventHandler *value);
-EventHandler *getOnLoadStart() const;
-void setOnLoadStart(EventHandler *value);
-EventHandler *getOnMouseDown() const;
-void setOnMouseDown(EventHandler *value);
-EventHandler *getOnMouseEnter() const;
-void setOnMouseEnter(EventHandler *value);
-EventHandler *getOnMouseLeave() const;
-void setOnMouseLeave(EventHandler *value);
-EventHandler *getOnMouseMove() const;
-void setOnMouseMove(EventHandler *value);
-EventHandler *getOnMouseOut() const;
-void setOnMouseOut(EventHandler *value);
-EventHandler *getOnMouseOver() const;
-void setOnMouseOver(EventHandler *value);
-EventHandler *getOnMouseUp() const;
-void setOnMouseUp(EventHandler *value);
-EventHandler *getOnMouseWheel() const;
-void setOnMouseWheel(EventHandler *value);
-EventHandler *getOnPause() const;
-void setOnPause(EventHandler *value);
-EventHandler *getOnPlay() const;
-void setOnPlay(EventHandler *value);
-EventHandler *getOnPlaying() const;
-void setOnPlaying(EventHandler *value);
-EventHandler *getOnProgress() const;
-void setOnProgress(EventHandler *value);
-EventHandler *getOnRateChange() const;
-void setOnRateChange(EventHandler *value);
-EventHandler *getOnReset() const;
-void setOnReset(EventHandler *value);
-EventHandler *getOnResize() const;
-void setOnResize(EventHandler *value);
-EventHandler *getOnScroll() const;
-void setOnScroll(EventHandler *value);
-EventHandler *getOnSeeked() const;
-void setOnSeeked(EventHandler *value);
-EventHandler *getOnSeeking() const;
-void setOnSeeking(EventHandler *value);
-EventHandler *getOnSelect() const;
-void setOnSelect(EventHandler *value);
-EventHandler *getOnShow() const;
-void setOnShow(EventHandler *value);
-EventHandler *getOnSort() const;
-void setOnSort(EventHandler *value);
-EventHandler *getOnStalled() const;
-void setOnStalled(EventHandler *value);
-EventHandler *getOnSubmit() const;
-void setOnSubmit(EventHandler *value);
-EventHandler *getOnSuspend() const;
-void setOnSuspend(EventHandler *value);
-EventHandler *getOnTimeUpdate() const;
-void setOnTimeUpdate(EventHandler *value);
-EventHandler *getOnToggle() const;
-void setOnToggle(EventHandler *value);
-EventHandler *getOnVolumeChange() const;
-void setOnVolumeChange(EventHandler *value);
-EventHandler *getOnWaiting() const;
-void setOnWaiting(EventHandler *value);
-HTMLPropertiesCollection *getProperties() const;
-void setProperties(HTMLPropertiesCollection *value);
-bool getSpellCheck() const;
-void setSpellCheck(bool value);
-CSSStyleDeclaration *getStyle() const;
-void setStyle(CSSStyleDeclaration *value);
-long getTabIndex() const;
-void setTabIndex(long value);
-std::string getTitle() const;
-void setTitle(std::string value);
-bool getTranslate() const;
-void setTranslate(bool value);
-*/
+EventHandler *HTMLElement::getOnLoadedData() const
+{
+    return this->_onloadeddata;
+}
+
+void HTMLElement::setOnLoadedData(EventHandler *value)
+{
+    this->_onloadeddata = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onloadeddata = function(e) { element.onLoadedDataCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onLoadedDataCallback(emscripten::val e)
+{
+    if (!this->_onloadeddata) return;
+
+    (*this->_onloadeddata)(Event::create(e));
+}
+    
+
+EventHandler *HTMLElement::getOnLoadedMetaData() const
+{
+    return this->_onloadedmetadata;
+}
+
+void HTMLElement::setOnLoadedMetaData(EventHandler *value)
+{
+    this->_onloadedmetadata = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onloadedmetadata = function(e) { element.onLoadedMetaDataCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onLoadedMetaDataCallback(emscripten::val e)
+{
+    if (!this->_onloadedmetadata) return;
+
+    (*this->_onloadedmetadata)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnLoadStart() const
+{
+    return this->_onloadstart;
+}
+
+void HTMLElement::setOnLoadStart(EventHandler *value)
+{
+    this->_onloadstart = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onloadstart = function(e) { element.onLoadStartCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onLoadStartCallback(emscripten::val e)
+{
+    if (!this->_onloadstart) return;
+
+    (*this->_onloadstart)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnMouseDown() const
+{
+    return this->_onmousedown;
+}
+
+void HTMLElement::setOnMouseDown(EventHandler *value)
+{
+    this->_onmousedown = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onmousedown = function(e) { element.onMouseDownCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onMouseDownCallback(emscripten::val e)
+{
+    if (!this->_onmousedown) return;
+
+    (*this->_onmousedown)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnMouseEnter() const
+{
+    return this->_onmouseenter;
+}
+
+void HTMLElement::setOnMouseEnter(EventHandler *value)
+{
+    this->_onmouseenter = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onmouseenter = function(e) { element.onMouseEnterCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onMouseEnterCallback(emscripten::val e)
+{
+    if (!this->_onmouseenter) return;
+
+    (*this->_onmouseenter)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnMouseLeave() const
+{
+    return this->_onmouseleave;
+}
+
+void HTMLElement::setOnMouseLeave(EventHandler *value)
+{
+    this->_onmouseleave = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onmouseleave = function(e) { element.onMouseLeaveCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onMouseLeaveCallback(emscripten::val e)
+{
+    if (!this->_onmouseleave) return;
+
+    (*this->_onmouseleave)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnMouseMove() const
+{
+    return this->_onmousemove;
+}
+
+void HTMLElement::setOnMouseMove(EventHandler *value)
+{
+    this->_onmousemove = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onmousemove = function(e) { element.onMouseMoveCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onMouseMoveCallback(emscripten::val e)
+{
+    if (!this->_onmousemove) return;
+
+    (*this->_onmousemove)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnMouseOut() const
+{
+    return this->_onmouseout;
+}
+
+void HTMLElement::setOnMouseOut(EventHandler *value)
+{
+    this->_onmouseout = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onmouseout = function(e) { element.onMouseOutCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onMouseOutCallback(emscripten::val e)
+{
+    if (!this->_onmouseout) return;
+
+    (*this->_onmouseout)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnMouseOver() const
+{
+    return this->_onmouseover;
+}
+
+void HTMLElement::setOnMouseOver(EventHandler *value)
+{
+    this->_onmouseover = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onmouseover = function(e) { element.onMouseOverCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onMouseOverCallback(emscripten::val e)
+{
+    if (!this->_onmouseover) return;
+
+    (*this->_onmouseover)(Event::create(e));
+}
+                                      
+EventHandler *HTMLElement::getOnMouseUp() const
+{
+    return this->_onmouseup;
+}
+
+void HTMLElement::setOnMouseUp(EventHandler *value)
+{
+    this->_onmouseup = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onmouseup = function(e) { element.onMouseUpCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onMouseUpCallback(emscripten::val e)
+{
+    if (!this->_onmouseup) return;
+
+    (*this->_onmouseup)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnMouseWheel() const
+{
+    return this->_onmousewheel;
+}
+
+void HTMLElement::setOnMouseWheel(EventHandler *value)
+{
+    this->_onmousewheel = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onmousewheel = function(e) { element.onMouseWheelCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onMouseWheelCallback(emscripten::val e)
+{
+    if (!this->_onmousewheel) return;
+
+    (*this->_onmousewheel)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnPause() const
+{
+    return this->_onpause;
+}
+
+void HTMLElement::setOnPause(EventHandler *value)
+{
+    this->_onpause = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onpause = function(e) { element.onPauseCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onPauseCallback(emscripten::val e)
+{
+    if (!this->_onpause) return;
+
+    (*this->_onpause)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnPlay() const
+{
+    return this->_onplay;
+}
+
+void HTMLElement::setOnPlay(EventHandler *value)
+{
+    this->_onplay = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onplay = function(e) { element.onPlayCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onPlayCallback(emscripten::val e)
+{
+    if (!this->_onplay) return;
+
+    (*this->_onplay)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnPlaying() const
+{
+    return this->_onplaying;
+}
+
+void HTMLElement::setOnPlaying(EventHandler *value)
+{
+    this->_onplaying = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onplaying = function(e) { element.onPlayingCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onPlayingCallback(emscripten::val e)
+{
+    if (!this->_onplaying) return;
+
+    (*this->_onplaying)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnProgress() const
+{
+    return this->_onprogress;
+}
+
+void HTMLElement::setOnProgress(EventHandler *value)
+{
+    this->_onprogress = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onprogress = function(e) { element.onProgressCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onProgressCallback(emscripten::val e)
+{
+    if (!this->_onprogress) return;
+
+    (*this->_onprogress)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnRateChange() const
+{
+    return this->_onratechange;
+}
+
+void HTMLElement::setOnRateChange(EventHandler *value)
+{
+    this->_onratechange = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onratechange = function(e) { element.onRateChangeCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onRateChangeCallback(emscripten::val e)
+{
+    if (!this->_onratechange) return;
+
+    (*this->_onratechange)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnReset() const
+{
+    return this->_onreset;
+}
+
+void HTMLElement::setOnReset(EventHandler *value)
+{
+    this->_onreset = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onreset = function(e) { element.onResetCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onResetCallback(emscripten::val e)
+{
+    if (!this->_onreset) return;
+
+    (*this->_onreset)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnResize() const
+{
+    return this->_onresize;
+}
+
+void HTMLElement::setOnResize(EventHandler *value)
+{
+    this->_onresize = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onresize = function(e) { element.onResizeCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onResizeCallback(emscripten::val e)
+{
+    if (!this->_onresize) return;
+
+    (*this->_onresize)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnScroll() const
+{
+    return this->_onscroll;
+}
+
+void HTMLElement::setOnScroll(EventHandler *value)
+{
+    this->_onscroll = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onscroll = function(e) { element.onScrollCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onScrollCallback(emscripten::val e)
+{
+    if (!this->_onscroll) return;
+
+    (*this->_onscroll)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnSeeked() const
+{
+    return this->_onseeked;
+}
+
+void HTMLElement::setOnSeeked(EventHandler *value)
+{
+    this->_onseeked = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onseeked = function(e) { element.onSeekedCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onSeekedCallback(emscripten::val e)
+{
+    if (!this->_onseeked) return;
+
+    (*this->_onseeked)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnSeeking() const
+{
+    return this->_onseeking;
+}
+
+void HTMLElement::setOnSeeking(EventHandler *value)
+{
+    this->_onseeking = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onseeking = function(e) { element.onSeekingCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onSeekingCallback(emscripten::val e)
+{
+    if (!this->_onseeking) return;
+
+    (*this->_onseeking)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnSelect() const
+{
+    return this->_onselect;
+}
+
+void HTMLElement::setOnSelect(EventHandler *value)
+{
+    this->_onselect = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onselect = function(e) { element.onSelectCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onSelectCallback(emscripten::val e)
+{
+    if (!this->_onselect) return;
+
+    (*this->_onselect)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnShow() const
+{
+    return this->_onshow;
+}
+
+void HTMLElement::setOnShow(EventHandler *value)
+{
+    this->_onshow = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onshow = function(e) { element.onShowCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onShowCallback(emscripten::val e)
+{
+    if (!this->_onshow) return;
+
+    (*this->_onshow)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnSort() const
+{
+    return this->_onsort;
+}
+
+void HTMLElement::setOnSort(EventHandler *value)
+{
+    this->_onsort = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onsort = function(e) { element.onSortCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onSortCallback(emscripten::val e)
+{
+    if (!this->_onsort) return;
+
+    (*this->_onsort)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnStalled() const
+{
+    return this->_onstalled;
+}
+
+void HTMLElement::setOnStalled(EventHandler *value)
+{
+    this->_onstalled = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onstalled = function(e) { element.onStalledCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onStalledCallback(emscripten::val e)
+{
+    if (!this->_onstalled) return;
+
+    (*this->_onstalled)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnSubmit() const
+{
+    return this->_onsubmit;
+}
+
+void HTMLElement::setOnSubmit(EventHandler *value)
+{
+    this->_onsubmit = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onsubmit = function(e) { element.onSubmitCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onSubmitCallback(emscripten::val e)
+{
+    if (!this->_onsubmit) return;
+
+    (*this->_onsubmit)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnSuspend() const
+{
+    return this->_onsuspend;
+}
+
+void HTMLElement::setOnSuspend(EventHandler *value)
+{
+    this->_onsuspend = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onsuspend = function(e) { element.onSuspendCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onSuspendCallback(emscripten::val e)
+{
+    if (!this->_onsuspend) return;
+
+    (*this->_onsuspend)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnTimeUpdate() const
+{
+    return this->_ontimeupdate;
+}
+
+void HTMLElement::setOnTimeUpdate(EventHandler *value)
+{
+    this->_ontimeupdate = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.ontimeupdate = function(e) { element.onTimeUpdateCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onTimeUpdateCallback(emscripten::val e)
+{
+    if (!this->_ontimeupdate) return;
+
+    (*this->_ontimeupdate)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnToggle() const
+{
+    return this->_ontoggle;
+}
+
+void HTMLElement::setOnToggle(EventHandler *value)
+{
+    this->_ontoggle = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.ontoggle = function(e) { element.onToggleCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onToggleCallback(emscripten::val e)
+{
+    if (!this->_ontoggle) return;
+
+    (*this->_ontoggle)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnVolumeChange() const
+{
+    return this->_onvolumechange;
+}
+
+void HTMLElement::setOnVolumeChange(EventHandler *value)
+{
+    this->_onvolumechange = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onvolumechange = function(e) { element.onVolumeChangeCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onVolumeChangeCallback(emscripten::val e)
+{
+    if (!this->_onvolumechange) return;
+
+    (*this->_onvolumechange)(Event::create(e));
+}
+
+EventHandler *HTMLElement::getOnWaiting() const
+{
+    return this->_onwaiting;
+}
+
+void HTMLElement::setOnWaiting(EventHandler *value)
+{
+    this->_onwaiting = value;
+    EM_ASM_({
+        const element = Module.toHTMLElement($0);
+        element._value.onwaiting = function(e) { element.onWaitingCallback(e); };
+    }, this);
+}
+
+void HTMLElement::onWaitingCallback(emscripten::val e)
+{
+    if (!this->_onwaiting) return;
+
+    (*this->_onwaiting)(Event::create(e));
+}
+
+HTMLPropertiesCollection *HTMLElement::getProperties() const
+{
+    return HTMLPropertiesCollection::create(this->v["properties"]);
+}
+
+void HTMLElement::setProperties(HTMLPropertiesCollection *value)
+{
+    this->_properties = value;
+    this->v.set("properties", value->v);
+}
+
+bool HTMLElement::getSpellCheck() const
+{
+    return this->v["spellCheck"].as<bool>();
+}
+
+void HTMLElement::setSpellCheck(bool value)
+{
+    this->_spellcheck = value;
+    this->v.set("spellCheck", value);
+}
+
+CSSStyleDeclaration *HTMLElement::getStyle() const
+{
+    return CSSStyleDeclaration::create(this->v["style"]);
+}
+
+void HTMLElement::setStyle(CSSStyleDeclaration *value)
+{
+    this->_style = value;
+    this->v.set("style", value->v);
+}
+
+long HTMLElement::getTabIndex() const
+{
+    return this->v["tabIndex"].as<long>();
+}
+
+void HTMLElement::setTabIndex(long value)
+{
+    this->_tabIndex = value;
+    this->v.set("tabIndex", value);
+}
+
+std::string HTMLElement::getTitle() const
+{
+    return this->v["title"].as<std::string>();
+}
+
+void HTMLElement::setTitle(std::string value)
+{
+    this->_title = value;
+    this->v.set("title", value);
+}
+
+bool HTMLElement::getTranslate() const
+{
+    return this->v["translate"].as<bool>();
+}
+
+void HTMLElement::setTranslate(bool value)
+{
+    this->_translate = value;
+    this->v.set("translate", value);
+}
+

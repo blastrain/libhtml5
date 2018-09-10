@@ -8,6 +8,7 @@ set(SOURCES src/attr.cc
             src/css_style_declaration.cc
             src/css_rule.cc
             src/css_rule_list.cc
+            src/date.cc
             src/style_sheet.cc
             src/text_track.cc
             src/text_track_list.cc

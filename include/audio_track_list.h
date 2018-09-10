@@ -15,7 +15,7 @@ public:
     AudioTrackList(emscripten::val v);
     virtual ~AudioTrackList();
     emscripten::val getValue() const;
-    AudioTrackList *create(emscripten::val v);
+    static AudioTrackList *create(emscripten::val v);
     AudioTrack *getter(unsigned long index);
     AudioTrack *getTrackById(std::string id);
     unsigned long getLength() const;

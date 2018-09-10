@@ -15,7 +15,7 @@ public:
     VideoTrackList(emscripten::val v);
     virtual ~VideoTrackList();
     emscripten::val getValue() const;
-    VideoTrackList *create(emscripten::val v);
+    static VideoTrackList *create(emscripten::val v);
     VideoTrack *getter(unsigned long index);
     VideoTrack *getTrackById(std::string id);
     unsigned long getLength() const;

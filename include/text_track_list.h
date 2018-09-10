@@ -15,7 +15,7 @@ public:
     TextTrackList(emscripten::val v);
     virtual ~TextTrackList();
     emscripten::val getValue() const;
-    TextTrackList *create(emscripten::val v);
+    static TextTrackList *create(emscripten::val v);
     TextTrack *getter(unsigned long index);
     TextTrack *getTrackById(std::string id);
 

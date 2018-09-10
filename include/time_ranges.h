@@ -9,7 +9,7 @@ public:
 
     TimeRanges(emscripten::val v);
     virtual ~TimeRanges();
-    TimeRanges *create(emscripten::val v);
+    static TimeRanges *create(emscripten::val v);
     double start(unsigned long index);
     double end(unsigned long index);
 

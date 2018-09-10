@@ -10,6 +10,7 @@ set(SOURCES src/attr.cc
             src/css_rule_list.cc
             src/style_sheet.cc
             src/media_list.cc
+            src/media_controller.cc
             src/time_ranges.cc
             src/html_collection.cc
             src/dom_token_list.cc

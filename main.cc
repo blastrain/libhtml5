@@ -5,6 +5,7 @@
 #include "html_source_element.h"
 #include "html_image_element.h"
 #include "audio_track_list.h"
+#include "media_controller.h"
 #include "event.h"
 #include "event_target.h"
 #include <iostream>
@@ -56,6 +57,11 @@ static HTMLElement *toHTMLElement(intptr_t ptr)
     return (HTMLElement *)ptr;
 }
 
+static MediaController *toMediaController(intptr_t ptr)
+{
+    return (MediaController *)ptr;
+}
+
 static AudioTrackList *toAudioTrackList(intptr_t ptr)
 {
     return (AudioTrackList *)ptr;
@@ -71,6 +77,22 @@ EMSCRIPTEN_BINDINGS(createVideo) {
         .function("onAddTrackCallback", &AudioTrackList::onAddTrackCallback)
         .function("onChangeCallback", &AudioTrackList::onChangeCallback)
         .function("onRemoveTrackCallback", &AudioTrackList::onRemoveTrackCallback);
+    emscripten::class_<MediaController>("MediaController")
+        .property("_value", &MediaController::getValue)
+        .function("onCanplayCallback", &MediaController::onCanplayCallback)
+        .function("onCanplayThroughCallback", &MediaController::onCanplayThroughCallback)
+        .function("onDurationChangeCallback", &MediaController::onDurationChangeCallback)
+        .function("onEmptiedCallback", &MediaController::onEmptiedCallback)
+        .function("onEndedCallback", &MediaController::onEndedCallback)
+        .function("onLoadedDataCallback", &MediaController::onLoadedDataCallback)
+        .function("onLoadedMetaDataCallback", &MediaController::onLoadedMetaDataCallback)
+        .function("onPauseCallback", &MediaController::onPauseCallback)
+        .function("onPlayCallback", &MediaController::onPlayCallback)
+        .function("onPlayingCallback", &MediaController::onPlayingCallback)
+        .function("onRateChangeCallback", &MediaController::onRateChangeCallback)
+        .function("onTimeUpdateCallback", &MediaController::onTimeUpdateCallback)
+        .function("onVolumeChangeCallback", &MediaController::onVolumeChangeCallback)
+        .function("onWaitingCallback", &MediaController::onWaitingCallback);
     emscripten::class_<HTMLElement>("HTMLElement")
         .property("_value", &HTMLElement::getValue)
         .function("onAbortCallback", &HTMLElement::onAbortCallback)
@@ -104,7 +126,38 @@ EMSCRIPTEN_BINDINGS(createVideo) {
         .function("onKeyDownCallback", &HTMLElement::onKeyDownCallback)
         .function("onKeyPressCallback", &HTMLElement::onKeyPressCallback)
         .function("onKeyUpCallback", &HTMLElement::onKeyUpCallback)
-        .function("onLoadCallback", &HTMLElement::onLoadCallback);
+        .function("onLoadCallback", &HTMLElement::onLoadCallback)
+        .function("onLoadedDataCallback", &HTMLElement::onLoadedDataCallback)
+        .function("onLoadedMetaDataCallback", &HTMLElement::onLoadedMetaDataCallback)
+        .function("onLoadStartCallback", &HTMLElement::onLoadStartCallback)
+        .function("onMouseDownCallback", &HTMLElement::onMouseDownCallback)
+        .function("onMouseEnterCallback", &HTMLElement::onMouseEnterCallback)
+        .function("onMouseLeaveCallback", &HTMLElement::onMouseLeaveCallback)
+        .function("onMouseMoveCallback", &HTMLElement::onMouseMoveCallback)
+        .function("onMouseOutCallback", &HTMLElement::onMouseOutCallback)
+        .function("onMouseOverCallback", &HTMLElement::onMouseOverCallback)
+        .function("onMouseUpCallback", &HTMLElement::onMouseUpCallback)
+        .function("onMouseWheelCallback", &HTMLElement::onMouseWheelCallback)
+        .function("onPauseCallback", &HTMLElement::onPauseCallback)
+        .function("onPlayCallback", &HTMLElement::onPlayCallback)
+        .function("onPlayingCallback", &HTMLElement::onPlayingCallback)
+        .function("onProgressCallback", &HTMLElement::onProgressCallback)
+        .function("onRateChangeCallback", &HTMLElement::onRateChangeCallback)
+        .function("onResetCallback", &HTMLElement::onResetCallback)
+        .function("onResizeCallback", &HTMLElement::onResizeCallback)
+        .function("onScrollCallback", &HTMLElement::onScrollCallback)
+        .function("onSeekedCallback", &HTMLElement::onSeekedCallback)
+        .function("onSeekingCallback", &HTMLElement::onSeekingCallback)
+        .function("onSelectCallback", &HTMLElement::onSelectCallback)
+        .function("onShowCallback", &HTMLElement::onShowCallback)
+        .function("onSortCallback", &HTMLElement::onSortCallback)
+        .function("onStalledCallback", &HTMLElement::onStalledCallback)
+        .function("onSubmitCallback", &HTMLElement::onSubmitCallback)
+        .function("onSuspendCallback", &HTMLElement::onSuspendCallback)
+        .function("onTimeUpdateCallback", &HTMLElement::onTimeUpdateCallback)
+        .function("onToggleCallback", &HTMLElement::onToggleCallback)
+        .function("onVolumeChangeCallback", &HTMLElement::onVolumeChangeCallback)
+        .function("onWaitingCallback", &HTMLElement::onWaitingCallback);
     emscripten::function("createVideo", &createVideo);
     emscripten::function("createImage", &createImage);
     function("toEventTarget", &toEventTarget, emscripten::allow_raw_pointers());

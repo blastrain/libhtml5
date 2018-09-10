@@ -45,7 +45,7 @@ public:
     void pause();
     void play();
     void unpause();
-
+    emscripten::val getValue() const;
     TimeRanges *getBuffered() const;
     void setBuffered(TimeRanges *value);
     double getCurrentTime() const;
@@ -56,9 +56,9 @@ public:
     void setDuration(double value);
     bool getMuted() const;
     void setMuted(bool value);
-    EventHandler *getOnCancel() const;
-    void setOnCancel(EventHandler *value);
-    void onCancelCallback(emscripten::val e);
+    EventHandler *getOnCanplay() const;
+    void setOnCanplay(EventHandler *value);
+    void onCanplayCallback(emscripten::val e);
     EventHandler *getOnCanplayThrough() const;
     void setOnCanplayThrough(EventHandler *value);
     void onCanplayThroughCallback(emscripten::val e);

@@ -5,6 +5,9 @@
 #include "html_source_element.h"
 #include "html_image_element.h"
 #include "audio_track_list.h"
+#include "text_track.h"
+#include "text_track_list.h"
+#include "text_track_cue.h"
 #include "media_controller.h"
 #include "event.h"
 #include "event_target.h"
@@ -67,6 +70,21 @@ static AudioTrackList *toAudioTrackList(intptr_t ptr)
     return (AudioTrackList *)ptr;
 }
 
+static TextTrackList *toTextTrackList(intptr_t ptr)
+{
+    return (TextTrackList *)ptr;
+}
+
+static TextTrack *toTextTrack(intptr_t ptr)
+{
+    return (TextTrack *)ptr;
+}
+
+static TextTrackCue *toTextTrackCue(intptr_t ptr)
+{
+    return (TextTrackCue *)ptr;
+}
+
 EMSCRIPTEN_BINDINGS(createVideo) {
     emscripten::class_<EventTarget>("EventTarget")
         .property("_value", &EventTarget::getValue)
@@ -77,6 +95,18 @@ EMSCRIPTEN_BINDINGS(createVideo) {
         .function("onAddTrackCallback", &AudioTrackList::onAddTrackCallback)
         .function("onChangeCallback", &AudioTrackList::onChangeCallback)
         .function("onRemoveTrackCallback", &AudioTrackList::onRemoveTrackCallback);
+    emscripten::class_<TextTrackList>("TextTrackList")
+        .property("_value", &TextTrackList::getValue)
+        .function("onAddTrackCallback", &TextTrackList::onAddTrackCallback)
+        .function("onChangeCallback", &TextTrackList::onChangeCallback)
+        .function("onRemoveTrackCallback", &TextTrackList::onRemoveTrackCallback);
+    emscripten::class_<TextTrack>("TextTrack")
+        .property("_value", &TextTrack::getValue)
+        .function("onCueChangeCallback", &TextTrack::onCueChangeCallback);
+    emscripten::class_<TextTrackCue>("TextTrackCue")
+        .property("_value", &TextTrackCue::getValue)
+        .function("onEnterCallback", &TextTrackCue::onEnterCallback)
+        .function("onExitCallback", &TextTrackCue::onExitCallback);
     emscripten::class_<MediaController>("MediaController")
         .property("_value", &MediaController::getValue)
         .function("onCanplayCallback", &MediaController::onCanplayCallback)

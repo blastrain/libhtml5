@@ -9,8 +9,13 @@ set(SOURCES src/attr.cc
             src/css_rule.cc
             src/css_rule_list.cc
             src/style_sheet.cc
+            src/text_track.cc
+            src/text_track_list.cc
+            src/text_track_cue.cc
+            src/text_track_cue_list.cc
             src/media_list.cc
             src/media_controller.cc
+            src/media_error.cc
             src/time_ranges.cc
             src/html_collection.cc
             src/dom_token_list.cc

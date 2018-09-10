@@ -3,18 +3,27 @@
 #include "html_element.h"
 #include <string>
 
+#include "text_track.h"
+
 class AudioTrackList;
 class TimeRanges;
+class MediaController;
+class MediaError;
+class TextTrackList;
+class VideoTrackList;
+class TextTrack;
+class CanPlayTypeResult;
+class Date;
 
 class HTMLMediaElement : public HTMLElement {
 public:
-    typedef enum {
+    enum {
         HAVE_NOTHING      = 0,
         HAVE_METADATA     = 1,
         HAVE_CURRENT_DATA = 2,
         HAVE_FUTURE_DATA  = 3,
         HAVE_ENOUGH_DATA  = 4,
-    } READY_STATE;
+    };
 
     enum {
         NETWORK_EMPTY     = 0,
@@ -26,51 +35,42 @@ public:
     AudioTrackList *_audioTracks;
     bool _autoPlay;
     TimeRanges *_buffered;
-    void *controller;
-    bool controls;
-    std::string crossOrigin;
-    std::string currentSrc;
+    MediaController *_controller;
+    bool _controls;
+    std::string _crossOrigin;
+    std::string _currentSrc;
     double _currentTime;
-    bool defaultMuted;
-    double defaultPlaybackRate;
-    double duration;
+    bool _defaultMuted;
+    double _defaultPlaybackRate;
+    double _duration;
     bool _ended;
-    void *error;
-    bool loop;
-    std::string mediaGroup;
-    void *mediaKeys;
-    bool muted;
-    unsigned short networkState;
+    MediaError *_error;
+    bool _loop;
+    std::string _mediaGroup;
+    bool _muted;
+    unsigned short _networkState;
     bool _paused;
-    double playbackRate;
-    void *played;
-    std::string preload;
-    bool preservePitch;
-    READY_STATE _readyState;
-    void *seekable;
-    bool seeking;
-    std::string skinId;
+    double _playbackRate;
+    TimeRanges *_played;
+    std::string _preload;
+    unsigned short _readyState;
+    TimeRanges *_seekable;
+    bool _seeking;
     std::string _src;
-    void *srcObject;
-    double volume;
-    void *textTracks;
-    void *videoTracks;
+    TextTrackList *_textTracks;
+    VideoTrackList *_videoTracks;
+    double _volume;
 
     HTMLMediaElement(emscripten::val v);
     virtual ~HTMLMediaElement();
     static HTMLMediaElement *create();
-    void addTextTrack();
-    bool canPlayType();
-    void fastSeek();
+    static HTMLMediaElement *create(emscripten::val v);
+    TextTrack *addTextTrack(TextTrackKind *kind);
+    TextTrack *addTextTrack(TextTrackKind *kind, std::string label, std::string language);
+    CanPlayTypeResult *canPlayType(std::string type);
+    void fastSeek(double time);
+    Date *getStartDate();
     void load();
     void pause();
     void play();
-    void setMediaKeys();
-    void setSkinId();
-    READY_STATE readyState();
-    bool paused();
-    bool ended();
-    double currentTime();
-    void src(std::string value);
-    std::string src();
 };

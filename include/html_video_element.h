@@ -4,26 +4,55 @@
 
 class HTMLVideoElement : public HTMLMediaElement {
 public:
-    double _width;
     double _height;
-    double _videoWidth;
-    double _videoHeight;
     std::string _poster;
-    bool _complete;
-    std::string _pixiId;
+    double _videoHeight;
+    double _videoWidth;
+    double _width;
     
     HTMLVideoElement(emscripten::val v);
     ~HTMLVideoElement();
     static HTMLVideoElement *create();
     static HTMLVideoElement *create(emscripten::val v);
-    void removeEventListener(std::string event, std::function<void(void*)> *fn, void *context = NULL);
-    double width();
-    void width(double value);
-    double videoWidth();
-    double height();
-    void height(double value);
-    double videoHeight();
-    std::string poster();
-    bool complete();
-    void complete(bool value);
+    double getHeight() const;
+    void setHeight(double value);
+    std::string getPoster() const;
+    void setPoster(std::string value);
+    double getVideoHeight() const;
+    void setVideoHeight(double value);
+    double getVideoWidth() const;
+    void setVideoWidth(double value);
+    double getWidth() const;
+    void setWidth(double value);
+
+    struct {
+        HTMLVideoElement &self;
+        void operator=(double value) { self.setHeight(value); };
+        operator double() { return self.getHeight(); };
+    } height{*this};
+
+    struct {
+        HTMLVideoElement &self;
+        void operator=(std::string value) { self.setPoster(value); };
+        operator std::string() { return self.getPoster(); };
+    } poster{*this};
+
+    struct {
+        HTMLVideoElement &self;
+        void operator=(double value) { self.setVideoHeight(value); };
+        operator double() { return self.getVideoHeight(); };
+    } videoHeight{*this};
+
+    struct {
+        HTMLVideoElement &self;
+        void operator=(double value) { self.setVideoWidth(value); };
+        operator double() { return self.getVideoWidth(); };
+    } videoWidth{*this};
+
+    struct {
+        HTMLVideoElement &self;
+        void operator=(double value) { self.setWidth(value); };
+        operator double() { return self.getWidth(); };
+    } width{*this};
+
 };

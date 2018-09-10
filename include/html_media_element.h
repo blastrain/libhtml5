@@ -12,8 +12,12 @@ class MediaError;
 class TextTrackList;
 class VideoTrackList;
 class TextTrack;
-class CanPlayTypeResult;
 class Date;
+
+enum class CanPlayTypeResult {
+    MAYBE,
+    PROBABLY,
+};
 
 class HTMLMediaElement : public HTMLElement {
 public:
@@ -65,9 +69,9 @@ public:
     virtual ~HTMLMediaElement();
     static HTMLMediaElement *create();
     static HTMLMediaElement *create(emscripten::val v);
-    TextTrack *addTextTrack(TextTrackKind *kind);
-    TextTrack *addTextTrack(TextTrackKind *kind, std::string label, std::string language);
-    CanPlayTypeResult *canPlayType(std::string type);
+    TextTrack *addTextTrack(TextTrackKind kind);
+    TextTrack *addTextTrack(TextTrackKind kind, std::string label, std::string language);
+    CanPlayTypeResult canPlayType(std::string type);
     void fastSeek(double time);
     Date *getStartDate();
     void load();

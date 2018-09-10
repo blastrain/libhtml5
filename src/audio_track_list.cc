@@ -55,7 +55,7 @@ void AudioTrackList::setOnAddTrack(EventHandler *value)
 {
     this->_onaddtrack = value;
     EM_ASM_({
-        const track = Module.toAudioTrack($0);
+        const track = Module.toAudioTrackList($0);
         track._value.onaddtrack = function(e) { track.onAddTrackCallback(e); };
     }, this);
 }
@@ -76,7 +76,7 @@ void AudioTrackList::setOnChange(EventHandler *value)
 {
     this->_onchange = value;
     EM_ASM_({
-        const track = Module.toAudioTrack($0);
+        const track = Module.toAudioTrackList($0);
         track._value.onchange = function(e) { track.onChangeCallback(e); };
     }, this);
 }
@@ -97,7 +97,7 @@ void AudioTrackList::setOnRemoveTrack(EventHandler *value)
 {
     this->_onremovetrack = value;
     EM_ASM_({
-        const track = Module.toAudioTrack($0);
+        const track = Module.toAudioTrackList($0);
         track._value.onremovetrack = function(e) { track.onRemoveTrackCallback(e); };
     }, this);
 }

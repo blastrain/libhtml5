@@ -13,6 +13,8 @@ set(SOURCES src/attr.cc
             src/text_track_list.cc
             src/text_track_cue.cc
             src/text_track_cue_list.cc
+            src/video_track_list.cc
+            src/video_track.cc
             src/media_list.cc
             src/media_controller.cc
             src/media_error.cc

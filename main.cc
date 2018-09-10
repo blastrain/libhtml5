@@ -8,6 +8,7 @@
 #include "text_track.h"
 #include "text_track_list.h"
 #include "text_track_cue.h"
+#include "video_track_list.h"
 #include "media_controller.h"
 #include "event.h"
 #include "event_target.h"
@@ -75,6 +76,11 @@ static TextTrackList *toTextTrackList(intptr_t ptr)
     return (TextTrackList *)ptr;
 }
 
+static VideoTrackList *toVideoTrackList(intptr_t ptr)
+{
+    return (VideoTrackList *)ptr;
+}
+
 static TextTrack *toTextTrack(intptr_t ptr)
 {
     return (TextTrack *)ptr;
@@ -100,6 +106,11 @@ EMSCRIPTEN_BINDINGS(createVideo) {
         .function("onAddTrackCallback", &TextTrackList::onAddTrackCallback)
         .function("onChangeCallback", &TextTrackList::onChangeCallback)
         .function("onRemoveTrackCallback", &TextTrackList::onRemoveTrackCallback);
+    emscripten::class_<VideoTrackList>("VideoTrackList")
+        .property("_value", &VideoTrackList::getValue)
+        .function("onAddTrackCallback", &VideoTrackList::onAddTrackCallback)
+        .function("onChangeCallback", &VideoTrackList::onChangeCallback)
+        .function("onRemoveTrackCallback", &VideoTrackList::onRemoveTrackCallback);
     emscripten::class_<TextTrack>("TextTrack")
         .property("_value", &TextTrack::getValue)
         .function("onCueChangeCallback", &TextTrack::onCueChangeCallback);

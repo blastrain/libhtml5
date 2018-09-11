@@ -14,7 +14,7 @@ Event::~Event()
 
 Event *Event::create(std::string type)
 {
-    Event *event = new Event(HTML5_NEW_PRIMITIVE_INSTANCE(Event));
+    Event *event = new Event(HTML5_NEW_PRIMITIVE_INSTANCE(Event, type));
     event->autorelease();
     return event;
 }

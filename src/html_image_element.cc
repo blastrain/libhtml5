@@ -1,4 +1,5 @@
 #include "html_image_element.h"
+#include <iostream>
 
 HTMLImageElement::HTMLImageElement(emscripten::val v) :
     HTMLElement(v)
@@ -13,7 +14,7 @@ HTMLImageElement::~HTMLImageElement()
 
 HTMLImageElement *HTMLImageElement::create()
 {
-    auto image = new HTMLImageElement(HTML5_NEW_PRIMITIVE_INSTANCE("Image"));
+    HTMLImageElement *image = new HTMLImageElement(HTML5_NEW_PRIMITIVE_INSTANCE(Image));
     image->autorelease();
     return image;
 }

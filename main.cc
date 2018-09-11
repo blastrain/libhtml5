@@ -28,22 +28,24 @@ static void createVideo()
         std::cout << e->timeStamp << std::endl;
     };
     video->addEventListener("demo", &f);
-    Document::create()->body()->appendChild(video);
+    Document::create()->body->appendChild(video);
     Event *event = Event::create("demo");
     video->dispatchEvent(event);
 }
 
-static void createImage()
+static void createImage(std::string url)
 {
     HTMLImageElement *image = HTMLImageElement::create();
     static EventHandler onload = [image](Event *e){
         std::cout << "callback. onload" << std::endl;
         std::cout << "width = " << image->width << std::endl;
         std::cout << "height = " << image->height << std::endl;
+        std::cout << "naturalWidth = " << image->naturalWidth << std::endl;
+        std::cout << "naturalHeight = " << image->naturalHeight << std::endl;
     };
     image->onload = &onload;
-    image->src = "";
-    Document::create()->body()->appendChild(image);
+    image->src = url;
+    Document::create()->body->appendChild(image);
 }
 
 static emscripten::val toString(intptr_t ptr)

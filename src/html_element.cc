@@ -18,7 +18,9 @@ HTMLElement::~HTMLElement()
 
 HTMLElement *HTMLElement::create(emscripten::val v)
 {
-    return new HTMLElement(v);
+    HTMLElement *e = new HTMLElement(v);
+    e->autorelease();
+    return e;
 }
 
 void HTMLElement::blur()

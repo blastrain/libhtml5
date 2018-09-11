@@ -12,7 +12,9 @@ MediaError::~MediaError()
 
 MediaError *MediaError::create(emscripten::val v)
 {
-    return new MediaError(v);
+    MediaError *me = new MediaError(v);
+    me->autorelease();
+    return me;
 }
 
 unsigned short MediaError::getCode() const

@@ -1,8 +1,10 @@
 #pragma once
 
+#include "object.h"
+
 class Node;
 
-class NodeList {
+class NodeList : public Object {
 public:
     emscripten::val v;
     unsigned long _length;

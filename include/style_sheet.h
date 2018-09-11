@@ -1,12 +1,13 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 #include <string>
 
 class MediaList;
 class Element;
 
-class StyleSheet {
+class StyleSheet : public Object {
 public:
     emscripten::val v;
     bool _disabled;

@@ -13,7 +13,9 @@ CSSRule::~CSSRule()
 
 CSSRule *CSSRule::create(emscripten::val v)
 {
-    return new CSSRule(v);
+    CSSRule *rule = new CSSRule(v);
+    rule->autorelease();
+    return rule;
 }
 
 std::string CSSRule::getCSSText() const

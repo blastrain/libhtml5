@@ -14,7 +14,9 @@ HTMLSourceElement::~HTMLSourceElement()
 
 HTMLSourceElement *HTMLSourceElement::create(emscripten::val v)
 {
-    return new HTMLSourceElement(v);
+    HTMLSourceElement *source = new HTMLSourceElement(v);
+    source->autorelease();
+    return source;
 }
 
 HTMLSourceElement *HTMLSourceElement::create()

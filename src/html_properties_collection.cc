@@ -13,5 +13,7 @@ HTMLPropertiesCollection::~HTMLPropertiesCollection()
 
 HTMLPropertiesCollection *HTMLPropertiesCollection::create(emscripten::val v)
 {
-    return new HTMLPropertiesCollection(v);
+    auto c = new HTMLPropertiesCollection(v);
+    c->autorelease();
+    return c;
 }

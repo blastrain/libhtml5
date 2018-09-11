@@ -14,7 +14,9 @@ HTMLCollection::~HTMLCollection()
 
 HTMLCollection *HTMLCollection::create(emscripten::val v)
 {
-    return new HTMLCollection(v);
+    HTMLCollection *c = new HTMLCollection(v);
+    c->autorelease();
+    return c;
 }
 
 HTMLCollection *HTMLCollection::create()
@@ -22,6 +24,7 @@ HTMLCollection *HTMLCollection::create()
     emscripten::val klass = emscripten::val::global("HTMLCollection");
     emscripten::val v = klass.new_();
     HTMLCollection *c = new HTMLCollection(v);
+    c->autorelease();
     return c;
 }
 

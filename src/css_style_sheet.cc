@@ -14,7 +14,9 @@ CSSStyleSheet::~CSSStyleSheet()
 
 CSSStyleSheet *CSSStyleSheet::create(emscripten::val v)
 {
-    return new CSSStyleSheet(v);
+    CSSStyleSheet *sheet = new CSSStyleSheet(v);
+    sheet->autorelease();
+    return sheet;
 }
 
 void CSSStyleSheet::deleteRule(unsigned long index)

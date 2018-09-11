@@ -12,7 +12,9 @@ DOMTokenList::~DOMTokenList()
 
 DOMTokenList *DOMTokenList::create(emscripten::val v)
 {
-    return new DOMTokenList(v);
+    DOMTokenList *list = new DOMTokenList(v);
+    list->autorelease();
+    return list;
 }
 
 void DOMTokenList::add(std::vector<std::string> tokens)

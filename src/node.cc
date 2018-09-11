@@ -16,6 +16,7 @@ Node::~Node()
 Node *Node::create(emscripten::val v)
 {
     Node *node = new Node(v);
+    node->autorelease();
     return node;
 }
 

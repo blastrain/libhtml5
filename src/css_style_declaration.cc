@@ -13,7 +13,9 @@ CSSStyleDeclaration::~CSSStyleDeclaration()
 
 CSSStyleDeclaration *CSSStyleDeclaration::create(emscripten::val v)
 {
-    return new CSSStyleDeclaration(v);
+    CSSStyleDeclaration *decl = new CSSStyleDeclaration(v);
+    decl->autorelease();
+    return decl;
 }
 
 std::string CSSStyleDeclaration::getPropertyPriority(std::string property)

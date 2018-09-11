@@ -14,7 +14,9 @@ HTMLVideoElement::~HTMLVideoElement()
 
 HTMLVideoElement *HTMLVideoElement::create(emscripten::val v)
 {
-    return new HTMLVideoElement(v);
+    HTMLVideoElement *video = new HTMLVideoElement(v);
+    video->autorelease();
+    return video;
 }
 
 HTMLVideoElement *HTMLVideoElement::create()

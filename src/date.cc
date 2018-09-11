@@ -13,48 +13,64 @@ Date::~Date()
 Date *Date::create()
 {
     emscripten::val klass = emscripten::val::global("Date");
-    return new Date(klass.new_());
+    Date *d = new Date(klass.new_());
+    d->autorelease();
+    return d;
 }
 
 Date *Date::create(emscripten::val v)
 {
-    return new Date(v);
+    Date *d = new Date(v);
+    d->autorelease();
+    return d;
 }
 
 Date *Date::create(int year, int month)
 {
     emscripten::val klass = emscripten::val::global("Date");
-    return new Date(klass.new_(year, month));
+    Date *d = new Date(klass.new_(year, month));
+    d->autorelease();
+    return d;
 }
 
 Date *Date::create(int year, int month, int date)
 {
     emscripten::val klass = emscripten::val::global("Date");
-    return new Date(klass.new_(year, month, date));
+    Date *d = new Date(klass.new_(year, month, date));
+    d->autorelease();
+    return d;
 }
 
 Date *Date::create(int year, int month, int date, int hours)
 {
     emscripten::val klass = emscripten::val::global("Date");
-    return new Date(klass.new_(year, month, date, hours));
+    Date *d = new Date(klass.new_(year, month, date, hours));
+    d->autorelease();
+    return d;
 }
 
 Date *Date::create(int year, int month, int date, int hours, int minutes)
 {
     emscripten::val klass = emscripten::val::global("Date");
-    return new Date(klass.new_(year, month, date, hours, minutes));
+    Date *d = new Date(klass.new_(year, month, date, hours, minutes));
+    d->autorelease();
+    return d;
 }
 
 Date *Date::create(int year, int month, int date, int hours, int minutes, int seconds)
 {
     emscripten::val klass = emscripten::val::global("Date");
-    return new Date(klass.new_(year, month, date, hours, minutes, seconds));
+    Date *d = new Date(klass.new_(year, month, date, hours, minutes, seconds));
+    d->autorelease();
+    return d;
 }
 
 Date *Date::create(int year, int month, int date, int hours, int minutes, int seconds, int ms)
 {
     emscripten::val klass = emscripten::val::global("Date");
-    return new Date(klass.new_(year, month, date, hours, minutes, seconds, ms));
+    Date *d = new Date(klass.new_(year, month, date, hours, minutes, seconds, ms));
+    d->autorelease();
+    return d;
 }
 
 Date *Date::now()

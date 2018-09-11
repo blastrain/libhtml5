@@ -14,7 +14,9 @@ NodeList::~NodeList()
 
 NodeList *NodeList::create(emscripten::val v)
 {
-    return new NodeList(v);
+    NodeList *nl = new NodeList(v);
+    nl->autorelease();
+    return nl;
 }
 
 Node *NodeList::item(unsigned long index)

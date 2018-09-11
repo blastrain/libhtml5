@@ -1,10 +1,11 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 #include <string>
 #include <vector>
 
-class DOMTokenList {
+class DOMTokenList : public Object {
 public:
     emscripten::val v;
     unsigned long _length;

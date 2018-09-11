@@ -1,10 +1,11 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 
 class CSSRule;
 
-class CSSRuleList {
+class CSSRuleList : public Object {
 public:
     emscripten::val v;
     unsigned long _length;

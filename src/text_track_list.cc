@@ -17,7 +17,9 @@ TextTrackList::~TextTrackList()
 
 TextTrackList *TextTrackList::create(emscripten::val v)
 {
-    return new TextTrackList(v);
+    TextTrackList *trackList = new TextTrackList(v);
+    trackList->autorelease();
+    return trackList;
 }
 
 emscripten::val TextTrackList::getValue() const

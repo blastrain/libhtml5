@@ -12,14 +12,18 @@ Attr::~Attr()
 
 Attr *Attr::create(emscripten::val v)
 {
-    return new Attr(v);
+    Attr *attr = new Attr(v);
+    attr->autorelease();
+    return attr;
 }
 
 Attr *Attr::create()
 {
     emscripten::val _Attr = emscripten::val::global("Attr");
     emscripten::val v = _Attr.new_();
-    return new Attr(v);
+    Attr *attr = new Attr(v);
+    attr->autorelease();
+    return attr;
 }
 
 std::string Attr::getLocalName()

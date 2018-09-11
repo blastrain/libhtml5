@@ -13,7 +13,9 @@ TextTrackCueList::~TextTrackCueList()
 
 TextTrackCueList *TextTrackCueList::create(emscripten::val v)
 {
-    return new TextTrackCueList(v);
+    auto list = new TextTrackCueList(v);
+    list->autorelease();
+    return list;
 }
 
 TextTrackCue *TextTrackCueList::getCueById(std::string id)

@@ -12,7 +12,9 @@ TimeRanges::~TimeRanges()
 
 TimeRanges *TimeRanges::create(emscripten::val v)
 {
-    return new TimeRanges(v);
+    TimeRanges *tr = new TimeRanges(v);
+    tr->autorelease();
+    return tr;
 }
 
 double TimeRanges::start(unsigned long index)

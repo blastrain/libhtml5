@@ -15,7 +15,9 @@ EventTarget::~EventTarget()
 
 EventTarget *EventTarget::create(emscripten::val v)
 {
-    return new EventTarget(v);
+    EventTarget *et = new EventTarget(v);
+    et->autorelease();
+    return et;
 }
 
 bool EventTarget::dispatchEvent(Event *event)

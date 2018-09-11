@@ -16,12 +16,16 @@ Event *Event::create(std::string type)
 {
     emscripten::val _Event = emscripten::val::global("Event");
     emscripten::val v = _Event.new_(emscripten::val(type));
-    return new Event(v);
+    Event *event = new Event(v);
+    event->autorelease();
+    return event;
 }
 
 Event *Event::create(emscripten::val v)
 {
-    return new Event(v);
+    Event *event = new Event(v);
+    event->autorelease();
+    return event;
 }
 
 void Event::initEvent(std::string type, bool bubbles, bool cancelable)

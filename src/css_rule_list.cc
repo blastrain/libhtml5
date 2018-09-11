@@ -13,7 +13,9 @@ CSSRuleList::~CSSRuleList()
 
 CSSRuleList *CSSRuleList::create(emscripten::val v)
 {
-    return new CSSRuleList(v);
+    CSSRuleList *ruleList = new CSSRuleList(v);
+    ruleList->autorelease();
+    return ruleList;
 }
 
 CSSRule *CSSRuleList::item(unsigned long index)

@@ -1,12 +1,13 @@
 #pragma once
 
+#include "object.h"
 #include <string>
 #include <time.h>
 #include <emscripten/val.h>
 
 class EventTarget;
 
-class Event {
+class Event : public Object {
 public:
     enum {
         NONE            = 0,

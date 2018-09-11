@@ -17,7 +17,9 @@ AudioTrackList::~AudioTrackList()
 
 AudioTrackList *AudioTrackList::create(emscripten::val v)
 {
-    return new AudioTrackList(v);
+    AudioTrackList *trackList = new AudioTrackList(v);
+    trackList->autorelease();
+    return trackList;
 }
 
 emscripten::val AudioTrackList::getValue() const

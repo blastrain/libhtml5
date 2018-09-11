@@ -2,7 +2,10 @@ cmake_minimum_required (VERSION 3.0.2)
 
 include_directories(include)
 
-set(SOURCES src/attr.cc
+set(SOURCES src/array.cc
+            src/auto_release_pool.cc
+            src/object.cc
+            src/attr.cc
             src/audio_track.cc
             src/audio_track_list.cc
             src/css_style_declaration.cc

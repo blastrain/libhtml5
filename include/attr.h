@@ -1,9 +1,10 @@
 #pragma once
 
+#include "object.h"
 #include <string>
 #include <emscripten/val.h>
 
-class Attr {
+class Attr : public Object {
 public:
     emscripten::val v;
     std::string _localName;

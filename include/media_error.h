@@ -1,8 +1,9 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 
-class MediaError {
+class MediaError : public Object {
 public:
 
     enum {

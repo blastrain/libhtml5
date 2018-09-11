@@ -16,7 +16,9 @@ TextTrack::~TextTrack()
 
 TextTrack *TextTrack::create(emscripten::val v)
 {
-    return new TextTrack(v);
+    TextTrack *track = new TextTrack(v);
+    track->autorelease();
+    return track;
 }
 
 emscripten::val TextTrack::getValue() const

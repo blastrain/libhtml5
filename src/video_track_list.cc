@@ -17,7 +17,9 @@ VideoTrackList::~VideoTrackList()
 
 VideoTrackList *VideoTrackList::create(emscripten::val v)
 {
-    return new VideoTrackList(v);
+    VideoTrackList *trackList = new VideoTrackList(v);
+    trackList->autorelease();
+    return trackList;
 }
 
 emscripten::val VideoTrackList::getValue() const

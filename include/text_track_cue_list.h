@@ -1,11 +1,12 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 #include <string>
 
 class TextTrackCue;
 
-class TextTrackCueList {
+class TextTrackCueList : public Object {
 public:
     emscripten::val v;
     unsigned long _length;

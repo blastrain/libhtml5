@@ -1,9 +1,10 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 #include <string>
 
-class MediaList {
+class MediaList : public Object {
 public:
     emscripten::val v;
     unsigned long _length;

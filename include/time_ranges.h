@@ -1,8 +1,9 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 
-class TimeRanges {
+class TimeRanges : public Object {
 public:
     emscripten::val v;
     unsigned long _length;

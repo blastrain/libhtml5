@@ -12,7 +12,9 @@ MediaList::~MediaList()
 
 MediaList *MediaList::create(emscripten::val v)
 {
-    return new MediaList(v);
+    MediaList *ml = new MediaList(v);
+    ml->autorelease();
+    return ml;
 }
 
 void MediaList::appendMedium(std::string medium)

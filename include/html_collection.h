@@ -1,10 +1,11 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 
 class Element;
 
-class HTMLCollection {
+class HTMLCollection : public Object {
 public:
     emscripten::val v;
     unsigned long _length;

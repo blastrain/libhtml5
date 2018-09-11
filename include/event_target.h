@@ -6,12 +6,13 @@
 #include <map>
 #include <vector>
 
+#include "object.h"
 #include "event_handler.h"
 #include "event_listener.h"
 
 class Event;
 
-class EventTarget {
+class EventTarget : public Object {
 public:
     emscripten::val v;
 

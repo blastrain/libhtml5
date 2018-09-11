@@ -1,11 +1,12 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 #include <string>
 
 class CSSRule;
 
-class CSSStyleDeclaration {
+class CSSStyleDeclaration : public Object {
 public:
     emscripten::val v;
     std::string _cssFloat;

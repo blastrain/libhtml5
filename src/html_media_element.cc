@@ -20,7 +20,9 @@ HTMLMediaElement::~HTMLMediaElement()
 
 HTMLMediaElement *HTMLMediaElement::create(emscripten::val v)
 {
-    return new HTMLMediaElement(v);
+    HTMLMediaElement *media = new HTMLMediaElement(v);
+    media->autorelease();
+    return media;
 }
 
 TextTrack *HTMLMediaElement::addTextTrack(TextTrackKind kind)

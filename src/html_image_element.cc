@@ -14,18 +14,24 @@ HTMLImageElement::~HTMLImageElement()
 HTMLImageElement *HTMLImageElement::create()
 {
     emscripten::val klass = emscripten::val::global("Image");
-    return new HTMLImageElement(klass.new_());
+    HTMLImageElement *image = new HTMLImageElement(klass.new_());
+    image->autorelease();
+    return image;
 }
 
 HTMLImageElement *HTMLImageElement::create(emscripten::val v)
 {
-    return new HTMLImageElement(v);
+    HTMLImageElement *image = new HTMLImageElement(v);
+    image->autorelease();
+    return image;
 }
 
 HTMLImageElement *HTMLImageElement::create(unsigned long width, unsigned long height)
 {
     emscripten::val klass = emscripten::val::global("Image");
-    return new HTMLImageElement(klass.new_(width, height));
+    HTMLImageElement *image = new HTMLImageElement(klass.new_(width, height));
+    image->autorelease();
+    return image;
 }
 
 std::string HTMLImageElement::getAlt() const

@@ -1,11 +1,12 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 #include <string>
 
 class CSSStyleSheet;
 
-class CSSRule {
+class CSSRule : public Object {
 public:
 
     enum {

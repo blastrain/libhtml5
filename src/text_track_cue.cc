@@ -15,7 +15,9 @@ TextTrackCue::~TextTrackCue()
 
 TextTrackCue *TextTrackCue::create(emscripten::val v)
 {
-    return new TextTrackCue(v);
+    TextTrackCue *trackCue = new TextTrackCue(v);
+    trackCue->autorelease();
+    return trackCue;
 }
 
 emscripten::val TextTrackCue::getValue() const

@@ -12,7 +12,9 @@ VideoTrack::~VideoTrack()
 
 VideoTrack *VideoTrack::create(emscripten::val v)
 {
-    return new VideoTrack(v);
+    VideoTrack *track = new VideoTrack(v);
+    track->autorelease();
+    return track;
 }
 
 std::string VideoTrack::getId() const

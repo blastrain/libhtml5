@@ -1,9 +1,10 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 #include <string>
 
-class Date {
+class Date : public Object {
 public:
     emscripten::val v;
 

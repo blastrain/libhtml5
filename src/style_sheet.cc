@@ -14,7 +14,9 @@ StyleSheet::~StyleSheet()
 
 StyleSheet *StyleSheet::create(emscripten::val v)
 {
-    return new StyleSheet(v);
+    StyleSheet *sheet = new StyleSheet(v);
+    sheet->autorelease();
+    return sheet;
 }
 
 bool StyleSheet::getDisabled() const

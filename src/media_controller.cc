@@ -16,7 +16,9 @@ MediaController::~MediaController()
 
 MediaController *MediaController::create(emscripten::val v)
 {
-    return new MediaController(v);
+    MediaController *mc = new MediaController(v);
+    mc->autorelease();
+    return mc;
 }
 
 emscripten::val MediaController::getValue() const

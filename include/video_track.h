@@ -1,9 +1,10 @@
 #pragma once
 
+#include "object.h"
 #include <emscripten/val.h>
 #include <string>
 
-class VideoTrack {
+class VideoTrack : public Object {
 public:
     emscripten::val v;
     std::string _id;

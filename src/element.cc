@@ -18,6 +18,7 @@ Element::~Element()
 Element *Element::create(emscripten::val v)
 {
     Element *e = new Element(v);
+    e->autorelease();
     return e;
 }
 

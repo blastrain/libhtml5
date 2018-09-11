@@ -12,7 +12,9 @@ AudioTrack::~AudioTrack()
 
 AudioTrack *AudioTrack::create(emscripten::val v)
 {
-    return new AudioTrack(v);
+    AudioTrack *track = new AudioTrack(v);
+    track->autorelease();
+    return track;
 }
 
 bool AudioTrack::getEnabled() const

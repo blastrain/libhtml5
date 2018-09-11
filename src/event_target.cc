@@ -1,7 +1,6 @@
 #include "event.h"
 #include "event_target.h"
 #include <iostream>
-#include <emscripten/emscripten.h>
 
 EventTarget::EventTarget(emscripten::val v) : v(v)
 {
@@ -22,7 +21,7 @@ EventTarget *EventTarget::create(emscripten::val v)
 
 bool EventTarget::dispatchEvent(Event *event)
 {
-    return this->v.call<bool>("dispatchEvent", event->v);
+    return HTML5_CALLb(this->v, dispatchEvent, event->v);
 }
 
 void EventTarget::addEventListener(std::string type, EventHandler *handler, bool capture)
@@ -53,20 +52,24 @@ void EventTarget::addEventListener(std::string type, EventListener *listener, bo
 
 void EventTarget::addEventHandlerCallback(emscripten::val v)
 {
+#if ENABLE_EMSCRIPTEN
     std::string type = v["type"].as<std::string>();
     Event *event = Event::create(v);
     for (EventHandler *callback : this->handlers[type]) {
         (*callback)(event);
     }
+#endif
 }
 
 void EventTarget::addEventListenerCallback(emscripten::val v)
 {
+#if ENABLE_EMSCRIPTEN
     std::string type = v["type"].as<std::string>();
     Event *event = Event::create(v);
     for (EventListener *listener : this->listeners[type]) {
         listener->handleEvent(event);
     }
+#endif
 }
 
 void EventTarget::removeEventListener(std::string type, EventHandler *handler, bool capture)

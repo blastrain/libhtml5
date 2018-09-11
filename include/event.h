@@ -1,9 +1,7 @@
 #pragma once
 
-#include "object.h"
-#include <string>
+#include "libhtml5.h"
 #include <time.h>
-#include <emscripten/val.h>
 
 class EventTarget;
 

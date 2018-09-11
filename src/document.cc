@@ -14,28 +14,26 @@ Document::~Document()
 
 }
 
-emscripten::val Document::_document()
+Document *Document::create()
 {
-    return emscripten::val::global("document");
-}
-
-Element *Document::createElement(std::string localName)
-{
-    emscripten::val v = _document().call<emscripten::val>("createElement", emscripten::val(localName));
-    if (localName == "video") {
-        return HTMLVideoElement::create(v);
-    } else if (localName == "source") {
-        return HTMLSourceElement::create(v);
-    }
-    return NULL;
-}
-
-HTMLElement *Document::body()
-{
-    return HTMLElement::create(_document()["body"]);
+    Document *doc = new Document(HTML5_STATIC_PRIMITIVE_INSTANCE(Document));
+    doc->autorelease();
+    return doc;
 }
 
 Document *Document::create(emscripten::val v)
 {
-    return new Document(v);
+    Document *doc = new Document(v);
+    doc->autorelease();
+    return doc;
+}
+
+Element *Document::createElement(std::string localName)
+{
+    return Element::create(HTML5_CALLv(this->v, createElement, localName));
+}
+
+HTMLElement *Document::body()
+{
+    return HTMLElement::create(HTML5_CALLv(this->v, body));
 }

@@ -21,7 +21,7 @@ StyleSheet *StyleSheet::create(emscripten::val v)
 
 bool StyleSheet::getDisabled() const
 {
-    return this->v["disabled"].as<bool>();
+    return HTML5_PROPERTY_GET(disabled, bool);
 }
 
 void StyleSheet::setDisabled(bool value)
@@ -32,7 +32,7 @@ void StyleSheet::setDisabled(bool value)
 
 std::string StyleSheet::getHref() const
 {
-    return this->v["href"].as<std::string>();
+    return HTML5_PROPERTY_GET(href, std::string);
 }
 
 void StyleSheet::setHref(std::string value)
@@ -43,7 +43,7 @@ void StyleSheet::setHref(std::string value)
 
 MediaList *StyleSheet::getMedia() const
 {
-    return MediaList::create(this->v["media"]);
+    return HTML5_PROPERTY_GET(media, MediaList);
 }
 
 void StyleSheet::setMedia(MediaList *value)
@@ -54,7 +54,7 @@ void StyleSheet::setMedia(MediaList *value)
 
 Element *StyleSheet::getOwnerNode() const
 {
-    return Element::create(this->v["ownerNode"]);
+    return HTML5_PROPERTY_GET(ownerNode, Element);
 }
 
 void StyleSheet::setOwnerNode(Element *value)
@@ -65,7 +65,7 @@ void StyleSheet::setOwnerNode(Element *value)
 
 StyleSheet *StyleSheet::getParentStyleSheet() const
 {
-    return StyleSheet::create(this->v["parentStyleSheet"]);
+    return HTML5_PROPERTY_GET(parentStyleSheet, StyleSheet);
 }
 
 void StyleSheet::setParentStyleSheet(StyleSheet *value)
@@ -76,7 +76,7 @@ void StyleSheet::setParentStyleSheet(StyleSheet *value)
 
 std::string StyleSheet::getTitle() const
 {
-    return this->v["title"].as<std::string>();
+    return HTML5_PROPERTY_GET(title, std::string);
 }
 
 void StyleSheet::setTitle(std::string value)
@@ -87,7 +87,7 @@ void StyleSheet::setTitle(std::string value)
 
 std::string StyleSheet::getType() const
 {
-    return this->v["type"].as<std::string>();
+    return HTML5_PROPERTY_GET(type, std::string);
 }
 
 void StyleSheet::setType(std::string value)

@@ -1,9 +1,9 @@
 #pragma once
 
+#include "libhtml5.h"
 #include "element.h"
 #include "event_handler.h"
 #include <functional>
-#include <emscripten/val.h>
 
 class HTMLMenuElement;
 class DOMStringMap;

@@ -1,7 +1,7 @@
 #pragma once
 
+#include "libhtml5.h"
 #include "node.h"
-#include <string>
 
 class Element;
 class HTMLElement;
@@ -11,10 +11,8 @@ public:
 
     Document(emscripten::val v);
     ~Document();
+    static Document *create();
     static Document *create(emscripten::val v);
-    static Element *createElement(std::string localName);
-    static HTMLElement *body();
-
-private:
-    static emscripten::val _document();
+    Element *createElement(std::string localName);
+    HTMLElement *body();
 };

@@ -21,12 +21,12 @@ HTMLVideoElement *HTMLVideoElement::create(emscripten::val v)
 
 HTMLVideoElement *HTMLVideoElement::create()
 {
-    return dynamic_cast<HTMLVideoElement *>(Document::createElement("video"));
+    return dynamic_cast<HTMLVideoElement *>(Document::create()->createElement("video"));
 }
 
 double HTMLVideoElement::getHeight() const
 {
-    return this->v["height"].as<double>();
+    return HTML5_PROPERTY_GET(height, double);
 }
 
 void HTMLVideoElement::setHeight(double value)
@@ -37,7 +37,7 @@ void HTMLVideoElement::setHeight(double value)
 
 std::string HTMLVideoElement::getPoster() const
 {
-    return this->v["poster"].as<std::string>();
+    return HTML5_PROPERTY_GET(poster, std::string);
 }
 
 void HTMLVideoElement::setPoster(std::string value)
@@ -48,7 +48,7 @@ void HTMLVideoElement::setPoster(std::string value)
 
 double HTMLVideoElement::getVideoHeight() const
 {
-    return this->v["videoHeight"].as<double>();
+    return HTML5_PROPERTY_GET(videoHeight, double);
 }
 
 void HTMLVideoElement::setVideoHeight(double value)
@@ -59,7 +59,7 @@ void HTMLVideoElement::setVideoHeight(double value)
 
 double HTMLVideoElement::getVideoWidth() const
 {
-    return this->v["videoWidth"].as<double>();
+    return HTML5_PROPERTY_GET(videoWidth, double);
 }
 
 void HTMLVideoElement::setVideoWidth(double value)
@@ -70,7 +70,7 @@ void HTMLVideoElement::setVideoWidth(double value)
 
 double HTMLVideoElement::getWidth() const
 {
-    return this->v["width"].as<double>();
+    return HTML5_PROPERTY_GET(width, double);
 }
 
 void HTMLVideoElement::setWidth(double value)

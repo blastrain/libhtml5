@@ -1,7 +1,6 @@
 #include "text_track_cue.h"
 #include "text_track_cue_list.h"
 #include "text_track.h"
-#include <emscripten/emscripten.h>
 
 TextTrack::TextTrack(emscripten::val v) :
     EventTarget(v)
@@ -28,17 +27,17 @@ emscripten::val TextTrack::getValue() const
 
 void TextTrack::addCue(TextTrackCue *cue)
 {
-    this->v.call<void>("addCue", cue->v);
+    HTML5_CALL(this->v, addCue, cue->v);
 }
 
 void TextTrack::removeCue(TextTrackCue *cue)
 {
-    this->v.call<void>("removeCue", cue->v);
+    HTML5_CALL(this->v, removeCue, cue->v);
 }
 
 TextTrackCueList *TextTrack::getActiveCues() const
 {
-    return TextTrackCueList::create(this->v["activeCues"]);
+    return HTML5_PROPERTY_GET(activeCues, TextTrackCueList);
 }
 
 void TextTrack::setActiveCues(TextTrackCueList *value)
@@ -49,7 +48,7 @@ void TextTrack::setActiveCues(TextTrackCueList *value)
 
 TextTrackCueList *TextTrack::getCues() const
 {
-    return TextTrackCueList::create(this->v["cues"]);
+    return HTML5_PROPERTY_GET(cues, TextTrackCueList);
 }
 
 void TextTrack::setCues(TextTrackCueList *value)
@@ -60,7 +59,7 @@ void TextTrack::setCues(TextTrackCueList *value)
 
 std::string TextTrack::getId() const
 {
-    return this->v["id"].as<std::string>();
+    return HTML5_PROPERTY_GET(id, std::string);
 }
 
 void TextTrack::setId(std::string value)
@@ -71,7 +70,7 @@ void TextTrack::setId(std::string value)
 
 std::string TextTrack::getInBandMetadataTrackDispatchType() const
 {
-    return this->v["inBandMetadataTrackDispatchType"].as<std::string>();
+    return HTML5_PROPERTY_GET(inBandMetadataTrackDispatchType, std::string);
 }
 
 void TextTrack::setInBandMetadataTrackDispatchType(std::string value)
@@ -82,7 +81,11 @@ void TextTrack::setInBandMetadataTrackDispatchType(std::string value)
 
 std::string TextTrack::getKind() const
 {
+#if ENABLE_EMSCRIPTEN
     return this->v["kind"].as<std::string>();
+#else
+    return "";
+#endif
 }
 
 void TextTrack::setKind(TextTrackKind value)
@@ -109,7 +112,7 @@ void TextTrack::setKind(TextTrackKind value)
 
 std::string TextTrack::getLabel() const
 {
-    return this->v["label"].as<std::string>();
+    return HTML5_PROPERTY_GET(label, std::string);
 }
 
 void TextTrack::setLabel(std::string value)
@@ -120,7 +123,7 @@ void TextTrack::setLabel(std::string value)
 
 std::string TextTrack::getLanguage() const
 {
-    return this->v["language"].as<std::string>();
+    return HTML5_PROPERTY_GET(language, std::string);
 }
 
 void TextTrack::setLanguage(std::string value)
@@ -131,7 +134,11 @@ void TextTrack::setLanguage(std::string value)
 
 std::string TextTrack::getMode() const
 {
+#if ENABLE_EMSCRIPTEN
     return this->v["mode"].as<std::string>();
+#else
+    return "";
+#endif
 }
 
 void TextTrack::setMode(TextTrackMode value)

@@ -20,12 +20,12 @@ CSSRuleList *CSSRuleList::create(emscripten::val v)
 
 CSSRule *CSSRuleList::item(unsigned long index)
 {
-    return CSSRule::create(this->v.call<emscripten::val>("item", index));
+    return CSSRule::create(HTML5_CALLv(this->v, item, index));
 }
 
 unsigned long CSSRuleList::getLength() const
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void CSSRuleList::setLength(unsigned long value)

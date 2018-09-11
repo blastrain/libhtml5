@@ -1,12 +1,11 @@
 #pragma once
 
+#include "libhtml5.h"
+
 #include <functional>
-#include <string>
-#include <emscripten/val.h>
 #include <map>
 #include <vector>
 
-#include "object.h"
 #include "event_handler.h"
 #include "event_listener.h"
 

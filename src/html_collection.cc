@@ -21,26 +21,24 @@ HTMLCollection *HTMLCollection::create(emscripten::val v)
 
 HTMLCollection *HTMLCollection::create()
 {
-    emscripten::val klass = emscripten::val::global("HTMLCollection");
-    emscripten::val v = klass.new_();
-    HTMLCollection *c = new HTMLCollection(v);
+    HTMLCollection *c = new HTMLCollection(HTML5_NEW_PRIMITIVE_INSTANCE(HTMLCollection));
     c->autorelease();
     return c;
 }
 
 Element *HTMLCollection::item(unsigned long index)
 {
-    return Element::create(this->v.call<emscripten::val>("item", index));
+    return Element::create(HTML5_CALLv(this->v, item, index));
 }
 
 Element *HTMLCollection::namedItem(std::string name)
 {
-    return Element::create(this->v.call<emscripten::val>("namedItem", name));
+    return Element::create(HTML5_CALLv(this->v, namedItem, name));
 }
 
 unsigned long HTMLCollection::getLength()
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void HTMLCollection::setLength(unsigned long value)

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "object.h"
-#include <emscripten/val.h>
+#include "libhtml5.h"
 
 class MediaError : public Object {
 public:

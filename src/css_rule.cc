@@ -20,7 +20,7 @@ CSSRule *CSSRule::create(emscripten::val v)
 
 std::string CSSRule::getCSSText() const
 {
-    return this->v["cssText"].as<std::string>();
+    return HTML5_PROPERTY_GET(cssText, std::string);
 }
 
 void CSSRule::setCSSText(std::string value)
@@ -31,7 +31,7 @@ void CSSRule::setCSSText(std::string value)
    
 CSSRule *CSSRule::getParentRule() const
 {
-    return CSSRule::create(this->v["parentRule"]);
+    return HTML5_PROPERTY_GET(parentRule, CSSRule);
 }
 
 void CSSRule::setParentRule(CSSRule *value)
@@ -42,7 +42,7 @@ void CSSRule::setParentRule(CSSRule *value)
 
 CSSStyleSheet *CSSRule::getParentStyleSheet() const
 {
-    return CSSStyleSheet::create(this->v["parentStyleSheet"]);
+    return HTML5_PROPERTY_GET(parentStyleSheet, CSSStyleSheet);
 }
 
 void CSSRule::setParentStyleSheet(CSSStyleSheet *value)
@@ -53,7 +53,7 @@ void CSSRule::setParentStyleSheet(CSSStyleSheet *value)
 
 unsigned short CSSRule::getType() const
 {
-    return this->v["type"].as<unsigned short>();
+    return HTML5_PROPERTY_GET(type, unsigned short);
 }
 
 void CSSRule::setType(unsigned short value)

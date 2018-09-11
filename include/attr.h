@@ -1,8 +1,6 @@
 #pragma once
 
-#include "object.h"
-#include <string>
-#include <emscripten/val.h>
+#include "libhtml5.h"
 
 class Attr : public Object {
 public:

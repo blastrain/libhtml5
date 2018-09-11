@@ -19,8 +19,7 @@ Attr *Attr::create(emscripten::val v)
 
 Attr *Attr::create()
 {
-    emscripten::val _Attr = emscripten::val::global("Attr");
-    emscripten::val v = _Attr.new_();
+    emscripten::val v = HTML5_NEW_PRIMITIVE_INSTANCE(Attr);
     Attr *attr = new Attr(v);
     attr->autorelease();
     return attr;
@@ -28,7 +27,7 @@ Attr *Attr::create()
 
 std::string Attr::getLocalName()
 {
-    return this->v["localName"].as<std::string>();
+    return HTML5_PROPERTY_GET(localName, std::string);
 }
 
 void Attr::setLocalName(std::string value)
@@ -39,7 +38,7 @@ void Attr::setLocalName(std::string value)
 
 std::string Attr::getName()
 {
-    return this->v["name"].as<std::string>();
+    return HTML5_PROPERTY_GET(name, std::string);
 }
 
 void Attr::setName(std::string value)
@@ -50,7 +49,7 @@ void Attr::setName(std::string value)
 
 std::string Attr::getNamespaceURI()
 {
-    return this->v["namespaceURI"].as<std::string>();
+    return HTML5_PROPERTY_GET(namespaceURI, std::string);
 }
 
 void Attr::setNamespaceURI(std::string value)
@@ -61,7 +60,7 @@ void Attr::setNamespaceURI(std::string value)
 
 std::string Attr::getPrefix()
 {
-    return this->v["prefix"].as<std::string>();
+    return HTML5_PROPERTY_GET(prefix, std::string);
 }
 
 void Attr::setPrefix(std::string value)
@@ -72,7 +71,7 @@ void Attr::setPrefix(std::string value)
 
 bool Attr::getSpecified()
 {
-    return this->v["specified"].as<bool>();
+    return HTML5_PROPERTY_GET(specified, bool);
 }
 
 void Attr::setSpecified(bool value)
@@ -83,7 +82,7 @@ void Attr::setSpecified(bool value)
 
 std::string Attr::getValue()
 {
-    return this->v["value"].as<std::string>();
+    return HTML5_PROPERTY_GET(value, std::string);
 }
 
 void Attr::setValue(std::string value)

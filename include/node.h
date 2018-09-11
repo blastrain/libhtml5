@@ -1,8 +1,7 @@
 #pragma once
 
+#include "libhtml5.h"
 #include "event_target.h"
-#include <string>
-#include <emscripten/val.h>
 
 class Document;
 class Element;

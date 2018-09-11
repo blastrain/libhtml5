@@ -28,7 +28,7 @@ static void createVideo()
         std::cout << e->timeStamp << std::endl;
     };
     video->addEventListener("demo", &f);
-    Document::body()->appendChild(video);
+    Document::create()->body()->appendChild(video);
     Event *event = Event::create("demo");
     video->dispatchEvent(event);
 }
@@ -43,7 +43,7 @@ static void createImage()
     };
     image->onload = &onload;
     image->src = "";
-    Document::body()->appendChild(image);
+    Document::create()->body()->appendChild(image);
 }
 
 static emscripten::val toString(intptr_t ptr)

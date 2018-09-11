@@ -19,7 +19,7 @@ VideoTrack *VideoTrack::create(emscripten::val v)
 
 std::string VideoTrack::getId() const
 {
-    return this->v["id"].as<std::string>();
+    return HTML5_PROPERTY_GET(id, std::string);
 }
 
 void VideoTrack::setId(std::string value)
@@ -30,7 +30,7 @@ void VideoTrack::setId(std::string value)
 
 std::string VideoTrack::getKind() const
 {
-    return this->v["kind"].as<std::string>();
+    return HTML5_PROPERTY_GET(kind, std::string);
 }
 
 void VideoTrack::setKind(std::string value)
@@ -41,7 +41,7 @@ void VideoTrack::setKind(std::string value)
 
 std::string VideoTrack::getLabel() const
 {
-    return this->v["label"].as<std::string>();
+    return HTML5_PROPERTY_GET(label, std::string);
 }
 
 void VideoTrack::setLabel(std::string value)
@@ -52,7 +52,7 @@ void VideoTrack::setLabel(std::string value)
 
 std::string VideoTrack::getLanguage() const
 {
-    return this->v["language"].as<std::string>();
+    return HTML5_PROPERTY_GET(language, std::string);
 }
 
 void VideoTrack::setLanguage(std::string value)
@@ -63,7 +63,7 @@ void VideoTrack::setLanguage(std::string value)
 
 bool VideoTrack::getSelected() const
 {
-    return this->v["selected"].as<bool>();
+    return HTML5_PROPERTY_GET(selected, bool);
 }
 
 void VideoTrack::setSelected(bool value)

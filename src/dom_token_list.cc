@@ -20,30 +20,30 @@ DOMTokenList *DOMTokenList::create(emscripten::val v)
 void DOMTokenList::add(std::vector<std::string> tokens)
 {
     for (auto &token : tokens) {
-        this->v.call<void>("add", token);
+        HTML5_CALL(this->v, add, token);
     }
 }
 
 bool DOMTokenList::contains(std::string token)
 {
-    return this->v.call<bool>("contains", token);
+    return HTML5_CALLb(this->v, contains, token);
 }
 
 void DOMTokenList::remove(std::vector<std::string> tokens)
 {
     for (auto &token : tokens) {
-        this->v.call<void>("remove", token);
+        HTML5_CALL(this->v, remove, token);
     }
 }
 
 bool DOMTokenList::toggle(std::string token, bool force)
 {
-    return this->v.call<bool>("toggle", token, force);
+    return HTML5_CALLb(this->v, toggle, token, force);
 }
 
 unsigned long DOMTokenList::getLength()
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void DOMTokenList::setLength(unsigned long value)

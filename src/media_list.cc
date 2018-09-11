@@ -19,22 +19,22 @@ MediaList *MediaList::create(emscripten::val v)
 
 void MediaList::appendMedium(std::string medium)
 {
-    this->v.call<void>("appendMedium", medium);
+    HTML5_CALL(this->v, appendMedium, medium);
 }
 
 void MediaList::deleteMedium(std::string medium)
 {
-    this->v.call<void>("deleteMedium", medium);
+    HTML5_CALL(this->v, deleteMedium, medium);
 }
 
 std::string MediaList::item(unsigned long index)
 {
-    return this->v.call<std::string>("item", index);
+    return HTML5_CALLs(this->v, item, index);
 }
 
 unsigned long MediaList::getLength() const
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void MediaList::setLength(unsigned long value)
@@ -45,7 +45,7 @@ void MediaList::setLength(unsigned long value)
 
 std::string MediaList::getMediaText() const
 {
-    return this->v["mediaText"].as<std::string>();
+    return HTML5_PROPERTY_GET(mediaText, std::string);
 }
 
 void MediaList::setMediaText(std::string value)

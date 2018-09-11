@@ -2,7 +2,6 @@
 #include "audio_track_list.h"
 #include "event.h"
 #include "event_handler.h"
-#include <emscripten/emscripten.h>
 
 AudioTrackList::AudioTrackList(emscripten::val v) :
     EventTarget(v)
@@ -29,17 +28,17 @@ emscripten::val AudioTrackList::getValue() const
 
 AudioTrack *AudioTrackList::getter(unsigned long index)
 {
-    return AudioTrack::create(this->v.call<emscripten::val>("getter", index));
+    return AudioTrack::create(HTML5_CALLv(this->v, getter, index));
 }
 
 AudioTrack *AudioTrackList::getTrackById(std::string id)
 {
-    return AudioTrack::create(this->v.call<emscripten::val>("getTrackById", id));
+    return AudioTrack::create(HTML5_CALLv(this->v, getTrackById, id));
 }
 
 unsigned long AudioTrackList::getLength() const
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void AudioTrackList::setLength(unsigned long value)

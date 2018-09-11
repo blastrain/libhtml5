@@ -14,9 +14,7 @@ Event::~Event()
 
 Event *Event::create(std::string type)
 {
-    emscripten::val _Event = emscripten::val::global("Event");
-    emscripten::val v = _Event.new_(emscripten::val(type));
-    Event *event = new Event(v);
+    Event *event = new Event(HTML5_NEW_PRIMITIVE_INSTANCE(Event));
     event->autorelease();
     return event;
 }
@@ -30,25 +28,22 @@ Event *Event::create(emscripten::val v)
 
 void Event::initEvent(std::string type, bool bubbles, bool cancelable)
 {
-    this->v.call<void>("initEvent",
-                       emscripten::val(type),
-                       emscripten::val(bubbles),
-                       emscripten::val(cancelable));
+    HTML5_CALL(this->v, initEvent, type, bubbles, cancelable);
 }
 
 void Event::preventDefault()
 {
-    this->v.call<void>("preventDefault");
+    HTML5_CALL(this->v, preventDefault);
 }
 
 void Event::stopImmediatePropagation()
 {
-    this->v.call<void>("stopImmediatePropagation");
+    HTML5_CALL(this->v, stopImmediatePropagation);
 }
 
 void Event::stopPropagation()
 {
-    this->v.call<void>("stopPropagation");
+    HTML5_CALL(this->v, stopPropagation);
 }
 
 void Event::setBubbles(bool value)
@@ -59,7 +54,7 @@ void Event::setBubbles(bool value)
 
 bool Event::getBubbles()
 {
-    return this->v["bubbles"].as<bool>();
+    return HTML5_PROPERTY_GET(bubbles, bool);
 }
 
 void Event::setCancelable(bool value)
@@ -70,7 +65,7 @@ void Event::setCancelable(bool value)
 
 bool Event::getCancelable()
 {
-    return this->v["cancelable"].as<bool>();
+    return HTML5_PROPERTY_GET(cancelable, bool);
 }
 
 void Event::setCurrentTarget(EventTarget *value)
@@ -81,7 +76,7 @@ void Event::setCurrentTarget(EventTarget *value)
 
 EventTarget *Event::getCurrentTarget()
 {
-    return EventTarget::create(this->v["currentTarget"]);
+    return HTML5_PROPERTY_GET(currentTarget, EventTarget);
 }
 
 void Event::setDefaultPrevented(bool value)
@@ -92,7 +87,7 @@ void Event::setDefaultPrevented(bool value)
 
 bool Event::getDefaultPrevented()
 {
-    return this->v["defaultPrevented"].as<bool>();
+    return HTML5_PROPERTY_GET(defaultPrevented, bool);
 }
 
 void Event::setEventPhase(unsigned short value)
@@ -103,7 +98,7 @@ void Event::setEventPhase(unsigned short value)
 
 unsigned short Event::getEventPhase()
 {
-    return this->v["eventPhase"].as<unsigned short>();
+    return HTML5_PROPERTY_GET(eventPhase, unsigned short);
 }
 
 void Event::setIsTrusted(bool value)
@@ -114,7 +109,7 @@ void Event::setIsTrusted(bool value)
 
 bool Event::getIsTrusted()
 {
-    return this->v["isTrusted"].as<bool>();
+    return HTML5_PROPERTY_GET(isTrusted, bool);
 }
 
 void Event::setTarget(EventTarget *value)
@@ -125,7 +120,7 @@ void Event::setTarget(EventTarget *value)
 
 EventTarget *Event::getTarget()
 {
-    return EventTarget::create(this->v["target"]);
+    return HTML5_PROPERTY_GET(target, EventTarget);
 }
 
 void Event::setType(std::string value)
@@ -136,7 +131,7 @@ void Event::setType(std::string value)
 
 std::string Event::getType()
 {
-    return this->v["type"].as<std::string>();
+    return HTML5_PROPERTY_GET(type, std::string);
 }
 
 void Event::setTimeStamp(time_t value)
@@ -147,5 +142,5 @@ void Event::setTimeStamp(time_t value)
 
 time_t Event::getTimeStamp()
 {
-    return this->v["timeStamp"].as<time_t>();
+    return HTML5_PROPERTY_GET(timeStamp, time_t);
 }

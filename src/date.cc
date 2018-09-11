@@ -12,8 +12,7 @@ Date::~Date()
 
 Date *Date::create()
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    Date *d = new Date(klass.new_());
+    Date *d = new Date(HTML5_NEW_PRIMITIVE_INSTANCE(Date));
     d->autorelease();
     return d;
 }
@@ -27,395 +26,389 @@ Date *Date::create(emscripten::val v)
 
 Date *Date::create(int year, int month)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    Date *d = new Date(klass.new_(year, month));
+    Date *d = new Date(HTML5_NEW_PRIMITIVE_INSTANCE(Date, year, month));
     d->autorelease();
     return d;
 }
 
 Date *Date::create(int year, int month, int date)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    Date *d = new Date(klass.new_(year, month, date));
+    Date *d = new Date(HTML5_NEW_PRIMITIVE_INSTANCE(Date, year, month, date));
     d->autorelease();
     return d;
 }
 
 Date *Date::create(int year, int month, int date, int hours)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    Date *d = new Date(klass.new_(year, month, date, hours));
+    Date *d = new Date(HTML5_NEW_PRIMITIVE_INSTANCE(Date, year, month, date, hours));
     d->autorelease();
     return d;
 }
 
 Date *Date::create(int year, int month, int date, int hours, int minutes)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    Date *d = new Date(klass.new_(year, month, date, hours, minutes));
+    Date *d = new Date(HTML5_NEW_PRIMITIVE_INSTANCE(Date, year, month, date, hours, minutes));
     d->autorelease();
     return d;
 }
 
 Date *Date::create(int year, int month, int date, int hours, int minutes, int seconds)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    Date *d = new Date(klass.new_(year, month, date, hours, minutes, seconds));
+    Date *d = new Date(HTML5_NEW_PRIMITIVE_INSTANCE(Date, year, month, date, hours, minutes, seconds));
     d->autorelease();
     return d;
 }
 
 Date *Date::create(int year, int month, int date, int hours, int minutes, int seconds, int ms)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    Date *d = new Date(klass.new_(year, month, date, hours, minutes, seconds, ms));
+    Date *d = new Date(HTML5_NEW_PRIMITIVE_INSTANCE(Date, year, month, date, hours, minutes, seconds, ms));
     d->autorelease();
     return d;
 }
 
 Date *Date::now()
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    return Date::create(klass.call<emscripten::val>("now"));
+    emscripten::val klass = HTML5_STATIC_PRIMITIVE_INSTANCE(Date);
+    return Date::create(HTML5_CALLv(klass, now));
 }
 
 Date *Date::UTC(int year, int month)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    return Date::create(klass.call<emscripten::val>("UTC", year, month));
+    emscripten::val klass = HTML5_STATIC_PRIMITIVE_INSTANCE(Date);
+    return Date::create(HTML5_CALLv(klass, UTC, year, month));
 }
 
 Date *Date::UTC(int year, int month, int date)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    return Date::create(klass.call<emscripten::val>("UTC", year, month, date));
+    emscripten::val klass = HTML5_STATIC_PRIMITIVE_INSTANCE(Date);
+    return Date::create(HTML5_CALLv(klass, UTC, year, month, date));
 }
 
 Date *Date::UTC(int year, int month, int date, int hours)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    return Date::create(klass.call<emscripten::val>("UTC", year, month, date, hours));
+    emscripten::val klass = HTML5_STATIC_PRIMITIVE_INSTANCE(Date);
+    return Date::create(HTML5_CALLv(klass, UTC, year, month, date, hours));
 }
 
 Date *Date::UTC(int year, int month, int date, int hours, int minutes)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    return Date::create(klass.call<emscripten::val>("UTC", year, month, date, hours, minutes));
+    emscripten::val klass = HTML5_STATIC_PRIMITIVE_INSTANCE(Date);
+    return Date::create(HTML5_CALLv(klass, UTC, year, month, date, hours, minutes));
 }
 
 Date *Date::UTC(int year, int month, int date, int hours, int minutes, int seconds)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    return Date::create(klass.call<emscripten::val>("UTC", year, month, date, hours, minutes, seconds));
+    emscripten::val klass = HTML5_STATIC_PRIMITIVE_INSTANCE(Date);
+    return Date::create(HTML5_CALLv(klass, UTC, year, month, date, hours, minutes, seconds));
 }
 
 Date *Date::UTC(int year, int month, int date, int hours, int minutes, int seconds, int ms)
 {
-    emscripten::val klass = emscripten::val::global("Date");
-    return Date::create(klass.call<emscripten::val>("UTC", year, month, date, hours, minutes, seconds, ms));
+    emscripten::val klass = HTML5_STATIC_PRIMITIVE_INSTANCE(Date);
+    return Date::create(HTML5_CALLv(klass, UTC, year, month, date, hours, minutes, seconds, ms));
 }
 
 double Date::getDate()
 {
-    return this->v.call<double>("getDate");
+    return HTML5_CALLf(this->v, getDate, double);
 }
 
 int Date::getDay()
 {
-    return this->v.call<int>("getDay");
+    return HTML5_CALLi(this->v, getDay, int);
 }
 
 int Date::getFullYear()
 {
-    return this->v.call<int>("getFullYear");
+    return HTML5_CALLi(this->v, getFullYear, int);
 }
 
 int Date::getHours()
 {
-    return this->v.call<int>("getHours");
+    return HTML5_CALLi(this->v, getHours, int);
 }
 
 int Date::getMilliseconds()
 {
-    return this->v.call<int>("getMilliseconds");
+    return HTML5_CALLi(this->v, getMilliseconds, int);
 }
 
 int Date::getMinutes()
 {
-    return this->v.call<int>("getMinutes");
+    return HTML5_CALLi(this->v, getMinutes, int);
 }
 
 int Date::getMonth()
 {
-    return this->v.call<int>("getMonth");
+    return HTML5_CALLi(this->v, getMonth, int);
 }
 
 int Date::getSeconds()
 {
-    return this->v.call<int>("getSeconds");
+    return HTML5_CALLi(this->v, getSeconds, int);
 }
 
 double Date::getTime()
 {
-    return this->v.call<double>("getTime");
+    return HTML5_CALLf(this->v, getTime, double);
 }
 
 int Date::getTimezoneOffset()
 {
-    return this->v.call<int>("getTimezoneOffset");
+    return HTML5_CALLi(this->v, getTimezoneOffset, int);
 }
 
 double Date::getUTCDate()
 {
-    return this->v.call<double>("getUTCDate");
+    return HTML5_CALLf(this->v, getUTCDate, double);
 }
 
 int Date::getUTCDay()
 {
-    return this->v.call<int>("getUTCDay");
+    return HTML5_CALLi(this->v, getUTCDay, int);
 }
 
 int Date::getUTCFullYear()
 {
-    return this->v.call<int>("getUTCFullYear");
+    return HTML5_CALLi(this->v, getUTCFullYear, int);
 }
 
 int Date::getUTCHours()
 {
-    return this->v.call<double>("getUTCHours");
+    return HTML5_CALLi(this->v, getUTCHours, int);
 }
 
 int Date::getUTCMilliseconds()
 {
-    return this->v.call<double>("getUTCMilliseconds");
+    return HTML5_CALLi(this->v, getUTCMilliseconds, int);
 }
 
 int Date::getUTCMinutes()
 {
-    return this->v.call<double>("getUTCMinutes");
+    return HTML5_CALLi(this->v, getUTCMinutes, int);
 }
 
 int Date::getUTCMonth()
 {
-    return this->v.call<double>("getUTCMonth");
+    return HTML5_CALLi(this->v, getUTCMonth, int);
 }
 
 int Date::getUTCSeconds()
 {
-    return this->v.call<double>("getUTCSeconds");
+    return HTML5_CALLi(this->v, getUTCSeconds, int);
 }
 
 double Date::setDate(int date)
 {
-    return this->v.call<double>("setDate", date);
+    return HTML5_CALLf(this->v, setDate, double, date);
 }
 
 double Date::setFullYear(int year)
 {
-    return this->v.call<double>("setFullYear", year);
+    return HTML5_CALLf(this->v, setFullYear, double, year);
 }
 
 double Date::setFullyear(int year, int month)
 {
-    return this->v.call<double>("setFullYear", year, month);
+    return HTML5_CALLf(this->v, setFullYear, double, year, month);
 }
 
 double Date::setFullyear(int year, int month, int date)
 {
-    return this->v.call<double>("setFullYear", year, month ,date);
+    return HTML5_CALLf(this->v, setFullYear, double, year, month ,date);
 }
 
 double Date::setHours(int hour)
 {
-    return this->v.call<double>("setHours", hour);
+    return HTML5_CALLf(this->v, setHours, double, hour);
 }
 
 double Date::setHours(int hour, int min)
 {
-    return this->v.call<double>("setHours", hour, min);
+    return HTML5_CALLf(this->v, setHours, double, hour, min);
 }
 
 double Date::setHours(int hour, int min, int sec)
 {
-    return this->v.call<double>("setHours", hour, min, sec);
+    return HTML5_CALLf(this->v, setHours, double, hour, min, sec);
 }
 
 double Date::setHours(int hour, int min, int sec, int ms)
 {
-    return this->v.call<double>("setHours", hour, min, sec, ms);
+    return HTML5_CALLf(this->v, setHours, double, hour, min, sec, ms);
 }
 
 double Date::setMilliseconds(int ms)
 {
-    return this->v.call<double>("setMilliseconds", ms);
+    return HTML5_CALLf(this->v, setMilliseconds, double, ms);
 }
 
 double Date::setMinutes(int min)
 {
-    return this->v.call<double>("setMinutes", min);
+    return HTML5_CALLf(this->v, setMinutes, double, min);
 }
 
 double Date::setMinutes(int min, int sec)
 {
-    return this->v.call<double>("setMinutes", min, sec);
+    return HTML5_CALLf(this->v, setMinutes, double, min, sec);
 }
 
 double Date::setMinutes(int min, int sec, int ms)
 {
-    return this->v.call<double>("setMinutes", min, sec, ms);
+    return HTML5_CALLf(this->v, setMinutes, double, min, sec, ms);
 }
 
 double Date::setMonth(int month)
 {
-    return this->v.call<double>("setMonth", month);
+    return HTML5_CALLf(this->v, setMonth, double, month);
 }
 
 double Date::setMonth(int month, int date)
 {
-    return this->v.call<double>("setMonth", month, date);
+    return HTML5_CALLf(this->v, setMonth, double, month, date);
 }
 
 double Date::setSeconds(int sec)
 {
-    return this->v.call<double>("setSeconds", sec);
+    return HTML5_CALLf(this->v, setSeconds, double, sec);
 }
 
 double Date::setSeconds(int sec, int ms)
 {
-    return this->v.call<double>("setSeconds", sec, ms);
+    return HTML5_CALLf(this->v, setSeconds, double, sec, ms);
 }
 
 double Date::setTime(double time)
 {
-    return this->v.call<double>("setTime", time);
+    return HTML5_CALLf(this->v, setTime, double, time);
 }
 
 double Date::setUTCDate(int date)
 {
-    return this->v.call<double>("setUTCDate", date);
+    return HTML5_CALLf(this->v, setUTCDate, double, date);
 }
 
 double Date::setUTCFullYear(int year)
 {
-    return this->v.call<double>("setUTCFullYear", year);
+    return HTML5_CALLf(this->v, setUTCFullYear, double, year);
 }
 
 double Date::setUTCFullyear(int year, int month)
 {
-    return this->v.call<double>("setUTCFullYear", year, month);
+    return HTML5_CALLf(this->v, setUTCFullYear, double, year, month);
 }
 
 double Date::setUTCFullyear(int year, int month, int date)
 {
-    return this->v.call<double>("setUTCFullYear", year, month, date);
+    return HTML5_CALLf(this->v, setUTCFullYear, double, year, month, date);
 }
 
 double Date::setUTCHours(int hour)
 {
-    return this->v.call<double>("setUTCHours", hour);
+    return HTML5_CALLf(this->v, setUTCHours, double, hour);
 }
 
 double Date::setUTCHours(int hour, int min)
 {
-    return this->v.call<double>("setUTCHours", hour, min);
+    return HTML5_CALLf(this->v, setUTCHours, double, hour, min);
 }
 
 double Date::setUTCHours(int hour, int min, int sec)
 {
-    return this->v.call<double>("setUTCHours", hour, min, sec);
+    return HTML5_CALLf(this->v, setUTCHours, double, hour, min, sec);
 }
 
 double Date::setUTCHours(int hour, int min, int sec, int ms)
 {
-    return this->v.call<double>("setUTCHours", hour, min, sec, ms);
+    return HTML5_CALLf(this->v, setUTCHours, double, hour, min, sec, ms);
 }
 
 double Date::setUTCMilliseconds(int ms)
 {
-    return this->v.call<double>("setUTCMilliseconds", ms);
+    return HTML5_CALLf(this->v, setUTCMilliseconds, double, ms);
 }
 
 double Date::setUTCMinutes(int min)
 {
-    return this->v.call<double>("setUTCMinutes", min);
+    return HTML5_CALLf(this->v, setUTCMinutes, double, min);
 }
 
 double Date::setUTCMinutes(int min, int sec)
 {
-    return this->v.call<double>("setUTCMinutes", min, sec);
+    return HTML5_CALLf(this->v, setUTCMinutes, double, min, sec);
 }
 
 double Date::setUTCMinutes(int min, int sec, int ms)
 {
-    return this->v.call<double>("setUTCMinutes", min, sec, ms);
+    return HTML5_CALLf(this->v, setUTCMinutes, double, min, sec, ms);
 }
 
 double Date::setUTCMonth(int month)
 {
-    return this->v.call<double>("setUTCMonth", month);
+    return HTML5_CALLf(this->v, setUTCMonth, double, month);
 }
 
 double Date::setUTCMonth(int month, int date)
 {
-    return this->v.call<double>("setUTCMonth", month, date);
+    return HTML5_CALLf(this->v, setUTCMonth, double, month, date);
 }
 
 double Date::setUTCSeconds(int sec)
 {
-    return this->v.call<double>("setUTCSeconds", sec);
+    return HTML5_CALLf(this->v, setUTCSeconds, double, sec);
 }
 
 double Date::setUTCSeconds(int sec, int ms)
 {
-    return this->v.call<double>("setUTCSeconds", sec, ms);
+    return HTML5_CALLf(this->v, setUTCSeconds, double, sec, ms);
 }
 
 std::string Date::toDateString()
 {
-    return this->v.call<std::string>("toDateString");
+    return HTML5_CALLs(this->v, toDateString);
 }
 
 std::string Date::toISOString()
 {
-    return this->v.call<std::string>("toISOString");
+    return HTML5_CALLs(this->v, toISOString);
 }
 
 std::string Date::toJSON(std::string key)
 {
-    return this->v.call<std::string>("toJSON", key);
+    return HTML5_CALLs(this->v, toJSON, key);
 }
     
 std::string Date::toLocaleDateString()
 {
-    return this->v.call<std::string>("toLocalDateString");
+    return HTML5_CALLs(this->v, toLocalDateString);
 }
 
 std::string Date::toLocaleString()
 {
-    return this->v.call<std::string>("toLocaleString");
+    return HTML5_CALLs(this->v, toLocaleString);
 }
 
 std::string Date::toLocaleTimeString()
 {
-    return this->v.call<std::string>("toLocaleTimeString");
+    return HTML5_CALLs(this->v, toLocaleTimeString);
 }
 
 std::string Date::toString()
 {
-    return this->v.call<std::string>("toString");
+    return HTML5_CALLs(this->v, toString);
 }
 
 std::string Date::toTimeString()
 {
-    return this->v.call<std::string>("toTimeString");
+    return HTML5_CALLs(this->v, toTimeString);
 }
 
 std::string Date::toUTCString()
 {
-    return this->v.call<std::string>("toUTCString");
+    return HTML5_CALLs(this->v, toUTCString);
 }
 
 double Date::valueOf()
 {
-    return this->v.call<double>("valueOf");
+    return HTML5_CALLf(this->v, valueOf, double);
 }

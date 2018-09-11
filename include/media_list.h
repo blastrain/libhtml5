@@ -1,8 +1,6 @@
 #pragma once
 
-#include "object.h"
-#include <emscripten/val.h>
-#include <string>
+#include "libhtml5.h"
 
 class MediaList : public Object {
 public:

@@ -2,7 +2,6 @@
 #include "text_track_list.h"
 #include "event.h"
 #include "event_handler.h"
-#include <emscripten/emscripten.h>
 
 TextTrackList::TextTrackList(emscripten::val v) :
     EventTarget(v)
@@ -29,17 +28,17 @@ emscripten::val TextTrackList::getValue() const
 
 TextTrack *TextTrackList::getter(unsigned long index)
 {
-    return TextTrack::create(this->v.call<emscripten::val>("getter", index));
+    return TextTrack::create(HTML5_CALLv(this->v, getter, index));
 }
 
 TextTrack *TextTrackList::getTrackById(std::string id)
 {
-    return TextTrack::create(this->v.call<emscripten::val>("getTrackById", id));
+    return TextTrack::create(HTML5_CALLv(this->v, getTrackById, id));
 }
 
 unsigned long TextTrackList::getLength() const
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void TextTrackList::setLength(unsigned long value)

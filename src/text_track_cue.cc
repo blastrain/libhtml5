@@ -1,6 +1,5 @@
 #include "text_track.h"
 #include "text_track_cue.h"
-#include <emscripten/emscripten.h>
 
 TextTrackCue::TextTrackCue(emscripten::val v) :
     EventTarget(v)
@@ -27,7 +26,7 @@ emscripten::val TextTrackCue::getValue() const
 
 double TextTrackCue::getEndTime() const
 {
-    return this->v["endTime"].as<double>();
+    return HTML5_PROPERTY_GET(endTime, double);
 }
 
 void TextTrackCue::setEndTime(double value)
@@ -38,7 +37,7 @@ void TextTrackCue::setEndTime(double value)
 
 std::string TextTrackCue::getId() const
 {
-    return this->v["id"].as<std::string>();
+    return HTML5_PROPERTY_GET(id, std::string);
 }
 
 void TextTrackCue::setId(std::string value)
@@ -91,7 +90,7 @@ void TextTrackCue::onExitCallback(emscripten::val e)
 
 bool TextTrackCue::getPauseOnExit() const
 {
-    return this->v["pauseOnExit"].as<bool>();
+    return HTML5_PROPERTY_GET(pauseOnExit, bool);
 }
 
 void TextTrackCue::setPauseOnExit(bool value)
@@ -102,7 +101,7 @@ void TextTrackCue::setPauseOnExit(bool value)
 
 double TextTrackCue::getStartTime() const
 {
-    return this->v["startTime"].as<double>();
+    return HTML5_PROPERTY_GET(startTime, double);
 }
 
 void TextTrackCue::setStartTime(double value)
@@ -113,7 +112,7 @@ void TextTrackCue::setStartTime(double value)
 
 TextTrack *TextTrackCue::getTrack() const
 {
-    return TextTrack::create(this->v["track"]);
+    return HTML5_PROPERTY_GET(track, TextTrack);
 }
 
 void TextTrackCue::setTrack(TextTrack *value)

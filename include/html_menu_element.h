@@ -1,7 +1,7 @@
 #pragma once
 
+#include "libhtml5.h"
 #include "html_element.h"
-#include <emscripten/val.h>
 
 class HTMLMenuElement : public HTMLElement {
 public:

@@ -22,77 +22,72 @@ Node *Node::create(emscripten::val v)
 
 Node *Node::appendChild(Node *node)
 {
-    emscripten::val v = this->v.call<emscripten::val>("appendChild", node->v);
-    return Node::create(v);
+    return Node::create(HTML5_CALLv(this->v, appendChild, node->v));
 }
 
 Node *Node::cloneNode(bool deep)
 {
-    emscripten::val v = this->v.call<emscripten::val>("cloneNode", deep);
-    return Node::create(v);
+    return Node::create(HTML5_CALLv(this->v, cloneNode, deep));
 }
 
 unsigned short Node::compareDocumentPosition(Node *other)
 {
-    return this->v.call<unsigned short>("compareDocumentPosition", other->v);
+    return HTML5_CALLi(this->v, compareDocumentPosition, unsigned short, other->v);
 }
 
 bool Node::contains(Node *other)
 {
-    return this->v.call<bool>("contains", other->v);
+    return HTML5_CALLb(this->v, contains, other->v);
 }
    
 bool Node::hasChildNodes()
 {
-    return this->v.call<bool>("hasChildNodes");
+    return HTML5_CALLb(this->v, hasChildNodes); 
 }
 
 Node *Node::insertBefore(Node *node, Node *child)
 {
-    emscripten::val v = this->v.call<emscripten::val>("insertBefore", node->v, child->v);
-    return Node::create(v);
+    return Node::create(HTML5_CALLv(this->v, insertBefore, node->v, child->v));
 }
 
 bool Node::isDefaultNamespace(std::string _namespace)
 {
-    return this->v.call<bool>("isDefaultNamespace", _namespace);
+    return HTML5_CALLb(this->v, isDefaultNamespace, _namespace);
 }
 
 bool Node::isEqualNode(Node *node)
 {
-    return this->v.call<bool>("isEqualNode", node->v);
+    return HTML5_CALLb(this->v, isEqualNode, node->v);
 }
 
 std::string Node::lookupNamespaceURI(std::string prefix)
 {
-    return this->v.call<std::string>("lookupNamespaceURI", prefix);
+    return HTML5_CALLs(this->v, lookupNamespaceURI, prefix);
 }
 
 std::string Node::lookupPrefix(std::string prefix)
 {
-    return this->v.call<std::string>("lookupPrefix", prefix);
+    return HTML5_CALLs(this->v, lookupPrefix, prefix);
 }
 
 void Node::normalize()
 {
-    this->v.call<void>("normalize");
+    HTML5_CALL(this->v, normalize);
 }
 
 Node *Node::removeChild(Node *node)
 {
-    emscripten::val v = this->v.call<emscripten::val>("removeChild", node->v);
-    return Node::create(v);
+    return Node::create(HTML5_CALLv(this->v, removeChild, node->v));
 }
 
 Node *Node::replaceChild(Node *node, Node *child)
 {
-    emscripten::val v = this->v.call<emscripten::val>("replaceChild", node->v, child->v);
-    return Node::create(v);
+    return Node::create(HTML5_CALLv(this->v, replaceChild, node->v, child->v));
 }
 
 std::string Node::getBaseURI() const
 {
-    return this->v["baseURI"].as<std::string>();
+    return HTML5_PROPERTY_GET(baseURI, std::string);
 }
 
 void Node::setBaseURI(std::string value)
@@ -103,27 +98,33 @@ void Node::setBaseURI(std::string value)
 
 std::vector<Node *> Node::getChildNodes() const
 {
+#if ENABLE_EMSCRIPTEN
     std::vector<emscripten::val> nodes = emscripten::vecFromJSArray<emscripten::val>(this->v["childNodes"]);
     std::vector<Node *> ret;
     for (auto &n : nodes) {
         ret.push_back(Node::create(n));
     }
     return ret;
+#else
+    return this->_childNodes;
+#endif
 }
 
 void Node::setChildNodes(std::vector<Node *> value)
 {
     this->_childNodes = value;
+#if ENABLE_EMSCRIPTEN
     emscripten::val arr = emscripten::val::array();
     for (size_t i = 0; i < value.size(); ++i) {
         arr.set(i, value[i]->v);
     }
     this->v.set("childNodes", arr);
+#endif
 }
 
 Node *Node::getFirstChild() const
 {
-    return Node::create(this->v["firstChild"]);
+    return HTML5_PROPERTY_GET(firstChild, Node);
 }
 
 void Node::setFirstChild(Node *value)
@@ -134,7 +135,7 @@ void Node::setFirstChild(Node *value)
 
 Node *Node::getLastChild() const
 {
-    return Node::create(this->v["lastChild"]);
+    return HTML5_PROPERTY_GET(lastChild, Node);
 }
 
 void Node::setLastChild(Node *value)
@@ -145,7 +146,7 @@ void Node::setLastChild(Node *value)
 
 Node *Node::getNextSibling() const
 {
-    return Node::create(this->v["nextSibling"]);
+    return HTML5_PROPERTY_GET(nextSibling, Node);
 }
 
 void Node::setNextSibling(Node *value)
@@ -157,9 +158,8 @@ void Node::setNextSibling(Node *value)
 
 std::string Node::getNodeName() const
 {
-    return this->v["nodeName"].as<std::string>();
+    return HTML5_PROPERTY_GET(nodeName, std::string);
 }
-
 
 void Node::setNodeName(std::string value)
 {
@@ -169,9 +169,8 @@ void Node::setNodeName(std::string value)
 
 unsigned short Node::getNodeType() const
 {
-    return this->v["nodeType"].as<unsigned short>();
+    return HTML5_PROPERTY_GET(nodeType, unsigned short);
 }
-
 
 void Node::setNodeType(unsigned short value)
 {
@@ -181,7 +180,7 @@ void Node::setNodeType(unsigned short value)
 
 std::string Node::getNodeValue() const
 {
-    return this->v["nodeValue"].as<std::string>();
+    return HTML5_PROPERTY_GET(nodeValue, std::string);
 }
 
 void Node::setNodeValue(std::string value)
@@ -192,7 +191,7 @@ void Node::setNodeValue(std::string value)
 
 Document *Node::getOwnerDocument() const
 {
-    return Document::create(this->v["ownerDocument"]);
+    return HTML5_PROPERTY_GET(ownerDocument, Document);
 }
 
 void Node::setOwnerDocument(Document *value)
@@ -203,7 +202,7 @@ void Node::setOwnerDocument(Document *value)
 
 Element *Node::getParentElement() const
 {
-    return Element::create(this->v["parentElement"]);
+    return HTML5_PROPERTY_GET(parentElement, Element);
 }
 
 void Node::setParentElement(Element *value)
@@ -214,7 +213,7 @@ void Node::setParentElement(Element *value)
 
 Node *Node::getParentNode() const
 {
-    return Node::create(this->v["parentNode"]);
+    return HTML5_PROPERTY_GET(parentNode, Node);
 }
 
 void Node::setParentNode(Node *value)
@@ -225,7 +224,7 @@ void Node::setParentNode(Node *value)
 
 Node *Node::getPreviousNode() const
 {
-    return Node::create(this->v["previousNode"]);
+    return HTML5_PROPERTY_GET(previousNode, Node);
 }
 
 void Node::setPreviousNode(Node *value)
@@ -236,7 +235,7 @@ void Node::setPreviousNode(Node *value)
 
 Node *Node::getPreviousSibling() const
 {
-    return Node::create(this->v["previousNode"]);
+    return HTML5_PROPERTY_GET(previousNode, Node);
 }
 
 void Node::setPreviousSibling(Node *value)
@@ -247,7 +246,7 @@ void Node::setPreviousSibling(Node *value)
 
 std::string Node::getTextContent() const
 {
-    return this->v["textContent"].as<std::string>();
+    return HTML5_PROPERTY_GET(textContent, std::string);
 }
 
 void Node::setTextContent(std::string value)

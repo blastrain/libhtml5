@@ -21,12 +21,12 @@ NodeList *NodeList::create(emscripten::val v)
 
 Node *NodeList::item(unsigned long index)
 {
-    return Node::create(this->v.call<emscripten::val>("item", index));
+    return Node::create(HTML5_CALLv(this->v, item, index));
 }
 
 unsigned long NodeList::getLength()
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void NodeList::setLength(unsigned long value)

@@ -3,7 +3,6 @@
 #include "html_menu_element.h"
 #include "html_element.h"
 #include "css_style_declaration.h"
-#include <emscripten/emscripten.h>
 
 HTMLElement::HTMLElement(emscripten::val v) :
     Element(v)
@@ -25,22 +24,22 @@ HTMLElement *HTMLElement::create(emscripten::val v)
 
 void HTMLElement::blur()
 {
-    this->v.call<void>("blur");
+    HTML5_CALL(this->v, blur);
 }
 
 void HTMLElement::click()
 {
-    this->v.call<void>("click");
+    HTML5_CALL(this->v, click);
 }
 
 void HTMLElement::focus()
 {
-    this->v.call<void>("focus");
+    HTML5_CALL(this->v, focus);
 }
 
 void HTMLElement::forceSpellCheck()
 {
-    this->v.call<void>("forceSpellCheck");
+    HTML5_CALL(this->v, forceSpellCheck);
 }
 
 emscripten::val HTMLElement::getValue() const
@@ -50,7 +49,7 @@ emscripten::val HTMLElement::getValue() const
 
 std::string HTMLElement::getAccessKey() const
 {
-    return this->v["accessKey"].as<std::string>();
+    return HTML5_PROPERTY_GET(accessKey, std::string);
 }
 
 void HTMLElement::setAccessKey(std::string value)
@@ -61,7 +60,7 @@ void HTMLElement::setAccessKey(std::string value)
 
 std::string HTMLElement::getAccessKeyLabel() const
 {
-    return this->v["accessKeyLabel"].as<std::string>();
+    return HTML5_PROPERTY_GET(accessKeyLabel, std::string);
 }
 
 void HTMLElement::setAccessKeyLabel(std::string value)
@@ -72,7 +71,7 @@ void HTMLElement::setAccessKeyLabel(std::string value)
 
 bool HTMLElement::getCommandChecked() const
 {
-    return this->v["commandChecked"].as<bool>();
+    return HTML5_PROPERTY_GET(commandChecked, bool);
 }
 
 void HTMLElement::setCommandChecked(bool value)
@@ -83,7 +82,7 @@ void HTMLElement::setCommandChecked(bool value)
 
 bool HTMLElement::getCommandDisabled() const
 {
-    return this->v["commandDisabled"].as<bool>();
+    return HTML5_PROPERTY_GET(commandDisabled, bool);
 }
 
 void HTMLElement::setCommandDisabled(bool value)
@@ -94,7 +93,7 @@ void HTMLElement::setCommandDisabled(bool value)
 
 bool HTMLElement::getCommandHidden() const
 {
-    return this->v["commandHidden"].as<bool>();
+    return HTML5_PROPERTY_GET(commandHidden, bool);
 }
 
 void HTMLElement::setCommandHidden(bool value)
@@ -105,7 +104,7 @@ void HTMLElement::setCommandHidden(bool value)
 
 std::string HTMLElement::getCommandIcon() const
 {
-    return this->v["commandIcon"].as<std::string>();
+    return HTML5_PROPERTY_GET(commandIcon, std::string);
 }
 
 void HTMLElement::setCommandIcon(std::string value)
@@ -116,7 +115,7 @@ void HTMLElement::setCommandIcon(std::string value)
 
 std::string HTMLElement::getCommandLabel() const
 {
-    return this->v["commandLabel"].as<std::string>();
+    return HTML5_PROPERTY_GET(commandLabel, std::string);
 }
 
 void HTMLElement::setCommandLabel(std::string value)
@@ -127,7 +126,7 @@ void HTMLElement::setCommandLabel(std::string value)
 
 std::string HTMLElement::getCommandType() const
 {
-    return this->v["commandType"].as<std::string>();
+    return HTML5_PROPERTY_GET(commandType, std::string);
 }
 
 void HTMLElement::setCommandType(std::string value)
@@ -138,7 +137,7 @@ void HTMLElement::setCommandType(std::string value)
 
 std::string HTMLElement::getContentEditable() const
 {
-    return this->v["contentEditable"].as<std::string>();
+    return HTML5_PROPERTY_GET(contentEditable, std::string);
 }
 
 void HTMLElement::setContentEditable(std::string value)
@@ -149,7 +148,7 @@ void HTMLElement::setContentEditable(std::string value)
 
 HTMLMenuElement *HTMLElement::getContextMenu() const
 {
-    return HTMLMenuElement::create(this->v["contentMenu"]);
+    return HTML5_PROPERTY_GET(contextMenu, HTMLMenuElement);
 }
 
 void HTMLElement::setContextMenu(HTMLMenuElement *value)
@@ -163,7 +162,7 @@ void HTMLElement::setContextMenu(HTMLMenuElement *value)
 
 std::string HTMLElement::getDir() const
 {
-    return this->v["dir"].as<std::string>();
+    return HTML5_PROPERTY_GET(dir, std::string);
 }
 
 void HTMLElement::setDir(std::string value)
@@ -174,7 +173,7 @@ void HTMLElement::setDir(std::string value)
 
 bool HTMLElement::getDraggable() const
 {
-    return this->v["draggable"].as<bool>();
+    return HTML5_PROPERTY_GET(draggable, bool);
 }
 
 void HTMLElement::setDraggable(bool value)
@@ -188,7 +187,7 @@ void HTMLElement::setDraggable(bool value)
 
 bool HTMLElement::getHidden() const
 {
-    return this->v["hidden"].as<bool>();
+    return HTML5_PROPERTY_GET(hidden, bool);
 }
 
 void HTMLElement::setHidden(bool value)
@@ -199,7 +198,7 @@ void HTMLElement::setHidden(bool value)
 
 bool HTMLElement::getIsContentEditable() const
 {
-    return this->v["isContentEditable"].as<bool>();
+    return HTML5_PROPERTY_GET(isContentEditable, bool);
 }
 
 void HTMLElement::setIsContentEditable(bool value)
@@ -210,7 +209,7 @@ void HTMLElement::setIsContentEditable(bool value)
 
 std::string HTMLElement::getItemId() const
 {
-    return this->v["itemId"].as<std::string>();
+    return HTML5_PROPERTY_GET(itemId, std::string);
 }
 
 void HTMLElement::setItemId(std::string value)
@@ -225,7 +224,7 @@ void HTMLElement::setItemId(std::string value)
 //void setItemRef(DOMSettableTokenList *value);
 bool HTMLElement::getItemScope() const
 {
-    return this->v["itemScope"].as<bool>();
+    return HTML5_PROPERTY_GET(itemScope, bool);
 }
 
 void HTMLElement::setItemScope(bool value)
@@ -251,7 +250,7 @@ void HTMLElement::setItemValue(void *value)
 
 std::string HTMLElement::getLang() const
 {
-    return this->v["lang"].as<std::string>();
+    return HTML5_PROPERTY_GET(lang, std::string);
 }
 
 void HTMLElement::setLang(std::string value)
@@ -1588,7 +1587,7 @@ void HTMLElement::onWaitingCallback(emscripten::val e)
 
 HTMLPropertiesCollection *HTMLElement::getProperties() const
 {
-    return HTMLPropertiesCollection::create(this->v["properties"]);
+    return HTML5_PROPERTY_GET(properties, HTMLPropertiesCollection);
 }
 
 void HTMLElement::setProperties(HTMLPropertiesCollection *value)
@@ -1599,7 +1598,7 @@ void HTMLElement::setProperties(HTMLPropertiesCollection *value)
 
 bool HTMLElement::getSpellCheck() const
 {
-    return this->v["spellCheck"].as<bool>();
+    return HTML5_PROPERTY_GET(spellcheck, bool);
 }
 
 void HTMLElement::setSpellCheck(bool value)
@@ -1610,7 +1609,7 @@ void HTMLElement::setSpellCheck(bool value)
 
 CSSStyleDeclaration *HTMLElement::getStyle() const
 {
-    return CSSStyleDeclaration::create(this->v["style"]);
+    return HTML5_PROPERTY_GET(style, CSSStyleDeclaration);
 }
 
 void HTMLElement::setStyle(CSSStyleDeclaration *value)
@@ -1621,7 +1620,7 @@ void HTMLElement::setStyle(CSSStyleDeclaration *value)
 
 long HTMLElement::getTabIndex() const
 {
-    return this->v["tabIndex"].as<long>();
+    return HTML5_PROPERTY_GET(tabIndex, long);
 }
 
 void HTMLElement::setTabIndex(long value)
@@ -1632,7 +1631,7 @@ void HTMLElement::setTabIndex(long value)
 
 std::string HTMLElement::getTitle() const
 {
-    return this->v["title"].as<std::string>();
+    return HTML5_PROPERTY_GET(title, std::string);
 }
 
 void HTMLElement::setTitle(std::string value)
@@ -1643,7 +1642,7 @@ void HTMLElement::setTitle(std::string value)
 
 bool HTMLElement::getTranslate() const
 {
-    return this->v["translate"].as<bool>();
+    return HTML5_PROPERTY_GET(translate, bool);
 }
 
 void HTMLElement::setTranslate(bool value)

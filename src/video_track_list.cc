@@ -2,7 +2,6 @@
 #include "video_track_list.h"
 #include "event.h"
 #include "event_handler.h"
-#include <emscripten/emscripten.h>
 
 VideoTrackList::VideoTrackList(emscripten::val v) :
     EventTarget(v)
@@ -29,17 +28,17 @@ emscripten::val VideoTrackList::getValue() const
 
 VideoTrack *VideoTrackList::getter(unsigned long index)
 {
-    return VideoTrack::create(this->v.call<emscripten::val>("getter", index));
+    return VideoTrack::create(HTML5_CALLv(this->v, getter, index));
 }
 
 VideoTrack *VideoTrackList::getTrackById(std::string id)
 {
-    return VideoTrack::create(this->v.call<emscripten::val>("getTrackById", id));
+    return VideoTrack::create(HTML5_CALLv(this->v, getTrackById, id));
 }
 
 unsigned long VideoTrackList::getLength() const
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void VideoTrackList::setLength(unsigned long value)
@@ -113,7 +112,7 @@ void VideoTrackList::onRemoveTrackCallback(emscripten::val e)
 
 long VideoTrackList::getSelectedIndex() const
 {
-    return this->v["selectedIndex"].as<long>();
+    return HTML5_PROPERTY_GET(selectedIndex, long);
 }
 
 void VideoTrackList::setSelectedIndex(long value)

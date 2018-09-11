@@ -45,8 +45,7 @@ TextTrack *HTMLMediaElement::addTextTrack(TextTrackKind kind)
         param = "metadata";
         break;
     }
-    emscripten::val v = this->v.call<emscripten::val>("addTextTrack", param);
-    return TextTrack::create(v);
+    return TextTrack::create(HTML5_CALLv(this->v, addTextTrack, param));
 }
 
 TextTrack *HTMLMediaElement::addTextTrack(TextTrackKind kind, std::string label, std::string language)
@@ -69,13 +68,12 @@ TextTrack *HTMLMediaElement::addTextTrack(TextTrackKind kind, std::string label,
         param = "metadata";
         break;
     }
-    emscripten::val v = this->v.call<emscripten::val>("addTextTrack", param, label, language);
-    return TextTrack::create(v);
+    return TextTrack::create(HTML5_CALLv(this->v, addTextTrack, param, label, language));
 }
 
 CanPlayTypeResult HTMLMediaElement::canPlayType(std::string type)
 {
-    std::string result = this->v.call<std::string>("canPlayType", type);
+    std::string result = HTML5_CALLs(this->v, canPlayType, type);
     if (result == "maybe") {
         return CanPlayTypeResult::MAYBE;
     } else if (result == "probably") {
@@ -86,32 +84,32 @@ CanPlayTypeResult HTMLMediaElement::canPlayType(std::string type)
 
 void HTMLMediaElement::fastSeek(double time)
 {
-    this->v.call<void>("fastSeek", time);
+    HTML5_CALL(this->v, fastSeek, time);
 }
 
 Date *HTMLMediaElement::getStartDate()
 {
-    return Date::create(this->v.call<emscripten::val>("getStartDate"));
+    return Date::create(HTML5_CALLv(this->v, getStartDate));
 }
 
 void HTMLMediaElement::load()
 {
-    this->v.call<void>("load");
+    HTML5_CALL(this->v, load);
 }
 
 void HTMLMediaElement::pause()
 {
-    this->v.call<void>("pause");
+    HTML5_CALL(this->v, pause);
 }
 
 void HTMLMediaElement::play()
 {
-    this->v.call<void>("play");
+    HTML5_CALL(this->v, play);
 }
 
 AudioTrackList *HTMLMediaElement::getAudioTracks() const
 {
-    return AudioTrackList::create(this->v["audioTracks"]);
+    return HTML5_PROPERTY_GET(audioTracks, AudioTrackList);
 }
 
 void HTMLMediaElement::setAudioTracks(AudioTrackList *value)
@@ -122,7 +120,7 @@ void HTMLMediaElement::setAudioTracks(AudioTrackList *value)
 
 bool HTMLMediaElement::getAutoPlay() const
 {
-    return this->v["autoPlay"].as<bool>();
+    return HTML5_PROPERTY_GET(autoPlay, bool);
 }
 
 void HTMLMediaElement::setAutoPlay(bool value)
@@ -133,7 +131,7 @@ void HTMLMediaElement::setAutoPlay(bool value)
 
 TimeRanges *HTMLMediaElement::getBuffered() const
 {
-    return TimeRanges::create(this->v["buffered"]);
+    return HTML5_PROPERTY_GET(buffered, TimeRanges);
 }
 
 void HTMLMediaElement::setBuffered(TimeRanges *value)
@@ -144,7 +142,7 @@ void HTMLMediaElement::setBuffered(TimeRanges *value)
 
 MediaController *HTMLMediaElement::getController() const
 {
-    return MediaController::create(this->v["controller"]);
+    return HTML5_PROPERTY_GET(controller, MediaController);
 }
 
 void HTMLMediaElement::setController(MediaController *value)
@@ -155,7 +153,7 @@ void HTMLMediaElement::setController(MediaController *value)
 
 bool HTMLMediaElement::getControls() const
 {
-    return this->v["controls"].as<bool>();
+    return HTML5_PROPERTY_GET(controls, bool);
 }
 
 void HTMLMediaElement::setControls(bool value)
@@ -166,7 +164,7 @@ void HTMLMediaElement::setControls(bool value)
 
 std::string HTMLMediaElement::getCrossOrigin() const
 {
-    return this->v["crossOrigin"].as<std::string>();
+    return HTML5_PROPERTY_GET(crossOrigin, std::string);
 }
 
 void HTMLMediaElement::setCrossOrigin(std::string value)
@@ -177,7 +175,7 @@ void HTMLMediaElement::setCrossOrigin(std::string value)
 
 std::string HTMLMediaElement::getCurrentSrc() const
 {
-    return this->v["currentSrc"].as<std::string>();
+    return HTML5_PROPERTY_GET(currentSrc, std::string);
 }
 
 void HTMLMediaElement::setCurrentSrc(std::string value)
@@ -188,7 +186,7 @@ void HTMLMediaElement::setCurrentSrc(std::string value)
 
 double HTMLMediaElement::getCurrentTime() const
 {
-    return this->v["currentTime"].as<double>();
+    return HTML5_PROPERTY_GET(currentTime, double);
 }
 
 void HTMLMediaElement::setCurrentTime(double value)
@@ -199,7 +197,7 @@ void HTMLMediaElement::setCurrentTime(double value)
 
 bool HTMLMediaElement::getDefaultMuted() const
 {
-    return this->_defaultMuted;
+    return HTML5_PROPERTY_GET(defaultMuted, bool);
 }
 
 void HTMLMediaElement::setDefaultMuted(bool value)
@@ -210,7 +208,7 @@ void HTMLMediaElement::setDefaultMuted(bool value)
 
 double HTMLMediaElement::getDefaultPlaybackRate() const
 {
-    return this->v["defaultPlaybackRate"].as<double>();
+    return HTML5_PROPERTY_GET(defaultPlaybackRate, double);
 }
 
 void HTMLMediaElement::setDefaultPlaybackRate(double value)
@@ -221,7 +219,7 @@ void HTMLMediaElement::setDefaultPlaybackRate(double value)
 
 double HTMLMediaElement::getDuration() const
 {
-    return this->v["duration"].as<double>();
+    return HTML5_PROPERTY_GET(duration, double);
 }
 
 void HTMLMediaElement::setDuration(double value)
@@ -232,7 +230,7 @@ void HTMLMediaElement::setDuration(double value)
     
 bool HTMLMediaElement::getEnded() const
 {
-    return this->v["ended"].as<bool>();
+    return HTML5_PROPERTY_GET(ended, bool);
 }
 
 void HTMLMediaElement::setEnded(bool value)
@@ -243,7 +241,7 @@ void HTMLMediaElement::setEnded(bool value)
 
 MediaError *HTMLMediaElement::getError() const
 {
-    return MediaError::create(this->v["error"]);
+    return HTML5_PROPERTY_GET(error, MediaError);
 }
 
 void HTMLMediaElement::setError(MediaError *value)
@@ -254,7 +252,7 @@ void HTMLMediaElement::setError(MediaError *value)
 
 bool HTMLMediaElement::getLoop() const
 {
-    return this->v["loop"].as<bool>();
+    return HTML5_PROPERTY_GET(loop, bool);
 }
 
 void HTMLMediaElement::setLoop(bool value)
@@ -265,7 +263,7 @@ void HTMLMediaElement::setLoop(bool value)
 
 std::string HTMLMediaElement::getMediaGroup() const
 {
-    return this->v["mediaGroup"].as<std::string>();
+    return HTML5_PROPERTY_GET(mediaGroup, std::string);
 }
 
 void HTMLMediaElement::setMediaGroup(std::string value)
@@ -276,7 +274,7 @@ void HTMLMediaElement::setMediaGroup(std::string value)
 
 bool HTMLMediaElement::getMuted() const
 {
-    return this->v["muted"].as<bool>();
+    return HTML5_PROPERTY_GET(muted, bool);
 }
 
 void HTMLMediaElement::setMuted(bool value)
@@ -287,7 +285,7 @@ void HTMLMediaElement::setMuted(bool value)
 
 unsigned short HTMLMediaElement::getNetworkState() const
 {
-    return this->v["networkState"].as<unsigned short>();
+    return HTML5_PROPERTY_GET(networkState, unsigned short);
 }
 
 void HTMLMediaElement::setNetworkState(unsigned short value)
@@ -298,7 +296,7 @@ void HTMLMediaElement::setNetworkState(unsigned short value)
 
 bool HTMLMediaElement::getPaused() const
 {
-    return this->v["paused"].as<bool>();
+    return HTML5_PROPERTY_GET(paused, bool);
 }
 
 void HTMLMediaElement::setPaused(bool value)
@@ -309,7 +307,7 @@ void HTMLMediaElement::setPaused(bool value)
 
 double HTMLMediaElement::getPlaybackRate() const
 {
-    return this->v["playbackRate"].as<double>();
+    return HTML5_PROPERTY_GET(playbackRate, double);
 }
 
 void HTMLMediaElement::setPlaybackRate(double value)
@@ -320,7 +318,7 @@ void HTMLMediaElement::setPlaybackRate(double value)
 
 TimeRanges *HTMLMediaElement::getPlayed() const
 {
-    return TimeRanges::create(this->v["played"]);
+    return HTML5_PROPERTY_GET(played, TimeRanges);
 }
 
 void HTMLMediaElement::setPlayed(TimeRanges *value)
@@ -331,7 +329,7 @@ void HTMLMediaElement::setPlayed(TimeRanges *value)
 
 std::string HTMLMediaElement::getPreload() const
 {
-    return this->v["preload"].as<std::string>();
+    return HTML5_PROPERTY_GET(preload, std::string);
 }
 
 void HTMLMediaElement::setPreload(std::string value)
@@ -342,7 +340,7 @@ void HTMLMediaElement::setPreload(std::string value)
 
 unsigned short HTMLMediaElement::getReadyState() const
 {
-    return this->v["readyState"].as<unsigned short>();
+    return HTML5_PROPERTY_GET(readyState, unsigned short);
 }
 
 void HTMLMediaElement::setReadyState(unsigned short value)
@@ -353,7 +351,7 @@ void HTMLMediaElement::setReadyState(unsigned short value)
 
 TimeRanges *HTMLMediaElement::getSeekable() const
 {
-    return TimeRanges::create(this->v["seekable"]);
+    return HTML5_PROPERTY_GET(seekable, TimeRanges);
 }
 
 void HTMLMediaElement::setSeekable(TimeRanges *value)
@@ -364,7 +362,7 @@ void HTMLMediaElement::setSeekable(TimeRanges *value)
 
 bool HTMLMediaElement::getSeeking() const
 {
-    return this->v["seeking"].as<bool>();
+    return HTML5_PROPERTY_GET(seeking, bool);
 }
 
 void HTMLMediaElement::setSeeking(bool value)
@@ -375,7 +373,7 @@ void HTMLMediaElement::setSeeking(bool value)
 
 std::string HTMLMediaElement::getSrc() const
 {
-    return this->v["src"].as<std::string>();
+    return HTML5_PROPERTY_GET(src, std::string);
 }
 
 void HTMLMediaElement::setSrc(std::string value)
@@ -386,7 +384,7 @@ void HTMLMediaElement::setSrc(std::string value)
 
 TextTrackList *HTMLMediaElement::getTextTracks() const
 {
-    return TextTrackList::create(this->v["textTracks"]);
+    return HTML5_PROPERTY_GET(textTracks, TextTrackList);
 }
 
 void HTMLMediaElement::setTextTracks(TextTrackList *value)
@@ -397,7 +395,7 @@ void HTMLMediaElement::setTextTracks(TextTrackList *value)
 
 VideoTrackList *HTMLMediaElement::getVideoTracks() const
 {
-    return VideoTrackList::create(this->v["videoTracks"]);
+    return HTML5_PROPERTY_GET(videoTracks, VideoTrackList);
 }
 
 void HTMLMediaElement::setVideoTracks(VideoTrackList *value)
@@ -408,7 +406,7 @@ void HTMLMediaElement::setVideoTracks(VideoTrackList *value)
 
 double HTMLMediaElement::getVolume() const
 {
-    return this->v["volume"].as<double>();
+    return HTML5_PROPERTY_GET(volume, double);
 }
 
 void HTMLMediaElement::setVolume(double value)

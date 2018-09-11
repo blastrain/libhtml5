@@ -21,27 +21,27 @@ HTMLSourceElement *HTMLSourceElement::create(emscripten::val v)
 
 HTMLSourceElement *HTMLSourceElement::create()
 {
-    return dynamic_cast<HTMLSourceElement *>(Document::createElement("source"));
+    return dynamic_cast<HTMLSourceElement *>(Document::create()->createElement("source"));
 }
 
 std::string HTMLSourceElement::getSrc()
 {
-    return this->v["src"].as<std::string>();
+    return HTML5_PROPERTY_GET(src, std::string);
 }
 
 void HTMLSourceElement::setSrc(std::string value)
 {
     this->_src = value;
-    this->v.set("src", emscripten::val(value));
+    this->v.set("src", value);
 }
 
 std::string HTMLSourceElement::getType()
 {
-    return this->v["type"].as<std::string>();
+    return HTML5_PROPERTY_GET(type, std::string);
 }
 
 void HTMLSourceElement::setType(std::string value)
 {
     this->_type = value;
-    this->v.set("type", emscripten::val(value));
+    this->v.set("type", value);
 }

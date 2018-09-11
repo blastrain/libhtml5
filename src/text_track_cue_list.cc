@@ -20,17 +20,17 @@ TextTrackCueList *TextTrackCueList::create(emscripten::val v)
 
 TextTrackCue *TextTrackCueList::getCueById(std::string id)
 {
-    return TextTrackCue::create(this->v.call<emscripten::val>("getCueById", id));
+    return TextTrackCue::create(HTML5_CALLv(this->v, getCueById, id));
 }
 
 TextTrackCue *TextTrackCueList::getter(unsigned long index)
 {
-    return TextTrackCue::create(this->v.call<emscripten::val>("getter", index));
+    return TextTrackCue::create(HTML5_CALLv(this->v, getter, index));
 }
 
 unsigned long TextTrackCueList::getLength() const
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void TextTrackCueList::setLength(unsigned long value)

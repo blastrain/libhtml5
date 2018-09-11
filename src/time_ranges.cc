@@ -19,17 +19,17 @@ TimeRanges *TimeRanges::create(emscripten::val v)
 
 double TimeRanges::start(unsigned long index)
 {
-    return this->v.call<double>("start", index);
+    return HTML5_CALLf(this->v, start, double, index);
 }
 
 double TimeRanges::end(unsigned long index)
 {
-    return this->v.call<double>("end", index);
+    return HTML5_CALLf(this->v, end, double, index);
 }
 
 unsigned long TimeRanges::getLength() const
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void TimeRanges::setLength(unsigned long value)

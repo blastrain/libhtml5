@@ -19,7 +19,7 @@ AudioTrack *AudioTrack::create(emscripten::val v)
 
 bool AudioTrack::getEnabled() const
 {
-    return this->v["enabled"].as<bool>();
+    return HTML5_PROPERTY_GET(enabled, bool);
 }
 
 void AudioTrack::setEnabled(bool value)
@@ -30,7 +30,7 @@ void AudioTrack::setEnabled(bool value)
 
 std::string AudioTrack::getId() const
 {
-    return this->v["id"].as<std::string>();
+    return HTML5_PROPERTY_GET(id, std::string);
 }
 
 void AudioTrack::setId(std::string value)
@@ -41,7 +41,7 @@ void AudioTrack::setId(std::string value)
 
 std::string AudioTrack::getKind() const
 {
-    return this->v["kind"].as<std::string>();
+    return HTML5_PROPERTY_GET(kind, std::string);
 }
 
 void AudioTrack::setKind(std::string value)
@@ -52,7 +52,7 @@ void AudioTrack::setKind(std::string value)
 
 std::string AudioTrack::getLabel() const
 {
-    return this->v["label"].as<std::string>();
+    return HTML5_PROPERTY_GET(label, std::string);
 }
 
 void AudioTrack::setLabel(std::string value)
@@ -63,7 +63,7 @@ void AudioTrack::setLabel(std::string value)
 
 std::string AudioTrack::getLanguage() const
 {
-    return this->v["language"].as<std::string>();
+    return HTML5_PROPERTY_GET(language, std::string);
 }
 
 void AudioTrack::setLanguage(std::string value)

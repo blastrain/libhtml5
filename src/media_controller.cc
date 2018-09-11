@@ -1,7 +1,6 @@
 #include "time_ranges.h"
 #include "event_handler.h"
 #include "media_controller.h"
-#include <emscripten/emscripten.h>
 
 MediaController::MediaController(emscripten::val v) :
     EventTarget(v)
@@ -28,22 +27,22 @@ emscripten::val MediaController::getValue() const
 
 void MediaController::pause()
 {
-    this->v.call<void>("pause");
+    HTML5_CALL(this->v, pause);
 }
 
 void MediaController::play()
 {
-    this->v.call<void>("play");
+    HTML5_CALL(this->v, play);
 }
 
 void MediaController::unpause()
 {
-    this->v.call<void>("unpause");
+    HTML5_CALL(this->v, unpause);
 }
 
 TimeRanges *MediaController::getBuffered() const
 {
-    return TimeRanges::create(this->v["buffered"]);
+    return HTML5_PROPERTY_GET(buffered, TimeRanges);
 }
 
 void MediaController::setBuffered(TimeRanges *value)
@@ -54,7 +53,7 @@ void MediaController::setBuffered(TimeRanges *value)
 
 double MediaController::getCurrentTime() const
 {
-    return this->v["currentTime"].as<double>();
+    return HTML5_PROPERTY_GET(currentTime, double);
 }
 
 void MediaController::setCurrentTime(double value)
@@ -65,7 +64,7 @@ void MediaController::setCurrentTime(double value)
 
 double MediaController::getDefaultPlaybackRate() const
 {
-    return this->v["defaultPlaybackRate"].as<double>();
+    return HTML5_PROPERTY_GET(defaultPlaybackRate, double);
 }
 
 void MediaController::setDefaultPlaybackRate(double value)
@@ -76,7 +75,7 @@ void MediaController::setDefaultPlaybackRate(double value)
 
 double MediaController::getDuration() const
 {
-    return this->v["duration"].as<double>();
+    return HTML5_PROPERTY_GET(duration, double);
 }
 
 void MediaController::setDuration(double value)
@@ -87,7 +86,7 @@ void MediaController::setDuration(double value)
 
 bool MediaController::getMuted() const
 {
-    return this->v["muted"].as<bool>();
+    return HTML5_PROPERTY_GET(muted, bool);
 }
 
 void MediaController::setMuted(bool value)
@@ -393,7 +392,7 @@ void MediaController::onWaitingCallback(emscripten::val e)
 
 bool MediaController::getPaused() const
 {
-    return this->v["paused"].as<bool>();
+    return HTML5_PROPERTY_GET(paused, bool);
 }
 
 void MediaController::setPaused(bool value)
@@ -404,7 +403,7 @@ void MediaController::setPaused(bool value)
 
 double MediaController::getPlaybackRate() const
 {
-    return this->v["playbackRate"].as<double>();
+    return HTML5_PROPERTY_GET(playbackRate, double);
 }
 
 void MediaController::setPlaybackRate(double value)
@@ -415,7 +414,11 @@ void MediaController::setPlaybackRate(double value)
 
 std::string MediaController::getPlaybackState() const
 {
+#if ENABLE_EMSCRIPTEN
     return this->v["playbackState"].as<std::string>();
+#else
+    return "";
+#endif
 }
 
 void MediaController::setPlaybackState(MediaControllerPlaybackState value)
@@ -436,7 +439,7 @@ void MediaController::setPlaybackState(MediaControllerPlaybackState value)
 
 TimeRanges *MediaController::getPlayed() const
 {
-    return TimeRanges::create(this->v["played"]);
+    return HTML5_PROPERTY_GET(played, TimeRanges);
 }
 
 void MediaController::setPlayed(TimeRanges *value)
@@ -447,7 +450,7 @@ void MediaController::setPlayed(TimeRanges *value)
 
 unsigned short MediaController::getReadyState() const
 {
-    return this->v["readyState"].as<unsigned short>();
+    return HTML5_PROPERTY_GET(readyState, unsigned short);
 }
 
 void MediaController::setReadyState(unsigned short value)
@@ -458,7 +461,7 @@ void MediaController::setReadyState(unsigned short value)
 
 TimeRanges *MediaController::getSeekable() const
 {
-    return TimeRanges::create(this->v["seekable"]);
+    return HTML5_PROPERTY_GET(seekable, TimeRanges);
 }
 
 void MediaController::setSeekable(TimeRanges *value)
@@ -469,7 +472,7 @@ void MediaController::setSeekable(TimeRanges *value)
 
 double MediaController::getVolume() const
 {
-    return this->v["volume"].as<double>();
+    return HTML5_PROPERTY_GET(volume, double);
 }
 
 void MediaController::setVolume(double value)

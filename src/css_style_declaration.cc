@@ -20,42 +20,42 @@ CSSStyleDeclaration *CSSStyleDeclaration::create(emscripten::val v)
 
 std::string CSSStyleDeclaration::getPropertyPriority(std::string property)
 {
-    return this->v.call<std::string>("getPropertyPriority", property);
+    return HTML5_CALLs(this->v, getPropertyPriority, property);
 }
 
 std::string CSSStyleDeclaration::getPropertyValue(std::string property)
 {
-    return this->v.call<std::string>("getPropertyValue", property);
+    return HTML5_CALLs(this->v, getPropertyValue, property);
 }
    
 std::string CSSStyleDeclaration::item(unsigned long index)
 {
-    return this->v.call<std::string>("item", index);
+    return HTML5_CALLs(this->v, item, index);
 }
 
 std::string CSSStyleDeclaration::removeProperty(std::string property)
 {
-    return this->v.call<std::string>("removeProperty", property);
+    return HTML5_CALLs(this->v, removeProperty, property);
 }
 
 void CSSStyleDeclaration::setProperty(std::string property, std::string value, std::string priority)
 {
-    this->v.call<void>("setProperty", property, value, priority);
+    HTML5_CALL(this->v, setProperty, property, value, priority);
 }
 
 void CSSStyleDeclaration::setPropertyPriority(std::string property, std::string priority)
 {
-    this->v.call<void>("setPropertyPriority", property, priority);
+    HTML5_CALL(this->v, setPropertyPriority, property, priority);
 }
 
 void CSSStyleDeclaration::setPropertyValue(std::string property, std::string value)
 {
-    this->v.call<void>("setPropertyValue", property, value);
+    HTML5_CALL(this->v, setPropertyValue, property, value);
 }
 
 std::string CSSStyleDeclaration::getCSSFloat() const
 {
-    return this->v["cssFloat"].as<std::string>();
+    return HTML5_PROPERTY_GET(cssFloat, std::string);
 }
 
 void CSSStyleDeclaration::setCSSFloat(std::string value)
@@ -66,7 +66,7 @@ void CSSStyleDeclaration::setCSSFloat(std::string value)
 
 std::string CSSStyleDeclaration::getCSSText() const
 {
-    return this->v["cssText"].as<std::string>();
+    return HTML5_PROPERTY_GET(cssText, std::string);
 }
 
 void CSSStyleDeclaration::setCSSText(std::string value)
@@ -77,7 +77,7 @@ void CSSStyleDeclaration::setCSSText(std::string value)
 
 unsigned long CSSStyleDeclaration::getLength() const
 {
-    return this->v["length"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(length, unsigned long);
 }
 
 void CSSStyleDeclaration::setLength(unsigned long value)
@@ -88,7 +88,7 @@ void CSSStyleDeclaration::setLength(unsigned long value)
 
 CSSRule *CSSStyleDeclaration::getParentRule() const
 {
-    return this->_parentRule;
+    return HTML5_PROPERTY_GET(parentRule, CSSRule);
 }
 
 void CSSStyleDeclaration::setParentRule(CSSRule *value)

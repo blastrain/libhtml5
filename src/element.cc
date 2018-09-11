@@ -3,11 +3,22 @@
 #include "html_collection.h"
 #include "node_list.h"
 #include "element.h"
+#include "html_element.h"
+#include "html_image_element.h"
+#include "html_video_element.h"
+#include "html_source_element.h"
+#include <iostream>
+
+static std::map<std::string, std::function<Element*(emscripten::val)>> classFactories = {
+    CLASS_FACTORY_MAP(HTMLElement),
+    CLASS_FACTORY_MAP(HTMLImageElement),
+    CLASS_FACTORY_MAP(HTMLSourceElement),
+    CLASS_FACTORY_MAP(HTMLVideoElement),
+};
 
 Element::Element(emscripten::val v) :
     Node(v)
 {
-
 }
 
 Element::~Element()
@@ -17,176 +28,182 @@ Element::~Element()
 
 Element *Element::create(emscripten::val v)
 {
+#if ENABLE_EMSCRIPTEN
+    std::string className = v["constructor"]["name"].as<std::string>();
+    std::cout << "factory: className = " << className << std::endl;
+    return classFactories[className](v);
+#else
     Element *e = new Element(v);
     e->autorelease();
     return e;
+#endif
 }
 
 void Element::after(std::vector<Node *> nodes)
 {
     for (Node *node : nodes) {
-        this->v.call<void>("after", node->v);
+        HTML5_CALL(this->v, after, node->v);
     }
 }
 
 void Element::append(std::vector<Node *> nodes)
 {
     for (Node *node : nodes) {
-        this->v.call<void>("append", node->v);
+        HTML5_CALL(this->v, append, node->v);
     }
 }
 
 void Element::before(std::vector<Node *> nodes)
 {
     for (Node *node : nodes) {
-        this->v.call<void>("before", node->v);
+        HTML5_CALL(this->v, before, node->v);
     }
 }
 
 std::string Element::getAttribute(std::string name)
 {
-    return this->v.call<std::string>("getAttribute", name);
+    return HTML5_CALLs(this->v, getAttribute, name);
 }
 
 std::string Element::getAttributeNS(std::string _namespace, std::string localName)
 {
-    return this->v.call<std::string>("getAttributeNS", _namespace, localName);
+    return HTML5_CALLs(this->v, getAttributeNS, _namespace, localName);
 }
 
 HTMLCollection *Element::getElementsByClassName(std::string classNames)
 {
-    emscripten::val v = this->v.call<emscripten::val>("getElementsByClassName", classNames);
-    return HTMLCollection::create(v);
+    return HTMLCollection::create(HTML5_CALLv(this->v, getElementsByClassName, classNames));
 }
 
 HTMLCollection *Element::getElementsByTagName(std::string localName)
 {
-    emscripten::val v = this->v.call<emscripten::val>("getElementsByTagName", localName);
-    return HTMLCollection::create(v);
+    return HTMLCollection::create(HTML5_CALLv(this->v, getElementsByTagName, localName));
 }
 
 HTMLCollection *Element::getElementsByTagnameNS(std::string _namespace, std::string localName)
 {
-    emscripten::val v = this->v.call<emscripten::val>("getElementsByTagNameNS", _namespace, localName);
-    return HTMLCollection::create(v);
+    return HTMLCollection::create(HTML5_CALLv(this->v, getElementsByTagNameNS, _namespace, localName));
 }
 
 bool Element::hasAttribute(std::string name)
 {
-    return this->v.call<bool>("hasAttribute", name);
+    return HTML5_CALLb(this->v, hasAttribute, name);
 }
 
 bool Element::hasAttributeNS(std::string _namespace, std::string localName)
 {
-    return this->v.call<bool>("hasAttributeNS", _namespace, localName);
+    return HTML5_CALLb(this->v, hasAttributeNS, _namespace, localName);
 }
 
 bool Element::matches(std::string selectors)
 {
-    return this->v.call<bool>("matches", selectors);
+    return HTML5_CALLb(this->v, matches, selectors);
 }
 
 void Element::prepend(std::vector<Node *> nodes)
 {
     for (Node *node : nodes) {
-        this->v.call<void>("prepend", node->v);
+        HTML5_CALL(this->v, prepend, node->v);
     }
 }
 
 Element *Element::query(std::string relativeSelectors)
 {
-    emscripten::val v = this->v.call<emscripten::val>("query", relativeSelectors);
-    return Element::create(v);
+    return Element::create(HTML5_CALLv(this->v, query, relativeSelectors));
 }
 
 std::vector<Element *> Element::queryAll(std::string relativeSelectors)
 {
-    emscripten::val arr = this->v.call<emscripten::val>("queryAll", relativeSelectors);
-    std::vector<emscripten::val> elems = emscripten::vecFromJSArray<emscripten::val>(arr);
+    emscripten::val arr = HTML5_CALLv(this->v, queryAll, relativeSelectors);
     std::vector<Element *> ret;
+#if ENABLE_EMSCRIPTEN
+    std::vector<emscripten::val> elems = emscripten::vecFromJSArray<emscripten::val>(arr);
     for (emscripten::val &elem : elems) {
         ret.push_back(Element::create(elem));
     }
+#endif
     return ret;
 }
 
 Element *Element::querySelector(std::string selectors)
 {
-    emscripten::val v = this->v.call<emscripten::val>("querySelector", selectors);
-    return Element::create(v);
+    return Element::create(HTML5_CALLv(this->v, querySelector, selectors));
 }
 
 NodeList *Element::querySelectorAll(std::string selectors)
 {
-    emscripten::val v = this->v.call<emscripten::val>("querySelectorAll", selectors);
-    return NodeList::create(v);
+    return NodeList::create(HTML5_CALLv(this->v, querySelectorAll, selectors));
 }
 
 void Element::remove()
 {
-    this->v.call<void>("remove");
+    HTML5_CALL(this->v, remove);
 }
 
 void Element::removeAttribute(std::string name)
 {
-    this->v.call<void>("removeAttribute", name);
+    HTML5_CALL(this->v, removeAttribute, name);
 }
 
 void Element::removeAttributeNS(std::string _namespace, std::string localName)
 {
-    this->v.call<void>("removeAttributeNS", _namespace, localName);
+    HTML5_CALL(this->v, removeAttributeNS, _namespace, localName);
 }
 
 void Element::replace(std::vector<Node *> nodes)
 {
     for (Node *node : nodes) {
-        this->v.call<void>("replace", node->v);
+        HTML5_CALL(this->v, replace, node->v);
     }
 }
 
 void Element::requestFullscreen()
 {
-    this->v.call<void>("requestFullscreen");
+    HTML5_CALL(this->v, requestFullscreen);
 }
 
 void Element::requestPointerLock()
 {
-    this->v.call<void>("requestPointerLock");
+    HTML5_CALL(this->v, requestPointerLock);
 }
 
 void Element::setAttribute(std::string qualifiedName, std::string value)
 {
-    this->v.call<void>("setAttribute", qualifiedName, value);
+    HTML5_CALL(this->v, setAttribute, qualifiedName, value);
 }
 
 void Element::setAttributeNS(std::string _namespace, std::string name, std::string value)
 {
-    this->v.call<void>("setAttributeNS", _namespace, name, value);
+    HTML5_CALL(this->v, setAttributeNS, _namespace, name, value);
 }
 
 std::vector<Attr *> Element::getAttributes() const
 {
-    std::vector<emscripten::val> attrs = emscripten::vecFromJSArray<emscripten::val>(this->v["attributes"]);
     std::vector<Attr *> ret;
+#if ENABLE_EMSCRIPTEN
+    std::vector<emscripten::val> attrs = emscripten::vecFromJSArray<emscripten::val>(this->v["attributes"]);
     for (emscripten::val &attr : attrs) {
         ret.push_back(Attr::create(attr));
     }
+#endif
     return ret;
 }
 
 void Element::setAttributes(std::vector<Attr *> value)
 {
+#if ENABLE_EMSCRIPTEN
     this->_attributes = value;
     emscripten::val arr = emscripten::val::array();
     for (size_t i = 0; i < value.size(); ++i) {
         arr.set(i, value[i]->v);
     }
     this->v.set("attributes", arr);
+#endif
 }
 
 unsigned long Element::getChildElementCount() const
 {
-    return this->v["childElementCount"].as<unsigned long>();
+    return HTML5_PROPERTY_GET(childElementCount, unsigned long);
 }
 
 void Element::setChildElementCount(unsigned long value)
@@ -197,7 +214,7 @@ void Element::setChildElementCount(unsigned long value)
 
 HTMLCollection *Element::getChildren() const
 {
-    return HTMLCollection::create(this->v["children"]);
+    return HTML5_PROPERTY_GET(children, HTMLCollection);
 }
     
 void Element::setChildren(HTMLCollection *value)
@@ -208,7 +225,7 @@ void Element::setChildren(HTMLCollection *value)
 
 std::string Element::getClassName() const
 {
-    return this->v["className"].as<std::string>();
+    return HTML5_PROPERTY_GET(className, std::string);
 }
 
 void Element::setClassName(std::string value)
@@ -219,7 +236,7 @@ void Element::setClassName(std::string value)
 
 Element *Element::getFirstElementChild() const
 {
-    return Element::create(this->v["firstElementChild"]);
+    return HTML5_PROPERTY_GET(firstElementChild, Element);
 }
 
 void Element::setFirstElementChild(Element *value)
@@ -230,7 +247,7 @@ void Element::setFirstElementChild(Element *value)
 
 std::string Element::getId() const
 {
-    return this->v["id"].as<std::string>();
+    return HTML5_PROPERTY_GET(id, std::string);
 }
 
 void Element::setId(std::string value)
@@ -241,7 +258,7 @@ void Element::setId(std::string value)
 
 Element *Element::getLastElementChild() const
 {
-    return Element::create(this->v["lastElementChild"]);
+    return HTML5_PROPERTY_GET(lastElementChild, Element);
 }
 
 void Element::setLastElementChild(Element *value)
@@ -252,7 +269,7 @@ void Element::setLastElementChild(Element *value)
 
 std::string Element::getLocalName() const
 {
-    return this->v["localName"].as<std::string>();
+    return HTML5_PROPERTY_GET(localName, std::string);
 }
 
 void Element::setLocalName(std::string value)
@@ -263,7 +280,7 @@ void Element::setLocalName(std::string value)
 
 std::string Element::getNamespaceURI() const
 {
-    return this->v["namespaceURI"].as<std::string>();
+    return HTML5_PROPERTY_GET(namespaceURI, std::string);
 }
 
 void Element::setNamespaceURI(std::string value)
@@ -274,7 +291,7 @@ void Element::setNamespaceURI(std::string value)
 
 Element *Element::getNextElementSibling() const
 {
-    return Element::create(this->v["nextElementSibling"]);
+    return HTML5_PROPERTY_GET(nextElementSibling, Element);
 }
 
 void Element::setNextElementSibling(Element *value)
@@ -285,7 +302,7 @@ void Element::setNextElementSibling(Element *value)
 
 std::string Element::getPrefix() const
 {
-    return this->v["prefix"].as<std::string>();
+    return HTML5_PROPERTY_GET(prefix, std::string);
 }
 
 void Element::setPrefix(std::string value)
@@ -296,7 +313,7 @@ void Element::setPrefix(std::string value)
 
 Element *Element::getPreviousElementSibling() const
 {
-    return Element::create(this->v["previousElementSibling"]);
+    return HTML5_PROPERTY_GET(previousElementSibling, Element);
 }
 
 void Element::setPreviousElementSibling(Element *value)
@@ -307,7 +324,7 @@ void Element::setPreviousElementSibling(Element *value)
 
 std::string Element::getTagName() const
 {
-    return this->v["tagName"].as<std::string>();
+    return HTML5_PROPERTY_GET(tagName, std::string);
 }
 
 void Element::setTagName(std::string value)
@@ -318,7 +335,7 @@ void Element::setTagName(std::string value)
 
 DOMTokenList *Element::getClassList() const
 {
-    return DOMTokenList::create(this->v["classList"]);
+    return HTML5_PROPERTY_GET(classList, DOMTokenList);
 }
 
 void Element::setClassList(DOMTokenList *value)

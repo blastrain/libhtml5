@@ -45,6 +45,16 @@ set(SOURCES src/array.cc
             src/rendering_context.cc
             src/canvas_rendering_context_2d.cc
             src/webgl_rendering_context.cc
+            src/text_metrics.cc
+            src/path2d.cc
+            src/svgmatrix.cc
+            src/canvas_gradient.cc
+            src/canvas_pattern.cc
+            src/hit_region_options.cc
+            src/array_buffer.cc
+            src/array_buffer_view.cc
+            src/uint8_clamped_array.cc
+            src/image_data.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

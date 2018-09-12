@@ -30,7 +30,6 @@ Element *Element::create(emscripten::val v)
 {
 #if ENABLE_EMSCRIPTEN
     std::string className = v["constructor"]["name"].as<std::string>();
-    std::cout << "factory: className = " << className << std::endl;
     return classFactories[className](v);
 #else
     Element *e = new Element(v);

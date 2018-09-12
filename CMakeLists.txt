@@ -39,6 +39,12 @@ set(SOURCES src/array.cc
             src/html_video_element.cc
             src/html_source_element.cc
             src/window.cc
+            src/promise.cc
+            src/blob.cc
+            src/html_canvas_element.cc
+            src/rendering_context.cc
+            src/canvas_rendering_context_2d.cc
+            src/webgl_rendering_context.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

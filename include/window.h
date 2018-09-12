@@ -25,6 +25,7 @@ class ImageData;
 class CanvasRenderingContext2D;
 class ImageBitmap;
 class Transferable;
+class Performance;
 
 class Window : public EventTarget {
 public:
@@ -128,6 +129,7 @@ public:
     BarProp *_toolbar;
     WindowProxy *_top;
     WindowProxy *_window;
+    Performance *_performance;
 
     Window(emscripten::val v);
     virtual ~Window();

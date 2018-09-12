@@ -55,6 +55,7 @@ set(SOURCES src/array.cc
             src/array_buffer_view.cc
             src/uint8_clamped_array.cc
             src/image_data.cc
+            src/image_bitmap.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

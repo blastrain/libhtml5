@@ -38,6 +38,7 @@ set(SOURCES src/array.cc
             src/document.cc
             src/html_video_element.cc
             src/html_source_element.cc
+            src/window.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

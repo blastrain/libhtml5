@@ -3,6 +3,19 @@
 #include "object.h"
 #include <string>
 
+#if PROPERTY_TRACE
+
+#include <iostream>
+
+#define HTML5_PROPERTY_TRACE_PRINT(prefix, content) (std::cout << prefix << " " << content << std::endl)
+
+#else
+
+#define HTML5_PROPERTY_TRACE_PRINT(prefix, content)
+
+#endif
+
+
 #if ENABLE_EMSCRIPTEN
 
 #include <emscripten/emscripten.h>
@@ -87,14 +100,59 @@ template<typename T> emscripten::val toJSArray(std::vector<T> array)
         }                                       \
     } while (0)
 
-#define HTML5_PROPERTY_SET(to, from) do {       \
-        if (to && to->isAutoRelease()) {        \
-            to->release();                      \
-        }                                       \
-        if (from && from->isAutoRelease()) {    \
-            from->retain();                     \
-        }                                       \
-        to = from;                              \
+#define HTML5_PROPERTY_SET(pname, value) do {   \
+        this->_ ## pname = value;               \
+        this->v.set(#pname, value);             \
+    } while (0)
+
+#define HTML5_PROPERTY_OBJECT_SET(pname, value) do {                    \
+        if (this->_ ## pname && this->_ ## pname->isAutoRelease()) {    \
+            this->_ ## pname->release();                                \
+        }                                                               \
+        if (value && value->isAutoRelease()) {                          \
+            value->retain();                                            \
+        }                                                               \
+        this->_ ## pname = value;                                       \
+        this->v.set(#pname, value->v);                                  \
     } while (0)
 
 #define CLASS_FACTORY_MAP(name) { #name, [](emscripten::val v){ auto klass = name::create(v); klass->autorelease(); return klass; } }
+
+#define PROPERTY(klass, type, name)                                     \
+    type _ ## name;                                                     \
+    struct {                                                            \
+            klass &self;                                                \
+            void operator=(type value) { self.set_ ## name(value); };   \
+            operator type() { return self.get_ ## name(); };            \
+    } name{*this};                                                      \
+    type get_ ## name() const;                                          \
+    void set_ ## name(type value);
+
+#define HTML5_PROPERTY_TRACE_GETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:getter]", #name)
+#define HTML5_PROPERTY_TRACE_SETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:setter]", #name)
+
+#define PROPERTY_IMPL(klass, type, name)        \
+    type klass::get_ ## name() const            \
+    {                                           \
+        HTML5_PROPERTY_TRACE_GETTER(name);      \
+        return HTML5_PROPERTY_GET(name, type);  \
+    }                                           \
+                                                \
+    void klass::set_ ## name(type value)        \
+    {                                           \
+        HTML5_PROPERTY_TRACE_SETTER(name);      \
+        HTML5_PROPERTY_SET(name, value);        \
+    }                                           
+
+#define PROPERTY_OBJECT_IMPL(klass, type, name) \
+    type klass::get_ ## name() const            \
+    {                                           \
+        HTML5_PROPERTY_TRACE_GETTER(name);      \
+        return HTML5_PROPERTY_GET(name, type);  \
+    }                                           \
+                                                \
+    void klass::set_ ## name(type value)        \
+    {                                           \
+        HTML5_PROPERTY_TRACE_SETTER(name);      \
+        HTML5_PROPERTY_OBJECT_SET(name, value); \
+    }

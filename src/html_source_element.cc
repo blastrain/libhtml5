@@ -24,24 +24,5 @@ HTMLSourceElement *HTMLSourceElement::create()
     return dynamic_cast<HTMLSourceElement *>(Document::create()->createElement("source"));
 }
 
-std::string HTMLSourceElement::getSrc()
-{
-    return HTML5_PROPERTY_GET(src, std::string);
-}
-
-void HTMLSourceElement::setSrc(std::string value)
-{
-    this->_src = value;
-    this->v.set("src", value);
-}
-
-std::string HTMLSourceElement::getType()
-{
-    return HTML5_PROPERTY_GET(type, std::string);
-}
-
-void HTMLSourceElement::setType(std::string value)
-{
-    this->_type = value;
-    this->v.set("type", value);
-}
+PROPERTY_IMPL(HTMLSourceElement, std::string, src);
+PROPERTY_IMPL(HTMLSourceElement, std::string, type);

@@ -60,7 +60,7 @@ set(SOURCES src/array.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g -std=c++11 --memory-init-file 0 --llvm-lto 1 --bind -s DEMANGLE_SUPPORT=1 -s WASM=0 -s NO_FILESYSTEM=1 -DENABLE_EMSCRIPTEN=1")
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g -std=c++11 --memory-init-file 0 --llvm-lto 1 --bind -s DEMANGLE_SUPPORT=1 -s WASM=0 -s NO_FILESYSTEM=1 -DENABLE_EMSCRIPTEN=1 -DPROPERTY_TRACE=1")
    add_executable(create-video main.cc ${SOURCES})
 else()
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g -std=c++11")

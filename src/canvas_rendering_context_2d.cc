@@ -351,7 +351,7 @@ void CanvasRenderingContext2D::scrollPathIntoView(Path2D *path)
 
 void CanvasRenderingContext2D::setLineDash(std::vector<double> segments)
 {
-    HTML5_CALL(this->v, setLineDash, path->v, toJSArray<double>(segments));
+    HTML5_CALL(this->v, setLineDash, toJSArray<double>(segments));
 }
 
 void CanvasRenderingContext2D::setTransform(double a, double b, double c, double d, double e, double f)
@@ -396,8 +396,7 @@ HTMLCanvasElement *CanvasRenderingContext2D::getCanvas() const
 
 void CanvasRenderingContext2D::setCanvas(HTMLCanvasElement *value)
 {
-    this->_canvas = value;
-    this->v.set("canvas", value->v);
+    HTML5_PROPERTY_OBJECT_SET(canvas, value);
 }
 
 SVGMatrix *CanvasRenderingContext2D::getCurrentTransform() const
@@ -407,8 +406,7 @@ SVGMatrix *CanvasRenderingContext2D::getCurrentTransform() const
 
 void CanvasRenderingContext2D::setCurrentTransform(SVGMatrix *value)
 {
-    this->_currentTransform = value;
-    this->v.set("currentTransform", value->v);
+    HTML5_PROPERTY_OBJECT_SET(currentTransform, value);
 }
 
 std::string CanvasRenderingContext2D::getDirection() const
@@ -418,8 +416,7 @@ std::string CanvasRenderingContext2D::getDirection() const
 
 void CanvasRenderingContext2D::setDirection(std::string value)
 {
-    this->_direction = value;
-    this->v.set("direction", value);
+    HTML5_PROPERTY_SET(direction, value);
 }
 
 void CanvasRenderingContext2D::setFillStyle(std::string value)
@@ -447,8 +444,7 @@ std::string CanvasRenderingContext2D::getFont() const
 
 void CanvasRenderingContext2D::setFont(std::string value)
 {
-    this->_font = value;
-    this->v.set("font", value);
+    HTML5_PROPERTY_SET(font, value);
 }
 
 double CanvasRenderingContext2D::getGlobalAlpha() const
@@ -458,8 +454,7 @@ double CanvasRenderingContext2D::getGlobalAlpha() const
 
 void CanvasRenderingContext2D::setGlobalAlpha(double value)
 {
-    this->_globalAlpha = value;
-    this->v.set("globalAlpha", value);
+    HTML5_PROPERTY_SET(globalAlpha, value);
 }
 
 std::string CanvasRenderingContext2D::getGlobalCompositeOperation() const
@@ -469,8 +464,7 @@ std::string CanvasRenderingContext2D::getGlobalCompositeOperation() const
 
 void CanvasRenderingContext2D::setGlobalCompositeOperation(std::string value)
 {
-    this->_globalCompositeOperation = value;
-    this->v.set("globalCompositeOperation", value);
+    HTML5_PROPERTY_SET(globalCompositeOperation, value);
 }
 
 unsigned long CanvasRenderingContext2D::getHeight() const
@@ -480,8 +474,7 @@ unsigned long CanvasRenderingContext2D::getHeight() const
 
 void CanvasRenderingContext2D::setHeight(unsigned long value)
 {
-    this->_height = value;
-    this->v.set("height", value);
+    HTML5_PROPERTY_SET(height, value);
 }
 
 bool CanvasRenderingContext2D::getImageSmoothingEnabled() const
@@ -491,8 +484,7 @@ bool CanvasRenderingContext2D::getImageSmoothingEnabled() const
 
 void CanvasRenderingContext2D::setImageSmoothingEnabled(bool value)
 {
-    this->_imageSmoothingEnabled = value;
-    this->v.set("imageSmoothingEnabled", value);
+    HTML5_PROPERTY_SET(imageSmoothingEnabled, value);
 }
 
 std::string CanvasRenderingContext2D::getLineCap() const
@@ -502,8 +494,7 @@ std::string CanvasRenderingContext2D::getLineCap() const
 
 void CanvasRenderingContext2D::setLineCap(std::string value)
 {
-    this->_lineCap = value;
-    this->v.set("lineCap", value);
+    HTML5_PROPERTY_SET(lineCap, value);
 }
 
 double CanvasRenderingContext2D::getLineDashOffset() const
@@ -513,8 +504,7 @@ double CanvasRenderingContext2D::getLineDashOffset() const
 
 void CanvasRenderingContext2D::setLineDashOffset(double value)
 {
-    this->_lineDashOffset = value;
-    this->v.set("lineDashOffset", value);
+    HTML5_PROPERTY_SET(lineDashOffset, value);
 }
 
 std::string CanvasRenderingContext2D::getLineJoin() const
@@ -524,8 +514,7 @@ std::string CanvasRenderingContext2D::getLineJoin() const
 
 void CanvasRenderingContext2D::setLineJoin(std::string value)
 {
-    this->_lineJoin = value;
-    this->v.set("lineJoin", value);
+    HTML5_PROPERTY_SET(lineJoin, value);
 }
 
 double CanvasRenderingContext2D::getLineWidth() const
@@ -535,8 +524,7 @@ double CanvasRenderingContext2D::getLineWidth() const
 
 void CanvasRenderingContext2D::setLineWidth(double value)
 {
-    this->_lineWidth = value;
-    this->v.set("lineWidth", value);
+    HTML5_PROPERTY_SET(lineWidth, value);
 }
 
 double CanvasRenderingContext2D::getMiterLimit() const
@@ -546,8 +534,7 @@ double CanvasRenderingContext2D::getMiterLimit() const
     
 void CanvasRenderingContext2D::setMiterLimit(double value)
 {
-    this->_miterLimit = value;
-    this->v.set("miterLimit", value);
+    HTML5_PROPERTY_SET(miterLimit, value);
 }
 
 double CanvasRenderingContext2D::getShadowBlur() const
@@ -557,8 +544,7 @@ double CanvasRenderingContext2D::getShadowBlur() const
 
 void CanvasRenderingContext2D::setShadowBlur(double value)
 {
-    this->_shadowBlur = value;
-    this->v.set("shadowBlur", value);
+    HTML5_PROPERTY_SET(shadowBlur, value);
 }
 
 std::string CanvasRenderingContext2D::getShadowColor() const
@@ -568,8 +554,7 @@ std::string CanvasRenderingContext2D::getShadowColor() const
 
 void CanvasRenderingContext2D::setShadowColor(std::string value)
 {
-    this->_shadowColor = value;
-    this->v.set("shadowColor", value);
+    HTML5_PROPERTY_SET(shadowColor, value);
 }
 
 double CanvasRenderingContext2D::getShadowOffsetX() const
@@ -579,8 +564,7 @@ double CanvasRenderingContext2D::getShadowOffsetX() const
 
 void CanvasRenderingContext2D::setShadowOffsetX(double value)
 {
-    this->_shadowOffsetX = value;
-    this->v.set("shadowOffsetX", value);
+    HTML5_PROPERTY_SET(shadowOffsetX, value);
 }
 
 double CanvasRenderingContext2D::getShadowOffsetY() const
@@ -590,8 +574,7 @@ double CanvasRenderingContext2D::getShadowOffsetY() const
 
 void CanvasRenderingContext2D::setShadowOffsetY(double value)
 {
-    this->_shadowOffsetY = value;
-    this->v.set("shadowOffsetY", value);
+    HTML5_PROPERTY_SET(shadowOffsetY, value);
 }
 
 void CanvasRenderingContext2D::setStrokeStyle(std::string value)
@@ -619,8 +602,7 @@ std::string CanvasRenderingContext2D::getTextAlign() const
 
 void CanvasRenderingContext2D::setTextAlign(std::string value)
 {
-    this->_textAlign = value;
-    this->v.set("textAlign", value);
+    HTML5_PROPERTY_SET(textAlign, value);
 }
 
 std::string CanvasRenderingContext2D::getTextBaseLine() const
@@ -630,8 +612,7 @@ std::string CanvasRenderingContext2D::getTextBaseLine() const
 
 void CanvasRenderingContext2D::setTextBaseLine(std::string value)
 {
-    this->_textBaseline = value;
-    this->v.set("textBaseline", value);
+    HTML5_PROPERTY_SET(textBaseline, value);
 }
 
 unsigned long CanvasRenderingContext2D::getWidth() const
@@ -641,6 +622,5 @@ unsigned long CanvasRenderingContext2D::getWidth() const
 
 void CanvasRenderingContext2D::setWidth(unsigned long value)
 {
-    this->_width = value;
-    this->v.set("width", value);
+    HTML5_PROPERTY_SET(width, value);
 }

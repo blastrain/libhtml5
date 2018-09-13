@@ -9,6 +9,7 @@ class WebGLRenderbuffer;
 class WebGLFramebuffer;
 class WebGLTexture;
 class ArrayBufferView;
+class ArrayBuffer;
 class WebGLActiveInfo;
 class WebGLContextAttributes;
 class WebGLUniformLocation;
@@ -19,14 +20,78 @@ class HTMLImageElement;
 class ImageData;
 class ImageBitmap;
 class WebGLExtension;
-class WebGLFramebufferAttachmentParameter;
-class WebGLParameter;
-class WebGLProgramParameter;
-class WebGLRenderbufferParameter;
-class WebGLShaderParameter;
-class WebGLTextureParameter;
-class WebGLUniformParameter;
-class WebGLVertexAttribute;
+
+class WebGLFramebufferAttachmentParameter : public Object {
+public:
+    emscripten::val v;
+
+    WebGLFramebufferAttachmentParameter(emscripten::val v);
+    virtual ~WebGLFramebufferAttachmentParameter();
+    static WebGLFramebufferAttachmentParameter *create(emscripten::val v);
+};
+
+class WebGLParameter : public Object {
+public:
+    emscripten::val v;
+
+    WebGLParameter(emscripten::val v);
+    virtual ~WebGLParameter();
+    static WebGLParameter *create(emscripten::val v);
+};
+
+class WebGLProgramParameter : public Object {
+public:
+    emscripten::val v;
+
+    WebGLProgramParameter(emscripten::val v);
+    virtual ~WebGLProgramParameter();
+    static WebGLProgramParameter *create(emscripten::val v);
+};
+
+class WebGLRenderbufferParameter : public Object {
+public:
+    emscripten::val v;
+
+    WebGLRenderbufferParameter(emscripten::val v);
+    virtual ~WebGLRenderbufferParameter();
+    static WebGLRenderbufferParameter *create(emscripten::val v);
+};
+
+class WebGLShaderParameter : public Object {
+public:
+    emscripten::val v;
+
+    WebGLShaderParameter(emscripten::val v);
+    virtual ~WebGLShaderParameter();
+    static WebGLShaderParameter *create(emscripten::val v);
+};
+
+class WebGLTextureParameter : public Object {
+public:
+    emscripten::val v;
+
+    WebGLTextureParameter(emscripten::val v);
+    virtual ~WebGLTextureParameter();
+    static WebGLTextureParameter *create(emscripten::val v);
+};
+
+class WebGLUniformParameter : public Object {
+public:
+    emscripten::val v;
+
+    WebGLUniformParameter(emscripten::val v);
+    virtual ~WebGLUniformParameter();
+    static WebGLUniformParameter *create(emscripten::val v);
+};
+
+class WebGLVertexAttribute : public Object {
+public:
+    emscripten::val v;
+
+    WebGLVertexAttribute(emscripten::val v);
+    virtual ~WebGLVertexAttribute();
+    static WebGLVertexAttribute *create(emscripten::val v);
+};
 
 class WebGLRenderingContext : public RenderingContext {
 public:
@@ -350,8 +415,11 @@ public:
     void blendEquationSeparate(GLenum modeRGB, GLenum modeAlpha);
     void blendFunc(GLenum sfactor, GLenum dfactor);
     void blendFuncSeparate(GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
-    void bufferData(GLenum target, void *size_data, GLenum usage);
-    void bufferSubData(GLenum target, GLintptr offset, void *data);
+    void bufferData(GLenum target, GLsizeiptr size, GLenum usage);
+    void bufferData(GLenum target, ArrayBuffer *srcData, GLenum usage);
+    void bufferData(GLenum target, ArrayBufferView *srcData, GLenum usage);
+    void bufferSubData(GLenum target, GLintptr offset, ArrayBuffer *data);
+    void bufferSubData(GLenum target, GLintptr offset, ArrayBufferView *data);
     GLenum checkFramebufferStatus(GLenum target);
     void clear(GLbitfield mask);
     void clearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
@@ -394,7 +462,7 @@ public:
     void generateMipmap(GLenum target);
     WebGLActiveInfo *getActiveAttrib(WebGLProgram *program, GLuint index);
     WebGLActiveInfo *getActiveUniform(WebGLProgram *program, GLuint index);
-    std::vector<WebGLShader> *getAttachedShaders(WebGLProgram *program);
+    std::vector<WebGLShader *> getAttachedShaders(WebGLProgram *program);
     GLint getAttribLocation(WebGLProgram *program, std::string name);
     GLenum getBufferParameter(GLenum target, GLenum pname);
     WebGLContextAttributes *getContextAttributes();
@@ -402,14 +470,14 @@ public:
     WebGLExtension *getExtension(std::string name);
     WebGLFramebufferAttachmentParameter *getFramebufferAttachmentParameter(GLenum target, GLenum attachment, GLenum pname);
     WebGLParameter *getParameter(GLenum pname);
-    std::string *getProgramInfoLog(WebGLProgram *program);
+    std::vector<std::string> getProgramInfoLog(WebGLProgram *program);
     WebGLProgramParameter *getProgramParameter(WebGLProgram *program, GLenum pname);
     WebGLRenderbufferParameter *getRenderbufferParameter(GLenum target, GLenum pname);
-    std::string *getShaderInfoLog(WebGLShader *shader);
+    std::vector<std::string> getShaderInfoLog(WebGLShader *shader);
     WebGLShaderParameter *getShaderParameter(WebGLShader *shader, GLenum pname);
     WebGLShaderPrecisionFormat *getShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype);
     std::string getShaderSource(WebGLShader *shader);
-    std::vector<std::string> getSupportedExtensions();
+    std::vector<WebGLExtension *> getSupportedExtensions();
     WebGLTextureParameter *getTexParameter(GLenum target, GLenum pname);
     WebGLUniformParameter *getUniform(WebGLProgram *program, WebGLUniformLocation *location);
     WebGLUniformLocation *getUniformLocation(WebGLProgram *program, std::string name);

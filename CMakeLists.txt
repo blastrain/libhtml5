@@ -68,6 +68,8 @@ set(SOURCES src/array.cc
             src/webgl_shader_precision_format.cc
             src/webgl_texture.cc
             src/webgl_uniform_location.cc
+            src/webgl_context_attributes.cc
+            src/webgl_extension.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

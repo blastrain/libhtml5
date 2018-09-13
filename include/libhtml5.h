@@ -57,6 +57,21 @@ template<typename T> emscripten::val toJSArray(std::vector<T> array)
     return v;
 }
 
+template<typename T> std::vector<T> toArray(emscripten::val v)
+{
+    return emscripten::vecFromJSArray<T>(v);
+}
+
+template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
+{
+    std::vector<T *> ret;
+    std::vector<emscripten::val> arr = emscripten::vecFromJSArray<emscripten::val>(v);
+    for (size_t i = 0; arr.size(); i++) {
+        ret.push_back(T::create(arr[i]));
+    }
+    return ret;
+}
+
 #else
 
 #if defined __APPLE__
@@ -91,6 +106,18 @@ namespace emscripten {
 template<typename T> emscripten::val toJSArray(std::vector<T> array)
 {
     return emscripten::val();
+}
+
+template<typename T> std::vector<T> toArray(emscripten::val v)
+{
+    std::vector<T> ret;
+    return ret;
+}
+
+template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
+{
+    std::vector<T *> ret;
+    return ret;
 }
 
 #endif
@@ -138,6 +165,14 @@ template<typename T> emscripten::val toJSArray(std::vector<T> array)
     type get_ ## name() const;                                      \
     void set_ ## name(type value);
 
+#define HTML5_READONLY_PROPERTY(klass, type, name)          \
+    type _ ## name;                                         \
+    struct {                                                \
+        klass &self;                                        \
+        operator type() { return self.get_ ## name(); };    \
+    } name{*this};                                          \
+    type get_ ## name() const;
+
 #define HTML5_PROPERTY_TRACE_GETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:getter]", #name)
 #define HTML5_PROPERTY_TRACE_SETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:setter]", #name)
 
@@ -154,6 +189,13 @@ template<typename T> emscripten::val toJSArray(std::vector<T> array)
         HTML5_PROPERTY_SET(name, value);        \
     }                                           
 
+#define HTML5_READONLY_PROPERTY_IMPL(klass, type, name) \
+    type klass::get_ ## name() const                    \
+    {                                                   \
+        HTML5_PROPERTY_TRACE_GETTER(name);              \
+        return HTML5_PROPERTY_GET(name, type);          \
+    }
+
 #define HTML5_PROPERTY_OBJECT_IMPL(klass, type, name)   \
     type *klass::get_ ## name() const                   \
     {                                                   \
@@ -165,4 +207,11 @@ template<typename T> emscripten::val toJSArray(std::vector<T> array)
     {                                                   \
         HTML5_PROPERTY_TRACE_SETTER(name);              \
         HTML5_PROPERTY_OBJECT_SET(name, value);         \
+    }
+
+#define HTML5_READONLY_PROPERTY_OBJECT_IMPL(klass, type, name)  \
+    type *klass::get_ ## name() const                           \
+    {                                                           \
+        HTML5_PROPERTY_TRACE_GETTER(name);                      \
+        return HTML5_PROPERTY_GET(name, type);                  \
     }

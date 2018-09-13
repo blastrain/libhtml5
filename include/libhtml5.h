@@ -22,6 +22,10 @@
 #include <emscripten/val.h>
 #include <emscripten/bind.h>
 
+#define GL_GLEXT_PROTOTYPES
+#include <GL/gl.h>
+#include <GL/glext.h>
+
 #define HTML5_STATIC_PRIMITIVE_INSTANCE(type, ...) (emscripten::val::global(#type))
 #define HTML5_NEW_PRIMITIVE_INSTANCE(type, ...) (emscripten::val::global(#type).new_(__VA_ARGS__))
 
@@ -54,6 +58,12 @@ template<typename T> emscripten::val toJSArray(std::vector<T> array)
 }
 
 #else
+
+#if defined __APPLE__
+
+#include <Opengl/gl.h>
+
+#endif
 
 namespace emscripten {
 
@@ -145,13 +155,13 @@ template<typename T> emscripten::val toJSArray(std::vector<T> array)
     }                                           
 
 #define HTML5_PROPERTY_OBJECT_IMPL(klass, type, name)   \
-    type klass::get_ ## name() const                    \
+    type *klass::get_ ## name() const                   \
     {                                                   \
         HTML5_PROPERTY_TRACE_GETTER(name);              \
         return HTML5_PROPERTY_GET(name, type);          \
     }                                                   \
                                                         \
-    void klass::set_ ## name(type value)                \
+    void klass::set_ ## name(type *value)               \
     {                                                   \
         HTML5_PROPERTY_TRACE_SETTER(name);              \
         HTML5_PROPERTY_OBJECT_SET(name, value);         \

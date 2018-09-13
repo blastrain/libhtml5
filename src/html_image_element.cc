@@ -12,13 +12,6 @@ HTMLImageElement::~HTMLImageElement()
 
 }
 
-HTMLImageElement *HTMLImageElement::create()
-{
-    HTMLImageElement *image = new HTMLImageElement(HTML5_NEW_PRIMITIVE_INSTANCE(Image));
-    image->autorelease();
-    return image;
-}
-
 HTMLImageElement *HTMLImageElement::create(emscripten::val v)
 {
     HTMLImageElement *image = new HTMLImageElement(v);
@@ -26,11 +19,14 @@ HTMLImageElement *HTMLImageElement::create(emscripten::val v)
     return image;
 }
 
+HTMLImageElement *HTMLImageElement::create()
+{
+    return create(HTML5_NEW_PRIMITIVE_INSTANCE(Image));
+}
+
 HTMLImageElement *HTMLImageElement::create(unsigned long width, unsigned long height)
 {
-    auto image = new HTMLImageElement(HTML5_NEW_PRIMITIVE_INSTANCE("Image", width, height));
-    image->autorelease();
-    return image;
+    return create(HTML5_NEW_PRIMITIVE_INSTANCE("Image", width, height));
 }
 
 HTML5_PROPERTY_IMPL(HTMLImageElement, std::string, alt);

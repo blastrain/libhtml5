@@ -118,20 +118,20 @@ template<typename T> emscripten::val toJSArray(std::vector<T> array)
 
 #define CLASS_FACTORY_MAP(name) { #name, [](emscripten::val v){ auto klass = name::create(v); klass->autorelease(); return klass; } }
 
-#define PROPERTY(klass, type, name)                                     \
-    type _ ## name;                                                     \
-    struct {                                                            \
-            klass &self;                                                \
-            void operator=(type value) { self.set_ ## name(value); };   \
-            operator type() { return self.get_ ## name(); };            \
-    } name{*this};                                                      \
-    type get_ ## name() const;                                          \
+#define HTML5_PROPERTY(klass, type, name)                           \
+    type _ ## name;                                                 \
+    struct {                                                        \
+        klass &self;                                                \
+        void operator=(type value) { self.set_ ## name(value); };   \
+        operator type() { return self.get_ ## name(); };            \
+    } name{*this};                                                  \
+    type get_ ## name() const;                                      \
     void set_ ## name(type value);
 
 #define HTML5_PROPERTY_TRACE_GETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:getter]", #name)
 #define HTML5_PROPERTY_TRACE_SETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:setter]", #name)
 
-#define PROPERTY_IMPL(klass, type, name)        \
+#define HTML5_PROPERTY_IMPL(klass, type, name)  \
     type klass::get_ ## name() const            \
     {                                           \
         HTML5_PROPERTY_TRACE_GETTER(name);      \
@@ -144,15 +144,15 @@ template<typename T> emscripten::val toJSArray(std::vector<T> array)
         HTML5_PROPERTY_SET(name, value);        \
     }                                           
 
-#define PROPERTY_OBJECT_IMPL(klass, type, name) \
-    type klass::get_ ## name() const            \
-    {                                           \
-        HTML5_PROPERTY_TRACE_GETTER(name);      \
-        return HTML5_PROPERTY_GET(name, type);  \
-    }                                           \
-                                                \
-    void klass::set_ ## name(type value)        \
-    {                                           \
-        HTML5_PROPERTY_TRACE_SETTER(name);      \
-        HTML5_PROPERTY_OBJECT_SET(name, value); \
+#define HTML5_PROPERTY_OBJECT_IMPL(klass, type, name)   \
+    type klass::get_ ## name() const                    \
+    {                                                   \
+        HTML5_PROPERTY_TRACE_GETTER(name);              \
+        return HTML5_PROPERTY_GET(name, type);          \
+    }                                                   \
+                                                        \
+    void klass::set_ ## name(type value)                \
+    {                                                   \
+        HTML5_PROPERTY_TRACE_SETTER(name);              \
+        HTML5_PROPERTY_OBJECT_SET(name, value);         \
     }

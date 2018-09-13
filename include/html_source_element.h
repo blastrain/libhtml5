@@ -5,8 +5,8 @@
 class HTMLSourceElement : public HTMLElement {
 public:
 
-    PROPERTY(HTMLSourceElement, std::string, src);
-    PROPERTY(HTMLSourceElement, std::string, type);
+    HTML5_PROPERTY(HTMLSourceElement, std::string, src);
+    HTML5_PROPERTY(HTMLSourceElement, std::string, type);
 
     HTMLSourceElement(emscripten::val v);
     ~HTMLSourceElement();

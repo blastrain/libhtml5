@@ -31,6 +31,15 @@ template<typename T> T __html5_property_get__(T o, emscripten::val v)
 #define HTML5_CALLs(v, method, ...)        v.call<std::string>(#method, ## __VA_ARGS__)
 #define HTML5_CALLv(v, method, ...)        v.call<emscripten::val>(#method, ## __VA_ARGS__)
 
+template<typename T> emscripten::val toJSArray(std::vector<T> array)
+{
+    emscripten::val v = emscripten::val::array();
+    for (size_t i = 0; i < array.size(); i++) {
+        v.set(i, array[i]);
+    }
+    return v;
+}
+
 #else
 
 namespace emscripten {
@@ -55,6 +64,11 @@ namespace emscripten {
 #define HTML5_CALLb(v, method, ...) (false)
 #define HTML5_CALLs(v, method, ...) ("")
 #define HTML5_CALLv(v, method, ...) emscripten::val()
+
+template<typename T> emscripten::val toJSArray(std::vector<T> array)
+{
+    return emscripten::val();
+}
 
 #endif
 

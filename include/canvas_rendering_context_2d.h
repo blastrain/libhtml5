@@ -118,4 +118,185 @@ public:
     void strokeText(std::string text, double x, double y, double maxWidth);
     void transform(double a, double b, double c, double d, double e, double f);
     void translate(double x, double y);
+
+    HTMLCanvasElement *getCanvas() const;
+    void setCanvas(HTMLCanvasElement *value);
+    SVGMatrix *getCurrentTransform() const;
+    void setCurrentTransform(SVGMatrix *value);
+    std::string getDirection() const;
+    void setDirection(std::string value);
+    void setFillStyle(std::string value);
+    void setFillStyle(CanvasGradient *value);
+    void setFillStyle(CanvasPattern *value);
+    std::string getFont() const;
+    void setFont(std::string value);
+    double getGlobalAlpha() const;
+    void setGlobalAlpha(double value);
+    std::string getGlobalCompositeOperation() const;
+    void setGlobalCompositeOperation(std::string value);
+    unsigned long getHeight() const;
+    void setHeight(unsigned long value);
+    bool getImageSmoothingEnabled() const;
+    void setImageSmoothingEnabled(bool value);
+    std::string getLineCap() const;
+    void setLineCap(std::string value);
+    double getLineDashOffset() const;
+    void setLineDashOffset(double value);
+    std::string getLineJoin() const;
+    void setLineJoin(std::string value);
+    double getLineWidth() const;
+    void setLineWidth(double value);
+    double getMiterLimit() const;
+    void setMiterLimit(double value);
+    double getShadowBlur() const;
+    void setShadowBlur(double value);
+    std::string getShadowColor() const;
+    void setShadowColor(std::string value);
+    double getShadowOffsetX() const;
+    void setShadowOffsetX(double value);
+    double getShadowOffsetY() const;
+    void setShadowOffsetY(double value);
+    void setStrokeStyle(std::string value);
+    void setStrokeStyle(CanvasGradient *value);
+    void setStrokeStyle(CanvasPattern *value);
+    std::string getTextAlign() const;
+    void setTextAlign(std::string value);
+    std::string getTextBaseLine() const;
+    void setTextBaseLine(std::string value);
+    unsigned long getWidth() const;
+    void setWidth(unsigned long value);
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(HTMLCanvasElement *value) { self.setCanvas(value); };
+        operator HTMLCanvasElement *() { return self.getCanvas(); };
+    } canvas{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(SVGMatrix *value) { self.setCurrentTransform(value); };
+        operator SVGMatrix *() { return self.getCurrentTransform(); };
+    } currentTransform{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(std::string value) { self.setDirection(value); };
+        operator std::string() { return self.getDirection(); };
+    } direction{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(std::string value) { self.setFillStyle(value); };
+        void operator=(CanvasGradient *value) { self.setFillStyle(value); };
+        void operator=(CanvasPattern *value) { self.setFillStyle(value); };
+    } fillStyle{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(std::string value) { self.setFont(value); };
+        operator std::string() { return self.getFont(); };
+    } font{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(double value) { self.setGlobalAlpha(value); };
+        operator double() { return self.getGlobalAlpha(); };
+    } globalAlpha{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(std::string value) { self.setGlobalCompositeOperation(value); };
+        operator std::string() { return self.getGlobalCompositeOperation(); };
+    } globalCompositeOperation{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(unsigned long value) { self.setHeight(value); };
+        operator unsigned long() { return self.getHeight(); };
+    } height{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(bool value) { self.setImageSmoothingEnabled(value); };
+        operator bool() { return self.getImageSmoothingEnabled(); };
+    } imageSmoothingEnabled{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(std::string value) { self.setLineCap(value); };
+        operator std::string() { return self.getLineCap(); };
+    } lineCap{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(double value) { self.setLineDashOffset(value); };
+        operator double() { return self.getLineDashOffset(); };
+    } lineDashOffset{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(std::string value) { self.setLineJoin(value); };
+        operator std::string() { return self.getLineJoin(); };
+    } lineJoin{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(double value) { self.setLineWidth(value); };
+        operator double() { return self.getLineWidth(); };
+    } lineWidth{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(double value) { self.setMiterLimit(value); };
+        operator double() { return self.getMiterLimit(); };
+    } miterLimit{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(double value) { self.setShadowBlur(value); };
+        operator double() { return self.getShadowBlur(); };
+    } shadowBlur{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(std::string value) { self.setShadowColor(value); };
+        operator std::string() { return self.getShadowColor(); };
+    } shadowColor{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(double value) { self.setShadowOffsetX(value); };
+        operator double() { return self.getShadowOffsetX(); };
+    } shadowOffsetX{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(double value) { self.setShadowOffsetY(value); };
+        operator double() { return self.getShadowOffsetY(); };
+    } shadowOffsetY{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(std::string value) { self.setStrokeStyle(value); };
+        void operator=(CanvasGradient *value) { self.setStrokeStyle(value); };
+        void operator=(CanvasPattern *value) { self.setStrokeStyle(value); };
+    } strokeStyle{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(std::string value) { self.setTextAlign(value); };
+        operator std::string() { return self.getTextAlign(); };
+    } textAlign{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(std::string value) { self.setTextBaseLine(value); };
+        operator std::string() { return self.getTextBaseLine(); };
+    } textBaseline{*this};
+
+    struct {
+        CanvasRenderingContext2D &self;
+        void operator=(double value) { self.setWidth(value); };
+        operator double() { return self.getWidth(); };
+    } width{*this};
 };

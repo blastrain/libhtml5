@@ -57,6 +57,17 @@ set(SOURCES src/array.cc
             src/image_data.cc
             src/image_bitmap.cc
             src/canvas_rendering_context_2d.cc
+            src/webgl_active_info.cc
+            src/webgl_buffer.cc
+            src/webgl_context_event.cc
+            src/webgl_framebuffer.cc
+            src/webgl_object.cc
+            src/webgl_program.cc
+            src/webgl_renderbuffer.cc
+            src/webgl_shader.cc
+            src/webgl_shader_precision_format.cc
+            src/webgl_texture.cc
+            src/webgl_uniform_location.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

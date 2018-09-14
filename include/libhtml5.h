@@ -165,6 +165,14 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     type get_ ## name() const;                                      \
     void set_ ## name(type value);
 
+#define HTML5_EVENT_HANDLER_PROPERTY(klass, type, name) \
+    HTML5_PROPERTY(klass, type, name);                  \
+    void on_ ## name(emscripten::val e);
+
+#define HTML5_ERROR_HANDLER_PROPERTY(klass, type, name)                 \
+    HTML5_PROPERTY(klass, type, name);                                  \
+    void on_ ## name(emscripten::val e, std::string source, unsigned long lineno, unsigned long colno, emscripten::val error);
+
 #define HTML5_READONLY_PROPERTY(klass, type, name)          \
     type _ ## name;                                         \
     struct {                                                \
@@ -188,6 +196,53 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         HTML5_PROPERTY_TRACE_SETTER(name);      \
         HTML5_PROPERTY_SET(name, value);        \
     }                                           
+
+#define HTML5_EVENT_HANDLER_PROPERTY_IMPL(klass, type, name)            \
+    type klass::get_ ## name() const                                    \
+    {                                                                   \
+        HTML5_PROPERTY_TRACE_GETTER(name);                              \
+        return this->_ ## name;                                         \
+    }                                                                   \
+                                                                        \
+    void klass::set_ ## name(type value)                                \
+    {                                                                   \
+        HTML5_PROPERTY_TRACE_SETTER(name);                              \
+        HTML5_PROPERTY_SET(name, value);                                \
+        EM_ASM_({                                                       \
+                const elem = Module.to ## klass($0);                    \
+                elem._value.name = function(e) { elem.on_ ## name(e); }; \
+            }, this);                                                   \
+    }                                                                   \
+    void klass::on_ ## name(emscripten::val e)                          \
+    {                                                                   \
+        if (!this->_ ## name) return;                                   \
+        (*this->_ ## name)(Event::create(e));                           \
+    }
+
+#define HTML5_ERROR_HANDLER_PROPERTY_IMPL(klass, type, name)            \
+    type klass::get_ ## name() const                                    \
+    {                                                                   \
+        HTML5_PROPERTY_TRACE_GETTER(name);                              \
+        return this->_ ## name;                                         \
+    }                                                                   \
+                                                                        \
+    void klass::set_ ## name(type value)                                \
+    {                                                                   \
+        HTML5_PROPERTY_TRACE_SETTER(name);                              \
+        HTML5_PROPERTY_SET(name, value);                                \
+        EM_ASM_({                                                       \
+                const elem = Module.to ## klass($0);                    \
+                elem._value.name = function(event, source, lineno, colno, error) { \
+                    elem.on_ ## name(event, source, lineno, colno, error); \
+                };                                                      \
+            }, this);                                                   \
+    }                                                                   \
+    void klass::on_ ## name(emscripten::val e, std::string source, unsigned long lineno, unsigned long colno, emscripten::val error) \
+    {                                                                   \
+        if (!this->_ ## name) return;                                   \
+        (*this->_ ## name)(Event::create(e), source, lineno, colno, NULL); \
+    }
+
 
 #define HTML5_READONLY_PROPERTY_IMPL(klass, type, name) \
     type klass::get_ ## name() const                    \

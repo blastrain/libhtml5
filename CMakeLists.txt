@@ -70,6 +70,7 @@ set(SOURCES src/array.cc
             src/webgl_uniform_location.cc
             src/webgl_context_attributes.cc
             src/webgl_extension.cc
+            src/xml_http_request.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

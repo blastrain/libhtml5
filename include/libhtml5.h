@@ -167,11 +167,11 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
 
 #define HTML5_EVENT_HANDLER_PROPERTY(klass, type, name) \
     HTML5_PROPERTY(klass, type, name);                  \
-    void on_ ## name(emscripten::val e);
+    void callback_ ## name(emscripten::val e);
 
 #define HTML5_ERROR_HANDLER_PROPERTY(klass, type, name)                 \
     HTML5_PROPERTY(klass, type, name);                                  \
-    void on_ ## name(emscripten::val e, std::string source, unsigned long lineno, unsigned long colno, emscripten::val error);
+    void callback_ ## name(emscripten::val e, std::string source, unsigned long lineno, unsigned long colno, emscripten::val error);
 
 #define HTML5_READONLY_PROPERTY(klass, type, name)          \
     type _ ## name;                                         \
@@ -207,13 +207,13 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     void klass::set_ ## name(type value)                                \
     {                                                                   \
         HTML5_PROPERTY_TRACE_SETTER(name);                              \
-        HTML5_PROPERTY_SET(name, value);                                \
+        this->_ ## name = value;                                        \
         EM_ASM_({                                                       \
                 const elem = Module.to ## klass($0);                    \
-                elem._value.name = function(e) { elem.on_ ## name(e); }; \
+                elem._value.name = function(e) { elem.callback_ ## name(e); }; \
             }, this);                                                   \
     }                                                                   \
-    void klass::on_ ## name(emscripten::val e)                          \
+    void klass::callback_ ## name(emscripten::val e)                    \
     {                                                                   \
         if (!this->_ ## name) return;                                   \
         (*this->_ ## name)(Event::create(e));                           \
@@ -229,15 +229,15 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     void klass::set_ ## name(type value)                                \
     {                                                                   \
         HTML5_PROPERTY_TRACE_SETTER(name);                              \
-        HTML5_PROPERTY_SET(name, value);                                \
+        this->_ ## name = value;                                        \
         EM_ASM_({                                                       \
                 const elem = Module.to ## klass($0);                    \
                 elem._value.name = function(event, source, lineno, colno, error) { \
-                    elem.on_ ## name(event, source, lineno, colno, error); \
+                    elem.callback_ ## name(event, source, lineno, colno, error); \
                 };                                                      \
             }, this);                                                   \
     }                                                                   \
-    void klass::on_ ## name(emscripten::val e, std::string source, unsigned long lineno, unsigned long colno, emscripten::val error) \
+    void klass::callback_ ## name(emscripten::val e, std::string source, unsigned long lineno, unsigned long colno, emscripten::val error) \
     {                                                                   \
         if (!this->_ ## name) return;                                   \
         (*this->_ ## name)(Event::create(e), source, lineno, colno, NULL); \

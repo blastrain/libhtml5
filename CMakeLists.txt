@@ -71,6 +71,10 @@ set(SOURCES src/array.cc
             src/webgl_context_attributes.cc
             src/webgl_extension.cc
             src/xml_http_request.cc
+            src/application_cache.cc
+            src/external.cc
+            src/history.cc
+            src/bar_prop.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

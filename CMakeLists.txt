@@ -75,6 +75,19 @@ set(SOURCES src/array.cc
             src/external.cc
             src/history.cc
             src/bar_prop.cc
+            src/storage.cc
+            src/location.cc
+            src/idb_factory.cc
+            src/idb_request.cc
+            src/idb_open_db_request.cc
+            src/idb_transaction.cc
+            src/idb_object_store.cc
+            src/idb_index.cc
+            src/idb_database.cc
+            src/idb_environment.cc
+            src/idb_version_change_event.cc
+            src/idb_index_parameters.cc
+            src/dom_error.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

@@ -12,6 +12,7 @@
 #include "media_controller.h"
 #include "event.h"
 #include "event_target.h"
+#include "window.h"
 #include <iostream>
 #include <emscripten/emscripten.h>
 
@@ -91,6 +92,11 @@ static TextTrack *toTextTrack(intptr_t ptr)
 static TextTrackCue *toTextTrackCue(intptr_t ptr)
 {
     return (TextTrackCue *)ptr;
+}
+
+static Window *toWindow(intptr_t ptr)
+{
+    return (Window *)ptr;
 }
 
 EMSCRIPTEN_BINDINGS(createVideo) {
@@ -201,9 +207,14 @@ EMSCRIPTEN_BINDINGS(createVideo) {
         .function("callback_ontoggle", &HTMLElement::callback_ontoggle)
         .function("callback_onvolumechange", &HTMLElement::callback_onvolumechange)
         .function("callback_onwaiting", &HTMLElement::callback_onwaiting);
+    emscripten::class_<Window>("Window")
+        .function("requestAnimationFrameCallback", &Window::requestAnimationFrameCallback)
+        .function("setIntervalCallback", &Window::setIntervalCallback)
+        .function("setTimeoutCallback", &Window::setTimeoutCallback);
     emscripten::function("createVideo", &createVideo);
     emscripten::function("createImage", &createImage);
     function("toEventTarget", &toEventTarget, emscripten::allow_raw_pointers());
     function("toHTMLElement", &toHTMLElement, emscripten::allow_raw_pointers());
+    function("toWindow", &toWindow, emscripten::allow_raw_pointers());
     function("toString", &toString, emscripten::allow_raw_pointers());
 }

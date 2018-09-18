@@ -88,6 +88,16 @@ set(SOURCES src/array.cc
             src/idb_version_change_event.cc
             src/idb_index_parameters.cc
             src/dom_error.cc
+            src/navigator.cc
+            src/mime_type.cc
+            src/mime_type_array.cc
+            src/plugin.cc
+            src/plugin_array.cc
+            src/navigator.cc
+            src/performance_navigation.cc
+            src/performance_timing.cc
+            src/performance_entry.cc
+            src/performance.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

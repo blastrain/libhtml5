@@ -98,6 +98,21 @@ set(SOURCES src/array.cc
             src/performance_timing.cc
             src/performance_entry.cc
             src/performance.cc
+            src/html_script_element.cc
+            src/document_type.cc
+            src/html_head_element.cc
+            src/xml_document.cc
+            src/dom_implementation.cc
+            src/style_sheet_list.cc
+            src/character_data.cc
+            src/comment.cc
+            src/document_fragment.cc
+            src/node_iterator.cc
+            src/node_filter.cc
+            src/processing_instruction.cc
+            src/range.cc
+            src/text.cc
+            src/tree_walker.cc
             )
 
 if ($ENV{ENABLE_EMSCRIPTEN})

@@ -165,6 +165,17 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     type get_ ## name() const;                                      \
     void set_ ## name(type value);
 
+#define HTML5_PROPERTY_OBJECT(klass, type, name)                    \
+    type *_ ## name;                                                \
+    struct {                                                        \
+        klass &self;                                                \
+        void operator=(type *value) { self.set_ ## name(value); };  \
+        operator type*() { return self.get_ ## name(); };           \
+        type *operator->() { return self.get_ ## name(); };         \
+    } name{*this};                                                  \
+    type *get_ ## name() const;                                     \
+    void set_ ## name(type *value);
+
 #define HTML5_EVENT_HANDLER_PROPERTY(klass, type, name) \
     HTML5_PROPERTY(klass, type, name);                  \
     void callback_ ## name(emscripten::val e);

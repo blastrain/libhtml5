@@ -20,6 +20,8 @@
 #include "canvas_rendering_context_2d.h"
 #include "window.h"
 
+Window *window = Window::create();
+
 Window::Window(emscripten::val v) :
     EventTarget(v),
     _requestAnimationFrameFn(NULL),

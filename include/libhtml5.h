@@ -281,3 +281,13 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         HTML5_PROPERTY_TRACE_GETTER(name);                      \
         return HTML5_PROPERTY_GET(name, type);                  \
     }
+
+#define NAMESPACE_HTML5_BEGIN namespace html5 {
+#define NAMESPACE_HTML5_END   }
+#define USING_NAMESPACE_HTML5 using namespace html5
+
+class Window;
+class Document;
+
+extern Window *window;
+extern Document *document;

@@ -179,4 +179,3 @@ public:
     virtual ~WindowProxy();
     static WindowProxy *create(emscripten::val v);
 };
-

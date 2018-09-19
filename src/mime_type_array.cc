@@ -1,6 +1,8 @@
 #include "mime_type.h"
 #include "mime_type_array.h"
 
+USING_NAMESPACE_HTML5;
+
 MimeTypeArray::MimeTypeArray(emscripten::val v) :
     Object(),
     v(v)

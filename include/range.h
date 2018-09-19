@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Node;
 class DocumentFragment;
 
@@ -47,3 +49,5 @@ public:
     void setStartBefore(Node *node);
     void surroundContents(Node *newParent);
 };
+
+NAMESPACE_HTML5_END;

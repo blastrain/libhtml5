@@ -1,6 +1,9 @@
 #pragma once
 
+#include "libhtml5.h"
 #include <vector>
+
+NAMESPACE_HTML5_BEGIN;
 
 class Object;
 
@@ -18,3 +21,5 @@ public:
 private:
     std::vector<Object *> objects;
 };
+
+NAMESPACE_HTML5_END;

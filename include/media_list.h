@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class MediaList : public Object {
 public:
     emscripten::val v;
@@ -16,3 +18,5 @@ public:
     void deleteMedium(std::string medium);
     std::string item(unsigned long index);
 };
+
+NAMESPACE_HTML5_END;

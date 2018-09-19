@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Attr : public Object {
 public:
     emscripten::val v;
@@ -18,3 +20,5 @@ public:
     static Attr *create(emscripten::val v);
     static Attr *create();
 };
+
+NAMESPACE_HTML5_END;

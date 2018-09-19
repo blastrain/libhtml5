@@ -3,6 +3,8 @@
 #include "event_target.h"
 #include <assert.h>
 
+NAMESPACE_HTML5_BEGIN;
+
 class Document;
 class Blob;
 class ArrayBufferView;
@@ -132,3 +134,5 @@ public:
     std::string getResponseType() const;
     void setResponseType(XMLHttpResponseType value);
 };
+
+NAMESPACE_HTML5_END;

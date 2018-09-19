@@ -3,6 +3,8 @@
 #include "document.h"
 #include "xml_http_request.h"
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(XMLHttpRequest);
 
 XMLHttpResponse::XMLHttpResponse(emscripten::val v) :
@@ -124,7 +126,7 @@ void XMLHttpRequest::setRequestHeader(std::string header, std::string value)
 std::string XMLHttpRequest::getResponseType() const
 {
 #if ENABLE_EMSCRIPTEN
-    return HTML5_PROPERTY_GET(responseType, std::string);
+    return this->v["responseType"].as<std::string>();
 #else
     return "";
 #endif

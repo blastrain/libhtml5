@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class WebGLActiveInfo : public Object {
 public:
     emscripten::val v;
@@ -13,3 +15,5 @@ public:
     virtual ~WebGLActiveInfo();
     static WebGLActiveInfo *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

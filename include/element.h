@@ -2,6 +2,8 @@
 
 #include "node.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Attr;
 class HTMLCollection;
 class DOMTokenList;
@@ -93,3 +95,5 @@ private:
     std::vector<Attr *> getAttributes() const;
     void setAttributes(std::vector<Attr *> value);
 };
+
+NAMESPACE_HTML5_END;

@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class IDBFactory;
 
 class IDBEnvironment : public Object {
@@ -14,3 +16,5 @@ public:
     virtual ~IDBEnvironment();
     static IDBEnvironment *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

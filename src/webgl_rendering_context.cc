@@ -18,6 +18,8 @@
 #include "webgl_extension.h"
 #include "webgl_rendering_context.h"
 
+USING_NAMESPACE_HTML5;
+
 WebGLFramebufferAttachmentParameter::WebGLFramebufferAttachmentParameter(emscripten::val v) :
     Object(),
     v(v)

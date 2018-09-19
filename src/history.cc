@@ -1,5 +1,7 @@
 #include "history.h"
 
+USING_NAMESPACE_HTML5;
+
 History::History(emscripten::val v) :
     Object(),
     v(v)

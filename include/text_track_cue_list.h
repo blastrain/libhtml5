@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class TextTrackCue;
 
 class TextTrackCueList : public Object {
@@ -16,3 +18,5 @@ public:
     TextTrackCue *getCueById(std::string id);
     TextTrackCue *getter(unsigned long index);
 };
+
+NAMESPACE_HTML5_END;

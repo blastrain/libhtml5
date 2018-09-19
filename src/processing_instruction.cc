@@ -1,6 +1,8 @@
 #include "style_sheet.h"
 #include "processing_instruction.h"
 
+USING_NAMESPACE_HTML5;
+
 ProcessingInstruction::ProcessingInstruction(emscripten::val v) :
     CharacterData(v)
 {

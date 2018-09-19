@@ -1,5 +1,7 @@
 #include "canvas_gradient.h"
 
+USING_NAMESPACE_HTML5;
+
 CanvasGradient::CanvasGradient(emscripten::val v) :
     Object(),
     v(v)

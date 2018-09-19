@@ -1,6 +1,8 @@
 #include "event_handler.h"
 #include "idb_open_db_request.h"
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(IDBOpenDBRequest);
 
 IDBOpenDBRequest::IDBOpenDBRequest(emscripten::val v) :

@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class MimeTypeArray;
 class PluginArray;
 
@@ -34,3 +36,5 @@ public:
     void unregisterProtocolHandler(std::string scheme, std::string url);
     void yieldForStorageUpdates();
 };
+
+NAMESPACE_HTML5_END;

@@ -1,5 +1,7 @@
 #include "image_bitmap.h"
 
+USING_NAMESPACE_HTML5;
+
 ImageBitmap::ImageBitmap(emscripten::val v) :
     Object(),
     v(v)

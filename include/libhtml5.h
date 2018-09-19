@@ -1,5 +1,9 @@
 #pragma once
 
+#define NAMESPACE_HTML5_BEGIN namespace html5 {
+#define NAMESPACE_HTML5_END   }
+#define USING_NAMESPACE_HTML5 using namespace html5
+
 #include "object.h"
 #include <string>
 
@@ -29,7 +33,7 @@
 #define HTML5_STATIC_PRIMITIVE_INSTANCE(type, ...) (emscripten::val::global(#type))
 #define HTML5_NEW_PRIMITIVE_INSTANCE(type, ...) (emscripten::val::global(#type).new_(__VA_ARGS__))
 
-template<typename T> T *__html5_property_get__(Object *o, emscripten::val v)
+template<typename T> T *__html5_property_get__(html5::Object *o, emscripten::val v)
 {
     return T::create(v);
 }
@@ -301,14 +305,14 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         return HTML5_PROPERTY_GET(name, type);                  \
     }
 
-#define NAMESPACE_HTML5_BEGIN namespace html5 {
-#define NAMESPACE_HTML5_END   }
-#define USING_NAMESPACE_HTML5 using namespace html5
+NAMESPACE_HTML5_BEGIN;
 
 class Window;
 class Document;
 
 extern Window *window;
 extern Document *document;
+
+NAMESPACE_HTML5_END;
 
 extern void HTML5_INIT();

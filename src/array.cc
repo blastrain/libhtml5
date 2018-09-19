@@ -1,6 +1,8 @@
 #include "libhtml5.h"
 #include "array.h"
 
+USING_NAMESPACE_HTML5;
+
 Array::Array()
 {
 

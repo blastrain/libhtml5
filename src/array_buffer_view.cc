@@ -1,6 +1,8 @@
 #include "array_buffer.h"
 #include "array_buffer_view.h"
 
+USING_NAMESPACE_HTML5;
+
 ArrayBufferView::ArrayBufferView(emscripten::val v) :
     Object(),
     v(v)

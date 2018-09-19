@@ -1,5 +1,7 @@
 #include "application_cache.h"
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(ApplicationCache);
 
 ApplicationCache::ApplicationCache(emscripten::val v) :

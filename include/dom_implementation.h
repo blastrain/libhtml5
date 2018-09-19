@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Document;
 class XMLDocument;
 class DocumentType;
@@ -18,3 +20,5 @@ public:
     Document *createHTMLDocument(std::string title = "");
     bool hasFeature();
 };
+
+NAMESPACE_HTML5_END;

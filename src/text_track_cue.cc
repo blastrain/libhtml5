@@ -1,6 +1,8 @@
 #include "text_track.h"
 #include "text_track_cue.h"
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(TextTrackCue);
 
 TextTrackCue::TextTrackCue(emscripten::val v) :

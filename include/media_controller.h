@@ -2,6 +2,8 @@
 
 #include "event_target.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class TimeRanges;
 
 enum class MediaControllerPlaybackState {
@@ -56,3 +58,5 @@ public:
         operator std::string() { return self.getPlaybackState(); };
     } playbackState{*this};
 };
+
+NAMESPACE_HTML5_END;

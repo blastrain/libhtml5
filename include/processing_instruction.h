@@ -2,6 +2,8 @@
 
 #include "character_data.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class StyleSheet;
 
 class ProcessingInstruction : public CharacterData {
@@ -14,3 +16,5 @@ public:
     virtual ~ProcessingInstruction();
     static ProcessingInstruction *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

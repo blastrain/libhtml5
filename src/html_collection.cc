@@ -1,6 +1,8 @@
 #include "element.h"
 #include "html_collection.h"
 
+USING_NAMESPACE_HTML5;
+
 HTMLCollection::HTMLCollection(emscripten::val v) : v(v)
 {
 

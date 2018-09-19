@@ -9,6 +9,8 @@
 #include "event_handler.h"
 #include "event_listener.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Event;
 
 class EventTarget : public Object {
@@ -31,3 +33,5 @@ private:
     std::map<std::string, std::vector<EventHandler *>> handlers;
     std::map<std::string, std::vector<EventListener *>> listeners;
 };
+
+NAMESPACE_HTML5_END;

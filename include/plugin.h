@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class MimeType;
 
 class Plugin : public Object {
@@ -19,3 +21,5 @@ public:
     MimeType *item(unsigned long index);
     MimeType *namedItem(std::string name);
 };
+
+NAMESPACE_HTML5_END;

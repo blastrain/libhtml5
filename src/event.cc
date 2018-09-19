@@ -1,6 +1,8 @@
 #include "event_target.h"
 #include "event.h"
 
+USING_NAMESPACE_HTML5;
+
 Event::Event(emscripten::val v) :
     v(v)
 {

@@ -2,6 +2,8 @@
 #include "event_target.h"
 #include <iostream>
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(EventTarget);
 HTML5_BIND_METHOD(EventTarget, addEventHandlerCallback);
 HTML5_BIND_METHOD(EventTarget, addEventListenerCallback);

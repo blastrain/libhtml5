@@ -1,5 +1,7 @@
 #include "date.h"
 
+USING_NAMESPACE_HTML5;
+
 Date::Date(emscripten::val v) : v(v)
 {
 

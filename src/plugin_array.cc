@@ -1,6 +1,8 @@
 #include "plugin.h"
 #include "plugin_array.h"
 
+USING_NAMESPACE_HTML5;
+
 PluginArray::PluginArray(emscripten::val v) :
     Object(),
     v(v)

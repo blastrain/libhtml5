@@ -1,6 +1,8 @@
 #include "array_buffer.h"
 #include "uint8_clamped_array.h"
 
+USING_NAMESPACE_HTML5;
+
 Uint8ClampedArray::Uint8ClampedArray(emscripten::val v) :
     ArrayBufferView(v)
 {

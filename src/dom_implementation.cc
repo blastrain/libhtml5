@@ -3,6 +3,8 @@
 #include "document_type.h"
 #include "dom_implementation.h"
 
+USING_NAMESPACE_HTML5;
+
 DOMImplementation::DOMImplementation(emscripten::val v) :
     Object(),
     v(v)

@@ -1,6 +1,8 @@
 #include "blob.h"
 #include "html_canvas_element.h"
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(HTMLCanvasElement);
 HTML5_BIND_METHOD(HTMLCanvasElement, toBlobCallback);
 

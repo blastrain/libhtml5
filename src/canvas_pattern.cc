@@ -1,6 +1,8 @@
 #include "svgmatrix.h"
 #include "canvas_pattern.h"
 
+USING_NAMESPACE_HTML5;
+
 CanvasPattern::CanvasPattern(emscripten::val v) :
     Object(),
     v(v)

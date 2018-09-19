@@ -3,6 +3,8 @@
 #include "libhtml5.h"
 #include <time.h>
 
+NAMESPACE_HTML5_BEGIN;
+
 class EventTarget;
 
 class Event : public Object {
@@ -35,3 +37,5 @@ public:
     void stopImmediatePropagation();
     void stopPropagation();
 };
+
+NAMESPACE_HTML5_END;

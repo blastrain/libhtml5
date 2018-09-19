@@ -1,6 +1,8 @@
 #include "node.h"
 #include "node_filter.h"
 
+USING_NAMESPACE_HTML5;
+
 NodeFilter::NodeFilter(emscripten::val v) :
     Object(),
     v(v)

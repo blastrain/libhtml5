@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class IDBOpenDBRequest;
 
 class IDBFactory : public Object {
@@ -15,3 +17,5 @@ public:
     IDBOpenDBRequest *deleteDatabase(std::string name);
     IDBOpenDBRequest *open(std::string name, unsigned long long version);
 };
+
+NAMESPACE_HTML5_END;

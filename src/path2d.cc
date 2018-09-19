@@ -1,6 +1,8 @@
 #include "svgmatrix.h"
 #include "path2d.h"
 
+USING_NAMESPACE_HTML5;
+
 Path2D::Path2D(emscripten::val v) :
     Object(),
     v(v)

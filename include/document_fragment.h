@@ -2,6 +2,8 @@
 
 #include "node.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class HTMLCollection;
 class Element;
 class NodeList;
@@ -35,3 +37,5 @@ public:
     Element *querySelector(std::string selectors);
     NodeList *querySelectorAll(std::string selectors);
 };
+
+NAMESPACE_HTML5_END;

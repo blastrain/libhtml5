@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class IDBRequest;
 class IDBIndex;
 class IDBTransaction;
@@ -29,3 +31,5 @@ public:
     IDBIndex *index(std::string name);
     IDBRequest *put(int value, int key);
 };
+
+NAMESPACE_HTML5_END;

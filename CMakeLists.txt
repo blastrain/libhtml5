@@ -22,6 +22,7 @@ set(SOURCES src/application_cache.cc
 	src/css_rule.cc
 	src/css_rule_list.cc
 	src/css_style_declaration.cc
+	src/css_style_sheet.cc
 	src/date.cc
 	src/document.cc
 	src/document_fragment.cc

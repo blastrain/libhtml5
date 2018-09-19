@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class StyleSheet;
 
 class StyleSheetList : public Object {
@@ -15,3 +17,5 @@ public:
     static StyleSheetList *create(emscripten::val v);
     StyleSheet *item(unsigned long index);
 };
+
+NAMESPACE_HTML5_END;

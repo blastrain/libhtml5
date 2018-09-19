@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Node;
 
 class DocumentType : public Object {
@@ -35,3 +37,5 @@ public:
     void replace(std::vector<Node *> nodes);
     void remove();
 };
+
+NAMESPACE_HTML5_END;

@@ -1,5 +1,7 @@
 #include "time_ranges.h"
 
+USING_NAMESPACE_HTML5;
+
 TimeRanges::TimeRanges(emscripten::val v) : v(v)
 {
     

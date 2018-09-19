@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class SVGMatrix;
 
 class Path2D : public Object {
@@ -23,3 +25,5 @@ public:
     void quadraticCurveTo(double cpx, double cpy, double x, double y);
     void rect(double x, double y, double w, double h);
 };
+
+NAMESPACE_HTML5_END;

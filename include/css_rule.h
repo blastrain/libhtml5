@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class CSSStyleSheet;
 
 class CSSRule : public Object {
@@ -30,3 +32,5 @@ public:
     virtual ~CSSRule();
     static CSSRule *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

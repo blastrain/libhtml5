@@ -1,5 +1,7 @@
 #include "webgl_shader.h"
 
+USING_NAMESPACE_HTML5;
+
 WebGLShader::WebGLShader(emscripten::val v) :
     WebGLObject(v)
 {

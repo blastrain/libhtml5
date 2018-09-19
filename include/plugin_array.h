@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Plugin;
 
 class PluginArray : public Object {
@@ -17,3 +19,5 @@ public:
     Plugin *namedItem(std::string name);
     void refresh(bool reload);
 };
+
+NAMESPACE_HTML5_END;

@@ -1,5 +1,7 @@
 #include "comment.h"
 
+USING_NAMESPACE_HTML5;
+
 Comment::Comment(emscripten::val v) :
     CharacterData(v)
 {

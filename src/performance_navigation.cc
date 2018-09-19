@@ -1,5 +1,7 @@
 #include "performance_navigation.h"
 
+USING_NAMESPACE_HTML5;
+
 PerformanceNavigation::PerformanceNavigation(emscripten::val v) :
     Object(),
     v(v)

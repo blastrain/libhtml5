@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Location : public Object {
 public:
     emscripten::val v;
@@ -13,3 +15,5 @@ public:
     void reload();
     void replace(std::string url);
 };
+
+NAMESPACE_HTML5_END;

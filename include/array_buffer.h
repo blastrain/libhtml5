@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class ArrayBuffer : public Object {
 public:
     emscripten::val v;
@@ -16,3 +18,5 @@ public:
     ArrayBuffer *slice(long begin);
     ArrayBuffer *slice(long begin, long end);
 };
+
+NAMESPACE_HTML5_END;

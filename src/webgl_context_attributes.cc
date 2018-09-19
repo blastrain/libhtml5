@@ -1,5 +1,7 @@
 #include "webgl_context_attributes.h"
 
+USING_NAMESPACE_HTML5;
+
 WebGLContextAttributes::WebGLContextAttributes(emscripten::val v) :
     Object(),
     v(v)

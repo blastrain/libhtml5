@@ -2,6 +2,8 @@
 
 #include "object.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Node;
 
 class NodeList : public Object {
@@ -15,3 +17,5 @@ public:
     static NodeList *create(emscripten::val v);
     Node *item(unsigned long index);
 };
+
+NAMESPACE_HTML5_END;

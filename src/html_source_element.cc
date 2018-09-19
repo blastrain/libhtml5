@@ -1,6 +1,8 @@
 #include "document.h"
 #include "html_source_element.h"
 
+USING_NAMESPACE_HTML5;
+
 HTMLSourceElement::HTMLSourceElement(emscripten::val v) :
     HTMLElement(v)
 {

@@ -2,6 +2,8 @@
 #include "path2d.h"
 #include "hit_region_options.h"
 
+USING_NAMESPACE_HTML5;
+
 HitRegionOptions::HitRegionOptions(emscripten::val v) :
     Object(),
     v(v)

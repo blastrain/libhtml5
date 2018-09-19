@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Storage : public Object {
 public:
     emscripten::val v;
@@ -17,3 +19,5 @@ public:
     void removeItem(std::string key);
     void setItem(std::string key, std::string value);
 };
+
+NAMESPACE_HTML5_END;

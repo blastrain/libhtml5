@@ -1,6 +1,8 @@
 #include "node.h"
 #include "node_list.h"
 
+USING_NAMESPACE_HTML5;
+
 NodeList::NodeList(emscripten::val v) : v(v)
 {
 

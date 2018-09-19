@@ -2,6 +2,8 @@
 
 #include "html_element.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class HTMLImageElement : public HTMLElement {
 public:
 
@@ -23,3 +25,5 @@ public:
     static HTMLImageElement *create(emscripten::val v);
     static HTMLImageElement *create(unsigned long width, unsigned long height);
 };
+
+NAMESPACE_HTML5_END;

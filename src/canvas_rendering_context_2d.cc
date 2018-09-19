@@ -11,6 +11,8 @@
 #include "path2d.h"
 #include "canvas_rendering_context_2d.h"
 
+USING_NAMESPACE_HTML5;
+
 CanvasRenderingContext2D::CanvasRenderingContext2D(emscripten::val v) :
     RenderingContext(v)
 {

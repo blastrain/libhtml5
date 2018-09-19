@@ -3,6 +3,8 @@
 #include "libhtml5.h"
 #include <vector>
 
+NAMESPACE_HTML5_BEGIN;
+
 class DOMTokenList : public Object {
 public:
     emscripten::val v;
@@ -26,3 +28,5 @@ public:
     void remove(std::vector<std::string> tokens);
     bool toggle(std::string token, bool force = false);
 };
+
+NAMESPACE_HTML5_END;

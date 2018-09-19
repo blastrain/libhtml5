@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class WebGLExtension : public Object {
 public:
     emscripten::val v;
@@ -83,3 +85,5 @@ public:
     uint64_t getQueryResultEXT(WebGLQuery *query);
     GLboolean getQueryResultAvailableEXT(WebGLQuery *query);
 };
+
+NAMESPACE_HTML5_END;

@@ -1,5 +1,7 @@
 #include "webgl_program.h"
 
+USING_NAMESPACE_HTML5;
+
 WebGLProgram::WebGLProgram(emscripten::val v) :
     WebGLObject(v)
 {

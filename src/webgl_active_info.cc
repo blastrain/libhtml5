@@ -1,5 +1,7 @@
 #include "webgl_active_info.h"
 
+USING_NAMESPACE_HTML5;
+
 WebGLActiveInfo::WebGLActiveInfo(emscripten::val v) :
     Object(),
     v(v)

@@ -1,6 +1,8 @@
 #include "uint8_clamped_array.h"
 #include "image_data.h"
 
+USING_NAMESPACE_HTML5;
+
 ImageData::ImageData(emscripten::val v) :
     Object(),
     v(v)

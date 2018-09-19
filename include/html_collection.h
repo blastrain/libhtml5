@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Element;
 
 class HTMLCollection : public Object {
@@ -17,3 +19,5 @@ public:
     Element *item(unsigned long index);
     Element *namedItem(std::string name);
 };
+
+NAMESPACE_HTML5_END;

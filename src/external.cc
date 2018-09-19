@@ -1,5 +1,7 @@
 #include "external.h"
 
+USING_NAMESPACE_HTML5;
+
 External::External(emscripten::val v) :
     Object(),
     v(v)

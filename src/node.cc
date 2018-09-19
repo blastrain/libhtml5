@@ -2,6 +2,8 @@
 #include "element.h"
 #include "node.h"
 
+USING_NAMESPACE_HTML5;
+
 Node::Node(emscripten::val v) :
     EventTarget(v)
 {

@@ -3,6 +3,8 @@
 #include "libhtml5.h"
 #include "node.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Element;
 class HTMLElement;
 class HTMLCollection;
@@ -205,3 +207,5 @@ public:
     };
     void writeln(std::vector<std::string> texts);
 };
+
+NAMESPACE_HTML5_END;

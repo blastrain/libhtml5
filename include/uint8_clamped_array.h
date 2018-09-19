@@ -2,6 +2,8 @@
 
 #include "array_buffer_view.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Uint8ClampedArray : public ArrayBufferView {
 public:
     const long BYTES_PER_ELEMENT = 1;
@@ -18,3 +20,5 @@ public:
     static Uint8ClampedArray *create(ArrayBuffer *buffer, unsigned long byteOffset);
     static Uint8ClampedArray *create(ArrayBuffer *buffer, unsigned long byteOffset, unsigned long length);
 };
+
+NAMESPACE_HTML5_END;

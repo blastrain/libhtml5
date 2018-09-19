@@ -1,5 +1,7 @@
 #include "bar_prop.h"
 
+USING_NAMESPACE_HTML5;
+
 BarProp::BarProp(emscripten::val v) :
     Object(),
     v(v)

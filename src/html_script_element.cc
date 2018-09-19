@@ -1,5 +1,7 @@
 #include "html_script_element.h"
 
+USING_NAMESPACE_HTML5;
+
 HTMLScriptElement::HTMLScriptElement(emscripten::val v) :
     HTMLElement(v)
 {

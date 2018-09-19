@@ -1,5 +1,7 @@
 #include "media_list.h"
 
+USING_NAMESPACE_HTML5;
+
 MediaList::MediaList(emscripten::val v) : v(v)
 {
 

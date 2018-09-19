@@ -2,6 +2,8 @@
 
 #include "event_target.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class ApplicationCache : public EventTarget {
 public:
     enum {
@@ -30,3 +32,5 @@ public:
     void swapCache();
     void update();
 };
+
+NAMESPACE_HTML5_END;

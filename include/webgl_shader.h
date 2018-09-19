@@ -2,6 +2,8 @@
 
 #include "webgl_object.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class WebGLShader : public WebGLObject {
 public:
 
@@ -9,3 +11,5 @@ public:
     virtual ~WebGLShader();
     static WebGLShader *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

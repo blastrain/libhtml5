@@ -2,6 +2,8 @@
 
 #include "character_data.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Comment : public CharacterData {
 public:
 
@@ -9,3 +11,5 @@ public:
     virtual ~Comment();
     static Comment *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

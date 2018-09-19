@@ -1,5 +1,7 @@
 #include "storage.h"
 
+USING_NAMESPACE_HTML5;
+
 Storage::Storage(emscripten::val v) :
     Object(),
     v(v)

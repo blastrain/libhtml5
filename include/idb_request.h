@@ -2,6 +2,8 @@
 
 #include "event_target.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 enum class IDBRequestReadyState {
     PENDING,
     DONE,
@@ -25,3 +27,5 @@ public:
     virtual ~IDBRequest();
     static IDBRequest *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

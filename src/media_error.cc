@@ -1,5 +1,7 @@
 #include "media_error.h"
 
+USING_NAMESPACE_HTML5;
+
 MediaError::MediaError(emscripten::val v) : v(v)
 {
 

@@ -2,6 +2,8 @@
 
 #include "event_target.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 enum class IDBTransactionMode {
     READONLY,
     READWRITE,
@@ -27,3 +29,5 @@ public:
     void abort();
     IDBObjectStore *objectStore(std::string name);
 };
+
+NAMESPACE_HTML5_END;

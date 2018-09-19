@@ -1,5 +1,7 @@
 #include "dom_error.h"
 
+USING_NAMESPACE_HTML5;
+
 DOMError::DOMError(emscripten::val v) :
     Object(),
     v(v)

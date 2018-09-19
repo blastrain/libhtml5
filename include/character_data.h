@@ -2,6 +2,8 @@
 
 #include "node.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Element;
 
 class CharacterData : public Node {
@@ -40,3 +42,5 @@ public:
     void replaceData(unsigned long offset, unsigned long count, std::string data);
     std::string substringData(unsigned long offset, unsigned long count);
 };
+
+NAMESPACE_HTML5_END;

@@ -3,6 +3,8 @@
 #include "libhtml5.h"
 #include <functional>
 
+NAMESPACE_HTML5_BEGIN;
+
 class Promise : public Object {
 public:
     emscripten::val v;
@@ -20,3 +22,5 @@ public:
     Promise *pcatch(std::function<Promise*(Promise*)> onRejected);
     Promise *then(std::function<Promise*(Promise*)> onFulfilled);
 };
+
+NAMESPACE_HTML5_END;

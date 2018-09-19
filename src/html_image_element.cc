@@ -1,6 +1,8 @@
 #include "html_image_element.h"
 #include <iostream>
 
+USING_NAMESPACE_HTML5;
+
 HTMLImageElement::HTMLImageElement(emscripten::val v) :
     HTMLElement(v)
 {

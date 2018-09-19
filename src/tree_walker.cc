@@ -2,6 +2,8 @@
 #include "node_filter.h"
 #include "tree_walker.h"
 
+USING_NAMESPACE_HTML5;
+
 TreeWalker::TreeWalker(emscripten::val v) :
     Object(),
     v(v)

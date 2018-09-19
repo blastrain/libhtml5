@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Blob : public Object {
 public:
     emscripten::val v;
@@ -16,3 +18,5 @@ public:
     Blob *slice(long long start = 0);
     Blob *slice(long long start, long long end, std::string contentType = "");
 };
+
+NAMESPACE_HTML5_END;

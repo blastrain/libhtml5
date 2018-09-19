@@ -3,6 +3,8 @@
 #include "html_collection.h"
 #include "document_fragment.h"
 
+USING_NAMESPACE_HTML5;
+
 DocumentFragment::DocumentFragment(emscripten::val v) :
     Node(v)
 {

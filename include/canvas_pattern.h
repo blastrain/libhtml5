@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class SVGMatrix;
 
 class CanvasPattern : public Object {
@@ -13,3 +15,5 @@ public:
     static CanvasPattern *create(emscripten::val v);
     void setTransform(SVGMatrix *transform);
 };
+
+NAMESPACE_HTML5_END;

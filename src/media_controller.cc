@@ -2,6 +2,8 @@
 #include "event_handler.h"
 #include "media_controller.h"
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(MediaController);
 
 MediaController::MediaController(emscripten::val v) :

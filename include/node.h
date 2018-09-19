@@ -3,6 +3,8 @@
 #include "libhtml5.h"
 #include "event_target.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Document;
 class Element;
 
@@ -71,3 +73,5 @@ private:
     std::vector<Node *> getChildNodes() const;
     void setChildNodes(std::vector<Node *> value);
 };
+
+NAMESPACE_HTML5_END;

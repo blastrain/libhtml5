@@ -1,6 +1,8 @@
 #include "style_sheet.h"
 #include "style_sheet_list.h"
 
+USING_NAMESPACE_HTML5;
+
 StyleSheetList::StyleSheetList(emscripten::val v) :
     Object(),
     v(v)

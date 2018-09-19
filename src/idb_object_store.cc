@@ -3,6 +3,8 @@
 #include "idb_index.h"
 #include "idb_object_store.h"
 
+USING_NAMESPACE_HTML5;
+
 IDBObjectStore::IDBObjectStore(emscripten::val v) :
     Object(),
     v(v)

@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class ArrayBuffer;
 
 class ArrayBufferView : public Object {
@@ -16,3 +18,5 @@ public:
     virtual ~ArrayBufferView();
     static ArrayBufferView *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

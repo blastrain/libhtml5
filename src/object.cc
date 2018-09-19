@@ -1,5 +1,8 @@
+#include "libhtml5.h"
 #include "object.h"
 #include "auto_release_pool.h"
+
+USING_NAMESPACE_HTML5;
 
 Object::Object() :
     _isAutoRelease(false),

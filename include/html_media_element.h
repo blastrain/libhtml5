@@ -5,6 +5,8 @@
 
 #include "text_track.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class AudioTrackList;
 class TimeRanges;
 class MediaController;
@@ -78,3 +80,5 @@ public:
     void pause();
     void play();
 };
+
+NAMESPACE_HTML5_END;

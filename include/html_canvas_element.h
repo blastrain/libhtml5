@@ -4,6 +4,8 @@
 #include "html_element.h"
 #include "rendering_context.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Blob;
 
 class HTMLCanvasElement : public HTMLElement {
@@ -23,3 +25,5 @@ public:
 private:
     std::function<void(Blob*)> *_toBlobFn;
 };
+
+NAMESPACE_HTML5_END;

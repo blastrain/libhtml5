@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class CSSRule;
 
 class CSSRuleList : public Object {
@@ -15,3 +17,5 @@ public:
     static CSSRuleList *create(emscripten::val v);
     CSSRule *item(unsigned long index);
 };
+
+NAMESPACE_HTML5_END;

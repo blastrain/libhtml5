@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Plugin;
 
 class MimeType : public Object {
@@ -17,3 +19,5 @@ public:
     virtual ~MimeType();
     static MimeType *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Date : public Object {
 public:
     emscripten::val v;
@@ -85,3 +87,5 @@ public:
     std::string toUTCString();
     double valueOf();
 };
+
+NAMESPACE_HTML5_END;

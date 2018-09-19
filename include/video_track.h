@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class VideoTrack : public Object {
 public:
     emscripten::val v;
@@ -16,3 +18,5 @@ public:
     virtual ~VideoTrack();
     static VideoTrack *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

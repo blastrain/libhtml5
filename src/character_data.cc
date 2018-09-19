@@ -1,6 +1,8 @@
 #include "element.h"
 #include "character_data.h"
 
+USING_NAMESPACE_HTML5;
+
 CharacterData::CharacterData(emscripten::val v) :
     Node(v)
 {

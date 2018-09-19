@@ -5,6 +5,8 @@
 #include "event_handler.h"
 #include <functional>
 
+NAMESPACE_HTML5_BEGIN;
+
 class HTMLMenuElement;
 class DOMStringMap;
 class DOMSettableTokenList;
@@ -117,3 +119,5 @@ public:
     void forceSpellCheck();
     emscripten::val getValue() const;
 };
+
+NAMESPACE_HTML5_END;

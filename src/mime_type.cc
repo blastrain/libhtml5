@@ -1,6 +1,8 @@
 #include "plugin.h"
 #include "mime_type.h"
 
+USING_NAMESPACE_HTML5;
+
 MimeType::MimeType(emscripten::val v) :
     Object(),
     v(v)

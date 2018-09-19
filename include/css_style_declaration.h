@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class CSSRule;
 
 class CSSStyleDeclaration : public Object {
@@ -24,3 +26,5 @@ public:
     void setPropertyPriority(std::string property, std::string priority);
     void setPropertyValue(std::string property, std::string value);
 };
+
+NAMESPACE_HTML5_END;

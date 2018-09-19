@@ -1,5 +1,7 @@
 #include "webgl_texture.h"
 
+USING_NAMESPACE_HTML5;
+
 WebGLTexture::WebGLTexture(emscripten::val v) :
     WebGLObject(v)
 {

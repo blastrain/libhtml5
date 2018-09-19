@@ -1,6 +1,8 @@
 #include "node.h"
 #include "document_type.h"
 
+USING_NAMESPACE_HTML5;
+
 DocumentType::DocumentType(emscripten::val v) :
     Object(),
     v(v)

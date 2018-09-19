@@ -1,5 +1,7 @@
 #include "performance_entry.h"
 
+USING_NAMESPACE_HTML5;
+
 PerformanceEntry::PerformanceEntry(emscripten::val v) :
     Object(),
     v(v)

@@ -2,6 +2,8 @@
 
 #include "rendering_context.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class WebGLBuffer;
 class WebGLProgram;
 class WebGLShader;
@@ -553,3 +555,5 @@ public:
     void vertexAttribPointer(GLuint indx, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset);
     void viewport(GLint x, GLint y, GLsizei width, GLsizei height);
 };
+
+NAMESPACE_HTML5_END;

@@ -4,6 +4,8 @@
 #include "event_handler.h"
 #include <vector>
 
+NAMESPACE_HTML5_BEGIN;
+
 class PerformanceNavigation;
 class PerformanceEntry;
 class PerformanceTiming;
@@ -37,3 +39,5 @@ public:
     double now();
     void setResourceTimingBufferSize(unsigned long maxSize);
 };
+
+NAMESPACE_HTML5_END;

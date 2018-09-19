@@ -2,6 +2,8 @@
 
 #include "idb_request.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class IDBOpenDBRequest : public IDBRequest {
 public:
 
@@ -12,3 +14,5 @@ public:
     virtual ~IDBOpenDBRequest();
     static IDBOpenDBRequest *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

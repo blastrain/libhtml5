@@ -2,6 +2,8 @@
 #include "element.h"
 #include "style_sheet.h"
 
+USING_NAMESPACE_HTML5;
+
 StyleSheet::StyleSheet(emscripten::val v) : v(v)
 {
 

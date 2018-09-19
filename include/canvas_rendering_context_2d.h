@@ -3,6 +3,8 @@
 #include "rendering_context.h"
 #include "canvas_fill_rule.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class HitRegionOptions;
 class HTMLImageElement;
 class HTMLVideoElement;
@@ -135,3 +137,5 @@ public:
     } strokeStyle{*this};
 
 };
+
+NAMESPACE_HTML5_END;

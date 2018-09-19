@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class SVGMatrix : public Object {
 public:
     emscripten::val v;
@@ -28,3 +30,5 @@ public:
     SVGMatrix *skewY(double angle);
     SVGMatrix *translate(double x, double y);
 };
+
+NAMESPACE_HTML5_END;

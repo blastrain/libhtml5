@@ -1,6 +1,8 @@
 #include "css_rule.h"
 #include "css_style_declaration.h"
 
+USING_NAMESPACE_HTML5;
+
 CSSStyleDeclaration::CSSStyleDeclaration(emscripten::val v) : v(v)
 {
 

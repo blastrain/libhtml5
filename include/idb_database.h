@@ -3,6 +3,8 @@
 #include "event_target.h"
 #include "idb_transaction.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class IDBObjectStore;
 
 class IDBDatabase : public EventTarget {
@@ -23,3 +25,5 @@ public:
     IDBTransaction *transaction(std::string storeName, IDBTransactionMode mode);
     IDBTransaction *transaction(std::vector<std::string> storeNames, IDBTransactionMode mode);
 };
+
+NAMESPACE_HTML5_END;

@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Node;
 
 class NodeFilter : public Object {
@@ -31,3 +33,5 @@ public:
     static NodeFilter *create(emscripten::val v);
     unsigned short acceptNode(Node *node);
 };
+
+NAMESPACE_HTML5_END;

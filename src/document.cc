@@ -20,6 +20,8 @@
 #include "document.h"
 #include <iostream>
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(Document);
 
 Document::Document(emscripten::val v) :

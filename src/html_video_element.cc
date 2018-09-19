@@ -1,6 +1,8 @@
 #include "document.h"
 #include "html_video_element.h"
 
+USING_NAMESPACE_HTML5;
+
 HTMLVideoElement::HTMLVideoElement(emscripten::val v) :
     HTMLMediaElement(v)
 {

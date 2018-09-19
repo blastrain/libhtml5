@@ -1,5 +1,7 @@
 #include "location.h"
 
+USING_NAMESPACE_HTML5;
+
 Location::Location(emscripten::val v) :
     Object(),
     v(v)

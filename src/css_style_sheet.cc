@@ -2,7 +2,10 @@
 #include "css_rule_list.h"
 #include "css_style_sheet.h"
 
-CSSStyleSheet::CSSStyleSheet(emscripten::val v) : v(v)
+USING_NAMESPACE_HTML5;
+
+CSSStyleSheet::CSSStyleSheet(emscripten::val v) :
+    StyleSheet(v)
 {
 
 }
@@ -29,24 +32,5 @@ unsigned long CSSStyleSheet::insertRule(std::string rule, unsigned long index)
     return this->v.call<unsigned long>("insertRule", rule, index);
 }
 
-CSSRuleList *CSSStyleSheet::getCSSRules() const
-{
-    return CSSRuleList::create(this->v["cssRules"]);
-}
-
-void CSSStyleSheet::setCSSRules(CSSRuleList *value)
-{
-    this->_cssRules = value;
-    this->v.set("cssRules", value->v);
-}
-
-CSSRule *CSSStyleSheet::getOwnerRule() const
-{
-    return CSSRule::create(this->v["ownerRule"]);
-}
-
-void CSSStyleSheet::setOwnerRule(CSSRule *value)
-{
-    this->_ownerRule = value;
-    this->v.set("ownerRule", value->v);
-}
+HTML5_PROPERTY_OBJECT_IMPL(CSSStyleSheet, CSSRuleList, cssRules);
+HTML5_PROPERTY_OBJECT_IMPL(CSSStyleSheet, CSSRule, ownerRule);

@@ -1,6 +1,8 @@
 #include "text_track_cue.h"
 #include "text_track_cue_list.h"
 
+USING_NAMESPACE_HTML5;
+
 TextTrackCueList::TextTrackCueList(emscripten::val v) : v(v)
 {
 

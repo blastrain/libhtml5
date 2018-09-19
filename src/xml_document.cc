@@ -1,5 +1,7 @@
 #include "xml_document.h"
 
+USING_NAMESPACE_HTML5;
+
 XMLDocument::XMLDocument(emscripten::val v) :
     Document(v)
 {

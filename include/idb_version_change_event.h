@@ -2,6 +2,8 @@
 
 #include "event.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class IDBVersionChangeEvent : public Event {
 public:
 
@@ -12,3 +14,5 @@ public:
     virtual ~IDBVersionChangeEvent();
     static IDBVersionChangeEvent *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class PerformanceTiming : public Object {
 public:
     emscripten::val v;
@@ -32,3 +34,5 @@ public:
     virtual ~PerformanceTiming();
     static PerformanceTiming *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

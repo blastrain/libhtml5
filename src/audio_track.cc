@@ -1,5 +1,7 @@
 #include "audio_track.h"
 
+USING_NAMESPACE_HTML5;
+
 AudioTrack::AudioTrack(emscripten::val v) : v(v)
 {
 

@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class WebGLContextAttributes : public Object {
 public:
     emscripten::val v;
@@ -19,3 +21,5 @@ public:
     virtual ~WebGLContextAttributes();
     static WebGLContextAttributes *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

@@ -2,6 +2,8 @@
 
 #include "character_data.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Text : public CharacterData {
 public:
 
@@ -12,3 +14,5 @@ public:
     static Text *create(emscripten::val v);
     Text *splitText(unsigned long offset);
 };
+
+NAMESPACE_HTML5_END;

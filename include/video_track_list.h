@@ -2,6 +2,8 @@
 
 #include "event_target.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class VideoTrack;
 
 class VideoTrackList : public EventTarget {
@@ -19,3 +21,5 @@ public:
     VideoTrack *getter(unsigned long index);
     VideoTrack *getTrackById(std::string id);
 };
+
+NAMESPACE_HTML5_END;

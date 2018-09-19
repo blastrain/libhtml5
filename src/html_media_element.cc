@@ -7,6 +7,8 @@
 #include "media_error.h"
 #include "html_media_element.h"
 
+USING_NAMESPACE_HTML5;
+
 HTMLMediaElement::HTMLMediaElement(emscripten::val v) :
     HTMLElement(v)
 {

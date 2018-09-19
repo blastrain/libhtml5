@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Node;
 class NodeFilter;
 
@@ -22,3 +24,5 @@ public:
     Node *nextNode();
     Node *previousNode();
 };
+
+NAMESPACE_HTML5_END;

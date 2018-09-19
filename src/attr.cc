@@ -1,5 +1,7 @@
 #include "attr.h"
 
+USING_NAMESPACE_HTML5;
+
 Attr::Attr(emscripten::val v) : v(v)
 {
 

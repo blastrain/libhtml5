@@ -3,6 +3,8 @@
 #include "libhtml5.h"
 #include "canvas_fill_rule.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Path2D;
 class Element;
 
@@ -31,3 +33,5 @@ public:
         operator std::string() { return self.getFillRule(); };
     } fillRule{*this};
 };
+
+NAMESPACE_HTML5_END;

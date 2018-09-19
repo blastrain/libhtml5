@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class MediaList;
 class Element;
 
@@ -21,3 +23,5 @@ public:
     virtual ~StyleSheet();
     static StyleSheet *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

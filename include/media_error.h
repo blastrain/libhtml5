@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class MediaError : public Object {
 public:
 
@@ -20,3 +22,5 @@ public:
     virtual ~MediaError();
     static MediaError *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

@@ -1,6 +1,8 @@
 #include "libhtml5.h"
 #include "class.h"
 
+USING_NAMESPACE_HTML5;
+
 static emscripten::val toString(intptr_t ptr)
 {
     return emscripten::val(std::string((char *)ptr));

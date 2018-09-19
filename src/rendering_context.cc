@@ -4,6 +4,8 @@
 #include "canvas_rendering_context_2d.h"
 #include "webgl_rendering_context.h"
 
+USING_NAMESPACE_HTML5;
+
 static std::map<std::string, std::function<RenderingContext*(emscripten::val)>> classFactories = {
     CLASS_FACTORY_MAP(CanvasRenderingContext2D),
     CLASS_FACTORY_MAP(WebGLRenderingContext),

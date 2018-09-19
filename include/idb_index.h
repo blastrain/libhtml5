@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class IDBObjectStore;
 class IDBRequest;
 
@@ -22,3 +24,5 @@ public:
     IDBRequest *get(int key);
     IDBRequest *getKey(int key);
 };
+
+NAMESPACE_HTML5_END;

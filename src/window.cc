@@ -20,6 +20,8 @@
 #include "canvas_rendering_context_2d.h"
 #include "window.h"
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(Window);
 HTML5_BIND_METHOD(Window, requestAnimationFrameCallback);
 HTML5_BIND_METHOD(Window, setIntervalCallback);

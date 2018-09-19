@@ -1,6 +1,8 @@
 #include "css_rule.h"
 #include "css_rule_list.h"
 
+USING_NAMESPACE_HTML5;
+
 CSSRuleList::CSSRuleList(emscripten::val v) : v(v)
 {
 

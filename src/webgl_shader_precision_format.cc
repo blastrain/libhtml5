@@ -1,5 +1,7 @@
 #include "webgl_shader_precision_format.h"
 
+USING_NAMESPACE_HTML5;
+
 WebGLShaderPrecisionFormat::WebGLShaderPrecisionFormat(emscripten::val v) :
     Object(),
     v(v)

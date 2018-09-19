@@ -2,6 +2,8 @@
 
 #include "html_media_element.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class HTMLVideoElement : public HTMLMediaElement {
 public:
 
@@ -16,3 +18,5 @@ public:
     static HTMLVideoElement *create();
     static HTMLVideoElement *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

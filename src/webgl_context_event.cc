@@ -1,5 +1,7 @@
 #include "webgl_context_event.h"
 
+USING_NAMESPACE_HTML5;
+
 WebGLContextEvent::WebGLContextEvent(emscripten::val v) :
     Event(v)
 {

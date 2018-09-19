@@ -2,6 +2,8 @@
 #include "node_filter.h"
 #include "node_iterator.h"
 
+USING_NAMESPACE_HTML5;
+
 NodeIterator::NodeIterator(emscripten::val v) :
     Object(),
     v(v)

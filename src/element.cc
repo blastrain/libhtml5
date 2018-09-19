@@ -9,6 +9,8 @@
 #include "html_source_element.h"
 #include <iostream>
 
+USING_NAMESPACE_HTML5;
+
 static std::map<std::string, std::function<Element*(emscripten::val)>> classFactories = {
     CLASS_FACTORY_MAP(HTMLElement),
     CLASS_FACTORY_MAP(HTMLImageElement),

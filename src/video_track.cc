@@ -1,5 +1,7 @@
 #include "video_track.h"
 
+USING_NAMESPACE_HTML5;
+
 VideoTrack::VideoTrack(emscripten::val v) : v(v)
 {
 

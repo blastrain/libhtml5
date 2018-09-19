@@ -3,6 +3,8 @@
 #include "event_target.h"
 #include "event_handler.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class AudioTrack;
 
 class AudioTrackList : public EventTarget {
@@ -19,3 +21,5 @@ public:
     AudioTrack *getter(unsigned long index);
     AudioTrack *getTrackById(std::string id);
 };
+
+NAMESPACE_HTML5_END;

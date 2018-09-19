@@ -2,6 +2,8 @@
 
 #include "html_element.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class HTMLScriptElement : public HTMLElement {
 public:
 
@@ -17,3 +19,5 @@ public:
     virtual ~HTMLScriptElement();
     static HTMLScriptElement *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

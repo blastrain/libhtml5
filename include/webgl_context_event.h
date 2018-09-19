@@ -2,6 +2,8 @@
 
 #include "event.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class WebGLContextEvent : public Event {
 public:
     HTML5_PROPERTY(WebGLContextEvent, std::string, statusMessage);
@@ -10,3 +12,5 @@ public:
     virtual ~WebGLContextEvent();
     static WebGLContextEvent *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

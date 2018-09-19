@@ -1,5 +1,7 @@
 #include "text.h"
 
+USING_NAMESPACE_HTML5;
+
 Text::Text(emscripten::val v) :
     CharacterData(v)
 {

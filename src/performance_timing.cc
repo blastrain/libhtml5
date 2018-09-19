@@ -1,5 +1,7 @@
 #include "performance_timing.h"
 
+USING_NAMESPACE_HTML5;
+
 PerformanceTiming::PerformanceTiming(emscripten::val v) :
     Object(),
     v(v)

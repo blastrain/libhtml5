@@ -4,6 +4,8 @@
 #include "event_handler.h"
 #include <string>
 
+NAMESPACE_HTML5_BEGIN;
+
 class TextTrack;
 
 class TextTrackCue : public EventTarget {
@@ -21,3 +23,5 @@ public:
     virtual ~TextTrackCue();
     static TextTrackCue *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

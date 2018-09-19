@@ -3,6 +3,8 @@
 #include "event.h"
 #include "event_handler.h"
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(AudioTrackList);
 
 AudioTrackList::AudioTrackList(emscripten::val v) :

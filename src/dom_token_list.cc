@@ -1,5 +1,7 @@
 #include "dom_token_list.h"
 
+USING_NAMESPACE_HTML5;
+
 DOMTokenList::DOMTokenList(emscripten::val v) : v(v)
 {
 

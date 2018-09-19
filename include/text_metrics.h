@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class TextMetrics : public Object {
 public:
     emscripten::val v;
@@ -23,3 +25,5 @@ public:
     virtual ~TextMetrics();
     static TextMetrics *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

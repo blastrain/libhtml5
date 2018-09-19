@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class Uint8ClampedArray;
 
 class ImageData : public Object {
@@ -18,3 +20,5 @@ public:
     static ImageData *create(unsigned long sw, unsigned long sh);
     static ImageData *create(Uint8ClampedArray *data, unsigned long sw, unsigned long sh);
 };
+
+NAMESPACE_HTML5_END;

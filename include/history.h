@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class History : public Object {
 public:
     emscripten::val v;
@@ -17,3 +19,5 @@ public:
     void pushState(void *data, std::string title, std::string url);
     void replaceState(void *data, std::string title, std::string url);
 };
+
+NAMESPACE_HTML5_END;

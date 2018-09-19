@@ -3,6 +3,8 @@
 #include "libhtml5.h"
 #include "event_target.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class ApplicationCache;
 class Document;
 class External;
@@ -179,3 +181,5 @@ public:
     virtual ~WindowProxy();
     static WindowProxy *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

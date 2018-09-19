@@ -1,5 +1,7 @@
 #include "svgmatrix.h"
 
+USING_NAMESPACE_HTML5;
+
 SVGMatrix::SVGMatrix(emscripten::val v) :
     Object(),
     v(v)

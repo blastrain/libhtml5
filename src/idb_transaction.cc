@@ -3,6 +3,8 @@
 #include "idb_object_store.h"
 #include "idb_transaction.h"
 
+USING_NAMESPACE_HTML5;
+
 HTML5_BIND_CLASS(IDBTransaction);
 
 IDBTransaction::IDBTransaction(emscripten::val v) :

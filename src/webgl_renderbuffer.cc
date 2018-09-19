@@ -1,5 +1,7 @@
 #include "webgl_renderbuffer.h"
 
+USING_NAMESPACE_HTML5;
+
 WebGLRenderbuffer::WebGLRenderbuffer(emscripten::val v) :
     WebGLObject(v)
 {

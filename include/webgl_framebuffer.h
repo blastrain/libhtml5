@@ -2,6 +2,8 @@
 
 #include "webgl_object.h"
 
+NAMESPACE_HTML5_BEGIN;
+
 class WebGLFramebuffer : public WebGLObject {
 public:
 
@@ -9,3 +11,5 @@ public:
     virtual ~WebGLFramebuffer();
     static WebGLFramebuffer *create(emscripten::val v);
 };
+
+NAMESPACE_HTML5_END;

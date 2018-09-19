@@ -1,6 +1,8 @@
 #include "idb_open_db_request.h"
 #include "idb_factory.h"
 
+USING_NAMESPACE_HTML5;
+
 IDBFactory::IDBFactory(emscripten::val v) :
     Object(),
     v(v)

@@ -18,6 +18,7 @@
 #include "css_rule.h"
 #include "css_rule_list.h"
 #include "css_style_declaration.h"
+#include "css_style_sheet.h"
 #include "date.h"
 #include "document.h"
 #include "document_fragment.h"

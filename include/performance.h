@@ -2,6 +2,7 @@
 
 #include "libhtml5.h"
 #include "event_handler.h"
+#include <vector>
 
 class PerformanceNavigation;
 class PerformanceEntry;

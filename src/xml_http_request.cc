@@ -123,7 +123,11 @@ void XMLHttpRequest::setRequestHeader(std::string header, std::string value)
 
 std::string XMLHttpRequest::getResponseType() const
 {
-    return this->v["responseType"].as<std::string>();
+#if ENABLE_EMSCRIPTEN
+    return HTML5_PROPERTY_GET(responseType, std::string);
+#else
+    return "";
+#endif
 }
 
 void XMLHttpRequest::setResponseType(XMLHttpResponseType value)

@@ -105,6 +105,7 @@ namespace emscripten {
 };
 
 #define EM_ASM_(block, ...)
+#define EM_ASM_INT(block, ...) (0)
 
 #define HTML5_STATIC_PRIMITIVE_INSTANCE(type, ...) emscripten::val()
 #define HTML5_NEW_PRIMITIVE_INSTANCE(type, ...) emscripten::val()

@@ -20,8 +20,6 @@
 #include "canvas_rendering_context_2d.h"
 #include "window.h"
 
-Window *window = Window::create();
-
 Window::Window(emscripten::val v) :
     EventTarget(v),
     _requestAnimationFrameFn(NULL),
@@ -38,7 +36,7 @@ Window::~Window()
 
 Window *Window::create()
 {
-    return create(HTML5_NEW_PRIMITIVE_INSTANCE("window"));
+    return create(HTML5_STATIC_PRIMITIVE_INSTANCE(window));
 }
 
 Window *Window::create(emscripten::val v)

@@ -20,8 +20,6 @@
 #include "document.h"
 #include <iostream>
 
-Document *document = Document::create();
-
 Document::Document(emscripten::val v) :
     Node(v)
 {

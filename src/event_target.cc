@@ -2,7 +2,9 @@
 #include "event_target.h"
 #include <iostream>
 
-EventTarget::EventTarget(emscripten::val v) : v(v)
+EventTarget::EventTarget(emscripten::val v) :
+    Object(),
+    v(v)
 {
 
 }

@@ -2,6 +2,8 @@
 
 #include "libhtml5.h"
 
+class IDBFactory;
+
 class IDBEnvironment : public Object {
 public:
     emscripten::val v;

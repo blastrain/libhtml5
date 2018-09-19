@@ -1,6 +1,9 @@
 #include "blob.h"
 #include "html_canvas_element.h"
 
+HTML5_BIND_CLASS(HTMLCanvasElement);
+HTML5_BIND_METHOD(HTMLCanvasElement, toBlobCallback);
+
 HTMLCanvasElement::HTMLCanvasElement(emscripten::val v) :
     HTMLElement(v)
 {
@@ -47,24 +50,5 @@ std::string HTMLCanvasElement::toDataURL(std::string type, double encoderOptions
     return HTML5_CALLs(this->v, toDataURL, type, encoderOptions);
 }
 
-unsigned long HTMLCanvasElement::getHeight() const
-{
-    return HTML5_PROPERTY_GET(height, unsigned long);
-}
-
-void HTMLCanvasElement::setHeight(unsigned long value)
-{
-    this->_height = value;
-    this->v.set("height", value);
-}
-
-unsigned long HTMLCanvasElement::getWidth() const
-{
-    return HTML5_PROPERTY_GET(width, unsigned long);
-}
-
-void HTMLCanvasElement::setWidth(unsigned long value)
-{
-    this->_width = value;
-    this->v.set("width", value);
-}
+HTML5_PROPERTY_IMPL(HTMLCanvasElement, unsigned long, height);
+HTML5_PROPERTY_IMPL(HTMLCanvasElement, unsigned long, width);

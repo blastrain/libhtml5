@@ -5,8 +5,9 @@
 class MediaList : public Object {
 public:
     emscripten::val v;
-    unsigned long _length;
-    std::string _mediaText;
+
+    HTML5_PROPERTY(MediaList, unsigned long, length);
+    HTML5_PROPERTY(MediaList, std::string, mediaText);
 
     MediaList(emscripten::val v);
     virtual ~MediaList();
@@ -14,21 +15,4 @@ public:
     void appendMedium(std::string medium);
     void deleteMedium(std::string medium);
     std::string item(unsigned long index);
-
-    unsigned long getLength() const;
-    void setLength(unsigned long value);
-    std::string getMediaText() const;
-    void setMediaText(std::string value);
-
-    struct {
-        MediaList &self;
-        void operator=(unsigned long value) { self.setLength(value); };
-        operator unsigned long() { return self.getLength(); };
-    } length{*this};
-
-    struct {
-        MediaList &self;
-        void operator=(std::string value) { self.setMediaText(value); };
-        operator std::string() { return self.getMediaText(); };
-    } mediaText{*this};
 };

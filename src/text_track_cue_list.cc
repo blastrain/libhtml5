@@ -28,13 +28,4 @@ TextTrackCue *TextTrackCueList::getter(unsigned long index)
     return TextTrackCue::create(HTML5_CALLv(this->v, getter, index));
 }
 
-unsigned long TextTrackCueList::getLength() const
-{
-    return HTML5_PROPERTY_GET(length, unsigned long);
-}
-
-void TextTrackCueList::setLength(unsigned long value)
-{
-    this->_length = value;
-    this->v.set("length", value);
-}
+HTML5_PROPERTY_IMPL(TextTrackCueList, unsigned long, length);

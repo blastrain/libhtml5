@@ -36,13 +36,4 @@ Element *HTMLCollection::namedItem(std::string name)
     return Element::create(HTML5_CALLv(this->v, namedItem, name));
 }
 
-unsigned long HTMLCollection::getLength()
-{
-    return HTML5_PROPERTY_GET(length, unsigned long);
-}
-
-void HTMLCollection::setLength(unsigned long value)
-{
-    this->_length = value;
-    this->v.set("length", value);
-}
+HTML5_PROPERTY_IMPL(HTMLCollection, unsigned long, length);

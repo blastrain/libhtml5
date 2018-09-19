@@ -13,18 +13,10 @@ public:
     };
 
     emscripten::val v;
-    unsigned short _code;
+
+    HTML5_PROPERTY(MediaError, unsigned short, code);
 
     MediaError(emscripten::val v);
     virtual ~MediaError();
     static MediaError *create(emscripten::val v);
-    unsigned short getCode() const;
-    void setCode(unsigned short value);
-
-    struct {
-        MediaError &self;
-        void operator=(unsigned short value) { self.setCode(value); };
-        operator unsigned short() { return self.getCode(); };
-    } code{*this};
-
 };

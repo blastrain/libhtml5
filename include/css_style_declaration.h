@@ -7,10 +7,11 @@ class CSSRule;
 class CSSStyleDeclaration : public Object {
 public:
     emscripten::val v;
-    std::string _cssFloat;
-    std::string _cssText;
-    unsigned long _length;
-    CSSRule *_parentRule;
+
+    HTML5_PROPERTY(CSSStyleDeclaration, std::string, cssFloat);
+    HTML5_PROPERTY(CSSStyleDeclaration, std::string, cssText);
+    HTML5_PROPERTY(CSSStyleDeclaration, unsigned long, length);
+    HTML5_PROPERTY_OBJECT(CSSStyleDeclaration, CSSRule, parentRule);
 
     CSSStyleDeclaration(emscripten::val v);
     virtual ~CSSStyleDeclaration();
@@ -22,38 +23,4 @@ public:
     void setProperty(std::string property, std::string value, std::string priority = "");
     void setPropertyPriority(std::string property, std::string priority);
     void setPropertyValue(std::string property, std::string value);
-
-    std::string getCSSFloat() const;
-    void setCSSFloat(std::string value);
-    std::string getCSSText() const;
-    void setCSSText(std::string value);
-    unsigned long getLength() const;
-    void setLength(unsigned long value);
-    CSSRule *getParentRule() const;
-    void setParentRule(CSSRule *value);
-
-    struct {
-        CSSStyleDeclaration &self;
-        void operator=(std::string value) { self.setCSSFloat(value); };
-        operator std::string() { return self.getCSSFloat(); };
-    } cssFloat{*this};
-
-    struct {
-        CSSStyleDeclaration &self;
-        void operator=(std::string value) { self.setCSSText(value); };
-        operator std::string() { return self.getCSSText(); };
-    } cssText{*this};
-
-    struct {
-        CSSStyleDeclaration &self;
-        void operator=(unsigned long value) { self.setLength(value); };
-        operator unsigned long() { return self.getLength(); };
-    } length{*this};
-
-    struct {
-        CSSStyleDeclaration &self;
-        void operator=(CSSRule *value) { self.setParentRule(value); };
-        operator CSSRule *() { return self.getParentRule(); };
-    } parentRule{*this};
-
 };

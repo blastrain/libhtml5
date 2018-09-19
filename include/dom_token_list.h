@@ -6,7 +6,8 @@
 class DOMTokenList : public Object {
 public:
     emscripten::val v;
-    unsigned long _length;
+
+    HTML5_PROPERTY(DOMTokenList, unsigned long, length);
 
     DOMTokenList(emscripten::val v);
     virtual ~DOMTokenList();
@@ -24,14 +25,4 @@ public:
     };
     void remove(std::vector<std::string> tokens);
     bool toggle(std::string token, bool force = false);
-
-    struct {
-        DOMTokenList &self;
-        void operator=(unsigned long value) { self.setLength(value); };
-        operator unsigned long() { return self.getLength(); };
-    } length{*this};
-
-private:
-    unsigned long getLength();
-    void setLength(unsigned long value);
 };

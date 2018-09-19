@@ -2,6 +2,8 @@
 #include "idb_transaction.h"
 #include "idb_request.h"
 
+HTML5_BIND_CLASS(IDBRequest);
+
 IDBRequest::IDBRequest(emscripten::val v) :
     EventTarget(v)
 {

@@ -40,13 +40,4 @@ ArrayBuffer *ArrayBuffer::slice(long begin, long end)
     return create(HTML5_CALLv(this->v, slice, begin, end));
 }
 
-unsigned long ArrayBuffer::getByteLength() const
-{
-    return HTML5_PROPERTY_GET(byteLength, unsigned long);
-}
-
-void ArrayBuffer::setByteLength(unsigned long value)
-{
-    this->_byteLength = value;
-    this->v.set("byteLength", value);
-}
+HTML5_PROPERTY_IMPL(ArrayBuffer, unsigned long, byteLength);

@@ -19,6 +19,7 @@ public:
     Performance(emscripten::val v);
     virtual ~Performance();
     static Performance *create(emscripten::val v);
+    emscripten::val getValue() const { return this->v; };
     void clearMarks();
     void clearMarks(std::string name);
     void clearMeasures();

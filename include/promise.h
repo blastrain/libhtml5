@@ -5,7 +5,9 @@
 
 class Promise : public Object {
 public:
-    unsigned long _length;
+    emscripten::val v;
+
+    HTML5_PROPERTY(Promise, unsigned long, length);
 
     Promise(emscripten::val v);
     virtual ~Promise();

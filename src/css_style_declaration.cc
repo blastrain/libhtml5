@@ -53,47 +53,7 @@ void CSSStyleDeclaration::setPropertyValue(std::string property, std::string val
     HTML5_CALL(this->v, setPropertyValue, property, value);
 }
 
-std::string CSSStyleDeclaration::getCSSFloat() const
-{
-    return HTML5_PROPERTY_GET(cssFloat, std::string);
-}
-
-void CSSStyleDeclaration::setCSSFloat(std::string value)
-{
-    this->_cssFloat = value;
-    this->v.set("cssFloat", value);
-}
-
-std::string CSSStyleDeclaration::getCSSText() const
-{
-    return HTML5_PROPERTY_GET(cssText, std::string);
-}
-
-void CSSStyleDeclaration::setCSSText(std::string value)
-{
-    this->_cssText = value;
-    this->v.set("cssText", value);
-}
-
-unsigned long CSSStyleDeclaration::getLength() const
-{
-    return HTML5_PROPERTY_GET(length, unsigned long);
-}
-
-void CSSStyleDeclaration::setLength(unsigned long value)
-{
-    this->_length = value;
-    this->v.set("length", value);
-}
-
-CSSRule *CSSStyleDeclaration::getParentRule() const
-{
-    return HTML5_PROPERTY_GET(parentRule, CSSRule);
-}
-
-void CSSStyleDeclaration::setParentRule(CSSRule *value)
-{
-    this->_parentRule = value;
-    this->v.set("parentRule", value->v);
-}
-
+HTML5_PROPERTY_IMPL(CSSStyleDeclaration, std::string, cssFloat);
+HTML5_PROPERTY_IMPL(CSSStyleDeclaration, std::string, cssText);
+HTML5_PROPERTY_IMPL(CSSStyleDeclaration, unsigned long, length);
+HTML5_PROPERTY_OBJECT_IMPL(CSSStyleDeclaration, CSSRule, parentRule);

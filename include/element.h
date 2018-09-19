@@ -11,21 +11,22 @@ class PseudoElement;
 
 class Element : public Node {
 public:
+
     std::vector<Attr *> _attributes;
-    unsigned long _childElementCount;
-    HTMLCollection *_children;
-    std::string _className;
-    Element *_firstElementChild;
-    std::string _id;
-    Element *_lastElementChild;
-    std::string _localName;
-    std::string _namespaceURI;
-    Element *_nextElementSibling;
-    std::string _prefix;
-    Element *_previousElementSibling;
-    std::string _tagName;
-    ShadowRoot *_shadowRoot;
-    DOMTokenList *_classList;
+    HTML5_PROPERTY(Element, unsigned long, childElementCount);
+    HTML5_PROPERTY_OBJECT(Element, HTMLCollection, children);
+    HTML5_PROPERTY(Element, std::string, className);
+    HTML5_PROPERTY_OBJECT(Element, Element, firstElementChild);
+    HTML5_PROPERTY(Element, std::string, id);
+    HTML5_PROPERTY_OBJECT(Element, Element, lastElementChild);
+    HTML5_PROPERTY(Element, std::string, localName);
+    HTML5_PROPERTY(Element, std::string, namespaceURI);
+    HTML5_PROPERTY_OBJECT(Element, Element, nextElementSibling);
+    HTML5_PROPERTY(Element, std::string, prefix);
+    HTML5_PROPERTY_OBJECT(Element, Element, previousElementSibling);
+    HTML5_PROPERTY(Element, std::string, tagName);
+    HTML5_PROPERTY_OBJECT(Element, ShadowRoot, shadowRoot);
+    HTML5_PROPERTY_OBJECT(Element, DOMTokenList, classList);
 
     Element(emscripten::val v);
     virtual ~Element();
@@ -88,119 +89,7 @@ public:
         operator std::vector<Attr *>() { return self.getAttributes(); };
     } attributes{*this};
 
-    struct {
-        Element &self;
-        void operator=(unsigned long value) { self.setChildElementCount(value); };
-        operator unsigned long() { return self.getChildElementCount(); };
-    } childElementCount{*this};
-
-    struct {
-        Element &self;
-        void operator=(HTMLCollection *value) { self.setChildren(value); };
-        operator HTMLCollection *() { return self.getChildren(); };
-    } children{*this};
-
-    struct {
-        Element &self;
-        void operator=(std::string value) { self.setClassName(value); };
-        operator std::string () { return self.getClassName(); };
-    } className{*this};
-
-    struct {
-        Element &self;
-        void operator=(Element *value) { self.setFirstElementChild(value); };
-        operator Element *() { return self.getFirstElementChild(); };
-    } firstElementChild{*this};
-
-    struct {
-        Element &self;
-        void operator=(std::string value) { self.setId(value); };
-        operator std::string() { return self.getId(); };
-    } id{*this};
-
-    struct {
-        Element &self;
-        void operator=(Element *value) { self.setLastElementChild(value); };
-        operator Element *() { return self.getLastElementChild(); };
-    } lastElementChild{*this};
-
-    struct {
-        Element &self;
-        void operator=(std::string value) { self.setLocalName(value); };
-        operator std::string() { return self.getLocalName(); };
-    } localName{*this};
-
-    struct {
-        Element &self;
-        void operator=(std::string value) { self.setNamespaceURI(value); };
-        operator std::string() { return self.getNamespaceURI(); };
-    } namespaceURI{*this};
-
-    struct {
-        Element &self;
-        void operator=(Element *value) { self.setNextElementSibling(value); };
-        operator Element *() { return self.getNextElementSibling(); };
-    } nextElementSibling{*this};
-
-    struct {
-        Element &self;
-        void operator=(std::string value) { self.setPrefix(value); };
-        operator std::string() { return self.getPrefix(); };
-    } prefix{*this};
-
-    struct {
-        Element &self;
-        void operator=(Element *value) { self.setPreviousElementSibling(value); };
-        operator Element *() { return self.getPreviousElementSibling(); };
-    } previousElementSibling{*this};
-
-    struct {
-        Element &self;
-        void operator=(std::string value) { self.setTagName(value); };
-        operator std::string() { return self.getTagName(); };
-    } tagName{*this};
-
-    struct {
-        Element &self;
-        void operator=(ShadowRoot *value) { self.setShadowRoot(value); };
-        operator ShadowRoot *() { return self.getShadowRoot(); };
-    } shadowRoot{*this};
-
-    struct {
-        Element &self;
-        void operator=(DOMTokenList *value) { self.setClassList(value); };
-        operator DOMTokenList *() { return self.getClassList(); };
-    } classList{*this};
-
 private:
     std::vector<Attr *> getAttributes() const;
     void setAttributes(std::vector<Attr *> value);
-    unsigned long getChildElementCount() const;
-    void setChildElementCount(unsigned long value);
-    HTMLCollection *getChildren() const;
-    void setChildren(HTMLCollection *value);
-    std::string getClassName() const;
-    void setClassName(std::string value);
-    Element *getFirstElementChild() const;
-    void setFirstElementChild(Element *value);
-    std::string getId() const;
-    void setId(std::string value);
-    Element *getLastElementChild() const;
-    void setLastElementChild(Element *value);
-    std::string getLocalName() const;
-    void setLocalName(std::string value);
-    std::string getNamespaceURI() const;
-    void setNamespaceURI(std::string value);
-    Element *getNextElementSibling() const;
-    void setNextElementSibling(Element *value);
-    std::string getPrefix() const;
-    void setPrefix(std::string value);
-    Element *getPreviousElementSibling() const;
-    void setPreviousElementSibling(Element *value);
-    std::string getTagName() const;
-    void setTagName(std::string value);
-    ShadowRoot *getShadowRoot() const;
-    void setShadowRoot(ShadowRoot *value);
-    DOMTokenList *getClassList() const;
-    void setClassList(DOMTokenList *value);
 };

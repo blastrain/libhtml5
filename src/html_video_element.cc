@@ -24,57 +24,8 @@ HTMLVideoElement *HTMLVideoElement::create()
     return dynamic_cast<HTMLVideoElement *>(Document::create()->createElement("video"));
 }
 
-double HTMLVideoElement::getHeight() const
-{
-    return HTML5_PROPERTY_GET(height, double);
-}
-
-void HTMLVideoElement::setHeight(double value)
-{
-    this->_height = value;
-    this->v.set("height", value);
-}
-
-std::string HTMLVideoElement::getPoster() const
-{
-    return HTML5_PROPERTY_GET(poster, std::string);
-}
-
-void HTMLVideoElement::setPoster(std::string value)
-{
-    this->_poster = value;
-    this->v.set("poster", value);
-}
-
-double HTMLVideoElement::getVideoHeight() const
-{
-    return HTML5_PROPERTY_GET(videoHeight, double);
-}
-
-void HTMLVideoElement::setVideoHeight(double value)
-{
-    this->_videoHeight = value;
-    this->v.set("videoHeight", value);
-}
-
-double HTMLVideoElement::getVideoWidth() const
-{
-    return HTML5_PROPERTY_GET(videoWidth, double);
-}
-
-void HTMLVideoElement::setVideoWidth(double value)
-{
-    this->_videoWidth = value;
-    this->v.set("videoWidth", value);
-}
-
-double HTMLVideoElement::getWidth() const
-{
-    return HTML5_PROPERTY_GET(width, double);
-}
-
-void HTMLVideoElement::setWidth(double value)
-{
-    this->_width = value;
-    this->v.set("width", value);
-}
+HTML5_PROPERTY_IMPL(HTMLVideoElement, double, height);
+HTML5_PROPERTY_IMPL(HTMLVideoElement, std::string, poster);
+HTML5_PROPERTY_IMPL(HTMLVideoElement, double, videoHeight);
+HTML5_PROPERTY_IMPL(HTMLVideoElement, double, videoWidth);
+HTML5_PROPERTY_IMPL(HTMLVideoElement, double, width);

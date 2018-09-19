@@ -13,35 +13,13 @@ ArrayBufferView::~ArrayBufferView()
 
 }
 
-ArrayBuffer *ArrayBufferView::getBuffer() const
+ArrayBufferView *ArrayBufferView::create(emscripten::val v)
 {
-    return HTML5_PROPERTY_GET(buffer, ArrayBuffer);
+    auto view = new ArrayBufferView(v);
+    view->autorelease();
+    return view;
 }
 
-void ArrayBufferView::setBuffer(ArrayBuffer *value)
-{
-    this->_buffer = value;
-    this->v.set("buffer", value->v);
-}
-
-unsigned long ArrayBufferView::getByteLength() const
-{
-    return HTML5_PROPERTY_GET(byteLength, unsigned long);
-}
-
-void ArrayBufferView::setByteLength(unsigned long value)
-{
-    this->_byteLength = value;
-    this->v.set("byteLength", value);
-}
-
-unsigned long ArrayBufferView::getByteOffset() const
-{
-    return HTML5_PROPERTY_GET(byteOffset, unsigned long);
-}
-
-void ArrayBufferView::setByteOffset(unsigned long value)
-{
-    this->_byteOffset = value;
-    this->v.set("byteOffset", value);
-}
+HTML5_PROPERTY_OBJECT_IMPL(ArrayBufferView, ArrayBuffer, buffer);
+HTML5_PROPERTY_IMPL(ArrayBufferView, unsigned long, byteLength);
+HTML5_PROPERTY_IMPL(ArrayBufferView, unsigned long, byteOffset);

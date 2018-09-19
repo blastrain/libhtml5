@@ -49,13 +49,4 @@ Uint8ClampedArray *Uint8ClampedArray::create(ArrayBuffer *buffer, unsigned long 
     return create(HTML5_NEW_PRIMITIVE_INSTANCE(Uint8ClampedArray, buffer->v, byteOffset, length));
 }
 
-unsigned long Uint8ClampedArray::getLength() const
-{
-    return HTML5_PROPERTY_GET(length, unsigned long);
-}
-
-void Uint8ClampedArray::setLength(unsigned long value)
-{
-    this->_length = value;
-    this->v.set("length", value);
-}
+HTML5_PROPERTY_IMPL(Uint8ClampedArray, unsigned long, length);

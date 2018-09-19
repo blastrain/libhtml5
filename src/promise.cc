@@ -1,7 +1,8 @@
 #include "promise.h"
 
 Promise::Promise(emscripten::val v) :
-    Object()
+    Object(),
+    v(v)
 {
 
 }
@@ -17,3 +18,5 @@ Promise *Promise::create(emscripten::val v)
     p->autorelease();
     return p;
 }
+
+HTML5_PROPERTY_IMPL(Promise, unsigned long, length);

@@ -41,13 +41,4 @@ bool DOMTokenList::toggle(std::string token, bool force)
     return HTML5_CALLb(this->v, toggle, token, force);
 }
 
-unsigned long DOMTokenList::getLength()
-{
-    return HTML5_PROPERTY_GET(length, unsigned long);
-}
-
-void DOMTokenList::setLength(unsigned long value)
-{
-    this->_length = value;
-    this->v.set("length", value);
-}
+HTML5_PROPERTY_IMPL(DOMTokenList, unsigned long, length);

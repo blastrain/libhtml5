@@ -3,6 +3,8 @@
 #include "performance_timing.h"
 #include "performance.h"
 
+HTML5_BIND_CLASS(Performance);
+
 Performance::Performance(emscripten::val v) :
     Object(),
     v(v)

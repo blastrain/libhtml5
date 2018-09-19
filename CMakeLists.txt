@@ -17,7 +17,6 @@ set(SOURCES src/application_cache.cc
 	src/canvas_gradient.cc
 	src/canvas_pattern.cc
 	src/canvas_rendering_context_2d.cc
-	src/canvas_rendering_context_2d.cc
 	src/character_data.cc
 	src/comment.cc
 	src/css_rule.cc
@@ -63,7 +62,6 @@ set(SOURCES src/application_cache.cc
 	src/media_list.cc
 	src/mime_type.cc
 	src/mime_type_array.cc
-	src/navigator.cc
 	src/navigator.cc
 	src/node.cc
 	src/node_filter.cc

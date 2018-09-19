@@ -17,13 +17,4 @@ MediaError *MediaError::create(emscripten::val v)
     return me;
 }
 
-unsigned short MediaError::getCode() const
-{
-    return HTML5_PROPERTY_GET(code, unsigned short);
-}
-
-void MediaError::setCode(unsigned short value)
-{
-    this->_code = value;
-    this->v.set("code", value);
-}
+HTML5_PROPERTY_IMPL(MediaError, unsigned short, code);

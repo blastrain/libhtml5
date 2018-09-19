@@ -32,24 +32,5 @@ std::string MediaList::item(unsigned long index)
     return HTML5_CALLs(this->v, item, index);
 }
 
-unsigned long MediaList::getLength() const
-{
-    return HTML5_PROPERTY_GET(length, unsigned long);
-}
-
-void MediaList::setLength(unsigned long value)
-{
-    this->_length = value;
-    this->v.set("length", value);
-}
-
-std::string MediaList::getMediaText() const
-{
-    return HTML5_PROPERTY_GET(mediaText, std::string);
-}
-
-void MediaList::setMediaText(std::string value)
-{
-    this->_mediaText = value;
-    this->v.set("mediaText", value);
-}
+HTML5_PROPERTY_IMPL(MediaList, unsigned long, length);
+HTML5_PROPERTY_IMPL(MediaList, std::string, mediaText);

@@ -85,17 +85,6 @@ Node *Node::replaceChild(Node *node, Node *child)
     return Node::create(HTML5_CALLv(this->v, replaceChild, node->v, child->v));
 }
 
-std::string Node::getBaseURI() const
-{
-    return HTML5_PROPERTY_GET(baseURI, std::string);
-}
-
-void Node::setBaseURI(std::string value)
-{
-    this->_baseURI = value;
-    this->v.set("baseURI", value);
-}
-
 std::vector<Node *> Node::getChildNodes() const
 {
 #if ENABLE_EMSCRIPTEN
@@ -122,135 +111,16 @@ void Node::setChildNodes(std::vector<Node *> value)
 #endif
 }
 
-Node *Node::getFirstChild() const
-{
-    return HTML5_PROPERTY_GET(firstChild, Node);
-}
-
-void Node::setFirstChild(Node *value)
-{
-    this->_firstChild = value;
-    this->v.set("firstChild", value->v);
-}
-
-Node *Node::getLastChild() const
-{
-    return HTML5_PROPERTY_GET(lastChild, Node);
-}
-
-void Node::setLastChild(Node *value)
-{
-    this->_lastChild = value;
-    this->v.set("lastChild", value->v);
-}
-
-Node *Node::getNextSibling() const
-{
-    return HTML5_PROPERTY_GET(nextSibling, Node);
-}
-
-void Node::setNextSibling(Node *value)
-{
-    this->_nextSibling = value;
-    this->v.set("nextSibling", value->v);
-}
-
-
-std::string Node::getNodeName() const
-{
-    return HTML5_PROPERTY_GET(nodeName, std::string);
-}
-
-void Node::setNodeName(std::string value)
-{
-    this->_nodeName = value;
-    this->v.set("nodeName", value);
-}
-
-unsigned short Node::getNodeType() const
-{
-    return HTML5_PROPERTY_GET(nodeType, unsigned short);
-}
-
-void Node::setNodeType(unsigned short value)
-{
-    this->_nodeType = value;
-    this->v.set("nodeType", value);
-}
-
-std::string Node::getNodeValue() const
-{
-    return HTML5_PROPERTY_GET(nodeValue, std::string);
-}
-
-void Node::setNodeValue(std::string value)
-{
-    this->_nodeValue = value;
-    this->v.set("nodeValue", value);
-}
-
-Document *Node::getOwnerDocument() const
-{
-    return HTML5_PROPERTY_GET(ownerDocument, Document);
-}
-
-void Node::setOwnerDocument(Document *value)
-{
-    this->_ownerDocument = value;
-    this->v.set("ownerDocument", value->v);
-}
-
-Element *Node::getParentElement() const
-{
-    return HTML5_PROPERTY_GET(parentElement, Element);
-}
-
-void Node::setParentElement(Element *value)
-{
-    this->_parentElement = value;
-    this->v.set("parentElement", value->v);
-}
-
-Node *Node::getParentNode() const
-{
-    return HTML5_PROPERTY_GET(parentNode, Node);
-}
-
-void Node::setParentNode(Node *value)
-{
-    this->_parentNode = value;
-    this->v.set("parentNode", value->v);
-}
-
-Node *Node::getPreviousNode() const
-{
-    return HTML5_PROPERTY_GET(previousNode, Node);
-}
-
-void Node::setPreviousNode(Node *value)
-{
-    this->_previousNode = value;
-    this->v.set("previousNode", value->v);
-}
-
-Node *Node::getPreviousSibling() const
-{
-    return HTML5_PROPERTY_GET(previousNode, Node);
-}
-
-void Node::setPreviousSibling(Node *value)
-{
-    this->_previousSibling = value;
-    this->v.set("previousSibling", value->v);
-}
-
-std::string Node::getTextContent() const
-{
-    return HTML5_PROPERTY_GET(textContent, std::string);
-}
-
-void Node::setTextContent(std::string value)
-{
-    this->_textContent = value;
-    this->v.set("textContent", value);
-}
+HTML5_PROPERTY_IMPL(Node, std::string, baseURI);
+HTML5_PROPERTY_OBJECT_IMPL(Node, Node, firstChild);
+HTML5_PROPERTY_OBJECT_IMPL(Node, Node, lastChild);
+HTML5_PROPERTY_OBJECT_IMPL(Node, Node, nextSibling);
+HTML5_PROPERTY_IMPL(Node, std::string, nodeName);
+HTML5_PROPERTY_IMPL(Node, unsigned short, nodeType);
+HTML5_PROPERTY_IMPL(Node, std::string, nodeValue);
+HTML5_PROPERTY_OBJECT_IMPL(Node, Document, ownerDocument);
+HTML5_PROPERTY_OBJECT_IMPL(Node, Element, parentElement);
+HTML5_PROPERTY_OBJECT_IMPL(Node, Node, parentNode);
+HTML5_PROPERTY_OBJECT_IMPL(Node, Node, previousNode);
+HTML5_PROPERTY_OBJECT_IMPL(Node, Node, previousSibling);
+HTML5_PROPERTY_IMPL(Node, std::string, textContent);

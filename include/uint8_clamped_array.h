@@ -5,7 +5,8 @@
 class Uint8ClampedArray : public ArrayBufferView {
 public:
     const long BYTES_PER_ELEMENT = 1;
-    unsigned long _length;
+
+    HTML5_PROPERTY(Uint8ClampedArray, unsigned long, length);
 
     Uint8ClampedArray(emscripten::val v);
     virtual ~Uint8ClampedArray();
@@ -16,13 +17,4 @@ public:
     static Uint8ClampedArray *create(ArrayBuffer *buffer);
     static Uint8ClampedArray *create(ArrayBuffer *buffer, unsigned long byteOffset);
     static Uint8ClampedArray *create(ArrayBuffer *buffer, unsigned long byteOffset, unsigned long length);
-
-    unsigned long getLength() const;
-    void setLength(unsigned long value);
-
-    struct {
-        Uint8ClampedArray &self;
-        void operator=(unsigned long value) { self.setLength(value); };
-        operator unsigned long() { return self.getLength(); };
-    } length{*this};
 };

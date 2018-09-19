@@ -389,238 +389,29 @@ void CanvasRenderingContext2D::translate(double x, double y)
     HTML5_CALL(this->v, translate, x, y);
 }
 
-HTMLCanvasElement *CanvasRenderingContext2D::getCanvas() const
-{
-    return HTML5_PROPERTY_GET(canvas, HTMLCanvasElement);
-}
-
-void CanvasRenderingContext2D::setCanvas(HTMLCanvasElement *value)
-{
-    HTML5_PROPERTY_OBJECT_SET(canvas, value);
-}
-
-SVGMatrix *CanvasRenderingContext2D::getCurrentTransform() const
-{
-    return HTML5_PROPERTY_GET(currentTransform, SVGMatrix);
-}
-
-void CanvasRenderingContext2D::setCurrentTransform(SVGMatrix *value)
-{
-    HTML5_PROPERTY_OBJECT_SET(currentTransform, value);
-}
-
-std::string CanvasRenderingContext2D::getDirection() const
-{
-    return HTML5_PROPERTY_GET(direction, std::string);
-}
-
-void CanvasRenderingContext2D::setDirection(std::string value)
-{
-    HTML5_PROPERTY_SET(direction, value);
-}
-
-void CanvasRenderingContext2D::setFillStyle(std::string value)
-{
-    this->_fillStyleColor = value;
-    this->v.set("fillStyle", value);
-}
-
-void CanvasRenderingContext2D::setFillStyle(CanvasGradient *value)
-{
-    this->_fillStyleGradient = value;
-    this->v.set("fillStyle", value->v);
-}
-
-void CanvasRenderingContext2D::setFillStyle(CanvasPattern *value)
-{
-    this->_fillStylePattern = value;
-    this->v.set("fillStyle", value->v);
-}
-
-std::string CanvasRenderingContext2D::getFont() const
-{
-    return HTML5_PROPERTY_GET(font, std::string);
-}
-
-void CanvasRenderingContext2D::setFont(std::string value)
-{
-    HTML5_PROPERTY_SET(font, value);
-}
-
-double CanvasRenderingContext2D::getGlobalAlpha() const
-{
-    return HTML5_PROPERTY_GET(globalAlpha, double);
-}
-
-void CanvasRenderingContext2D::setGlobalAlpha(double value)
-{
-    HTML5_PROPERTY_SET(globalAlpha, value);
-}
-
-std::string CanvasRenderingContext2D::getGlobalCompositeOperation() const
-{
-    return HTML5_PROPERTY_GET(globalCompositeOperation, std::string);
-}
-
-void CanvasRenderingContext2D::setGlobalCompositeOperation(std::string value)
-{
-    HTML5_PROPERTY_SET(globalCompositeOperation, value);
-}
-
-unsigned long CanvasRenderingContext2D::getHeight() const
-{
-    return HTML5_PROPERTY_GET(height, unsigned long);
-}
-
-void CanvasRenderingContext2D::setHeight(unsigned long value)
-{
-    HTML5_PROPERTY_SET(height, value);
-}
-
-bool CanvasRenderingContext2D::getImageSmoothingEnabled() const
-{
-    return HTML5_PROPERTY_GET(imageSmoothingEnabled, bool);
-}
-
-void CanvasRenderingContext2D::setImageSmoothingEnabled(bool value)
-{
-    HTML5_PROPERTY_SET(imageSmoothingEnabled, value);
-}
-
-std::string CanvasRenderingContext2D::getLineCap() const
-{
-    return HTML5_PROPERTY_GET(lineCap, std::string);
-}
-
-void CanvasRenderingContext2D::setLineCap(std::string value)
-{
-    HTML5_PROPERTY_SET(lineCap, value);
-}
-
-double CanvasRenderingContext2D::getLineDashOffset() const
-{
-    return HTML5_PROPERTY_GET(lineDashOffset, double);
-}
-
-void CanvasRenderingContext2D::setLineDashOffset(double value)
-{
-    HTML5_PROPERTY_SET(lineDashOffset, value);
-}
-
-std::string CanvasRenderingContext2D::getLineJoin() const
-{
-    return HTML5_PROPERTY_GET(lineJoin, std::string);
-}
-
-void CanvasRenderingContext2D::setLineJoin(std::string value)
-{
-    HTML5_PROPERTY_SET(lineJoin, value);
-}
-
-double CanvasRenderingContext2D::getLineWidth() const
-{
-    return HTML5_PROPERTY_GET(lineWidth, double);
-}
-
-void CanvasRenderingContext2D::setLineWidth(double value)
-{
-    HTML5_PROPERTY_SET(lineWidth, value);
-}
-
-double CanvasRenderingContext2D::getMiterLimit() const
-{
-    return HTML5_PROPERTY_GET(miterLimit, double);
-}
-    
-void CanvasRenderingContext2D::setMiterLimit(double value)
-{
-    HTML5_PROPERTY_SET(miterLimit, value);
-}
-
-double CanvasRenderingContext2D::getShadowBlur() const
-{
-    return HTML5_PROPERTY_GET(shadowBlur, double);
-}
-
-void CanvasRenderingContext2D::setShadowBlur(double value)
-{
-    HTML5_PROPERTY_SET(shadowBlur, value);
-}
-
-std::string CanvasRenderingContext2D::getShadowColor() const
-{
-    return HTML5_PROPERTY_GET(shadowColor, std::string);
-}
-
-void CanvasRenderingContext2D::setShadowColor(std::string value)
-{
-    HTML5_PROPERTY_SET(shadowColor, value);
-}
-
-double CanvasRenderingContext2D::getShadowOffsetX() const
-{
-    return HTML5_PROPERTY_GET(shadowOffsetX, double);
-}
-
-void CanvasRenderingContext2D::setShadowOffsetX(double value)
-{
-    HTML5_PROPERTY_SET(shadowOffsetX, value);
-}
-
-double CanvasRenderingContext2D::getShadowOffsetY() const
-{
-    return HTML5_PROPERTY_GET(shadowOffsetY, double);
-}
-
-void CanvasRenderingContext2D::setShadowOffsetY(double value)
-{
-    HTML5_PROPERTY_SET(shadowOffsetY, value);
-}
-
-void CanvasRenderingContext2D::setStrokeStyle(std::string value)
-{
-    this->_strokeStyleColor = value;
-    this->v.set("strokeStyle", value);
-}
-
-void CanvasRenderingContext2D::setStrokeStyle(CanvasGradient *value)
-{
-    this->_strokeStyleGradient = value;
-    this->v.set("strokeStyle", value->v);
-}
-
-void CanvasRenderingContext2D::setStrokeStyle(CanvasPattern *value)
-{
-    this->_strokeStylePattern = value;
-    this->v.set("strokeStyle", value->v);
-}
-
-std::string CanvasRenderingContext2D::getTextAlign() const
-{
-    return HTML5_PROPERTY_GET(textAlign, std::string);
-}
-
-void CanvasRenderingContext2D::setTextAlign(std::string value)
-{
-    HTML5_PROPERTY_SET(textAlign, value);
-}
-
-std::string CanvasRenderingContext2D::getTextBaseLine() const
-{
-    return HTML5_PROPERTY_GET(textBaseline, std::string);
-}
-
-void CanvasRenderingContext2D::setTextBaseLine(std::string value)
-{
-    HTML5_PROPERTY_SET(textBaseline, value);
-}
-
-unsigned long CanvasRenderingContext2D::getWidth() const
-{
-    return HTML5_PROPERTY_GET(width, unsigned long);
-}
-
-void CanvasRenderingContext2D::setWidth(unsigned long value)
-{
-    HTML5_PROPERTY_SET(width, value);
-}
+HTML5_PROPERTY_OBJECT_IMPL(CanvasRenderingContext2D, HTMLCanvasElement, canvas);
+HTML5_PROPERTY_OBJECT_IMPL(CanvasRenderingContext2D, SVGMatrix, currentTransform);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, std::string, direction);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, std::string, fillStyleColor);
+HTML5_PROPERTY_OBJECT_IMPL(CanvasRenderingContext2D, CanvasGradient, fillStyleGradient);
+HTML5_PROPERTY_OBJECT_IMPL(CanvasRenderingContext2D, CanvasPattern, fillStylePattern);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, std::string, font);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, double, globalAlpha);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, std::string, globalCompositeOperation);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, unsigned long, height);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, bool, imageSmoothingEnabled);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, std::string, lineCap);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, double, lineDashOffset);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, std::string, lineJoin);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, double, lineWidth);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, double, miterLimit);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, double, shadowBlur);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, std::string, shadowColor);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, double, shadowOffsetX);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, double, shadowOffsetY);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, std::string, strokeStyleColor);
+HTML5_PROPERTY_OBJECT_IMPL(CanvasRenderingContext2D, CanvasGradient, strokeStyleGradient);
+HTML5_PROPERTY_OBJECT_IMPL(CanvasRenderingContext2D, CanvasPattern, strokeStylePattern);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, std::string, textAlign);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, std::string, textBaseline);
+HTML5_PROPERTY_IMPL(CanvasRenderingContext2D, unsigned long, width);

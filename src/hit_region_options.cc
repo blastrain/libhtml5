@@ -21,27 +21,6 @@ HitRegionOptions *HitRegionOptions::create(emscripten::val v)
     return opt;
 }
 
-Element *HitRegionOptions::getControl() const
-{
-    return HTML5_PROPERTY_GET(control, Element);
-}
-
-void HitRegionOptions::setControl(Element *value)
-{
-
-}
-
-std::string HitRegionOptions::getCursor() const
-{
-    return HTML5_PROPERTY_GET(cursor, std::string);
-}
-
-void HitRegionOptions::setCursor(std::string value)
-{
-    this->_cursor = value;
-    this->v.set("cursor", value);
-}
-
 std::string HitRegionOptions::getFillRule()
 {
 #if ENABLE_EMSCRIPTEN
@@ -64,57 +43,10 @@ void HitRegionOptions::setFillRule(CanvasFillRule value)
     }
 }
 
-std::string HitRegionOptions::getId() const
-{
-    return HTML5_PROPERTY_GET(id, std::string);
-}
-
-void HitRegionOptions::setId(std::string value)
-{
-    this->_id = value;
-    this->v.set("id", value);
-}
-
-std::string HitRegionOptions::getLabel() const
-{
-    return HTML5_PROPERTY_GET(label, std::string);
-}
-    
-void HitRegionOptions::setLabel(std::string value)
-{
-    this->_label = value;
-    this->v.set("label", value);
-}
-
-std::string HitRegionOptions::getParentID() const
-{
-    return HTML5_PROPERTY_GET(parentID, std::string);
-}
-
-void HitRegionOptions::setParentID(std::string value)
-{
-    this->_parentID = value;
-    this->v.set("parentID", value);
-}
-
-Path2D *HitRegionOptions::getPath() const
-{
-    return HTML5_PROPERTY_GET(path, Path2D);
-}
-
-void HitRegionOptions::setPath(Path2D *value)
-{
-    this->_path = value;
-    this->v.set("path", value->v);
-}
-
-std::string HitRegionOptions::getRole() const
-{
-    return HTML5_PROPERTY_GET(role, std::string);
-}
-
-void HitRegionOptions::setRole(std::string value)
-{
-    this->_role = value;
-    this->v.set("role", value);
-}
+HTML5_PROPERTY_OBJECT_IMPL(HitRegionOptions, Element, control);
+HTML5_PROPERTY_IMPL(HitRegionOptions, std::string, cursor);
+HTML5_PROPERTY_IMPL(HitRegionOptions, std::string, id);
+HTML5_PROPERTY_IMPL(HitRegionOptions, std::string, label);
+HTML5_PROPERTY_IMPL(HitRegionOptions, std::string, parentID);
+HTML5_PROPERTY_OBJECT_IMPL(HitRegionOptions, Path2D, path);
+HTML5_PROPERTY_IMPL(HitRegionOptions, std::string, role);

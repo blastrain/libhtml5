@@ -23,13 +23,4 @@ CSSRule *CSSRuleList::item(unsigned long index)
     return CSSRule::create(HTML5_CALLv(this->v, item, index));
 }
 
-unsigned long CSSRuleList::getLength() const
-{
-    return HTML5_PROPERTY_GET(length, unsigned long);
-}
-
-void CSSRuleList::setLength(unsigned long value)
-{
-    this->_length = value;
-    this->v.set("length", value);
-}
+HTML5_PROPERTY_IMPL(CSSRuleList, unsigned long, length);

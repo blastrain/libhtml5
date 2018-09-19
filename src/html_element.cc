@@ -4,6 +4,9 @@
 #include "html_element.h"
 #include "css_style_declaration.h"
 
+HTML5_BIND_CLASS(HTMLElement);
+
+
 HTMLElement::HTMLElement(emscripten::val v) :
     Element(v)
 {

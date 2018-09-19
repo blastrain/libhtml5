@@ -1,5 +1,7 @@
 #include "application_cache.h"
 
+HTML5_BIND_CLASS(ApplicationCache);
+
 ApplicationCache::ApplicationCache(emscripten::val v) :
     EventTarget(v)
 {

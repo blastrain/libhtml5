@@ -46,101 +46,12 @@ void Event::stopPropagation()
     HTML5_CALL(this->v, stopPropagation);
 }
 
-void Event::setBubbles(bool value)
-{
-    this->_bubbles = value;
-    this->v.set("bubbles", value);
-}
-
-bool Event::getBubbles()
-{
-    return HTML5_PROPERTY_GET(bubbles, bool);
-}
-
-void Event::setCancelable(bool value)
-{
-    this->_cancelable = value;
-    this->v.set("cancelable", value);
-}
-
-bool Event::getCancelable()
-{
-    return HTML5_PROPERTY_GET(cancelable, bool);
-}
-
-void Event::setCurrentTarget(EventTarget *value)
-{
-    this->_currentTarget = value;
-    this->v.set("currentTarget", value->v);
-}
-
-EventTarget *Event::getCurrentTarget()
-{
-    return HTML5_PROPERTY_GET(currentTarget, EventTarget);
-}
-
-void Event::setDefaultPrevented(bool value)
-{
-    this->_defaultPrevented = value;
-    this->v.set("defaultPrevented", value);
-}
-
-bool Event::getDefaultPrevented()
-{
-    return HTML5_PROPERTY_GET(defaultPrevented, bool);
-}
-
-void Event::setEventPhase(unsigned short value)
-{
-    this->_eventPhase = value;
-    this->v.set("eventPhase", value);
-}
-
-unsigned short Event::getEventPhase()
-{
-    return HTML5_PROPERTY_GET(eventPhase, unsigned short);
-}
-
-void Event::setIsTrusted(bool value)
-{
-    this->_isTrusted = value;
-    this->v.set("isTrusted", value);
-}
-
-bool Event::getIsTrusted()
-{
-    return HTML5_PROPERTY_GET(isTrusted, bool);
-}
-
-void Event::setTarget(EventTarget *value)
-{
-    this->_target = value;
-    this->v.set("target", value->v);
-}
-
-EventTarget *Event::getTarget()
-{
-    return HTML5_PROPERTY_GET(target, EventTarget);
-}
-
-void Event::setType(std::string value)
-{
-    this->_type = value;
-    this->v.set("type", value);
-}
-
-std::string Event::getType()
-{
-    return HTML5_PROPERTY_GET(type, std::string);
-}
-
-void Event::setTimeStamp(time_t value)
-{
-    this->_timeStamp = value;
-    this->v.set("timeStamp", value);
-}
-
-time_t Event::getTimeStamp()
-{
-    return HTML5_PROPERTY_GET(timeStamp, time_t);
-}
+HTML5_PROPERTY_IMPL(Event, bool, bubbles);
+HTML5_PROPERTY_IMPL(Event, bool, cancelable);
+HTML5_PROPERTY_OBJECT_IMPL(Event, EventTarget, currentTarget);
+HTML5_PROPERTY_IMPL(Event, bool, defaultPrevented);
+HTML5_PROPERTY_IMPL(Event, unsigned short, eventPhase);
+HTML5_PROPERTY_IMPL(Event, bool, isTrusted);
+HTML5_PROPERTY_OBJECT_IMPL(Event, EventTarget, target);
+HTML5_PROPERTY_IMPL(Event, std::string, type);
+HTML5_PROPERTY_IMPL(Event, time_t, timeStamp);

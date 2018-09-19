@@ -25,7 +25,7 @@ public:
     void removeEventListener(std::string type, EventListener *listener, bool capture = false);
     void addEventListenerCallback(emscripten::val v);
     void addEventHandlerCallback(emscripten::val v);
-    emscripten::val getValue() const { return this->v; };
+    virtual emscripten::val getValue() const { return this->v; };
 
 private:
     std::map<std::string, std::vector<EventHandler *>> handlers;

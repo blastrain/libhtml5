@@ -74,68 +74,9 @@ SVGMatrix *SVGMatrix::translate(double x, double y)
     return SVGMatrix::create(HTML5_CALLv(this->v, translate, x, y));
 }
 
-double SVGMatrix::getA() const
-{
-    return HTML5_PROPERTY_GET(a, double);
-}
-
-void SVGMatrix::setA(double value)
-{
-    this->_a = value;
-    this->v.set("a", value);
-}
-
-double SVGMatrix::getB() const
-{
-    return HTML5_PROPERTY_GET(b, double);
-}
-
-void SVGMatrix::setB(double value)
-{
-    this->_b = value;
-    this->v.set("b", value);
-}
-
-double SVGMatrix::getC() const
-{
-    return HTML5_PROPERTY_GET(c, double);
-}
-
-void SVGMatrix::setC(double value)
-{
-    this->_c = value;
-    this->v.set("c", value);
-}
-
-double SVGMatrix::getD() const
-{
-    return HTML5_PROPERTY_GET(d, double);
-}
-
-void SVGMatrix::setD(double value)
-{
-    this->_d = value;
-    this->v.set("d", value);
-}
-
-double SVGMatrix::getE() const
-{
-    return HTML5_PROPERTY_GET(e, double);
-}
-
-void SVGMatrix::setE(double value)
-{
-    this->_e = value;
-    this->v.set("e", value);
-}
-
-double SVGMatrix::getF() const
-{
-    return HTML5_PROPERTY_GET(f, double);
-}
-
-void SVGMatrix::setF(double value)
-{
-    this->_f = value;
-    this->v.set("f", value);
-}
+HTML5_PROPERTY_IMPL(SVGMatrix, double, a);
+HTML5_PROPERTY_IMPL(SVGMatrix, double, b);
+HTML5_PROPERTY_IMPL(SVGMatrix, double, c);
+HTML5_PROPERTY_IMPL(SVGMatrix, double, d);
+HTML5_PROPERTY_IMPL(SVGMatrix, double, e);
+HTML5_PROPERTY_IMPL(SVGMatrix, double, f);

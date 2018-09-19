@@ -200,145 +200,17 @@ void Element::setAttributes(std::vector<Attr *> value)
 #endif
 }
 
-unsigned long Element::getChildElementCount() const
-{
-    return HTML5_PROPERTY_GET(childElementCount, unsigned long);
-}
-
-void Element::setChildElementCount(unsigned long value)
-{
-    this->_childElementCount = value;
-    this->v.set("childElementCount", value);
-}
-
-HTMLCollection *Element::getChildren() const
-{
-    return HTML5_PROPERTY_GET(children, HTMLCollection);
-}
-    
-void Element::setChildren(HTMLCollection *value)
-{
-    this->_children = value;
-    this->v.set("children", value->v);
-}
-
-std::string Element::getClassName() const
-{
-    return HTML5_PROPERTY_GET(className, std::string);
-}
-
-void Element::setClassName(std::string value)
-{
-    this->_className = value;
-    this->v.set("className", value);
-}
-
-Element *Element::getFirstElementChild() const
-{
-    return HTML5_PROPERTY_GET(firstElementChild, Element);
-}
-
-void Element::setFirstElementChild(Element *value)
-{
-    this->_firstElementChild = value;
-    this->v.set("firstElementChild", value->v);
-}
-
-std::string Element::getId() const
-{
-    return HTML5_PROPERTY_GET(id, std::string);
-}
-
-void Element::setId(std::string value)
-{
-    this->_id = value;
-    this->v.set("id", value);
-}
-
-Element *Element::getLastElementChild() const
-{
-    return HTML5_PROPERTY_GET(lastElementChild, Element);
-}
-
-void Element::setLastElementChild(Element *value)
-{
-    this->_lastElementChild = value;
-    this->v.set("lastElementChild", value->v);
-}
-
-std::string Element::getLocalName() const
-{
-    return HTML5_PROPERTY_GET(localName, std::string);
-}
-
-void Element::setLocalName(std::string value)
-{
-    this->_localName = value;
-    this->v.set("localName", value);
-}
-
-std::string Element::getNamespaceURI() const
-{
-    return HTML5_PROPERTY_GET(namespaceURI, std::string);
-}
-
-void Element::setNamespaceURI(std::string value)
-{
-    this->_namespaceURI = value;
-    this->v.set("namespaceURI", value);
-}
-
-Element *Element::getNextElementSibling() const
-{
-    return HTML5_PROPERTY_GET(nextElementSibling, Element);
-}
-
-void Element::setNextElementSibling(Element *value)
-{
-    this->_nextElementSibling = value;
-    this->v.set("nextElementSibling", value->v);
-}
-
-std::string Element::getPrefix() const
-{
-    return HTML5_PROPERTY_GET(prefix, std::string);
-}
-
-void Element::setPrefix(std::string value)
-{
-    this->_prefix = value;
-    this->v.set("prefix", value);
-}
-
-Element *Element::getPreviousElementSibling() const
-{
-    return HTML5_PROPERTY_GET(previousElementSibling, Element);
-}
-
-void Element::setPreviousElementSibling(Element *value)
-{
-    this->_previousElementSibling = value;
-    this->v.set("previousElementSibling", value->v);
-}
-
-std::string Element::getTagName() const
-{
-    return HTML5_PROPERTY_GET(tagName, std::string);
-}
-
-void Element::setTagName(std::string value)
-{
-    this->_tagName = value;
-    this->v.set("tagName", value);
-}
-
-DOMTokenList *Element::getClassList() const
-{
-    return HTML5_PROPERTY_GET(classList, DOMTokenList);
-}
-
-void Element::setClassList(DOMTokenList *value)
-{
-    this->_classList = value;
-    this->v.set("classList", value->v);
-}
+HTML5_PROPERTY_IMPL(Element, unsigned long, childElementCount);
+HTML5_PROPERTY_OBJECT_IMPL(Element, HTMLCollection, children);
+HTML5_PROPERTY_IMPL(Element, std::string, className);
+HTML5_PROPERTY_OBJECT_IMPL(Element, Element, firstElementChild);
+HTML5_PROPERTY_IMPL(Element, std::string, id);
+HTML5_PROPERTY_OBJECT_IMPL(Element, Element, lastElementChild);
+HTML5_PROPERTY_IMPL(Element, std::string, localName);
+HTML5_PROPERTY_IMPL(Element, std::string, namespaceURI);
+HTML5_PROPERTY_OBJECT_IMPL(Element, Element, nextElementSibling);
+HTML5_PROPERTY_IMPL(Element, std::string, prefix);
+HTML5_PROPERTY_OBJECT_IMPL(Element, Element, previousElementSibling);
+HTML5_PROPERTY_IMPL(Element, std::string, tagName);
+//HTML5_PROPERTY_OBJECT_IMPL(Element, ShadowRoot, shadowRoot);
+HTML5_PROPERTY_OBJECT_IMPL(Element, DOMTokenList, classList);

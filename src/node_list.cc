@@ -24,14 +24,4 @@ Node *NodeList::item(unsigned long index)
     return Node::create(HTML5_CALLv(this->v, item, index));
 }
 
-unsigned long NodeList::getLength()
-{
-    return HTML5_PROPERTY_GET(length, unsigned long);
-}
-
-void NodeList::setLength(unsigned long value)
-{
-    this->_length = value;
-    this->v.set("length", value);
-}
-
+HTML5_PROPERTY_IMPL(NodeList, unsigned long, length);

@@ -20,6 +20,8 @@
 #include "document.h"
 #include <iostream>
 
+HTML5_BIND_CLASS(Document);
+
 Document::Document(emscripten::val v) :
     Node(v)
 {

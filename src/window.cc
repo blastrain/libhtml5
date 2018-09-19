@@ -20,6 +20,11 @@
 #include "canvas_rendering_context_2d.h"
 #include "window.h"
 
+HTML5_BIND_CLASS(Window);
+HTML5_BIND_METHOD(Window, requestAnimationFrameCallback);
+HTML5_BIND_METHOD(Window, setIntervalCallback);
+HTML5_BIND_METHOD(Window, setTimeoutCallback);
+
 Window::Window(emscripten::val v) :
     EventTarget(v),
     _requestAnimationFrameFn(NULL),

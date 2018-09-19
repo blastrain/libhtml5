@@ -5,20 +5,12 @@
 class TimeRanges : public Object {
 public:
     emscripten::val v;
-    unsigned long _length;
+
+    HTML5_PROPERTY(TimeRanges, unsigned long, length);
 
     TimeRanges(emscripten::val v);
     virtual ~TimeRanges();
     static TimeRanges *create(emscripten::val v);
     double start(unsigned long index);
     double end(unsigned long index);
-
-    struct {
-        TimeRanges &self;
-        void operator=(unsigned long value) { self.setLength(value); };
-        operator unsigned long() { return self.getLength(); };
-    } length{*this};
-
-    unsigned long getLength() const;
-    void setLength(unsigned long value);
 };

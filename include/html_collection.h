@@ -7,7 +7,8 @@ class Element;
 class HTMLCollection : public Object {
 public:
     emscripten::val v;
-    unsigned long _length;
+
+    HTML5_PROPERTY(HTMLCollection, unsigned long, length);
 
     HTMLCollection(emscripten::val v);
     virtual ~HTMLCollection();
@@ -15,14 +16,4 @@ public:
     static HTMLCollection *create(emscripten::val v);
     Element *item(unsigned long index);
     Element *namedItem(std::string name);
-
-    struct {
-        HTMLCollection &self;
-        void operator=(unsigned long value) { self.setLength(value); };
-        operator unsigned long() { return self.getLength(); };
-    } length{*this};
-
-private:
-    unsigned long getLength();
-    void setLength(unsigned long value);
 };

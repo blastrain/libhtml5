@@ -3,6 +3,8 @@
 #include "document.h"
 #include "xml_http_request.h"
 
+HTML5_BIND_CLASS(XMLHttpRequest);
+
 XMLHttpResponse::XMLHttpResponse(emscripten::val v) :
     Object(),
     v(v)

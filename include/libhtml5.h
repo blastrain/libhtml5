@@ -72,6 +72,19 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     return ret;
 }
 
+#define __to_text__(text) #text
+
+#define HTML5_BIND_CLASS(klassname)                                     \
+    static klassname *to ## klassname(intptr_t ptr)                     \
+    {                                                                   \
+        return (klassname *)ptr;                                        \
+    }                                                                   \
+    static emscripten::class_<klassname> klass = emscripten::class_<klassname>(#klassname); \
+    EMSCRIPTEN_BINDINGS(klassname ## _to ## klassname) { function(__to_text__(to ## klassname), &to ## klassname, emscripten::allow_raw_pointers()); } \
+    EMSCRIPTEN_BINDINGS(klassname ## _getValue) { klass.property("_value", &klassname::getValue); }
+
+#define HTML5_BIND_METHOD(klassname, method) EMSCRIPTEN_BINDINGS(klassname ## method) { klass.function(#method, &klassname::method); }
+
 #else
 
 #if defined __APPLE__
@@ -119,6 +132,9 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     std::vector<T *> ret;
     return ret;
 }
+
+#define HTML5_BIND_CLASS(klassname)
+#define HTML5_BIND_METHOD(klassname, method)
 
 #endif
 
@@ -228,7 +244,8 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     {                                                                   \
         if (!this->_ ## name) return;                                   \
         (*this->_ ## name)(Event::create(e));                           \
-    }
+    }                                                                   \
+    HTML5_BIND_METHOD(klass, callback_ ## name);
 
 #define HTML5_ERROR_HANDLER_PROPERTY_IMPL(klass, type, name)            \
     type klass::get_ ## name() const                                    \
@@ -252,7 +269,8 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     {                                                                   \
         if (!this->_ ## name) return;                                   \
         (*this->_ ## name)(Event::create(e), source, lineno, colno, NULL); \
-    }
+    }                                                                   \
+    HTML5_BIND_METHOD(klass, callback_ ## name);
 
 
 #define HTML5_READONLY_PROPERTY_IMPL(klass, type, name) \

@@ -27,13 +27,4 @@ double TimeRanges::end(unsigned long index)
     return HTML5_CALLf(this->v, end, double, index);
 }
 
-unsigned long TimeRanges::getLength() const
-{
-    return HTML5_PROPERTY_GET(length, unsigned long);
-}
-
-void TimeRanges::setLength(unsigned long value)
-{
-    this->_length = value;
-    this->v.set("length", value);
-}
+HTML5_PROPERTY_IMPL(TimeRanges, unsigned long, length);

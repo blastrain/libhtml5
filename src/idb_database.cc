@@ -2,6 +2,8 @@
 #include "idb_object_store.h"
 #include "idb_database.h"
 
+HTML5_BIND_CLASS(IDBDatabase);
+
 IDBDatabase::IDBDatabase(emscripten::val v) :
     EventTarget(v)
 {

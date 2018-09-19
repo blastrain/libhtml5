@@ -5,8 +5,8 @@
 static void createImage(std::string url)
 {
     HTML5_INIT();
-    HTMLImageElement *image = HTMLImageElement::create();
-    static EventHandler onload = [image](Event *e){
+    html5::HTMLImageElement *image = html5::HTMLImageElement::create();
+    static html5::EventHandler onload = [image](html5::Event *e){
         std::cout << "callback. onload" << std::endl;
         std::cout << "width = " << image->width << std::endl;
         std::cout << "height = " << image->height << std::endl;
@@ -15,7 +15,7 @@ static void createImage(std::string url)
     };
     image->onload = &onload;
     image->src = url;
-    document->body->appendChild(image);
+    html5::document->body->appendChild(image);
 }
 
 EMSCRIPTEN_BINDINGS(html5example) {

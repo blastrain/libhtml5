@@ -1,0 +1,8 @@
+emscripten:
+  build: .
+  container_name: 'libhtml5'
+  environment:
+    TZ: "Asia/Tokyo"
+    ROOT_PATH: "/src/emscripten"
+  volumes:
+    - ".:/src/emscripten"

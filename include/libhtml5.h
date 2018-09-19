@@ -309,3 +309,5 @@ class Document;
 
 extern Window *window;
 extern Document *document;
+
+extern void HTML5_INIT();

@@ -2,26 +2,9 @@
 #include "class.h"
 #include <iostream>
 
-static void createVideo()
-{
-    HTMLVideoElement *video = HTMLVideoElement::create();
-    HTMLSourceElement *source = HTMLSourceElement::create();
-    source->src = "http://clips.vorwaerts-gmbh.de/VfE_html5.mp4";
-    video->appendChild(source);
-    static EventHandler f = [](Event *e){
-        std::cout << "demo event fired!!!" << std::endl;
-        std::cout << (std::string)e->type << std::endl;
-        std::cout << e->bubbles << std::endl;
-        std::cout << e->timeStamp << std::endl;
-    };
-    video->addEventListener("demo", &f);
-    document->body->appendChild(video);
-    Event *event = Event::create("demo");
-    video->dispatchEvent(event);
-}
-
 static void createImage(std::string url)
 {
+    HTML5_INIT();
     HTMLImageElement *image = HTMLImageElement::create();
     static EventHandler onload = [image](Event *e){
         std::cout << "callback. onload" << std::endl;
@@ -36,6 +19,5 @@ static void createImage(std::string url)
 }
 
 EMSCRIPTEN_BINDINGS(html5example) {
-    emscripten::function("createVideo", &createVideo);
     emscripten::function("createImage", &createImage);
 }

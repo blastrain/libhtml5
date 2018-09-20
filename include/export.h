@@ -28,9 +28,9 @@ class ImageBitmap;
 class Transferable;
 class Performance;
 class WindowProxy;
+class Console;
 
 extern Window *window;
-extern Document *document;
 
 extern void alert(std::string message);
 extern std::string atob(std::string atob);

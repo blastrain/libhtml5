@@ -15,6 +15,7 @@
 #include "canvas_rendering_context_2d.h"
 #include "character_data.h"
 #include "comment.h"
+#include "console.h"
 #include "css_rule.h"
 #include "css_rule_list.h"
 #include "css_style_declaration.h"

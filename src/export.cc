@@ -1,7 +1,7 @@
 #include "libhtml5.h"
 #include "window.h"
 
-USING_NAMESPACE_HTML5;
+NAMESPACE_HTML5_BEGIN;
 
 void alert(std::string message)
 {
@@ -138,3 +138,4 @@ void stop()
     window->stop();
 }
 
+NAMESPACE_HTML5_END;

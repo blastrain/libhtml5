@@ -14,10 +14,8 @@ void HTML5_INIT()
 {
     if (g_initialized) return;
 
-    window   = Window::create();
+    window = Window::create();
     window->retain();
-    document = Document::create();
-    document->retain();
     g_initialized = true;
 }
 

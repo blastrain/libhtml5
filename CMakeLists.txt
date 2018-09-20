@@ -19,6 +19,7 @@ set(SOURCES src/application_cache.cc
 	src/canvas_rendering_context_2d.cc
 	src/character_data.cc
 	src/comment.cc
+	src/console.cc
 	src/css_rule.cc
 	src/css_rule_list.cc
 	src/css_style_declaration.cc

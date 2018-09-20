@@ -15,7 +15,7 @@ Console::~Console()
 
 Console *Console::create()
 {
-    return create(HTML5_NEW_PRIMITIVE_INSTANCE(console));
+    return create(HTML5_STATIC_PRIMITIVE_INSTANCE(console));
 }
 
 Console *Console::create(emscripten::val v)

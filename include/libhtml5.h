@@ -216,6 +216,15 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     } name{*this};                                          \
     type get_ ## name() const;
 
+#define HTML5_READONLY_PROPERTY_OBJECT(klass, type, name)                    \
+    type *_ ## name;                                                \
+    struct {                                                        \
+        klass &self;                                                \
+        operator type*() { return self.get_ ## name(); };           \
+        type *operator->() { return self.get_ ## name(); };         \
+    } name{*this};                                                  \
+    type *get_ ## name() const;
+
 #define HTML5_PROPERTY_TRACE_GETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:getter]", #name)
 #define HTML5_PROPERTY_TRACE_SETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:setter]", #name)
 

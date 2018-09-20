@@ -18,6 +18,7 @@
 #include "css_style_declaration.h"
 #include "blob.h"
 #include "canvas_rendering_context_2d.h"
+#include "console.h"
 #include "window.h"
 
 USING_NAMESPACE_HTML5;
@@ -228,6 +229,7 @@ void Window::stop()
 
 HTML5_PROPERTY_OBJECT_IMPL(Window, ApplicationCache, applicationCache);
 HTML5_READONLY_PROPERTY_IMPL(Window, bool, closed);
+HTML5_READONLY_PROPERTY_OBJECT_IMPL(Window, Console, console);
 HTML5_PROPERTY_OBJECT_IMPL(Window, Document, document);
 HTML5_PROPERTY_OBJECT_IMPL(Window, External, external);
 HTML5_PROPERTY_OBJECT_IMPL(Window, Element, frameElement);

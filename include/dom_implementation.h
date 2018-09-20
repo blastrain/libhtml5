@@ -10,7 +10,6 @@ class DocumentType;
 
 class DOMImplementation : public Object {
 public:
-    emscripten::val v;
 
     DOMImplementation(emscripten::val v);
     virtual ~DOMImplementation();

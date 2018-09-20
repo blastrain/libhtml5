@@ -15,7 +15,6 @@ class Event;
 
 class EventTarget : public Object {
 public:
-    emscripten::val v;
 
     EventTarget(emscripten::val v);
     virtual ~EventTarget();

@@ -6,7 +6,7 @@ NAMESPACE_HTML5_BEGIN;
 
 class History : public Object {
 public:
-    emscripten::val v;
+
     HTML5_READONLY_PROPERTY(History, long, length);
     //HTML5_PROPERTY(History, void *, state);
 

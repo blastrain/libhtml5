@@ -5,8 +5,7 @@
 USING_NAMESPACE_HTML5;
 
 HitRegionOptions::HitRegionOptions(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

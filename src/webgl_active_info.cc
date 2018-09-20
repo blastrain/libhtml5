@@ -3,8 +3,7 @@
 USING_NAMESPACE_HTML5;
 
 WebGLActiveInfo::WebGLActiveInfo(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

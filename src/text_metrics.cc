@@ -2,7 +2,8 @@
 
 USING_NAMESPACE_HTML5;
 
-TextMetrics::TextMetrics(emscripten::val v) : v(v)
+TextMetrics::TextMetrics(emscripten::val v) :
+    Object(v)
 {
 
 }

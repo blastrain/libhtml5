@@ -227,7 +227,7 @@ void Window::stop()
 }
 
 HTML5_PROPERTY_OBJECT_IMPL(Window, ApplicationCache, applicationCache);
-HTML5_PROPERTY_IMPL(Window, bool, closed);
+HTML5_READONLY_PROPERTY_IMPL(Window, bool, closed);
 HTML5_PROPERTY_OBJECT_IMPL(Window, Document, document);
 HTML5_PROPERTY_OBJECT_IMPL(Window, External, external);
 HTML5_PROPERTY_OBJECT_IMPL(Window, Element, frameElement);

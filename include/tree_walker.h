@@ -9,7 +9,6 @@ class NodeFilter;
 
 class TreeWalker : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY_OBJECT(TreeWalker, Node, currentNode);
     HTML5_PROPERTY_OBJECT(TreeWalker, NodeFilter, filter);

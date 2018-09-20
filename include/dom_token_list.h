@@ -7,7 +7,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class DOMTokenList : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(DOMTokenList, unsigned long, length);
 

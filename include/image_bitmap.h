@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class ImageBitmap : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(ImageBitmap, unsigned long, height);
     HTML5_PROPERTY(ImageBitmap, unsigned long, width);

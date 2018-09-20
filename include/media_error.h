@@ -14,8 +14,6 @@ public:
         MEDIA_ERR_SRC_NOT_SUPPORTED = 4,
     };
 
-    emscripten::val v;
-
     HTML5_PROPERTY(MediaError, unsigned short, code);
 
     MediaError(emscripten::val v);

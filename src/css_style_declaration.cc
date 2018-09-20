@@ -3,7 +3,8 @@
 
 USING_NAMESPACE_HTML5;
 
-CSSStyleDeclaration::CSSStyleDeclaration(emscripten::val v) : v(v)
+CSSStyleDeclaration::CSSStyleDeclaration(emscripten::val v) :
+    Object(v)
 {
 
 }

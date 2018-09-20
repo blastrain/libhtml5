@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class AudioTrack : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(AudioTrack, bool, enabled);
     HTML5_PROPERTY(AudioTrack, std::string, id);

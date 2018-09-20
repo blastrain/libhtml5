@@ -8,7 +8,6 @@ class SVGMatrix;
 
 class Path2D : public Object {
 public:
-    emscripten::val v;
 
     Path2D(emscripten::val v);
     virtual ~Path2D();

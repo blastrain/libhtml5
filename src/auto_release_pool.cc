@@ -21,14 +21,14 @@ AutoReleasePool *AutoReleasePool::sharedInstance()
     return &g_sharedInstance;
 }
 
-void AutoReleasePool::addObject(Object *object)
+void AutoReleasePool::addObject(NativeObject *object)
 {
     this->objects.push_back(object);
 }
 
-bool AutoReleasePool::contains(Object *o) const
+bool AutoReleasePool::contains(NativeObject *o) const
 {
-    for (Object *obj : this->objects) {
+    for (NativeObject *obj : this->objects) {
         if (obj == o) {
             return true;
         }
@@ -43,8 +43,8 @@ void AutoReleasePool::clear()
 
 void AutoReleasePool::releaseObjects()
 {
-    std::vector<Object *> newObjects;
-    for (Object *o : this->objects) {
+    std::vector<NativeObject *> newObjects;
+    for (NativeObject *o : this->objects) {
         if (o->referenceCount() == 0) {
             delete o;
         } else {

@@ -8,7 +8,6 @@ class Uint8ClampedArray;
 
 class ImageData : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY_OBJECT(ImageData, Uint8ClampedArray, data);
     HTML5_PROPERTY(ImageData, unsigned long, height);

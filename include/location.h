@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class Location : public Object {
 public:
-    emscripten::val v;
     
     Location(emscripten::val v);
     virtual ~Location();

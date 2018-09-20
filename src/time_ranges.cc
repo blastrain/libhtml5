@@ -2,7 +2,8 @@
 
 USING_NAMESPACE_HTML5;
 
-TimeRanges::TimeRanges(emscripten::val v) : v(v)
+TimeRanges::TimeRanges(emscripten::val v) :
+    Object(v)
 {
     
 }

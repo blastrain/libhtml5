@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class WebGLContextAttributes : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(WebGLContextAttributes, GLboolean, alpha);
     HTML5_PROPERTY(WebGLContextAttributes, GLboolean, antialias);

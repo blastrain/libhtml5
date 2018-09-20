@@ -8,7 +8,6 @@ class CSSRule;
 
 class CSSStyleDeclaration : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(CSSStyleDeclaration, std::string, cssFloat);
     HTML5_PROPERTY(CSSStyleDeclaration, std::string, cssText);

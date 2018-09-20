@@ -8,8 +8,7 @@ USING_NAMESPACE_HTML5;
 HTML5_BIND_CLASS(XMLHttpRequest);
 
 XMLHttpResponse::XMLHttpResponse(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }
@@ -27,8 +26,7 @@ XMLHttpResponse *XMLHttpResponse::create(emscripten::val v)
 }
 
 XMLHttpRequestUpload::XMLHttpRequestUpload(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

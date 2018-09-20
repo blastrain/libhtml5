@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class MediaList : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(MediaList, unsigned long, length);
     HTML5_PROPERTY(MediaList, std::string, mediaText);

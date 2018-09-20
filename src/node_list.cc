@@ -3,7 +3,8 @@
 
 USING_NAMESPACE_HTML5;
 
-NodeList::NodeList(emscripten::val v) : v(v)
+NodeList::NodeList(emscripten::val v) :
+    Object(v)
 {
 
 }

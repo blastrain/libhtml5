@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class WebGLExtension : public Object {
 public:
-    emscripten::val v;
 
     WebGLExtension(emscripten::val v);
     virtual ~WebGLExtension();

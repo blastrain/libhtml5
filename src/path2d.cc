@@ -4,8 +4,7 @@
 USING_NAMESPACE_HTML5;
 
 Path2D::Path2D(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

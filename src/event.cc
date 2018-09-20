@@ -4,7 +4,7 @@
 USING_NAMESPACE_HTML5;
 
 Event::Event(emscripten::val v) :
-    v(v)
+    Object(v)
 {
 
 }

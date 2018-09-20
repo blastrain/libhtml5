@@ -3,7 +3,8 @@
 
 USING_NAMESPACE_HTML5;
 
-TextTrackCueList::TextTrackCueList(emscripten::val v) : v(v)
+TextTrackCueList::TextTrackCueList(emscripten::val v) :
+    Object(v)
 {
 
 }

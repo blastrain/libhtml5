@@ -8,13 +8,9 @@ NAMESPACE_HTML5_BEGIN;
 class Array : public Object {
 public:
 
-    Array();
+    Array(emscripten::val v);
     virtual ~Array();
-    static Array *create();
-    void add(Object *o);
-
-private:
-    std::vector<Object *> arr;
+    static Array *create(emscripten::val v);
 };
 
 NAMESPACE_HTML5_END;

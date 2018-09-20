@@ -2,7 +2,8 @@
 
 USING_NAMESPACE_HTML5;
 
-MediaList::MediaList(emscripten::val v) : v(v)
+MediaList::MediaList(emscripten::val v) :
+    Object(v)
 {
 
 }

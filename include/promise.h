@@ -7,7 +7,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class Promise : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(Promise, unsigned long, length);
 

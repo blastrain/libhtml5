@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class WebGLObject : public Object {
 public:
-    emscripten::val v;
 
     WebGLObject(emscripten::val v);
     virtual ~WebGLObject();

@@ -2,7 +2,8 @@
 
 USING_NAMESPACE_HTML5;
 
-DOMTokenList::DOMTokenList(emscripten::val v) : v(v)
+DOMTokenList::DOMTokenList(emscripten::val v) :
+    Object(v)
 {
 
 }

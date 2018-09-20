@@ -10,7 +10,6 @@ class Element;
 
 class HitRegionOptions : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY_OBJECT(HitRegionOptions, Element, control);
     HTML5_PROPERTY(HitRegionOptions, std::string, cursor);

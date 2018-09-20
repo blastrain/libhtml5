@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class DOMError : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(DOMError, std::string, message);
     HTML5_PROPERTY(DOMError, std::string, name);

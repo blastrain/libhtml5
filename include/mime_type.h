@@ -8,7 +8,6 @@ class Plugin;
 
 class MimeType : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(MimeType, std::string, description);
     HTML5_PROPERTY(MimeType, Plugin *, enabledPlugin);

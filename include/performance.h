@@ -12,7 +12,6 @@ class PerformanceTiming;
 
 class Performance : public Object {
 public:
-    emscripten::val v;
 
     HTML5_READONLY_PROPERTY(Performance, PerformanceNavigation *, navigation);
     HTML5_EVENT_HANDLER_PROPERTY(Performance, EventHandler *, onresourcetimingbufferfull);

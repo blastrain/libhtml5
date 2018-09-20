@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class WebGLUniformLocation : public Object {
 public:
-    emscripten::val v;
 
     WebGLUniformLocation(emscripten::val v);
     virtual ~WebGLUniformLocation();

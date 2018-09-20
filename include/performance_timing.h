@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class PerformanceTiming : public Object {
 public:
-    emscripten::val v;
 
     HTML5_READONLY_PROPERTY(PerformanceTiming, unsigned long long, navigationStart);
     HTML5_READONLY_PROPERTY(PerformanceTiming, unsigned long long, unloadEventStart);

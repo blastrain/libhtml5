@@ -4,8 +4,7 @@
 USING_NAMESPACE_HTML5;
 
 MimeType::MimeType(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

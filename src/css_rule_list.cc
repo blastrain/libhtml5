@@ -3,7 +3,8 @@
 
 USING_NAMESPACE_HTML5;
 
-CSSRuleList::CSSRuleList(emscripten::val v) : v(v)
+CSSRuleList::CSSRuleList(emscripten::val v) :
+    Object(v)
 {
 
 }

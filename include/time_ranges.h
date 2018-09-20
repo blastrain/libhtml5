@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class TimeRanges : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(TimeRanges, unsigned long, length);
 

@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class CanvasGradient : public Object {
 public:
-    emscripten::val v;
 
     CanvasGradient(emscripten::val v);
     virtual ~CanvasGradient();

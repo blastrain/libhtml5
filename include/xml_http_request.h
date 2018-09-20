@@ -63,7 +63,6 @@ inline XMLHttpResponseType toXMLHttpResponseType(std::string type)
 
 class XMLHttpResponse : public Object {
 public:
-    emscripten::val v;
 
     XMLHttpResponse(emscripten::val v);
     virtual ~XMLHttpResponse();
@@ -72,7 +71,6 @@ public:
 
 class XMLHttpRequestUpload : public Object {
 public:
-    emscripten::val v;
 
     XMLHttpRequestUpload(emscripten::val v);
     virtual ~XMLHttpRequestUpload();

@@ -25,7 +25,6 @@ class WebGLExtension;
 
 class WebGLFramebufferAttachmentParameter : public Object {
 public:
-    emscripten::val v;
 
     WebGLFramebufferAttachmentParameter(emscripten::val v);
     virtual ~WebGLFramebufferAttachmentParameter();
@@ -34,7 +33,6 @@ public:
 
 class WebGLParameter : public Object {
 public:
-    emscripten::val v;
 
     WebGLParameter(emscripten::val v);
     virtual ~WebGLParameter();
@@ -43,7 +41,6 @@ public:
 
 class WebGLProgramParameter : public Object {
 public:
-    emscripten::val v;
 
     WebGLProgramParameter(emscripten::val v);
     virtual ~WebGLProgramParameter();
@@ -52,7 +49,6 @@ public:
 
 class WebGLRenderbufferParameter : public Object {
 public:
-    emscripten::val v;
 
     WebGLRenderbufferParameter(emscripten::val v);
     virtual ~WebGLRenderbufferParameter();
@@ -61,7 +57,6 @@ public:
 
 class WebGLShaderParameter : public Object {
 public:
-    emscripten::val v;
 
     WebGLShaderParameter(emscripten::val v);
     virtual ~WebGLShaderParameter();
@@ -70,7 +65,6 @@ public:
 
 class WebGLTextureParameter : public Object {
 public:
-    emscripten::val v;
 
     WebGLTextureParameter(emscripten::val v);
     virtual ~WebGLTextureParameter();
@@ -79,7 +73,6 @@ public:
 
 class WebGLUniformParameter : public Object {
 public:
-    emscripten::val v;
 
     WebGLUniformParameter(emscripten::val v);
     virtual ~WebGLUniformParameter();
@@ -88,7 +81,6 @@ public:
 
 class WebGLVertexAttribute : public Object {
 public:
-    emscripten::val v;
 
     WebGLVertexAttribute(emscripten::val v);
     virtual ~WebGLVertexAttribute();

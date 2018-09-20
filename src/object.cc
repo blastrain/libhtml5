@@ -4,9 +4,9 @@
 
 USING_NAMESPACE_HTML5;
 
-Object::Object() :
-    _isAutoRelease(false),
-    _refCount(0)
+Object::Object(emscripten::val v) :
+    NativeObject(),
+    v(v)
 {
 }
 
@@ -15,30 +15,14 @@ Object::~Object()
 
 }
 
-bool Object::isAutoRelease()
+Object *Object::create()
 {
-    return this->_isAutoRelease;
+    return create(HTML5_NEW_PRIMITIVE_INSTANCE(Object));
 }
 
-void Object::autorelease()
+Object *Object::create(emscripten::val v)
 {
-    this->_isAutoRelease = true;
-    AutoReleasePool::sharedInstance()->addObject(this);
-}
-
-void Object::release()
-{
-    if (this->_refCount > 0) {
-        this->_refCount--;
-    }
-}
-
-void Object::retain()
-{
-    this->_refCount++;
-}
-
-unsigned int Object::referenceCount()
-{
-    return this->_refCount;
+    auto o = new Object(v);
+    o->autorelease();
+    return o;
 }

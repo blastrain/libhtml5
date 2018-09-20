@@ -2,7 +2,8 @@
 
 USING_NAMESPACE_HTML5;
 
-Attr::Attr(emscripten::val v) : v(v)
+Attr::Attr(emscripten::val v) :
+    Object(v)
 {
 
 }

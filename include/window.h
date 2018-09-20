@@ -32,7 +32,7 @@ class Window : public EventTarget {
 public:
 
     HTML5_PROPERTY(Window, ApplicationCache *, applicationCache);
-    HTML5_PROPERTY(Window, bool, closed);
+    HTML5_READONLY_PROPERTY(Window, bool, closed);
     HTML5_PROPERTY(Window, Document *, document);
     HTML5_PROPERTY(Window, External *, external);
     HTML5_PROPERTY(Window, Element *, frameElement);

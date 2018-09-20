@@ -10,7 +10,6 @@ class IDBTransaction;
 
 class IDBObjectStore : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(IDBObjectStore, bool, autoIncrement);
     HTML5_PROPERTY(IDBObjectStore, std::string, keyPath);

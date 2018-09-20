@@ -8,7 +8,6 @@ class TextTrackCue;
 
 class TextTrackCueList : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(TextTrackCueList, unsigned long, length);
 

@@ -34,6 +34,21 @@
 #define HTML5_STATIC_PRIMITIVE_INSTANCE(type, ...) (emscripten::val::global(#type))
 #define HTML5_NEW_PRIMITIVE_INSTANCE(type, ...) (emscripten::val::global(#type).new_(__VA_ARGS__))
 
+inline std::string __html5_val_to_string__(emscripten::val v)
+{
+    if (v == emscripten::val::null()) {
+        return "";
+    } else if (v == emscripten::val::undefined()) {
+        return "";
+    }
+    return v.as<std::string>();
+}
+
+template<typename T> T __html5_property_get__(std::string o, emscripten::val v)
+{
+    return __html5_val_to_string__(v);
+}
+
 template<typename T> T *__html5_property_get__(html5::NativeObject *o, emscripten::val v)
 {
     return T::create(v);
@@ -50,7 +65,7 @@ template<typename T> T __html5_property_get__(T o, emscripten::val v)
 #define HTML5_CALLi(v, method, rtype, ...) v.call<rtype>(#method, ## __VA_ARGS__)
 #define HTML5_CALLf(v, method, rtype, ...) v.call<rtype>(#method, ## __VA_ARGS__)
 #define HTML5_CALLb(v, method, ...)        v.call<bool>(#method, ## __VA_ARGS__)
-#define HTML5_CALLs(v, method, ...)        v.call<std::string>(#method, ## __VA_ARGS__)
+#define HTML5_CALLs(v, method, ...)        __html5_val_to_string__(v.call<emscripten::val>(#method, ## __VA_ARGS__))
 #define HTML5_CALLv(v, method, ...)        v.call<emscripten::val>(#method, ## __VA_ARGS__)
 
 template<typename T> emscripten::val toJSArray(std::vector<T> array)

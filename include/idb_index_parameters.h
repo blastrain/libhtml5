@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class IDBIndexParameters : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(IDBIndexParameters, bool, multiEntry);
     HTML5_PROPERTY(IDBIndexParameters, bool, unique);

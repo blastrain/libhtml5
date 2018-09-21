@@ -5,7 +5,7 @@
 
 NAMESPACE_HTML5_BEGIN;
 
-class Object;
+class NativeObject;
 
 class AutoReleasePool {
 public:
@@ -13,13 +13,13 @@ public:
     AutoReleasePool();
     ~AutoReleasePool();
     static AutoReleasePool *sharedInstance();
-    void addObject(Object *o);
+    void addObject(NativeObject *o);
     void clear();
-    bool contains(Object *o) const;
+    bool contains(NativeObject *o) const;
     void releaseObjects();
 
 private:
-    std::vector<Object *> objects;
+    std::vector<NativeObject *> objects;
 };
 
 NAMESPACE_HTML5_END;

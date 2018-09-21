@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class Storage : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(Storage, unsigned long, length);
 

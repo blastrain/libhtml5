@@ -9,7 +9,6 @@ class DocumentFragment;
 
 class Range : public Object {
 public:
-    emscripten::val v;
 
     enum {
         START_TO_START = 0,

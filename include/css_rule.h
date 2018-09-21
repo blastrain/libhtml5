@@ -21,8 +21,6 @@ public:
         HOST_RULE      = 1001,
     };
 
-    emscripten::val v;
-
     HTML5_PROPERTY(CSSRule, std::string, cssText);
     HTML5_PROPERTY_OBJECT(CSSRule, CSSRule, parentRule);
     HTML5_PROPERTY_OBJECT(CSSRule, CSSStyleSheet, parentStyleSheet);

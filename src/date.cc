@@ -2,7 +2,8 @@
 
 USING_NAMESPACE_HTML5;
 
-Date::Date(emscripten::val v) : v(v)
+Date::Date(emscripten::val v) :
+    Object(v)
 {
 
 }

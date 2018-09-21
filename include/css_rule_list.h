@@ -8,7 +8,6 @@ class CSSRule;
 
 class CSSRuleList : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(CSSRuleList, unsigned long, length);
 

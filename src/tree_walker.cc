@@ -5,8 +5,7 @@
 USING_NAMESPACE_HTML5;
 
 TreeWalker::TreeWalker(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

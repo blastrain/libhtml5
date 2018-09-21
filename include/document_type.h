@@ -8,7 +8,6 @@ class Node;
 
 class DocumentType : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(DocumentType, std::string, name);
     HTML5_PROPERTY(DocumentType, std::string, publicId);

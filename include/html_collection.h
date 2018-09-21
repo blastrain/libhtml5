@@ -8,7 +8,6 @@ class Element;
 
 class HTMLCollection : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(HTMLCollection, unsigned long, length);
 

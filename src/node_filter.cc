@@ -4,8 +4,7 @@
 USING_NAMESPACE_HTML5;
 
 NodeFilter::NodeFilter(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

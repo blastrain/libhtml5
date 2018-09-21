@@ -9,7 +9,6 @@ class PluginArray;
 
 class Navigator : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(Navigator, std::string, appCodeName);
     HTML5_PROPERTY(Navigator, std::string, appName);

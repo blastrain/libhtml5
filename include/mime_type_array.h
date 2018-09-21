@@ -8,7 +8,6 @@ class MimeType;
 
 class MimeTypeArray : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(MimeTypeArray, unsigned long, length);
 

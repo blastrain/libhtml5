@@ -16,7 +16,8 @@ static void createVideo(std::string url)
         std::cout << e->timeStamp << std::endl;
     };
     video->addEventListener("demo", &f);
-    html5::document->body->appendChild(video);
+    html5::Document *document = html5::window->document;
+    document->body->appendChild(video);
     html5::Event *event = html5::Event::create("demo");
     video->dispatchEvent(event);
 }

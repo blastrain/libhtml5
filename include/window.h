@@ -6,6 +6,7 @@
 NAMESPACE_HTML5_BEGIN;
 
 class ApplicationCache;
+class Console;
 class Document;
 class External;
 class Element;
@@ -32,7 +33,8 @@ class Window : public EventTarget {
 public:
 
     HTML5_PROPERTY(Window, ApplicationCache *, applicationCache);
-    HTML5_PROPERTY(Window, bool, closed);
+    HTML5_READONLY_PROPERTY(Window, bool, closed);
+    HTML5_READONLY_PROPERTY_OBJECT(Window, Console, console);
     HTML5_PROPERTY(Window, Document *, document);
     HTML5_PROPERTY(Window, External *, external);
     HTML5_PROPERTY(Window, Element *, frameElement);

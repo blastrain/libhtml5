@@ -4,7 +4,8 @@
 
 USING_NAMESPACE_HTML5;
 
-StyleSheet::StyleSheet(emscripten::val v) : v(v)
+StyleSheet::StyleSheet(emscripten::val v) :
+    Object(v)
 {
 
 }

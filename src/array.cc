@@ -3,30 +3,19 @@
 
 USING_NAMESPACE_HTML5;
 
-Array::Array()
+Array::Array(emscripten::val v) :
+    Object(v)
 {
 
 }
 
 Array::~Array()
 {
-    for (Object *o : this->arr) {
-        HTML5_RELEASE(o);
-    }
-    this->arr.clear();
 }
 
-Array *Array::create()
+Array *Array::create(emscripten::val v)
 {
-    Array *arr = new Array();
+    Array *arr = new Array(v);
     arr->autorelease();
     return arr;
-}
-
-void Array::add(Object *o)
-{
-    if (o->isAutoRelease()) {
-        o->retain();
-    }
-    this->arr.push_back(o);
 }

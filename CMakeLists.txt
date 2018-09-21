@@ -19,6 +19,7 @@ set(SOURCES src/application_cache.cc
 	src/canvas_rendering_context_2d.cc
 	src/character_data.cc
 	src/comment.cc
+	src/console.cc
 	src/css_rule.cc
 	src/css_rule_list.cc
 	src/css_style_declaration.cc
@@ -33,6 +34,7 @@ set(SOURCES src/application_cache.cc
 	src/element.cc
 	src/event.cc
 	src/event_target.cc
+	src/export.cc
 	src/external.cc
 	src/history.cc
 	src/hit_region_options.cc
@@ -63,6 +65,8 @@ set(SOURCES src/application_cache.cc
 	src/media_list.cc
 	src/mime_type.cc
 	src/mime_type_array.cc
+	src/native_array.cc
+	src/native_object.cc
 	src/navigator.cc
 	src/node.cc
 	src/node_filter.cc

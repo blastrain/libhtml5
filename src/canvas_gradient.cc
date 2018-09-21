@@ -3,8 +3,7 @@
 USING_NAMESPACE_HTML5;
 
 CanvasGradient::CanvasGradient(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 }
 

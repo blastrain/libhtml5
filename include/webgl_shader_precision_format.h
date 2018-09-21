@@ -6,7 +6,7 @@ NAMESPACE_HTML5_BEGIN;
 
 class WebGLShaderPrecisionFormat : public Object {
 public:
-    emscripten::val v;
+
     HTML5_PROPERTY(WebGLShaderPrecisionFormat, GLint, precision);
     HTML5_PROPERTY(WebGLShaderPrecisionFormat, GLint, rangeMax);
     HTML5_PROPERTY(WebGLShaderPrecisionFormat, GLint, rangeMin);

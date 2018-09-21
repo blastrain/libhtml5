@@ -21,8 +21,7 @@
 USING_NAMESPACE_HTML5;
 
 WebGLFramebufferAttachmentParameter::WebGLFramebufferAttachmentParameter(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }
@@ -40,8 +39,7 @@ WebGLFramebufferAttachmentParameter *WebGLFramebufferAttachmentParameter::create
 }
 
 WebGLParameter::WebGLParameter(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }
@@ -60,8 +58,7 @@ WebGLParameter *WebGLParameter::create(emscripten::val v)
 
 
 WebGLProgramParameter::WebGLProgramParameter(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }
@@ -79,8 +76,7 @@ WebGLProgramParameter *WebGLProgramParameter::create(emscripten::val v)
 }
 
 WebGLRenderbufferParameter::WebGLRenderbufferParameter(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }
@@ -98,8 +94,7 @@ WebGLRenderbufferParameter *WebGLRenderbufferParameter::create(emscripten::val v
 }
 
 WebGLShaderParameter::WebGLShaderParameter(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }
@@ -117,8 +112,7 @@ WebGLShaderParameter *WebGLShaderParameter::create(emscripten::val v)
 }
 
 WebGLTextureParameter::WebGLTextureParameter(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }
@@ -136,8 +130,7 @@ WebGLTextureParameter *WebGLTextureParameter::create(emscripten::val v)
 }
 
 WebGLVertexAttribute::WebGLVertexAttribute(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

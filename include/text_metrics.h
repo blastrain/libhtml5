@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class TextMetrics : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(TextMetrics, double, actualBoundingBoxAscent);
     HTML5_PROPERTY(TextMetrics, double, actualBoundingBoxDescent);

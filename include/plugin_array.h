@@ -8,7 +8,6 @@ class Plugin;
 
 class PluginArray : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(PluginArray, unsigned long, length);
 

@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class VideoTrack : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(VideoTrack, std::string, id);
     HTML5_PROPERTY(VideoTrack, std::string, kind);

@@ -9,7 +9,6 @@ class NodeFilter;
 
 class NodeIterator : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY_OBJECT(NodeIterator, NodeFilter, filter);
     HTML5_PROPERTY(NodeIterator, bool, pointerBeforeReferenceNode);

@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class BarProp : public Object {
 public:
-    emscripten::val v;
     HTML5_PROPERTY(BarProp, bool, visible);
 
     BarProp(emscripten::val v);

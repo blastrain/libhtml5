@@ -2,7 +2,8 @@
 
 USING_NAMESPACE_HTML5;
 
-VideoTrack::VideoTrack(emscripten::val v) : v(v)
+VideoTrack::VideoTrack(emscripten::val v) :
+    Object(v)
 {
 
 }

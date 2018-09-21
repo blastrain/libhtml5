@@ -3,8 +3,7 @@
 USING_NAMESPACE_HTML5;
 
 WebGLObject::WebGLObject(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

@@ -3,8 +3,7 @@
 USING_NAMESPACE_HTML5;
 
 PerformanceNavigation::PerformanceNavigation(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

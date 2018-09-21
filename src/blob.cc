@@ -3,8 +3,7 @@
 USING_NAMESPACE_HTML5;
 
 Blob::Blob(emscripten::val v) :
-    v(v),
-    Object()
+    Object(v)
 {
 
 }

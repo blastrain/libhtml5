@@ -8,7 +8,7 @@ class Node;
 
 class NodeFilter : public Object {
 public:
-    emscripten::val v;
+
     enum {
         FILTER_ACCEPT = 1,
         FILTER_REJECT = 2,

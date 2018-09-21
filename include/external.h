@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class External : public Object {
 public:
-    emscripten::val v;
 
     External(emscripten::val v);
     virtual ~External();

@@ -9,8 +9,7 @@ HTML5_BIND_METHOD(EventTarget, addEventHandlerCallback);
 HTML5_BIND_METHOD(EventTarget, addEventListenerCallback);
 
 EventTarget::EventTarget(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

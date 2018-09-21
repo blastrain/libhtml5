@@ -2,7 +2,8 @@
 
 USING_NAMESPACE_HTML5;
 
-MediaError::MediaError(emscripten::val v) : v(v)
+MediaError::MediaError(emscripten::val v) :
+    Object(v)
 {
 
 }

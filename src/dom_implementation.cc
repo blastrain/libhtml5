@@ -6,8 +6,7 @@
 USING_NAMESPACE_HTML5;
 
 DOMImplementation::DOMImplementation(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

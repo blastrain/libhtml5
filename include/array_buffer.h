@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class ArrayBuffer : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(ArrayBuffer, unsigned long, byteLength);
 

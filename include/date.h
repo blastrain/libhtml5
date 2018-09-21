@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class Date : public Object {
 public:
-    emscripten::val v;
 
     Date(emscripten::val v);
     virtual ~Date();

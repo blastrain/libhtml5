@@ -11,7 +11,8 @@ static std::map<std::string, std::function<RenderingContext*(emscripten::val)>> 
     CLASS_FACTORY_MAP(WebGLRenderingContext),
 };
 
-RenderingContext::RenderingContext(emscripten::val v) : v(v)
+RenderingContext::RenderingContext(emscripten::val v) :
+    Object(v)
 {
 
 }

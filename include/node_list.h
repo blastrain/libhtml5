@@ -8,7 +8,6 @@ class Node;
 
 class NodeList : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(NodeList, unsigned long, length);
 

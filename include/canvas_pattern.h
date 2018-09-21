@@ -8,7 +8,6 @@ class SVGMatrix;
 
 class CanvasPattern : public Object {
 public:
-    emscripten::val v;
 
     CanvasPattern(emscripten::val v);
     virtual ~CanvasPattern();

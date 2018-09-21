@@ -1,23 +1,19 @@
 #pragma once
 
 #include "libhtml5.h"
+#include "native_object.h"
 
 NAMESPACE_HTML5_BEGIN;
 
-class Object {
+class Object : public NativeObject {
 public:
+    emscripten::val v;
 
-    Object();
+    Object(emscripten::val v);
     virtual ~Object();
-    void autorelease();
-    void release();
-    void retain();
-    unsigned int referenceCount();
-    bool isAutoRelease();
-
-private:
-    bool _isAutoRelease;
-    unsigned int _refCount;
+    static Object *create();
+    static Object *create(emscripten::val v);
+    virtual emscripten::val getValue() const { return this->v; };
 };
 
 NAMESPACE_HTML5_END;

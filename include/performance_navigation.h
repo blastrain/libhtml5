@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class PerformanceNavigation : public Object {
 public:
-    emscripten::val v;
 
     HTML5_READONLY_PROPERTY(PerformanceNavigation, unsigned short, type);
     HTML5_READONLY_PROPERTY(PerformanceNavigation, unsigned short, redirectCount);

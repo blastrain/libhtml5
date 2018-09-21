@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class SVGMatrix : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(SVGMatrix, double, a);
     HTML5_PROPERTY(SVGMatrix, double, b);

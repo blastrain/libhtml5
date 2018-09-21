@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class Attr : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(Attr, std::string, localName);
     HTML5_PROPERTY(Attr, std::string, name);

@@ -9,7 +9,6 @@ class Element;
 
 class StyleSheet : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(StyleSheet, bool, disabled);
     HTML5_PROPERTY(StyleSheet, std::string, href);

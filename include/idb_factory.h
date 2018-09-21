@@ -8,7 +8,6 @@ class IDBOpenDBRequest;
 
 class IDBFactory : public Object {
 public:
-    emscripten::val v;
 
     IDBFactory(emscripten::val v);
     virtual ~IDBFactory();

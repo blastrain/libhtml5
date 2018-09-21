@@ -16,8 +16,6 @@ public:
         BUBBLING_PHASE  = 3,
     };
 
-    emscripten::val v;
-
     HTML5_PROPERTY(Event, bool, bubbles);
     HTML5_PROPERTY(Event, bool, cancelable);
     HTML5_PROPERTY_OBJECT(Event, EventTarget, currentTarget);

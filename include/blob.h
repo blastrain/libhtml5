@@ -6,7 +6,6 @@ NAMESPACE_HTML5_BEGIN;
 
 class Blob : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(Blob, unsigned long long, size);
     HTML5_PROPERTY(Blob, std::string, type);

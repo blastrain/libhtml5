@@ -8,8 +8,7 @@ USING_NAMESPACE_HTML5;
 HTML5_BIND_CLASS(Performance);
 
 Performance::Performance(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

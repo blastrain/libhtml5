@@ -3,8 +3,7 @@
 USING_NAMESPACE_HTML5;
 
 IDBIndexParameters::IDBIndexParameters(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

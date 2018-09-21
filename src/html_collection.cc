@@ -3,7 +3,8 @@
 
 USING_NAMESPACE_HTML5;
 
-HTMLCollection::HTMLCollection(emscripten::val v) : v(v)
+HTMLCollection::HTMLCollection(emscripten::val v) :
+    Object(v)
 {
 
 }

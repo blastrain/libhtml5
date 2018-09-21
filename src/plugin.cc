@@ -4,8 +4,7 @@
 USING_NAMESPACE_HTML5;
 
 Plugin::Plugin(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

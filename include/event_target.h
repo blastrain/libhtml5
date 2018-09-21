@@ -15,7 +15,6 @@ class Event;
 
 class EventTarget : public Object {
 public:
-    emscripten::val v;
 
     EventTarget(emscripten::val v);
     virtual ~EventTarget();
@@ -27,7 +26,6 @@ public:
     void removeEventListener(std::string type, EventListener *listener, bool capture = false);
     void addEventListenerCallback(emscripten::val v);
     void addEventHandlerCallback(emscripten::val v);
-    virtual emscripten::val getValue() const { return this->v; };
 
 private:
     std::map<std::string, std::vector<EventHandler *>> handlers;

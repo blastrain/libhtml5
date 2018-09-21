@@ -9,7 +9,6 @@ class IDBRequest;
 
 class IDBIndex : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(IDBIndex, std::string, keyPath);
     HTML5_PROPERTY(IDBIndex, bool, multiEntry);

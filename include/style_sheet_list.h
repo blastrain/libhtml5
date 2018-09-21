@@ -8,7 +8,6 @@ class StyleSheet;
 
 class StyleSheetList : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY(StyleSheetList, unsigned long, length);
 

@@ -3,8 +3,7 @@
 USING_NAMESPACE_HTML5;
 
 PerformanceEntry::PerformanceEntry(emscripten::val v) :
-    Object(),
-    v(v)
+    Object(v)
 {
 
 }

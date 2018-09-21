@@ -8,7 +8,6 @@ class ArrayBuffer;
 
 class ArrayBufferView : public Object {
 public:
-    emscripten::val v;
 
     HTML5_PROPERTY_OBJECT(ArrayBufferView, ArrayBuffer, buffer);
     HTML5_PROPERTY(ArrayBufferView, unsigned long, byteLength);

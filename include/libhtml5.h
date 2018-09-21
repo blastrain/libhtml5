@@ -4,7 +4,6 @@
 #define NAMESPACE_HTML5_END   }
 #define USING_NAMESPACE_HTML5 using namespace html5
 
-#include "object.h"
 #include <string>
 
 #if PROPERTY_TRACE
@@ -26,6 +25,8 @@
 #include <emscripten/val.h>
 #include <emscripten/bind.h>
 
+#include "object.h"
+
 #define GL_GLEXT_PROTOTYPES
 #include <GL/gl.h>
 #include <GL/glext.h>
@@ -33,7 +34,7 @@
 #define HTML5_STATIC_PRIMITIVE_INSTANCE(type, ...) (emscripten::val::global(#type))
 #define HTML5_NEW_PRIMITIVE_INSTANCE(type, ...) (emscripten::val::global(#type).new_(__VA_ARGS__))
 
-template<typename T> T *__html5_property_get__(html5::Object *o, emscripten::val v)
+template<typename T> T *__html5_property_get__(html5::NativeObject *o, emscripten::val v)
 {
     return T::create(v);
 }
@@ -107,6 +108,8 @@ namespace emscripten {
     };
 
 };
+
+#include "object.h"
 
 #define EM_ASM_(block, ...)
 #define EM_ASM_INT(block, ...) (0)
@@ -213,6 +216,15 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     } name{*this};                                          \
     type get_ ## name() const;
 
+#define HTML5_READONLY_PROPERTY_OBJECT(klass, type, name)                    \
+    type *_ ## name;                                                \
+    struct {                                                        \
+        klass &self;                                                \
+        operator type*() { return self.get_ ## name(); };           \
+        type *operator->() { return self.get_ ## name(); };         \
+    } name{*this};                                                  \
+    type *get_ ## name() const;
+
 #define HTML5_PROPERTY_TRACE_GETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:getter]", #name)
 #define HTML5_PROPERTY_TRACE_SETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:setter]", #name)
 
@@ -305,14 +317,4 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         return HTML5_PROPERTY_GET(name, type);                  \
     }
 
-NAMESPACE_HTML5_BEGIN;
-
-class Window;
-class Document;
-
-extern Window *window;
-extern Document *document;
-
-NAMESPACE_HTML5_END;
-
-extern void HTML5_INIT();
+#include "export.h"

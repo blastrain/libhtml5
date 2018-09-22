@@ -11,7 +11,9 @@ public:
     virtual ~Console();
     static Console *create();
     static Console *create(emscripten::val v);
-    template<typename... Args> void _assert(bool expr, const Args&... args);
+    template<typename... Args> void _assert(bool expr, const Args&... args) {
+        HTML5_CALL(this->v, assert, expr, to_val(args)...);
+    };
     void clear();
     void count();
     void count(std::string label);
@@ -19,15 +21,23 @@ public:
     void countReset(std::string label);
     void dir(Object *object);
     void dirxml(Object *object);
-    template<typename... Args> void error(const Args&... args);
-    template<typename... Args> void exception(const Args&... args);
+    template<typename... Args> void error(const Args&... args) {
+        HTML5_CALL(this->v, error, to_val(args)...);
+    };
+    template<typename... Args> void exception(const Args&... args) {
+        HTML5_CALL(this->v, exception, to_val(args)...);
+    };
     void group();
     void group(std::string label);
     void groupCollapsed();
     void groupCollapsed(std::string label);
     void groupEnd();
-    template<typename... Args> void info(const Args&... args);
-    template<typename... Args> void log(const Args&... args);
+    template<typename... Args> void info(const Args&... args) {
+        HTML5_CALL(this->v, info, to_val(args)...);
+    };
+    template<typename... Args> void log(const Args&... args) {
+        HTML5_CALL(this->v, log, to_val(args)...);
+    };
     void profile();
     void profile(std::string profileName);
     void profileEnd();
@@ -43,7 +53,15 @@ public:
     void timeStamp();
     void timeStamp(std::string label);
     void trace();
-    template<typename... Args> void warn(const Args&... args);
+    template<typename... Args> void warn(const Args&... args) {
+        HTML5_CALL(this->v, warn, to_val(args)...);
+    };
+
+private:
+    emscripten::val to_val(Object *o) { return o->v; };
+    emscripten::val to_val(std::string o) { return emscripten::val(o); }
+    emscripten::val to_val(int o) { return emscripten::val(o); }
+    emscripten::val to_val(double o) { return emscripten::val(o); }
 };
 
 NAMESPACE_HTML5_END;

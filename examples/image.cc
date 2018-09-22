@@ -5,7 +5,6 @@
 static void createImage(std::string url)
 {
     HTML5_INIT();
-    html5::alert("hello");
     html5::HTMLImageElement *image = html5::HTMLImageElement::create();
     static html5::EventHandler onload = [image](html5::Event *e){
         html5::window->console->trace();
@@ -15,10 +14,12 @@ static void createImage(std::string url)
         std::cout << "naturalWidth = " << image->naturalWidth << std::endl;
         std::cout << "naturalHeight = " << image->naturalHeight << std::endl;
     };
+    html5::Console *console = html5::window->console;
     image->onload = &onload;
     image->src = url;
     html5::Document *document = html5::window->document;
     document->body->appendChild(image);
+    console->log("image = ", image);
 }
 
 EMSCRIPTEN_BINDINGS(html5example) {

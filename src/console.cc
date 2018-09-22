@@ -25,12 +25,6 @@ Console *Console::create(emscripten::val v)
     return console;
 }
 
-template<typename... Args>
-void Console::_assert(bool expr, const Args&... args)
-{
-    HTML5_CALL(this->v, assert, expr, args...);
-};
-
 void Console::clear()
 {
     HTML5_CALL(this->v, clear);
@@ -45,7 +39,7 @@ void Console::count(std::string label)
 {
     HTML5_CALL(this->v, count, label);
 }
-    
+
 void Console::countReset()
 {
     HTML5_CALL(this->v, countReset);
@@ -55,7 +49,7 @@ void Console::countReset(std::string label)
 {
     HTML5_CALL(this->v, countReset, label);
 }
-    
+
 void Console::dir(Object *object)
 {
     HTML5_CALL(this->v, dir, object->v);
@@ -64,18 +58,6 @@ void Console::dir(Object *object)
 void Console::dirxml(Object *object)
 {
     HTML5_CALL(this->v, dirxml, object->v);
-}
-
-template<typename... Args>
-void Console::error(const Args&... args)
-{
-    HTML5_CALL(this->v, error, args...);
-}
-
-template<typename... Args>
-void Console::exception(const Args&... args)
-{
-    HTML5_CALL(this->v, exception, args...);
 }
 
 void Console::group()
@@ -97,29 +79,17 @@ void Console::groupCollapsed(std::string label)
 {
     HTML5_CALL(this->v, groupCollapsed, label);
 }
-    
+
 void Console::groupEnd()
 {
     HTML5_CALL(this->v, groupEnd);
-}
-    
-template<typename... Args>
-void Console::info(const Args&... args)
-{
-    HTML5_CALL(this->v, info, args...);
-}
-
-template<typename... Args>
-void Console::log(const Args&... args)
-{
-    HTML5_CALL(this->v, log, args...);
 }
 
 void Console::profile()
 {
     HTML5_CALL(this->v, profile);
 }
-    
+
 void Console::profile(std::string profileName)
 {
     HTML5_CALL(this->v, profile, profileName);
@@ -134,7 +104,7 @@ void Console::profileEnd(std::string profileName)
 {
     HTML5_CALL(this->v, profileEnd, profileName);
 }
-    
+
 void Console::table(Object *data)
 {
     HTML5_CALL(this->v, data->v);
@@ -188,10 +158,4 @@ void Console::timeStamp(std::string label)
 void Console::trace()
 {
     HTML5_CALL(this->v, trace);
-}
-
-template<typename... Args>
-void Console::warn(const Args&... args)
-{
-    HTML5_CALL(this->v, warn, args...);
 }

@@ -35,7 +35,7 @@ public:
     HTML5_PROPERTY(Window, ApplicationCache *, applicationCache);
     HTML5_READONLY_PROPERTY(Window, bool, closed);
     HTML5_READONLY_PROPERTY_OBJECT(Window, Console, console);
-    HTML5_PROPERTY(Window, Document *, document);
+    HTML5_PROPERTY_OBJECT(Window, Document, document);
     HTML5_PROPERTY(Window, External *, external);
     HTML5_PROPERTY(Window, Element *, frameElement);
     HTML5_PROPERTY(Window, WindowProxy *, frames);

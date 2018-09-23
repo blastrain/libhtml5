@@ -3,6 +3,32 @@
 
 USING_NAMESPACE_HTML5;
 
+StyleSheetIterator::StyleSheetIterator(StyleSheetList *list, unsigned long index) :
+    _list(list),
+    _index(index)
+{
+};
+
+StyleSheetIterator::~StyleSheetIterator()
+{
+
+};
+
+StyleSheet *StyleSheetIterator::operator*()
+{
+    return (this->_list->item(this->_index));
+};
+
+StyleSheetIterator& StyleSheetIterator::operator++()
+{
+    this->_index++; return *this;
+};
+
+bool StyleSheetIterator::operator!=(const StyleSheetIterator& v)
+{
+    return this->_index != v._index;
+};
+
 StyleSheetList::StyleSheetList(emscripten::val v) :
     Object(v)
 {

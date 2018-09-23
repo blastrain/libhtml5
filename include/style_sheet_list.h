@@ -5,21 +5,6 @@
 
 NAMESPACE_HTML5_BEGIN;
 
-class StyleSheetList;
-
-class StyleSheetIterator {
-public:
-    StyleSheetIterator(StyleSheetList *list, unsigned long index = 0);
-    virtual ~StyleSheetIterator();
-    StyleSheet *operator*();
-    StyleSheetIterator& operator++();
-    bool operator!=(const StyleSheetIterator& v);
-
-private:
-    unsigned long _index;
-    StyleSheetList *_list;
-};
-
 class StyleSheetList : public Object {
 public:
 
@@ -29,12 +14,27 @@ public:
     virtual ~StyleSheetList();
     static StyleSheetList *create(emscripten::val v);
     StyleSheet *item(unsigned long index);
-    StyleSheetIterator begin() {
-        return StyleSheetIterator(this);
+
+    class iterator {
+    public:
+        iterator(StyleSheetList *list, unsigned long index = 0) :
+            _list(list),
+            _index(index){};
+        virtual ~iterator() {};
+        StyleSheet *operator*() { return this->_list->item(this->_index); };
+        iterator& operator++() {
+            this->_index++;
+            return *this;
+        };
+        bool operator!=(const iterator& v) { return this->_index != v._index; };
+
+    private:
+        unsigned long _index;
+        StyleSheetList *_list;
     };
-    StyleSheetIterator end() {
-        return StyleSheetIterator(this, this->length);
-    };
+
+    iterator begin() { return iterator(this); };
+    iterator end() { return iterator(this, this->length); };
 };
 
 NAMESPACE_HTML5_END;

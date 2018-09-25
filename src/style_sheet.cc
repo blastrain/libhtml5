@@ -5,9 +5,11 @@
 
 USING_NAMESPACE_HTML5;
 
-static std::map<std::string, std::function<StyleSheet*(emscripten::val)>> classFactories = {
-    CLASS_FACTORY_MAP(CSSStyleSheet),
+HTML5_CLASS_FACTORY(StyleSheet) {
+    HTML5_SUBCLASS_FACTORY(CSSStyleSheet),
 };
+
+HTML5_CREATE_IMPL(StyleSheet);
 
 StyleSheet::StyleSheet(emscripten::val v) :
     Object(v)
@@ -18,18 +20,6 @@ StyleSheet::StyleSheet(emscripten::val v) :
 StyleSheet::~StyleSheet()
 {
 
-}
-
-StyleSheet *StyleSheet::create(emscripten::val v)
-{
-#if ENABLE_EMSCRIPTEN
-    std::string className = v["constructor"]["name"].as<std::string>();
-    return classFactories[className](v);
-#else
-    StyleSheet *sheet = new StyleSheet(v);
-    sheet->autorelease();
-    return sheet;
-#endif
 }
 
 HTML5_PROPERTY_IMPL(StyleSheet, bool, disabled);

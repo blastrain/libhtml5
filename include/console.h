@@ -59,9 +59,27 @@ public:
 
 private:
     emscripten::val to_val(Object *o) { return o->v; };
-    emscripten::val to_val(std::string o) { return emscripten::val(o); }
-    emscripten::val to_val(int o) { return emscripten::val(o); }
-    emscripten::val to_val(double o) { return emscripten::val(o); }
+    emscripten::val to_val(std::string o) {
+#if ENABLE_EMSCRIPTEN
+        return emscripten::val(o);
+#else
+        return emscripten::val();
+#endif
+    }
+    emscripten::val to_val(int o) {
+#if ENABLE_EMSCRIPTEN
+        return emscripten::val(o);
+#else
+        return emscripten::val();
+#endif
+    }
+    emscripten::val to_val(double o) {
+#if ENABLE_EMSCRIPTEN
+        return emscripten::val(o);
+#else
+        return emscripten::val();
+#endif
+    }
 };
 
 NAMESPACE_HTML5_END;

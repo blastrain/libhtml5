@@ -2,6 +2,9 @@
 
 // this is included by libhtml5.h
 
+#include <string>
+#include <functional>
+
 NAMESPACE_HTML5_BEGIN;
 
 class Window;

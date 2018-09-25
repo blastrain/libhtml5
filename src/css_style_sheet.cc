@@ -24,12 +24,12 @@ CSSStyleSheet *CSSStyleSheet::create(emscripten::val v)
 
 void CSSStyleSheet::deleteRule(unsigned long index)
 {
-    this->v.call<void>("deleteRule", index);
+    HTML5_CALL(this->v, deleteRule, index);
 }
 
 unsigned long CSSStyleSheet::insertRule(std::string rule, unsigned long index)
 {
-    return this->v.call<unsigned long>("insertRule", rule, index);
+    return HTML5_CALLi(this->v, insertRule, unsigned long, rule, index);
 }
 
 HTML5_PROPERTY_OBJECT_IMPL(CSSStyleSheet, CSSRuleList, cssRules);

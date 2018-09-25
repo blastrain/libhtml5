@@ -3,6 +3,7 @@
 #include "html_collection.h"
 #include "node_list.h"
 #include "element.h"
+#include "html_div_element.h"
 #include "html_element.h"
 #include "html_image_element.h"
 #include "html_video_element.h"
@@ -12,8 +13,10 @@
 USING_NAMESPACE_HTML5;
 
 static std::map<std::string, std::function<Element*(emscripten::val)>> classFactories = {
+    CLASS_FACTORY_MAP(HTMLDivElement),
     CLASS_FACTORY_MAP(HTMLElement),
     CLASS_FACTORY_MAP(HTMLImageElement),
+    CLASS_FACTORY_MAP(HTMLMediaElement),
     CLASS_FACTORY_MAP(HTMLSourceElement),
     CLASS_FACTORY_MAP(HTMLVideoElement),
 };

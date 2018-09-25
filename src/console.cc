@@ -1,4 +1,5 @@
 #include "console.h"
+#include <vector>
 
 USING_NAMESPACE_HTML5;
 

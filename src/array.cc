@@ -13,9 +13,7 @@ Array::~Array()
 {
 }
 
-Array *Array::create(emscripten::val v)
+std::unique_ptr<Array> Array::create(emscripten::val v)
 {
-    Array *arr = new Array(v);
-    arr->autorelease();
-    return arr;
+    return std::unique_ptr<Array>(new Array(v));
 }

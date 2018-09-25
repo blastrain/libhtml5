@@ -16,7 +16,7 @@ public:
     static DOMImplementation *create(emscripten::val v);
     XMLDocument *createDocument(std::string _namespace, std::string qualifiedName, DocumentType *type = NULL);
     DocumentType *createDocumentType(std::string qualifiedName, std::string publicId, std::string systemId);
-    Document *createHTMLDocument(std::string title = "");
+    std::unique_ptr<Document> createHTMLDocument(std::string title = "");
     bool hasFeature();
 };
 

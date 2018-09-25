@@ -36,9 +36,7 @@
 
 inline std::string __html5_val_to_string__(emscripten::val v)
 {
-    if (v == emscripten::val::null()) {
-        return "";
-    } else if (v == emscripten::val::undefined()) {
+    if (v == emscripten::val::null() || v == emscripten::val::undefined()) {
         return "";
     }
     return v.as<std::string>();
@@ -49,8 +47,11 @@ template<typename T> T __html5_property_get__(std::string o, emscripten::val v)
     return __html5_val_to_string__(v);
 }
 
-template<typename T> T *__html5_property_get__(html5::NativeObject *o, emscripten::val v)
+template<typename T> std::unique_ptr<T> __html5_property_get__(const std::unique_ptr<html5::NativeObject> o, emscripten::val v)
 {
+    if (v == emscripten::val::null() || v == emscripten::val::undefined()) {
+        return nullptr;
+    }
     return T::create(v);
 }
 
@@ -181,31 +182,23 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         this->v.set(#pname, value);             \
     } while (0)
 
-#define HTML5_PROPERTY_OBJECT_SET(pname, value) do {                    \
-        if (this->_ ## pname && this->_ ## pname->isAutoRelease()) {    \
-            this->_ ## pname->release();                                \
-        }                                                               \
-        if (value && value->isAutoRelease()) {                          \
-            value->retain();                                            \
-        }                                                               \
-        this->_ ## pname = value;                                       \
-        this->v.set(#pname, value->v);                                  \
+#define HTML5_PROPERTY_OBJECT_SET(pname, value) do {    \
+        this->_ ## pname = std::move(value);            \
+        this->v.set(#pname, value->v);                  \
     } while (0)
 
-#define HTML5_CLASS_FACTORY(klass) static std::map<std::string, std::function<klass*(emscripten::val)>> classFactories =
+#define HTML5_CLASS_FACTORY(klass) static std::map<std::string, std::function<std::unique_ptr<klass>(emscripten::val)>> classFactories =
 
-#define HTML5_SUBCLASS_FACTORY(name) { #name, [](emscripten::val v){ auto klass = name::create(v); klass->autorelease(); return klass; } }
+#define HTML5_SUBCLASS_FACTORY(name) { #name, [](emscripten::val v){ return name::create(v); } }
 
 #if ENABLE_EMSCRIPTEN
 
 #define HTML5_CREATE_IMPL(klass)                                        \
-    klass *klass::create(emscripten::val v)                             \
+    std::unique_ptr<klass> klass::create(emscripten::val v)             \
     {                                                                   \
         std::string className = v["constructor"]["name"].as<std::string>(); \
         if (className == #klass) {                                      \
-            klass *instance = new klass(v);                             \
-            instance->autorelease();                                    \
-            return instance;                                            \
+            return std::unique_ptr<klass>(new klass(v));                \
         } else if (classFactories.find(className) == classFactories.end()) { \
             std::cout << "cannot find " << className << " in classFactories" << std::endl; \
             return nullptr;                                             \
@@ -215,12 +208,10 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
 
 #else
 
-#define HTML5_CREATE_IMPL(klass)                \
-    klass *klass::create(emscripten::val v)     \
-    {                                           \
-        klass *e = new klass(v);                \
-        e->autorelease();                       \
-        return e;                               \
+#define HTML5_CREATE_IMPL(klass)                            \
+    std::unique_ptr<klass> klass::create(emscripten::val v) \
+    {                                                       \
+        return std::unique_ptr<klass>(new klass(v));        \
     }
 
 #endif
@@ -235,19 +226,19 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     type get_ ## name() const;                                      \
     void set_ ## name(type value);
 
-#define HTML5_PROPERTY_OBJECT(klass, type, name)                    \
-    type *_ ## name;                                                \
-    struct {                                                        \
-        klass &self;                                                \
-        void operator=(type *value) { self.set_ ## name(value); };  \
-        operator type*() { return self.get_ ## name(); };           \
-        type *operator->() { return self.get_ ## name(); };         \
-    } name{*this};                                                  \
-    type *get_ ## name() const;                                     \
-    void set_ ## name(type *value);
+#define HTML5_PROPERTY_OBJECT(klass, type, name)                        \
+    std::unique_ptr<type> _ ## name;                                    \
+    struct {                                                            \
+        klass &self;                                                    \
+        void operator=(std::unique_ptr<type> value) { self.set_ ## name(value); }; \
+        operator const type &() { return self.get_ ## name(); };        \
+        const type &operator->() { return self.get_ ## name(); };       \
+    } name{*this};                                                      \
+    const type &get_ ## name() const;                                   \
+    void set_ ## name(std::unique_ptr<type> &value);
 
 #define HTML5_EVENT_HANDLER_PROPERTY(klass, type, name) \
-    HTML5_PROPERTY(klass, type, name);                  \
+    HTML5_PROPERTY_OBJECT(klass, type, name);           \
     void callback_ ## name(emscripten::val e);
 
 #define HTML5_ERROR_HANDLER_PROPERTY(klass, type, name)                 \
@@ -262,14 +253,14 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     } name{*this};                                          \
     type get_ ## name() const;
 
-#define HTML5_READONLY_PROPERTY_OBJECT(klass, type, name)                    \
-    type *_ ## name;                                                \
-    struct {                                                        \
-        klass &self;                                                \
-        operator type*() { return self.get_ ## name(); };           \
-        type *operator->() { return self.get_ ## name(); };         \
-    } name{*this};                                                  \
-    type *get_ ## name() const;
+#define HTML5_READONLY_PROPERTY_OBJECT(klass, type, name)               \
+    std::unique_ptr<type> _ ## name;                                    \
+    struct {                                                            \
+        klass &self;                                                    \
+        operator std::unique_ptr<type>() { return self.get_ ## name(); }; \
+        std::unique_ptr<type> operator->() { return self.get_ ## name(); }; \
+    } name{*this};                                                      \
+    std::unique_ptr<type> get_ ## name() const;
 
 #define HTML5_PROPERTY_TRACE_GETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:getter]", #name)
 #define HTML5_PROPERTY_TRACE_SETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:setter]", #name)
@@ -288,16 +279,16 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     }                                           
 
 #define HTML5_EVENT_HANDLER_PROPERTY_IMPL(klass, type, name)            \
-    type klass::get_ ## name() const                                    \
+    const type &klass::get_ ## name() const                             \
     {                                                                   \
         HTML5_PROPERTY_TRACE_GETTER(name);                              \
-        return this->_ ## name;                                         \
+        return *this->_ ## name;                                        \
     }                                                                   \
                                                                         \
-    void klass::set_ ## name(type value)                                \
+    void klass::set_ ## name(std::unique_ptr<type> &value)              \
     {                                                                   \
         HTML5_PROPERTY_TRACE_SETTER(name);                              \
-        this->_ ## name = value;                                        \
+        this->_ ## name = std::move(value);                             \
         EM_ASM_({                                                       \
                 const elem = Module.to ## klass($0);                    \
                 elem._value.name = function(e) { elem.callback_ ## name(e); }; \
@@ -343,21 +334,21 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         return HTML5_PROPERTY_GET(name, type);          \
     }
 
-#define HTML5_PROPERTY_OBJECT_IMPL(klass, type, name)   \
-    type *klass::get_ ## name() const                   \
-    {                                                   \
-        HTML5_PROPERTY_TRACE_GETTER(name);              \
-        return HTML5_PROPERTY_GET(name, type);          \
-    }                                                   \
-                                                        \
-    void klass::set_ ## name(type *value)               \
-    {                                                   \
-        HTML5_PROPERTY_TRACE_SETTER(name);              \
-        HTML5_PROPERTY_OBJECT_SET(name, value);         \
+#define HTML5_PROPERTY_OBJECT_IMPL(klass, type, name)               \
+    const type &klass::get_ ## name() const                         \
+    {                                                               \
+        HTML5_PROPERTY_TRACE_GETTER(name);                          \
+        return HTML5_PROPERTY_GET(name, type);                      \
+    }                                                               \
+                                                                    \
+    void klass::set_ ## name(std::unique_ptr<type> &value)          \
+    {                                                               \
+        HTML5_PROPERTY_TRACE_SETTER(name);                          \
+        HTML5_PROPERTY_OBJECT_SET(name, value);                     \
     }
 
 #define HTML5_READONLY_PROPERTY_OBJECT_IMPL(klass, type, name)  \
-    type *klass::get_ ## name() const                           \
+    std::unique_ptr<type> klass::get_ ## name() const           \
     {                                                           \
         HTML5_PROPERTY_TRACE_GETTER(name);                      \
         return HTML5_PROPERTY_GET(name, type);                  \

@@ -28,8 +28,8 @@ public:
 
     Event(emscripten::val v);
     virtual ~Event();
-    static Event *create(std::string type);
-    static Event *create(emscripten::val v);
+    static std::unique_ptr<Event> create(std::string type);
+    static std::unique_ptr<Event> create(emscripten::val v);
     void initEvent(std::string type, bool bubbles, bool cancelable);
     void preventDefault();
     void stopImmediatePropagation();

@@ -35,14 +35,12 @@ Document::~Document()
 
 }
 
-Document *Document::create(emscripten::val v)
+std::unique_ptr<Document> Document::create(emscripten::val v)
 {
-    Document *doc = new Document(v);
-    doc->autorelease();
-    return doc;
+    return std::unique_ptr<Document>(new Document(v));
 }
 
-Document *Document::create()
+std::unique_ptr<Document> Document::create()
 {
     return create(HTML5_STATIC_PRIMITIVE_INSTANCE(document));
 }
@@ -180,7 +178,7 @@ Node *Document::importNode(Node *node, bool deep)
     return Node::create(HTML5_CALLv(this->v, importNode, node->v, deep));
 }
 
-Document *Document::open(std::string typeURL, std::string replaceName, std::string features, bool replace)
+std::unique_ptr<Document> Document::open(std::string typeURL, std::string replaceName, std::string features, bool replace)
 {
     return Document::create(HTML5_CALLv(this->v, typeURL, replaceName, features, replace));
 }

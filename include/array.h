@@ -10,7 +10,7 @@ public:
 
     Array(emscripten::val v);
     virtual ~Array();
-    static Array *create(emscripten::val v);
+    static std::unique_ptr<Array> create(emscripten::val v);
 };
 
 NAMESPACE_HTML5_END;

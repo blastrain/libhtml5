@@ -145,8 +145,8 @@ public:
 
     Document(emscripten::val v);
     ~Document();
-    static Document *create();
-    static Document *create(emscripten::val v);
+    static std::unique_ptr<Document> create();
+    static std::unique_ptr<Document> create(emscripten::val v);
     Node *adoptNode(Node *node);
     template<typename... Args> void append(Node *node, Args ...args) {
         std::vector<Node *> nodes = { args... };
@@ -178,7 +178,7 @@ public:
     void *getter(std::string name);
     bool hasFocus();
     Node *importNode(Node *node, bool deep);
-    Document *open(std::string typeURL, std::string replaceName, std::string features, bool replace);
+    std::unique_ptr<Document> open(std::string typeURL, std::string replaceName, std::string features, bool replace);
     template<typename... Args> void prepend(Node *node, Args ...args) {
         std::vector<Node *> nodes = { args... };
         nodes.insert(nodes.begin(), node);

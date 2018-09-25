@@ -33,7 +33,7 @@ DocumentType *DOMImplementation::createDocumentType(std::string qualifiedName, s
     return DocumentType::create(HTML5_CALLv(this->v, createDocumentType, qualifiedName, publicId, systemId));
 }
 
-Document *DOMImplementation::createHTMLDocument(std::string title)
+std::unique_ptr<Document> DOMImplementation::createHTMLDocument(std::string title)
 {
     return Document::create(HTML5_CALLv(this->v, createHTMLDocument, title));
 }

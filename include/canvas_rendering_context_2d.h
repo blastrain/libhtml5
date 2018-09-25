@@ -125,15 +125,15 @@ public:
     struct {
         CanvasRenderingContext2D &self;
         void operator=(std::string value) { self.set_fillStyleColor(value); };
-        void operator=(CanvasGradient *value) { self.set_fillStyleGradient(value); };
-        void operator=(CanvasPattern *value) { self.set_fillStylePattern(value); };
+        void operator=(std::unique_ptr<CanvasGradient> value) { self.set_fillStyleGradient(value); };
+        void operator=(std::unique_ptr<CanvasPattern> value) { self.set_fillStylePattern(value); };
     } fillStyle{*this};
 
     struct {
         CanvasRenderingContext2D &self;
         void operator=(std::string value) { self.set_strokeStyleColor(value); };
-        void operator=(CanvasGradient *value) { self.set_strokeStyleGradient(value); };
-        void operator=(CanvasPattern *value) { self.set_strokeStylePattern(value); };
+        void operator=(std::unique_ptr<CanvasGradient> value) { self.set_strokeStyleGradient(value); };
+        void operator=(std::unique_ptr<CanvasPattern> value) { self.set_strokeStylePattern(value); };
     } strokeStyle{*this};
 
 };

@@ -27,7 +27,7 @@ public:
     HTML5_PROPERTY(Element, std::string, prefix);
     HTML5_PROPERTY_OBJECT(Element, Element, previousElementSibling);
     HTML5_PROPERTY(Element, std::string, tagName);
-    HTML5_PROPERTY_OBJECT(Element, ShadowRoot, shadowRoot);
+    //HTML5_PROPERTY_OBJECT(Element, ShadowRoot, shadowRoot);
     HTML5_PROPERTY_OBJECT(Element, DOMTokenList, classList);
 
     Element(emscripten::val v);

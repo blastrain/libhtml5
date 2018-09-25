@@ -14,11 +14,9 @@ ArrayBufferView::~ArrayBufferView()
 
 }
 
-ArrayBufferView *ArrayBufferView::create(emscripten::val v)
+std::unique_ptr<ArrayBufferView> ArrayBufferView::create(emscripten::val v)
 {
-    auto view = new ArrayBufferView(v);
-    view->autorelease();
-    return view;
+    return std::unique_ptr<ArrayBufferView>(new ArrayBufferView(v));
 }
 
 HTML5_PROPERTY_OBJECT_IMPL(ArrayBufferView, ArrayBuffer, buffer);

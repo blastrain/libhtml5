@@ -15,7 +15,7 @@ public:
 
     ArrayBufferView(emscripten::val v);
     virtual ~ArrayBufferView();
-    static ArrayBufferView *create(emscripten::val v);
+    static std::unique_ptr<ArrayBufferView> create(emscripten::val v);
 };
 
 NAMESPACE_HTML5_END;

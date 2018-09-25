@@ -19,3 +19,5 @@ Array *Array::create(emscripten::val v)
     arr->autorelease();
     return arr;
 }
+
+HTML5_PROPERTY_IMPL(Array, unsigned long, length);

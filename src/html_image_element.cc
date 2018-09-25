@@ -28,7 +28,7 @@ HTMLImageElement *HTMLImageElement::create()
 
 HTMLImageElement *HTMLImageElement::create(unsigned long width, unsigned long height)
 {
-    return create(HTML5_NEW_PRIMITIVE_INSTANCE("Image", width, height));
+    return create(HTML5_NEW_PRIMITIVE_INSTANCE(Image, width, height));
 }
 
 HTML5_PROPERTY_IMPL(HTMLImageElement, std::string, alt);

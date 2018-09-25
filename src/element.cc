@@ -12,14 +12,16 @@
 
 USING_NAMESPACE_HTML5;
 
-static std::map<std::string, std::function<Element*(emscripten::val)>> classFactories = {
-    CLASS_FACTORY_MAP(HTMLDivElement),
-    CLASS_FACTORY_MAP(HTMLElement),
-    CLASS_FACTORY_MAP(HTMLImageElement),
-    CLASS_FACTORY_MAP(HTMLMediaElement),
-    CLASS_FACTORY_MAP(HTMLSourceElement),
-    CLASS_FACTORY_MAP(HTMLVideoElement),
+HTML5_CLASS_FACTORY(Element) {
+    HTML5_SUBCLASS_FACTORY(HTMLDivElement),
+    HTML5_SUBCLASS_FACTORY(HTMLElement),
+    HTML5_SUBCLASS_FACTORY(HTMLImageElement),
+    HTML5_SUBCLASS_FACTORY(HTMLMediaElement),
+    HTML5_SUBCLASS_FACTORY(HTMLSourceElement),
+    HTML5_SUBCLASS_FACTORY(HTMLVideoElement)
 };
+
+HTML5_CREATE_IMPL(Element);
 
 Element::Element(emscripten::val v) :
     Node(v)
@@ -29,18 +31,6 @@ Element::Element(emscripten::val v) :
 Element::~Element()
 {
 
-}
-
-Element *Element::create(emscripten::val v)
-{
-#if ENABLE_EMSCRIPTEN
-    std::string className = v["constructor"]["name"].as<std::string>();
-    return classFactories[className](v);
-#else
-    Element *e = new Element(v);
-    e->autorelease();
-    return e;
-#endif
 }
 
 void Element::after(std::vector<Node *> nodes)

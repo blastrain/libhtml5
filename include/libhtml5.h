@@ -192,7 +192,38 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         this->v.set(#pname, value->v);                                  \
     } while (0)
 
-#define CLASS_FACTORY_MAP(name) { #name, [](emscripten::val v){ auto klass = name::create(v); klass->autorelease(); return klass; } }
+#define HTML5_CLASS_FACTORY(klass) static std::map<std::string, std::function<klass*(emscripten::val)>> classFactories =
+
+#define HTML5_SUBCLASS_FACTORY(name) { #name, [](emscripten::val v){ auto klass = name::create(v); klass->autorelease(); return klass; } }
+
+#if ENABLE_EMSCRIPTEN
+
+#define HTML5_CREATE_IMPL(klass)                                        \
+    klass *klass::create(emscripten::val v)                             \
+    {                                                                   \
+        std::string className = v["constructor"]["name"].as<std::string>(); \
+        if (className == #klass) {                                      \
+            klass *instance = new klass(v);                             \
+            instance->autorelease();                                    \
+            return instance;                                            \
+        } else if (classFactories.find(className) == classFactories.end()) { \
+            std::cout << "cannot find " << className << " in classFactories" << std::endl; \
+            return nullptr;                                             \
+        }                                                               \
+        return classFactories[className](v);                            \
+    }
+
+#else
+
+#define HTML5_CREATE_IMPL(klass)                \
+    klass *klass::create(emscripten::val v)     \
+    {                                           \
+        klass *e = new klass(v);                \
+        e->autorelease();                       \
+        return e;                               \
+    }
+
+#endif
 
 #define HTML5_PROPERTY(klass, type, name)                           \
     type _ ## name;                                                 \

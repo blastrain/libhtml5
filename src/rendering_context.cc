@@ -6,10 +6,12 @@
 
 USING_NAMESPACE_HTML5;
 
-static std::map<std::string, std::function<RenderingContext*(emscripten::val)>> classFactories = {
-    CLASS_FACTORY_MAP(CanvasRenderingContext2D),
-    CLASS_FACTORY_MAP(WebGLRenderingContext),
+HTML5_CLASS_FACTORY(RenderingContext) {
+    HTML5_SUBCLASS_FACTORY(CanvasRenderingContext2D),
+    HTML5_SUBCLASS_FACTORY(WebGLRenderingContext),
 };
+
+HTML5_CREATE_IMPL(RenderingContext);
 
 RenderingContext::RenderingContext(emscripten::val v) :
     Object(v)
@@ -20,14 +22,4 @@ RenderingContext::RenderingContext(emscripten::val v) :
 RenderingContext::~RenderingContext()
 {
 
-}
-
-RenderingContext *RenderingContext::create(emscripten::val v)
-{
-#if ENABLE_EMSCRIPTEN
-    std::string className = v["constructor"]["name"].as<std::string>();
-#else
-    std::string className = "";
-#endif
-    return classFactories[className](v);
 }

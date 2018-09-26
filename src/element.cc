@@ -8,6 +8,7 @@
 #include "html_image_element.h"
 #include "html_video_element.h"
 #include "html_source_element.h"
+#include "html_style_element.h"
 #include <iostream>
 
 USING_NAMESPACE_HTML5;
@@ -18,6 +19,7 @@ HTML5_CLASS_FACTORY(Element) {
     HTML5_SUBCLASS_FACTORY(HTMLImageElement),
     HTML5_SUBCLASS_FACTORY(HTMLMediaElement),
     HTML5_SUBCLASS_FACTORY(HTMLSourceElement),
+    HTML5_SUBCLASS_FACTORY(HTMLStyleElement),
     HTML5_SUBCLASS_FACTORY(HTMLVideoElement)
 };
 

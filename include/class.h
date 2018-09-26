@@ -41,6 +41,7 @@
 #include "html_media_element.h"
 #include "html_script_element.h"
 #include "html_source_element.h"
+#include "html_style_element.h"
 #include "html_video_element.h"
 #include "idb_database.h"
 #include "idb_environment.h"

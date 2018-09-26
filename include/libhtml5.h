@@ -51,6 +51,11 @@ template<typename T> T __html5_property_get__(std::string o, emscripten::val v)
 
 template<typename T> T *__html5_property_get__(html5::NativeObject *o, emscripten::val v)
 {
+    if (v == emscripten::val::null()) {
+        return nullptr;
+    } else if (v == emscripten::val::undefined()) {
+        return nullptr;
+    }
     return T::create(v);
 }
 
@@ -362,5 +367,20 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         HTML5_PROPERTY_TRACE_GETTER(name);                      \
         return HTML5_PROPERTY_GET(name, type);                  \
     }
+
+#define HTML5_PURE_VIRTUAL_PROPERTY_OBJECT(klass, type, name)       \
+    type *_ ## name;                                                \
+    struct {                                                        \
+        klass &self;                                                \
+        void operator=(type *value) { self.set_ ## name(value); };  \
+        operator type*() { return self.get_ ## name(); };           \
+        type *operator->() { return self.get_ ## name(); };         \
+    } name{*this};                                                  \
+    virtual type *get_ ## name() const = 0;                         \
+    virtual void set_ ## name(type *value) = 0;
+
+#define HTML5_VIRTUAL_PROPERTY_OBJECT(klass, type, name)    \
+    virtual type *get_ ## name() const;                     \
+    virtual void set_ ## name(type *value);
 
 #include "export.h"

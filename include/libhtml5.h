@@ -414,4 +414,24 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         return HTML5_PROPERTY_GET(name, type);                  \
     }
 
+#define HTML5_DEFINE_ITERATOR(klass, subclass)                          \
+    class iterator {                                                    \
+    public:                                                             \
+    iterator(klass *list, unsigned long index = 0) :                    \
+        _list(list),                                                    \
+        _index(index){};                                                \
+    virtual ~iterator() {};                                             \
+    subclass *operator*() { return this->_list->item(this->_index); };  \
+    iterator& operator++() {                                            \
+        this->_index++;                                                 \
+        return *this;                                                   \
+    };                                                                  \
+    bool operator!=(const iterator& v) { return this->_index != v._index; }; \
+    private:                                                            \
+    unsigned long _index;                                               \
+    klass *_list;                                                       \
+    };                                                                  \
+    iterator begin() { return iterator(this); };                        \
+    iterator end() { return iterator(this, this->length); };            \
+
 #include "export.h"

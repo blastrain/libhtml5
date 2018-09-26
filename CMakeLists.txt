@@ -49,6 +49,7 @@ set(SOURCES src/application_cache.cc
 	src/html_media_element.cc
 	src/html_script_element.cc
 	src/html_source_element.cc
+	src/html_style_element.cc
 	src/html_video_element.cc
 	src/idb_database.cc
 	src/idb_environment.cc
@@ -62,6 +63,7 @@ set(SOURCES src/application_cache.cc
 	src/idb_version_change_event.cc
 	src/image_bitmap.cc
 	src/image_data.cc
+	src/link_style.cc
 	src/location.cc
 	src/media_controller.cc
 	src/media_error.cc

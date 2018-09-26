@@ -51,6 +51,11 @@ template<typename T> T __html5_property_get__(std::string o, emscripten::val v)
 
 template<typename T> T *__html5_property_get__(html5::NativeObject *o, emscripten::val v)
 {
+    if (v == emscripten::val::null()) {
+        return nullptr;
+    } else if (v == emscripten::val::undefined()) {
+        return nullptr;
+    }
     return T::create(v);
 }
 
@@ -336,7 +341,7 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     {                                           \
         HTML5_PROPERTY_TRACE_SETTER(name);      \
         HTML5_PROPERTY_SET(name, value);        \
-    }                                           
+    }
 
 #define HTML5_EVENT_HANDLER_PROPERTY_IMPL(klass, type, name)            \
     type klass::get_ ## name() const                                    \

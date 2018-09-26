@@ -34,6 +34,7 @@ public:
     HTML5_PROPERTY(Node, std::string, baseURI);
     std::vector<Node *> _childNodes;
     HTML5_PROPERTY_OBJECT(Node, Node, firstChild);
+    HTML5_PROPERTY(Node, std::string, innerText);
     HTML5_PROPERTY_OBJECT(Node, Node, lastChild);
     HTML5_PROPERTY_OBJECT(Node, Node, nextSibling);
     HTML5_PROPERTY(Node, std::string, nodeName);

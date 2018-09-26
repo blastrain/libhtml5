@@ -115,6 +115,7 @@ void Node::setChildNodes(std::vector<Node *> value)
 
 HTML5_PROPERTY_IMPL(Node, std::string, baseURI);
 HTML5_PROPERTY_OBJECT_IMPL(Node, Node, firstChild);
+HTML5_PROPERTY_IMPL(Node, std::string, innerText);
 HTML5_PROPERTY_OBJECT_IMPL(Node, Node, lastChild);
 HTML5_PROPERTY_OBJECT_IMPL(Node, Node, nextSibling);
 HTML5_PROPERTY_IMPL(Node, std::string, nodeName);

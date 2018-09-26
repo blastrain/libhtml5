@@ -27,7 +27,7 @@ static void addStyleSheet() {
     for (auto sheet : *sheets) {
         window->console->log(sheet);
         auto cssSheet = dynamic_cast<CSSStyleSheet *>(sheet);
-        for (auto i = 0;i < cssSheet->cssRules->length;i++) {
+        for (auto i = 0; i < cssSheet->cssRules->length; i++) {
             auto rule = cssSheet->cssRules->item(i);
             window->console->log(rule);
             cssSheet->deleteRule(i);

@@ -17,7 +17,7 @@ public:
     HTMLCanvasElement(emscripten::val v);
     virtual ~HTMLCanvasElement();
     static HTMLCanvasElement *create(emscripten::val v);
-    RenderingContext *getContext(std::string contextId);
+    RenderingContext *getContext(std::string contextId = "2d");
     void toBlob(std::function<void(Blob*)> *callback, std::string mimeType = "image/png", double qualityArgument = 1.0);
     void toBlobCallback(emscripten::val v);
     std::string toDataURL(std::string type, double encoderOptions = 0.92);

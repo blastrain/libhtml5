@@ -67,4 +67,23 @@ Float32Array *Float32Array::subarray(long start, long end)
     return create(HTML5_CALLv(this->v, subarray, start, end));
 }
 
+double Float32Array::operator[](std::size_t index) const
+{
+#if ENABLE_EMSCRIPTEN
+    return this->v[index].as<double>();
+#else
+    return 0;
+#endif
+}
+
+double& Float32Array::operator[](std::size_t index)
+{
+#if ENABLE_EMSCRIPTEN
+    return this->v[index].as<double>();
+#else
+    double v;
+    return v;
+#endif
+}
+
 HTML5_PROPERTY_IMPL(Float32Array, unsigned long, length);

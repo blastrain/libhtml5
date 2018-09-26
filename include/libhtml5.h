@@ -235,6 +235,14 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     type get_ ## name() const;                                      \
     void set_ ## name(type value);
 
+#define HTML5_READONLY_PROPERTY(klass, type, name)          \
+    type _ ## name;                                         \
+    struct {                                                \
+        klass &self;                                        \
+        operator type() { return self.get_ ## name(); };    \
+    } name{*this};                                          \
+    type get_ ## name() const;
+
 #define HTML5_PROPERTY_OBJECT(klass, type, name)                    \
     type *_ ## name;                                                \
     struct {                                                        \
@@ -246,23 +254,7 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     type *get_ ## name() const;                                     \
     void set_ ## name(type *value);
 
-#define HTML5_EVENT_HANDLER_PROPERTY(klass, type, name) \
-    HTML5_PROPERTY(klass, type, name);                  \
-    void callback_ ## name(emscripten::val e);
-
-#define HTML5_ERROR_HANDLER_PROPERTY(klass, type, name)                 \
-    HTML5_PROPERTY(klass, type, name);                                  \
-    void callback_ ## name(emscripten::val e, std::string source, unsigned long lineno, unsigned long colno, emscripten::val error);
-
-#define HTML5_READONLY_PROPERTY(klass, type, name)          \
-    type _ ## name;                                         \
-    struct {                                                \
-        klass &self;                                        \
-        operator type() { return self.get_ ## name(); };    \
-    } name{*this};                                          \
-    type get_ ## name() const;
-
-#define HTML5_READONLY_PROPERTY_OBJECT(klass, type, name)                    \
+#define HTML5_READONLY_PROPERTY_OBJECT(klass, type, name)           \
     type *_ ## name;                                                \
     struct {                                                        \
         klass &self;                                                \
@@ -270,6 +262,65 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         type *operator->() { return self.get_ ## name(); };         \
     } name{*this};                                                  \
     type *get_ ## name() const;
+
+#define HTML5_VIRTUAL_PROPERTY(klass, type, name)   \
+    virtual type get_ ## name() const;              \
+    virtual void set_ ## name(type value);
+
+#define HTML5_VIRTUAL_READONLY_PROPERTY(klass, type, name) \
+    virtual type get_ ## name() const;
+
+#define HTML5_VIRTUAL_PROPERTY_OBJECT(klass, type, name)    \
+    virtual type *get_ ## name() const;                     \
+    virtual void set_ ## name(type *value);
+
+#define HTML5_VIRTUAL_READONLY_PROPERTY_OBJECT(klass, type, name) \
+    virtual type *get_ ## name() const;
+
+#define HTML5_PURE_VIRTUAL_PROPERTY(klass, type, name)              \
+    type _ ## name;                                                 \
+    struct {                                                        \
+        klass &self;                                                \
+        void operator=(type value) { self.set_ ## name(value); };   \
+        operator type() { return self.get_ ## name(); };            \
+    } name{*this};                                                  \
+    type get_ ## name() const = 0;                                  \
+    void set_ ## name(type value) = 0;
+
+#define HTML5_PURE_VIRTUAL_PROPERTY_OBJECT(klass, type, name)       \
+    type *_ ## name;                                                \
+    struct {                                                        \
+        klass &self;                                                \
+        void operator=(type *value) { self.set_ ## name(value); };  \
+        operator type*() { return self.get_ ## name(); };           \
+        type *operator->() { return self.get_ ## name(); };         \
+    } name{*this};                                                  \
+    virtual type *get_ ## name() const = 0;                         \
+    virtual void set_ ## name(type *value) = 0;
+
+#define HTML5_PURE_VIRTUAL_READONLY_PROPERTY(klass, type, name) \
+    type _ ## name;                                             \
+    struct {                                                    \
+        klass &self;                                            \
+        operator type() { return self.get_ ## name(); };        \
+    } name{*this};                                              \
+    virtual type get_ ## name() const = 0;
+
+#define HTML5_PURE_VIRTUAL_READONLY_PROPERTY_OBJECT(klass, type, name)  \
+    type *_ ## name;                                                     \
+    struct {                                                            \
+        klass &self;                                                    \
+        operator type*() { return self.get_ ## name(); };               \
+    } name{*this};                                                      \
+    virtual type *get_ ## name() const = 0;
+
+#define HTML5_EVENT_HANDLER_PROPERTY(klass, type, name) \
+    HTML5_PROPERTY(klass, type, name);                  \
+    void callback_ ## name(emscripten::val e);
+
+#define HTML5_ERROR_HANDLER_PROPERTY(klass, type, name)                 \
+    HTML5_PROPERTY(klass, type, name);                                  \
+    void callback_ ## name(emscripten::val e, std::string source, unsigned long lineno, unsigned long colno, emscripten::val error);
 
 #define HTML5_PROPERTY_TRACE_GETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:getter]", #name)
 #define HTML5_PROPERTY_TRACE_SETTER(name) HTML5_PROPERTY_TRACE_PRINT("[property:setter]", #name)

@@ -143,3 +143,43 @@ Object *Object::valueOf()
 {
     return Object::create(HTML5_CALLv(this->v, valueOf));
 }
+
+static int valFromTuple(int v, const std::tuple<int,double,std::string> &data)
+{
+    return std::get<0>(data);
+}
+
+static double valFromTuple(double v, const std::tuple<int,double,std::string> &data)
+{
+    return std::get<1>(data);
+}
+
+static std::string valFromTuple(std::string v, const std::tuple<int,double,std::string> &data)
+{
+    return std::get<2>(data);
+}
+
+template<typename T> T Object::userData(const std::string &key)
+{
+#if ENABLE_EMSCRIPTEN
+    return this->v[key].as<T>();
+#else
+    T v;
+    return valFromTuple(v, this->_userData[key]);
+#endif
+}
+
+void Object::userData(const std::string &key, int value)
+{
+    this->v.set(key, value);
+}
+
+void Object::userData(const std::string &key, double value)
+{
+    this->v.set(key, value);
+}
+
+void Object::userData(const std::string &key, std::string value)
+{
+    this->v.set(key, value);
+}

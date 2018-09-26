@@ -24,6 +24,8 @@ public:
     double get(unsigned long index);
     void set(Array *array, unsigned long offset = 0);
     Float32Array *subarray(long start, long end);
+    double operator[](std::size_t index) const;
+    double& operator[](std::size_t index);
 };
 
 NAMESPACE_HTML5_END;

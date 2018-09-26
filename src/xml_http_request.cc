@@ -61,6 +61,11 @@ XMLHttpRequest *XMLHttpRequest::create(emscripten::val v)
     return request;
 }
 
+XMLHttpRequest *XMLHttpRequest::create()
+{
+    return create(HTML5_NEW_PRIMITIVE_INSTANCE(XMLHttpRequest));
+}
+
 void XMLHttpRequest::abort()
 {
     HTML5_CALL(this->v, abort);
@@ -94,6 +99,11 @@ void XMLHttpRequest::open(std::string method, std::string url, bool async, std::
 void XMLHttpRequest::overrideMimeType(std::string mimeType)
 {
     HTML5_CALL(this->v, overrideMimeType, mimeType);
+}
+
+void XMLHttpRequest::send()
+{
+    HTML5_CALL(this->v, send);
 }
 
 void XMLHttpRequest::send(Document *body)

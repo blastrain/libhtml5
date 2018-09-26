@@ -2,6 +2,7 @@
 
 #include "libhtml5.h"
 #include "native_object.h"
+#include <map>
 
 NAMESPACE_HTML5_BEGIN;
 
@@ -41,7 +42,13 @@ public:
     std::string toString();
     Object *valueOf();
 
+    template<typename T> T userData(const std::string &key);
+    void userData(const std::string &key, int value);
+    void userData(const std::string &key, double value);
+    void userData(const std::string &key, std::string value);
+
 private:
+    std::map<std::string, std::tuple<int,double,std::string>> _userData;
     static emscripten::val to_val(Object *o) { return o->v; };
 };
 

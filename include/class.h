@@ -31,6 +31,8 @@
 #include "event.h"
 #include "event_target.h"
 #include "external.h"
+#include "float32_array.h"
+#include "float64_array.h"
 #include "history.h"
 #include "hit_region_options.h"
 #include "html_canvas_element.h"

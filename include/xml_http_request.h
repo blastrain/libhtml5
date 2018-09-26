@@ -109,6 +109,7 @@ public:
     
     XMLHttpRequest(emscripten::val v);
     virtual ~XMLHttpRequest();
+    static XMLHttpRequest *create();
     static XMLHttpRequest *create(emscripten::val v);
     void abort();
     std::string getAllResponseHeaders();
@@ -117,6 +118,7 @@ public:
     void open(std::string method, std::string url, bool async, std::string user);
     void open(std::string method, std::string url, bool async, std::string user, std::string password);
     void overrideMimeType(std::string mimeType);
+    void send();
     void send(Document *body);
     void send(Blob *body);
     void send(std::string body);

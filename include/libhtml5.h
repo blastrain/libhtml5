@@ -341,7 +341,7 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     {                                           \
         HTML5_PROPERTY_TRACE_SETTER(name);      \
         HTML5_PROPERTY_SET(name, value);        \
-    }                                           
+    }
 
 #define HTML5_EVENT_HANDLER_PROPERTY_IMPL(klass, type, name)            \
     type klass::get_ ## name() const                                    \
@@ -419,19 +419,6 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
         return HTML5_PROPERTY_GET(name, type);                  \
     }
 
-#define HTML5_PURE_VIRTUAL_PROPERTY_OBJECT(klass, type, name)       \
-    type *_ ## name;                                                \
-    struct {                                                        \
-        klass &self;                                                \
-        void operator=(type *value) { self.set_ ## name(value); };  \
-        operator type*() { return self.get_ ## name(); };           \
-        type *operator->() { return self.get_ ## name(); };         \
-    } name{*this};                                                  \
-    virtual type *get_ ## name() const = 0;                         \
-    virtual void set_ ## name(type *value) = 0;
 
-#define HTML5_VIRTUAL_PROPERTY_OBJECT(klass, type, name)    \
-    virtual type *get_ ## name() const;                     \
-    virtual void set_ ## name(type *value);
 
 #include "export.h"

@@ -36,6 +36,8 @@ set(SOURCES src/application_cache.cc
 	src/event_target.cc
 	src/export.cc
 	src/external.cc
+	src/float32_array.cc
+	src/float64_array.cc
 	src/history.cc
 	src/hit_region_options.cc
 	src/html_canvas_element.cc

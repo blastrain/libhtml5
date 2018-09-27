@@ -1,4 +1,5 @@
 #include "blob.h"
+#include "webgl_context_attributes.h"
 #include "html_canvas_element.h"
 
 USING_NAMESPACE_HTML5;
@@ -27,6 +28,11 @@ HTMLCanvasElement *HTMLCanvasElement::create(emscripten::val v)
 RenderingContext *HTMLCanvasElement::getContext(std::string contextId)
 {
     return RenderingContext::create(HTML5_CALLv(this->v, getContext, contextId));
+}
+
+RenderingContext *HTMLCanvasElement::getContext(std::string contextId, WebGLContextAttributes *attr)
+{
+    return RenderingContext::create(HTML5_CALLv(this->v, getContext, contextId, attr->v));
 }
 
 void HTMLCanvasElement::toBlob(std::function<void(Blob*)> *callback, std::string mimeType, double qualityArgument)

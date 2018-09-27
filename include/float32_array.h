@@ -1,6 +1,7 @@
 #pragma once
 
 #include "array_buffer_view.h"
+#include <vector>
 
 NAMESPACE_HTML5_BEGIN;
 
@@ -26,6 +27,9 @@ public:
     Float32Array *subarray(long start, long end);
     double operator[](std::size_t index) const;
     double& operator[](std::size_t index);
+
+private:
+    std::vector<double> _rawdata;
 };
 
 NAMESPACE_HTML5_END;

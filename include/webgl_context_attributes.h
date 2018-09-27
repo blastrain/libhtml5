@@ -18,6 +18,7 @@ public:
     
     WebGLContextAttributes(emscripten::val v);
     virtual ~WebGLContextAttributes();
+    static WebGLContextAttributes *create();
     static WebGLContextAttributes *create(emscripten::val v);
 };
 

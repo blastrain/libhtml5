@@ -1,6 +1,7 @@
 #pragma once
 
 #include "array_buffer_view.h"
+#include <vector>
 
 NAMESPACE_HTML5_BEGIN;
 
@@ -19,6 +20,11 @@ public:
     static Uint8ClampedArray *create(ArrayBuffer *buffer);
     static Uint8ClampedArray *create(ArrayBuffer *buffer, unsigned long byteOffset);
     static Uint8ClampedArray *create(ArrayBuffer *buffer, unsigned long byteOffset, unsigned long length);
+    uint8_t operator[](std::size_t index) const;
+    uint8_t& operator[](std::size_t index);
+    
+private:
+    std::vector<uint8_t> _rawdata;
 };
 
 NAMESPACE_HTML5_END;

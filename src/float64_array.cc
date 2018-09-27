@@ -67,4 +67,22 @@ Float64Array *Float64Array::subarray(long start, long end)
     return create(HTML5_CALLv(this->v, subarray, start, end));
 }
 
+double Float64Array::operator[](std::size_t index) const
+{
+#if ENABLE_EMSCRIPTEN
+    return this->v[index].as<double>();
+#else
+    return this->_rawdata[index];
+#endif
+}
+
+double& Float64Array::operator[](std::size_t index)
+{
+#if ENABLE_EMSCRIPTEN
+    return this->v[index].as<double>();
+#else
+    return this->_rawdata[index];
+#endif
+}
+
 HTML5_PROPERTY_IMPL(Float64Array, unsigned long, length);

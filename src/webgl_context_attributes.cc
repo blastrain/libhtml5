@@ -20,6 +20,11 @@ WebGLContextAttributes *WebGLContextAttributes::create(emscripten::val v)
     return attr;
 }
 
+WebGLContextAttributes *WebGLContextAttributes::create()
+{
+    return create(HTML5_NEW_PRIMITIVE_INSTANCE(Object));
+}
+
 HTML5_PROPERTY_IMPL(WebGLContextAttributes, GLboolean, alpha);
 HTML5_PROPERTY_IMPL(WebGLContextAttributes, GLboolean, antialias);
 HTML5_PROPERTY_IMPL(WebGLContextAttributes, GLboolean, depth);

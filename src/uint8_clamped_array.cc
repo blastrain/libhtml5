@@ -51,4 +51,22 @@ Uint8ClampedArray *Uint8ClampedArray::create(ArrayBuffer *buffer, unsigned long 
     return create(HTML5_NEW_PRIMITIVE_INSTANCE(Uint8ClampedArray, buffer->v, byteOffset, length));
 }
 
+uint8_t Uint8ClampedArray::operator[](std::size_t index) const
+{
+#if ENABLE_EMSCRIPTEN
+    return this->v[index].as<uint8_t>();
+#else
+    return this->_rawdata[index];
+#endif
+}
+
+uint8_t& Uint8ClampedArray::operator[](std::size_t index)
+{
+#if ENABLE_EMSCRIPTEN
+    return this->v[index].as<uint8_t>();
+#else
+    return this->_rawdata[index];
+#endif
+}
+
 HTML5_PROPERTY_IMPL(Uint8ClampedArray, unsigned long, length);

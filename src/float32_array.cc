@@ -72,7 +72,7 @@ double Float32Array::operator[](std::size_t index) const
 #if ENABLE_EMSCRIPTEN
     return this->v[index].as<double>();
 #else
-    return 0;
+    return this->_rawdata[index];
 #endif
 }
 
@@ -81,8 +81,7 @@ double& Float32Array::operator[](std::size_t index)
 #if ENABLE_EMSCRIPTEN
     return this->v[index].as<double>();
 #else
-    double v;
-    return v;
+    return this->_rawdata[index];
 #endif
 }
 

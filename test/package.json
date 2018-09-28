@@ -1,0 +1,9 @@
+{
+  "name": "libhtml5",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "puppeteer": "^1.8.0"
+  }
+}

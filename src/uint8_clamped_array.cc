@@ -60,13 +60,26 @@ uint8_t Uint8ClampedArray::operator[](std::size_t index) const
 #endif
 }
 
-uint8_t& Uint8ClampedArray::operator[](std::size_t index)
+Uint8ClampedArray::uint8WrapType::uint8WrapType(emscripten::val v, size_t index) :
+    v(v),
+    index(index)
 {
-#if ENABLE_EMSCRIPTEN
-    return this->v[index].as<uint8_t>();
-#else
-    return this->_rawdata[index];
-#endif
+
+}
+
+Uint8ClampedArray::uint8WrapType::~uint8WrapType()
+{
+
+}
+
+void Uint8ClampedArray::uint8WrapType::operator=(uint8_t value)
+{
+    this->v.set(this->index, value);
+}
+
+Uint8ClampedArray::uint8WrapType Uint8ClampedArray::operator[](std::size_t index)
+{
+    return Uint8ClampedArray::uint8WrapType(this->v, index);
 }
 
 HTML5_PROPERTY_IMPL(Uint8ClampedArray, unsigned long, length);

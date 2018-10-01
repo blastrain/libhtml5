@@ -11,6 +11,16 @@ public:
 
     HTML5_PROPERTY(Uint8ClampedArray, unsigned long, length);
 
+    class uint8WrapType {
+    public:
+        emscripten::val v;
+        size_t index;
+
+        uint8WrapType(emscripten::val v, size_t index);
+        ~uint8WrapType();
+        void operator=(uint8_t value);
+    };
+
     Uint8ClampedArray(emscripten::val v);
     virtual ~Uint8ClampedArray();
     static Uint8ClampedArray *create(emscripten::val v);
@@ -21,7 +31,7 @@ public:
     static Uint8ClampedArray *create(ArrayBuffer *buffer, unsigned long byteOffset);
     static Uint8ClampedArray *create(ArrayBuffer *buffer, unsigned long byteOffset, unsigned long length);
     uint8_t operator[](std::size_t index) const;
-    uint8_t& operator[](std::size_t index);
+    uint8WrapType operator[](std::size_t index);
     
 private:
     std::vector<uint8_t> _rawdata;

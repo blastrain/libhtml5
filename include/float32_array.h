@@ -13,6 +13,16 @@ public:
 
     HTML5_PROPERTY(Float32Array, unsigned long, length);
 
+    class doubleWrapType {
+    public:
+        emscripten::val v;
+        size_t index;
+
+        doubleWrapType(emscripten::val v, size_t index);
+        ~doubleWrapType();
+        void operator=(double value);
+    };
+
     Float32Array(emscripten::val v);
     virtual ~Float32Array();
     static Float32Array *create(emscripten::val v);
@@ -26,7 +36,7 @@ public:
     void set(Array *array, unsigned long offset = 0);
     Float32Array *subarray(long start, long end);
     double operator[](std::size_t index) const;
-    double& operator[](std::size_t index);
+    doubleWrapType operator[](std::size_t index);
 
 private:
     std::vector<double> _rawdata;

@@ -88,8 +88,10 @@ set(SOURCES src/application_cache.cc
 	src/processing_instruction.cc
 	src/promise.cc
 	src/range.cc
+	src/regexp.cc
 	src/rendering_context.cc
 	src/storage.cc
+	src/string.cc
 	src/style_sheet.cc
 	src/style_sheet_list.cc
 	src/svgmatrix.cc

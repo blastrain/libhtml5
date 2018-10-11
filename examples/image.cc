@@ -24,7 +24,3 @@ static void createImage(std::string url)
     document->body->appendChild(image);
     console->log("image = ", image);
 }
-
-EMSCRIPTEN_BINDINGS(html5example) {
-    emscripten::function("createImage", &createImage);
-}

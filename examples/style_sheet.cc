@@ -36,7 +36,3 @@ static void addStyleSheet() {
 
     }
 }
-
-EMSCRIPTEN_BINDINGS(module) {
-    emscripten::function("addStyleSheet", &addStyleSheet);
-}

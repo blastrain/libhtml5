@@ -45,6 +45,8 @@
 #include "html_source_element.h"
 #include "html_style_element.h"
 #include "html_video_element.h"
+#include "html5_regexp.h"
+#include "html5_string.h"
 #include "idb_database.h"
 #include "idb_environment.h"
 #include "idb_factory.h"

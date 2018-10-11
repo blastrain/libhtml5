@@ -125,6 +125,9 @@ namespace emscripten {
         void set(std::string name, double value) {};
         void set(std::string name, std::string value) {};
         void set(std::string name, val value) {};
+        void set(size_t index, double value) {};
+        void set(size_t index, std::string value) {};
+        void set(size_t index, val value) {};
     };
 
 };

@@ -76,13 +76,26 @@ double Float32Array::operator[](std::size_t index) const
 #endif
 }
 
-double& Float32Array::operator[](std::size_t index)
+Float32Array::doubleWrapType::doubleWrapType(emscripten::val v, size_t index) :
+    v(v),
+    index(index)
 {
-#if ENABLE_EMSCRIPTEN
-    return this->v[index].as<double>();
-#else
-    return this->_rawdata[index];
-#endif
+
+}
+
+Float32Array::doubleWrapType::~doubleWrapType()
+{
+
+}
+
+void Float32Array::doubleWrapType::operator=(double value)
+{
+    this->v.set(this->index, value);
+}
+
+Float32Array::doubleWrapType Float32Array::operator[](std::size_t index)
+{
+    return Float32Array::doubleWrapType(this->v, index);
 }
 
 HTML5_PROPERTY_IMPL(Float32Array, unsigned long, length);

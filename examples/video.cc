@@ -21,7 +21,3 @@ static void createVideo(std::string url)
     html5::Event *event = html5::Event::create("demo");
     video->dispatchEvent(event);
 }
-
-EMSCRIPTEN_BINDINGS(video) {
-    emscripten::function("createVideo", &createVideo);
-}

@@ -40,6 +40,7 @@ set(SOURCES src/application_cache.cc
 	src/float64_array.cc
 	src/history.cc
 	src/hit_region_options.cc
+	src/html_body_element.cc
 	src/html_canvas_element.cc
 	src/html_collection.cc
 	src/html_content_element.cc

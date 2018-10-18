@@ -35,6 +35,7 @@
 #include "float64_array.h"
 #include "history.h"
 #include "hit_region_options.h"
+#include "html_body_element.h"
 #include "html_canvas_element.h"
 #include "html_collection.h"
 #include "html_element.h"

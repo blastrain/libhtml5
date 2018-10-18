@@ -43,6 +43,7 @@ set(SOURCES src/application_cache.cc
 	src/html_body_element.cc
 	src/html_canvas_element.cc
 	src/html_collection.cc
+	src/html_content_element.cc
 	src/html_div_element.cc
 	src/html_element.cc
 	src/html_head_element.cc

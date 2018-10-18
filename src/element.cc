@@ -4,6 +4,7 @@
 #include "node_list.h"
 #include "element.h"
 #include "html_body_element.h"
+#include "html_content_element.h"
 #include "html_div_element.h"
 #include "html_element.h"
 #include "html_image_element.h"
@@ -17,6 +18,7 @@ USING_NAMESPACE_HTML5;
 HTML5_CLASS_FACTORY(Element) {
     HTML5_SUBCLASS_FACTORY(HTMLBodyElement),
     HTML5_SUBCLASS_FACTORY(HTMLDivElement),
+    HTML5_SUBCLASS_FACTORY(HTMLContentElement),
     HTML5_SUBCLASS_FACTORY(HTMLElement),
     HTML5_SUBCLASS_FACTORY(HTMLImageElement),
     HTML5_SUBCLASS_FACTORY(HTMLMediaElement),

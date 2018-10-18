@@ -38,6 +38,7 @@
 #include "html_body_element.h"
 #include "html_canvas_element.h"
 #include "html_collection.h"
+#include "html_content_element.h"
 #include "html_element.h"
 #include "html_head_element.h"
 #include "html_image_element.h"

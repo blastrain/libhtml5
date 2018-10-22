@@ -4,19 +4,26 @@
 
 NAMESPACE_HTML5_BEGIN;
 
-class RegExp : public Object {
+class regexp : public Object {
 public:
 
-    HTML5_PROPERTY(RegExp, bool, global);
-    HTML5_PROPERTY(RegExp, bool, ignoreCase);
-    HTML5_PROPERTY(RegExp, int, lastIndex);
-    HTML5_PROPERTY(RegExp, bool, multiline);
-    HTML5_PROPERTY(RegExp, std::string, source);
+    HTML5_PROPERTY(regexp, bool, global);
+    HTML5_PROPERTY(regexp, bool, ignoreCase);
+    HTML5_PROPERTY(regexp, int, lastIndex);
+    HTML5_PROPERTY(regexp, bool, multiline);
+    HTML5_PROPERTY(regexp, std::string, source);
 
-    RegExp(emscripten::val v);
-    virtual ~RegExp();
-    static RegExp *create(emscripten::val v);
-    static RegExp *create(std::string pattern, std::string flags);
+    regexp(const char *pattern);
+    regexp(const char *pattern, const char *flags);
+    regexp(const std::string &pattern);
+    regexp(const std::string &pattern, const std::string &flags);
+    regexp(emscripten::val v);
+    virtual ~regexp();
+    regexp& operator=(const char *str);
+    regexp& operator=(const std::string& s);
+    static regexp *create(emscripten::val v);
+    static regexp *create(std::string pattern);
+    static regexp *create(std::string pattern, std::string flags);
     bool test(std::string s);
 };
 

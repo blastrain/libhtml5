@@ -77,7 +77,7 @@ string *string::create(emscripten::val v)
     return str;
 }
 
-string *string::create(std::string s)
+string *string::create(const std::string &s)
 {
     return create(HTML5_NEW_PRIMITIVE_INSTANCE(string, s));
 }
@@ -97,12 +97,12 @@ int string::codePointAt(int pos)
     return HTML5_CALLi(this->v, codePointAt, int, pos);
 }
 
-bool string::endsWidth(std::string searchstring)
+bool string::endsWidth(const std::string &searchstring)
 {
     return HTML5_CALLb(this->v, endsWith, searchstring);
 }
 
-bool string::endsWidth(std::string searchstring, int length)
+bool string::endsWidth(const std::string &searchstring, int length)
 {
     return HTML5_CALLb(this->v, endsWith, searchstring, length);
 }
@@ -112,49 +112,49 @@ string string::normalize()
     return HTML5_CALLs(this->v, normalize);
 }
 
-string string::normalize(std::string form)
+string string::normalize(const std::string &form)
 {
     return HTML5_CALLs(this->v, normalize, form);
 }
 
-string string::padEnd(int targetLength, std::string padstring)
+string string::padEnd(int targetLength, const std::string &padstring)
 {
     return HTML5_CALLs(this->v, padEnd, targetLength, padstring);
 }
 
-string string::padStart(int targetLength, std::string padstring)
+string string::padStart(int targetLength, const std::string &padstring)
 {
     return HTML5_CALLs(this->v, padStart, targetLength, padstring);
 }
 
-bool string::includes(std::string searchstring, int position)
+bool string::includes(const std::string &searchstring, int position)
 {
     return HTML5_CALLb(this->v, includes, searchstring, position);
 }
 
-int string::indexOf(std::string searchstring, int position)
+int string::indexOf(const std::string &searchstring, int position)
 {
     return HTML5_CALLi(this->v, indexOf, int, searchstring, position);
 }
 
-int string::lastIndexOf(std::string searchstring)
+int string::lastIndexOf(const std::string &searchstring)
 {
     return HTML5_CALLi(this->v, lastIndexOf, int, searchstring);
 }
     
-int string::lastIndexOf(std::string searchstring, int position)
+int string::lastIndexOf(const std::string &searchstring, int position)
 {
     return HTML5_CALLi(this->v, lastIndexOf, int, searchstring, position);
 }
 
-int string::localCompare(std::string that)
+int string::localCompare(const std::string &that)
 {
     return HTML5_CALLi(this->v, localCompare, int, that);
 }
 
-Array *string::match(RegExp *regexp)
+Array *string::match(const regexp &re)
 {
-    return Array::create(HTML5_CALLv(this->v, match, regexp->v));
+    return Array::create(HTML5_CALLv(this->v, match, re.v));
 }
 
 string string::repeat(int count)
@@ -162,19 +162,19 @@ string string::repeat(int count)
     return HTML5_CALLs(this->v, repeat, count);
 }
 
-string string::replace(RegExp *searchValue, std::string replaceValue)
+string string::replace(const regexp &searchValue, const std::string &replaceValue)
 {
-    return HTML5_CALLs(this->v, replace, searchValue->v, replaceValue);
+    return HTML5_CALLs(this->v, replace, searchValue.v, replaceValue);
 }
 
-string string::replace(std::string searchValue, std::string replaceValue)
+string string::replace(const std::string &searchValue, const std::string &replaceValue)
 {
     return HTML5_CALLs(this->v, replace, searchValue, replaceValue);
 }
 
-int string::search(RegExp *regexp)
+int string::search(const regexp &regexp)
 {
-    return HTML5_CALLi(this->v, search, int, regexp->v);
+    return HTML5_CALLi(this->v, search, int, regexp.v);
 }
 
 string string::slice(int start, int end)
@@ -187,17 +187,17 @@ Array *string::split()
     return Array::create(HTML5_CALLv(this->v, split));
 }
 
-Array *string::split(std::string separator)
+Array *string::split(const std::string &separator)
 {
     return Array::create(HTML5_CALLv(this->v, split, separator));
 }
 
-Array *string::split(std::string separator, int limit)
+Array *string::split(const std::string &separator, int limit)
 {
     return Array::create(HTML5_CALLv(this->v, split, separator, limit));
 }
 
-bool string::startsWith(std::string searchstring, int position)
+bool string::startsWith(const std::string &searchstring, int position)
 {
     return HTML5_CALLb(this->v, startsWith, searchstring, position);
 }

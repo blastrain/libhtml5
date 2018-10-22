@@ -24,7 +24,7 @@ static void stringTest()
     }
     {
         html5::string s = "hello world";
-        for (const auto &splitted : *s.split(" ")) {
+        for (const auto &splitted : s.split(" ")) {
             html5::string v = splitted;
             std::cout << v << std::endl;
             std::cout << "includes h? " << v.includes("h") << std::endl;

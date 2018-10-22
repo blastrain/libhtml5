@@ -30,6 +30,11 @@ static void stringTest()
             std::cout << "includes h? " << v.includes("h") << std::endl;
         }
     }
+    {
+        html5::string s = "0123456789abcdef";
+        std::string primitiveStr = s.substr(1, 10).toUpperCase();
+        std::cout << primitiveStr << std::endl;
+    }
 }
 
 EMSCRIPTEN_BINDINGS(string) {

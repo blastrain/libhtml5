@@ -82,7 +82,7 @@ string *string::create(std::string s)
     return create(HTML5_NEW_PRIMITIVE_INSTANCE(string, s));
 }
 
-std::string string::charAt(int pos)
+string string::charAt(int pos)
 {
     return HTML5_CALLs(this->v, charAt, pos);
 }
@@ -107,22 +107,22 @@ bool string::endsWidth(std::string searchstring, int length)
     return HTML5_CALLb(this->v, endsWith, searchstring, length);
 }
 
-std::string string::normalize()
+string string::normalize()
 {
     return HTML5_CALLs(this->v, normalize);
 }
 
-std::string string::normalize(std::string form)
+string string::normalize(std::string form)
 {
     return HTML5_CALLs(this->v, normalize, form);
 }
 
-std::string string::padEnd(int targetLength, std::string padstring)
+string string::padEnd(int targetLength, std::string padstring)
 {
     return HTML5_CALLs(this->v, padEnd, targetLength, padstring);
 }
 
-std::string string::padStart(int targetLength, std::string padstring)
+string string::padStart(int targetLength, std::string padstring)
 {
     return HTML5_CALLs(this->v, padStart, targetLength, padstring);
 }
@@ -157,17 +157,17 @@ Array *string::match(RegExp *regexp)
     return Array::create(HTML5_CALLv(this->v, match, regexp->v));
 }
 
-std::string string::repeat(int count)
+string string::repeat(int count)
 {
     return HTML5_CALLs(this->v, repeat, count);
 }
 
-std::string string::replace(RegExp *searchValue, std::string replaceValue)
+string string::replace(RegExp *searchValue, std::string replaceValue)
 {
     return HTML5_CALLs(this->v, replace, searchValue->v, replaceValue);
 }
 
-std::string string::replace(std::string searchValue, std::string replaceValue)
+string string::replace(std::string searchValue, std::string replaceValue)
 {
     return HTML5_CALLs(this->v, replace, searchValue, replaceValue);
 }
@@ -177,7 +177,7 @@ int string::search(RegExp *regexp)
     return HTML5_CALLi(this->v, search, int, regexp->v);
 }
 
-std::string string::slice(int start, int end)
+string string::slice(int start, int end)
 {
     return HTML5_CALLs(this->v, slice, start, end);
 }
@@ -202,77 +202,77 @@ bool string::startsWith(std::string searchstring, int position)
     return HTML5_CALLb(this->v, startsWith, searchstring, position);
 }
 
-std::string string::substr(int start)
+string string::substr(int start)
 {
     return HTML5_CALLs(this->v, substr, start);
 }
 
-std::string string::substr(int start, int length)
+string string::substr(int start, int length)
 {
     return HTML5_CALLs(this->v, substr, start, length);
 }
 
-std::string string::substring(int start)
+string string::substring(int start)
 {
     return HTML5_CALLs(this->v, substring, start);
 }
 
-std::string string::substring(int start, int end)
+string string::substring(int start, int end)
 {
     return HTML5_CALLs(this->v, substring, start, end);
 }
 
-std::string string::toLocaleLowerCase()
+string string::toLocaleLowerCase()
 {
     return HTML5_CALLs(this->v, toLocaleLowerCase);
 }
 
-std::string string::toLocaleUpperCase()
+string string::toLocaleUpperCase()
 {
     return HTML5_CALLs(this->v, toLocaleUpperCase);
 }
 
-std::string string::toLowerCase()
+string string::toLowerCase()
 {
     return HTML5_CALLs(this->v, toLowerCase);
 }
 
-std::string string::toString()
+string string::toString()
 {
     return HTML5_CALLs(this->v, toString);
 }
 
-std::string string::toUpperCase()
+string string::toUpperCase()
 {
     return HTML5_CALLs(this->v, toUpperCase);
 }
 
-std::string string::trim()
+string string::trim()
 {
     return HTML5_CALLs(this->v, trim);
 }
 
-std::string string::trimStart()
+string string::trimStart()
 {
     return HTML5_CALLs(this->v, trimStart);
 }
 
-std::string string::trimLeft()
+string string::trimLeft()
 {
     return HTML5_CALLs(this->v, trimLeft);
 }
 
-std::string string::trimEnd()
+string string::trimEnd()
 {
     return HTML5_CALLs(this->v, trimEnd);
 }
 
-std::string string::trimRight()
+string string::trimRight()
 {
     return HTML5_CALLs(this->v, trimRight);
 }
 
-std::string string::valueOf()
+string string::valueOf()
 {
     return HTML5_CALLs(this->v, valueOf);
 }

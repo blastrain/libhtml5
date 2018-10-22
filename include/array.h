@@ -1,6 +1,7 @@
 #pragma once
 
 #include "object.h"
+#include "html5_string.h"
 #include <vector>
 
 NAMESPACE_HTML5_BEGIN;
@@ -30,6 +31,9 @@ public:
         operator std::string() const {
             return this->v[this->index].as<std::string>();
         };
+        operator html5::string() const {
+            return html5::string(this->v[this->index].as<emscripten::val>());
+        }
         operator Array*() const {
             return Array::create(this->v[this->index].as<emscripten::val>());
         };

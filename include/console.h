@@ -1,6 +1,7 @@
 #pragma once
 
 #include "libhtml5.h"
+#include "html5_string.h"
 
 NAMESPACE_HTML5_BEGIN;
 
@@ -59,12 +60,8 @@ public:
 
 private:
     emscripten::val to_val(Object *o) { return o->v; };
-    emscripten::val to_val(std::string o) {
-#if ENABLE_EMSCRIPTEN
-        return emscripten::val(o);
-#else
-        return emscripten::val();
-#endif
+    emscripten::val to_val(const html5::string &s) {
+        return s.v;
     }
     emscripten::val to_val(int o) {
 #if ENABLE_EMSCRIPTEN

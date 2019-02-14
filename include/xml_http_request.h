@@ -7,6 +7,7 @@ NAMESPACE_HTML5_BEGIN;
 
 class Document;
 class Blob;
+class ArrayBuffer;
 class ArrayBufferView;
 
 enum class XMLHttpResponseType {
@@ -61,14 +62,6 @@ inline XMLHttpResponseType toXMLHttpResponseType(std::string type)
 }
 
 
-class XMLHttpResponse : public Object {
-public:
-
-    XMLHttpResponse(emscripten::val v);
-    virtual ~XMLHttpResponse();
-    static XMLHttpResponse *create(emscripten::val v);
-};
-
 class XMLHttpRequestUpload : public Object {
 public:
 
@@ -96,7 +89,6 @@ public:
     HTML5_EVENT_HANDLER_PROPERTY(XMLHttpRequest, EventHandler *, onreadystatechange);
     HTML5_EVENT_HANDLER_PROPERTY(XMLHttpRequest, EventHandler *, ontimeout);
     HTML5_PROPERTY(XMLHttpRequest, unsigned short, readyState);
-    HTML5_PROPERTY(XMLHttpRequest, XMLHttpResponse *, response);
     HTML5_PROPERTY(XMLHttpRequest, std::string, responseText);
     HTML5_PROPERTY(XMLHttpRequest, std::string, responseURL);
     HTML5_PROPERTY(XMLHttpRequest, Document *, responseXML);
@@ -130,6 +122,17 @@ public:
         void operator=(XMLHttpResponseType value) { self.setResponseType(value); };
         operator std::string() { return self.getResponseType(); };
     } responseType{*this};
+
+    struct {
+        XMLHttpRequest &self;
+        operator ArrayBuffer *() { return self.responseArrayBuffer(); };
+        operator Blob *() { return self.responseBlob(); };
+        operator std::string () { return self.responseString(); };
+    } response{*this};
+
+    ArrayBuffer *responseArrayBuffer() const;
+    Blob *responseBlob() const;
+    std::string responseString() const;
 
     std::string getResponseType() const;
     void setResponseType(XMLHttpResponseType value);

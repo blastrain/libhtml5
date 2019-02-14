@@ -1,4 +1,5 @@
 #include "array_buffer_view.h"
+#include "array_buffer.h"
 #include "blob.h"
 #include "document.h"
 #include "xml_http_request.h"
@@ -6,24 +7,6 @@
 USING_NAMESPACE_HTML5;
 
 HTML5_BIND_CLASS(XMLHttpRequest);
-
-XMLHttpResponse::XMLHttpResponse(emscripten::val v) :
-    Object(v)
-{
-
-}
-
-XMLHttpResponse::~XMLHttpResponse()
-{
-
-}
-
-XMLHttpResponse *XMLHttpResponse::create(emscripten::val v)
-{
-    auto response = new XMLHttpResponse(v);
-    response->autorelease();
-    return response;
-}
 
 XMLHttpRequestUpload::XMLHttpRequestUpload(emscripten::val v) :
     Object(v)
@@ -146,6 +129,21 @@ void XMLHttpRequest::setResponseType(XMLHttpResponseType value)
     this->v.set("responseType", toXMLHttpResponseTypeString(value));
 }
 
+ArrayBuffer *XMLHttpRequest::responseArrayBuffer() const
+{
+    return ArrayBuffer::create(this->v["response"].as<emscripten::val>());
+}
+
+Blob *XMLHttpRequest::responseBlob() const
+{
+    return Blob::create(this->v["response"].as<emscripten::val>());
+}
+
+std::string XMLHttpRequest::responseString() const
+{
+    return this->v["response"].as<std::string>();
+}
+
 HTML5_EVENT_HANDLER_PROPERTY_IMPL(XMLHttpRequest, EventHandler *, onabort);
 HTML5_ERROR_HANDLER_PROPERTY_IMPL(XMLHttpRequest, OnErrorEventHandler *, onerror);
 HTML5_EVENT_HANDLER_PROPERTY_IMPL(XMLHttpRequest, EventHandler *, onload);
@@ -155,7 +153,6 @@ HTML5_EVENT_HANDLER_PROPERTY_IMPL(XMLHttpRequest, EventHandler *, onprogress);
 HTML5_EVENT_HANDLER_PROPERTY_IMPL(XMLHttpRequest, EventHandler *, onreadystatechange);
 HTML5_EVENT_HANDLER_PROPERTY_IMPL(XMLHttpRequest, EventHandler *, ontimeout);
 HTML5_PROPERTY_IMPL(XMLHttpRequest, unsigned short, readyState);
-HTML5_PROPERTY_OBJECT_IMPL(XMLHttpRequest, XMLHttpResponse, response);
 HTML5_PROPERTY_IMPL(XMLHttpRequest, std::string, responseText);
 HTML5_PROPERTY_IMPL(XMLHttpRequest, std::string, responseURL);
 HTML5_PROPERTY_OBJECT_IMPL(XMLHttpRequest, Document, responseXML);

@@ -357,10 +357,14 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     {                                                                   \
         HTML5_PROPERTY_TRACE_SETTER(name);                              \
         this->_ ## name = value;                                        \
+        const char *key = __to_text__(to ## klass);                     \
+        const char *callbackFnName = __to_text__(callback_ ## name);    \
         EM_ASM_({                                                       \
-                const elem = Module.to ## klass($0);                    \
-                elem._value.name = function(e) { elem.callback_ ## name(e); }; \
-            }, this);                                                   \
+                var key = Module['toString']($1);                       \
+                var callbackFnName = Module['toString']($2);            \
+                var elem = Module[key]($0);                             \
+                elem['_value'][#name] = function(e) { elem[callbackFnName](e); }; \
+            }, this, key, callbackFnName);                              \
     }                                                                   \
     void klass::callback_ ## name(emscripten::val e)                    \
     {                                                                   \
@@ -380,12 +384,16 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     {                                                                   \
         HTML5_PROPERTY_TRACE_SETTER(name);                              \
         this->_ ## name = value;                                        \
+        const char *key = __to_text__(to ## klass);                     \
+        const char *callbackFnName = __to_text__(callback_ ## name);    \
         EM_ASM_({                                                       \
-                const elem = Module.to ## klass($0);                    \
-                elem._value.name = function(event, source, lineno, colno, error) { \
-                    elem.callback_ ## name(event, source, lineno, colno, error); \
+                var key = Module['toString']($1);                       \
+                var callbackFnName = Module['toString']($2);            \
+                var elem = Module[key]($0);                             \
+                elem['_value'][#name] = function(event, source, lineno, colno, error) { \
+                    elem[callbackFnName](event, source, lineno, colno, error); \
                 };                                                      \
-            }, this);                                                   \
+            }, this, key, callbackFnName);                              \
     }                                                                   \
     void klass::callback_ ## name(emscripten::val e, std::string source, unsigned long lineno, unsigned long colno, emscripten::val error) \
     {                                                                   \

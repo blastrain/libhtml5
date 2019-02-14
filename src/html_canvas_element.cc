@@ -39,10 +39,10 @@ void HTMLCanvasElement::toBlob(std::function<void(Blob*)> *callback, std::string
 {
     this->_toBlobFn = callback;
     EM_ASM_({
-        const elem = Module.toHTMLCanvasElement($0);
-        const mimeType = Module.toString($1);
-        const quality  = $2;
-        elem._value.toBlob(function(blob) { elem.toBlobCallback(blob); }, mimeType, quality);
+        var elem = Module['toHTMLCanvasElement']($0);
+        var mimeType = Module['toString']($1);
+        var quality  = $2;
+        elem['_value']['toBlob'](function(blob) { elem['toBlobCallback'](blob); }, mimeType, quality);
     }, this, mimeType.c_str(), qualityArgument);
 }
 

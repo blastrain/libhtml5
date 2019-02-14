@@ -96,6 +96,7 @@
 #include "text_track_list.h"
 #include "time_ranges.h"
 #include "tree_walker.h"
+#include "uint8_array.h"
 #include "uint8_clamped_array.h"
 #include "video_track.h"
 #include "video_track_list.h"

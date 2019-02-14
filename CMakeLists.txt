@@ -105,6 +105,7 @@ set(SOURCES src/application_cache.cc
 	src/text_track_list.cc
 	src/time_ranges.cc
 	src/tree_walker.cc
+	src/uint8_array.cc
 	src/uint8_clamped_array.cc
 	src/video_track.cc
 	src/video_track_list.cc

@@ -37,10 +37,10 @@ void EventTarget::addEventListener(std::string type, EventHandler *handler, bool
 
     this->handlers[type].push_back(handler);
     EM_ASM_({
-        const eventTarget = Module.toEventTarget($0);
-        const type = Module.toString($1);
-        const capture = $2;
-        eventTarget._value.addEventListener(type, function(e) { eventTarget.addEventHandlerCallback(e); }, capture);
+        var eventTarget = Module['toEventTarget']($0);
+        var type = Module['toString']($1);
+        var capture = $2;
+        eventTarget['_value']['addEventListener'](type, function(e) { eventTarget['addEventHandlerCallback'](e); }, capture);
     }, this, type.c_str(), capture);
 }
 
@@ -50,10 +50,10 @@ void EventTarget::addEventListener(std::string type, EventListener *listener, bo
 
     this->listeners[type].push_back(listener);
     EM_ASM_({
-        const eventTarget = Module.toEventTarget($0);
-        const type = Module.toString($1);
-        const capture = $2;
-        eventTarget._value.addEventListener(type, function(e) { eventTarget.addEventListenerCallback(e); }, capture);
+        var eventTarget = Module['toEventTarget']($0);
+        var type = Module['toString']($1);
+        var capture = $2;
+        eventTarget['_value']['addEventListener'](type, function(e) { eventTarget['addEventListenerCallback'](e); }, capture);
     }, this, type.c_str(), capture);
 }
 

@@ -172,9 +172,9 @@ long Window::requestAnimationFrame(std::function<void(double)> *callback)
 {
     this->_requestAnimationFrameFn = callback;
     return EM_ASM_INT({
-        const w = Module.toWindow($0);
-        return window.requestAnimationFrame(function(time) {
-            w.requestAnimationFrameCallback(time);
+        var w = Module['toWindow']($0);
+        return window['requestAnimationFrame'](function(time) {
+            w['requestAnimationFrameCallback'](time);
         });
     }, this);
 }
@@ -190,9 +190,9 @@ long Window::setInterval(std::function<void(void)> *handler, long timeout)
 {
     this->_setIntervalFn = handler;
     return EM_ASM_INT({
-        const w = Module.toWindow($0);
-        return window.setInterval(function() {
-            w.setIntervalCallback();
+        var w = Module['toWindow']($0);
+        return window['setInterval'](function() {
+            w['setIntervalCallback']();
         }, timeout);
     }, this);
 }
@@ -208,9 +208,9 @@ long Window::setTimeout(std::function<void(void)> *handler, long timeout)
 {
     this->_setTimeoutFn = handler;
     return EM_ASM_INT({
-        const w = Module.toWindow($0);
-        return window.setTimeout(function() {
-            w.setTimeoutCallback();
+        var w = Module['toWindow']($0);
+        return window['setTimeout'](function() {
+            w['setTimeoutCallback']();
         }, timeout);
     }, this);
 }

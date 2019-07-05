@@ -152,9 +152,9 @@ int string::localCompare(const std::string &that)
     return HTML5_CALLi(this->v, localCompare, int, that);
 }
 
-Array string::match(const regexp &re)
+array string::match(const regexp &re)
 {
-    return Array(HTML5_CALLv(this->v, match, re.v));
+    return array(HTML5_CALLv(this->v, match, re.v));
 }
 
 string string::repeat(int count)
@@ -182,19 +182,19 @@ string string::slice(int start, int end)
     return HTML5_CALLs(this->v, slice, start, end);
 }
 
-Array string::split()
+array string::split()
 {
-    return Array(HTML5_CALLv(this->v, split));
+    return array(HTML5_CALLv(this->v, split));
 }
 
-Array string::split(const std::string &separator)
+array string::split(const std::string &separator)
 {
-    return Array(HTML5_CALLv(this->v, split, separator));
+    return array(HTML5_CALLv(this->v, split, separator));
 }
 
-Array string::split(const std::string &separator, int limit)
+array string::split(const std::string &separator, int limit)
 {
-    return Array(HTML5_CALLv(this->v, split, separator, limit));
+    return array(HTML5_CALLv(this->v, split, separator, limit));
 }
 
 bool string::startsWith(const std::string &searchstring, int position)

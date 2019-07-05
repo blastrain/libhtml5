@@ -57,9 +57,9 @@ double Float64Array::get(unsigned long index)
     return HTML5_CALLf(this->v, get, double, index);
 }
 
-void Float64Array::set(Array *array, unsigned long offset)
+void Float64Array::set(const array &array, unsigned long offset)
 {
-    HTML5_CALL(this->v, set, array->v, offset);
+    HTML5_CALL(this->v, set, array.v, offset);
 }
 
 Float64Array *Float64Array::subarray(long start, long end)

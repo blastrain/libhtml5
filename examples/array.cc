@@ -6,8 +6,8 @@ static void arrayTest()
 {
     HTML5_INIT();
 
-    html5::Array subarray;
-    html5::Array array = {
+    html5::array subarray;
+    html5::array array = {
         1, M_PI, "hello", subarray, html5::Object::create(),
     };
     html5::window->console->log("array = ", array);
@@ -21,7 +21,7 @@ static void arrayTest()
     std::string svalue = array[2];
     html5::window->console->log("array[2] = ", svalue);
 
-    html5::Array *avalue = array[3];
+    html5::array *avalue = array[3];
     html5::window->console->log("array[3] = ", avalue);
 
     html5::Object *ovalue = array[4];
@@ -40,7 +40,7 @@ static void arrayTest()
             html5::window->console->log((std::string)e);
             break;
         case 3:
-            html5::window->console->log((html5::Array)e);
+            html5::window->console->log((html5::array)e);
             break;
         case 4:
             html5::window->console->log((html5::Object *)e);
@@ -49,11 +49,11 @@ static void arrayTest()
         index++;
     }
 
-    array.forEach([](const html5::Array::Element &e, int index){
+    array.forEach([](const html5::array::Element &e, int index){
         html5::window->console->log(index);
     });
 }
 
-EMSCRIPTEN_BINDINGS(array) {
+EMSCRIPTEN_BINDINGS(Array) {
     emscripten::function("arrayTest", &arrayTest);
 }

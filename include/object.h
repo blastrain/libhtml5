@@ -6,7 +6,7 @@
 
 NAMESPACE_HTML5_BEGIN;
 
-class Array;
+class array;
 
 class Object : public NativeObject {
 public:
@@ -32,8 +32,8 @@ public:
     static std::vector<std::string> keys(Object *o);
     static Object *preventExtensions(Object *o);
     static Object *seal(Object *o);
-    static Array *values(Object *o);
-    static Array *entries(Object *o);
+    static array values(Object *o);
+    static array entries(Object *o);
     virtual emscripten::val getValue() const { return this->v; };
     bool hasOwnProperty(std::string prop);
     bool isPrototypeOf(Object *o);

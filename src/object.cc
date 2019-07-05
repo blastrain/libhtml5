@@ -104,14 +104,14 @@ Object *Object::seal(Object *o)
     return Object::create(HTML5_CALLv(HTML5_STATIC_PRIMITIVE_INSTANCE(Object), seal, o->v));
 }
 
-Array *Object::values(Object *o)
+array Object::values(Object *o)
 {
-    return Array::create(HTML5_CALLv(HTML5_STATIC_PRIMITIVE_INSTANCE(Object), values, o->v));
+    return array(HTML5_CALLv(HTML5_STATIC_PRIMITIVE_INSTANCE(Object), values, o->v));
 }
 
-Array *Object::entries(Object *o)
+array Object::entries(Object *o)
 {
-    return Array::create(HTML5_CALLv(HTML5_STATIC_PRIMITIVE_INSTANCE(Object), entries, o->v));
+    return array(HTML5_CALLv(HTML5_STATIC_PRIMITIVE_INSTANCE(Object), entries, o->v));
 }
 
 bool Object::hasOwnProperty(std::string prop)

@@ -6,10 +6,10 @@
 
 NAMESPACE_HTML5_BEGIN;
 
-class Array : public Object {
+class array : public Object {
 public:
 
-    HTML5_PROPERTY(Array, unsigned long, length);
+    HTML5_PROPERTY(array, unsigned long, length);
 
     class Element {
     public:
@@ -34,8 +34,8 @@ public:
         operator html5::string() const {
             return html5::string(this->v[this->index].as<emscripten::val>());
         }
-        operator Array*() const {
-            return Array::create(this->v[this->index].as<emscripten::val>());
+        operator array*() const {
+            return array::create(this->v[this->index].as<emscripten::val>());
         };
         operator Object*() const {
             return Object::create(this->v[this->index].as<emscripten::val>());
@@ -44,7 +44,7 @@ public:
 
     class iterator {
     public:
-        iterator(Array *list, unsigned long index = 0) :
+        iterator(array *list, unsigned long index = 0) :
             _list(list),
             _index(index){};
         virtual ~iterator() {};
@@ -56,34 +56,34 @@ public:
         bool operator!=(const iterator& v) { return this->_index != v._index; };
     private:
         unsigned long _index;
-        Array *_list;
+        array *_list;
     };
     iterator begin() { return iterator(this); };
     iterator end() { return iterator(this, this->length); };
 
-    Array(emscripten::val v);
-    template<typename... Args> Array(const Args&... args) : Object(HTML5_NEW_PRIMITIVE_INSTANCE(Array)) {
+    array(emscripten::val v);
+    template<typename... Args> array(const Args&... args) : Object(HTML5_NEW_PRIMITIVE_INSTANCE(array)) {
         push(args...);
     };
-    virtual ~Array();
-    static Array *create(emscripten::val v);
-    static Array *create(unsigned long length = 0);
+    virtual ~array();
+    static array *create(emscripten::val v);
+    static array *create(unsigned long length = 0);
     Element operator[](std::size_t index) const;
     Element operator[](std::size_t index);
     void forEach(std::function<void(const Element &elem)> callback);
     void forEach(std::function<void(const Element &elem, int index)> callback);
-    void forEach(std::function<void(const Element &elem, int index, Array *array)> callback);
+    void forEach(std::function<void(const Element &elem, int index, const array &array)> callback);
     template<typename... Args> unsigned long push(const Args&... args) {
         return HTML5_CALLi(this->v, push, unsigned long, to_val(args)...);
     };
     Element pop();
-    Array *concat(Array *array);
+    array concat(const array &array);
     bool includes(int searchElement, int fromIndex = 0);
     bool includes(double searchElement, int fromIndex = 0);
     bool includes(std::string searchElement, int fromIndex = 0);
     std::string join(std::string separator = ",");
-    Array *slice(int begin = 0);
-    Array *slice(int begin, int end);
+    array slice(int begin = 0);
+    array slice(int begin, int end);
     int indexOf(int searchElement, int fromIndex = 0);
     int indexOf(double searchElement, int fromIndex = 0);
     int indexOf(std::string searchElement, int fromIndex = 0);
@@ -92,30 +92,30 @@ public:
     int lastIndexOf(std::string searchElement, int fromIndex = 0);
     bool every(std::function<bool(const Element &elem)> callback);
     bool some(std::function<bool(const Element &elem)> callback);
-    Array *filter(std::function<bool(const Element &elem)> callback);
+    array filter(std::function<bool(const Element &elem)> callback);
     Element find(std::function<bool(const Element &elem)> callback);
     int findIndex(std::function<bool(const Element &elem)> callback);
-    Array *map(std::function<Element(const Element &elem)> callback);
+    array map(std::function<Element(const Element &elem)> callback);
     Element reduce(std::function<Element(Element,Element)> callback);
     Element reduce(std::function<Element(Element,Element,int)> callback);
-    Element reduce(std::function<Element(Element,Element,int,Array*)> callback);
+    Element reduce(std::function<Element(Element,Element,int,const array&)> callback);
     Element reduceRight(std::function<Element(Element,Element)> callback);
     Element reduceRight(std::function<Element(Element,Element,int)> callback);
-    Element reduceRight(std::function<Element(Element,Element,int,Array*)> callback);
+    Element reduceRight(std::function<Element(Element,Element,int,const array&)> callback);
     void fill(int value, int start = 0);
     void fill(int value, int start, int end);
     void fill(double value, int start = 0);
     void fill(double value, int start, int end);
     void fill(std::string value, int start = 0);
     void fill(std::string value, int start, int end);
-    Array *reverse();
+    array reverse();
     Element shift();
-    Array *sort();
-    Array *sort(std::function<int(const Element &a, const Element &b)> compareFn);
-    Array *splice(int index);
-    Array *splice(int index, unsigned long howMany);
-    template<typename... Args> Array *splice(int index, unsigned long howMany, const Args&... args) {
-        return Array::create(HTML5_CALL(this->v, splice, index, howMany, to_val(args)...));
+    array sort();
+    array sort(std::function<int(const Element &a, const Element &b)> compareFn);
+    array splice(int index);
+    array splice(int index, unsigned long howMany);
+    template<typename... Args> array splice(int index, unsigned long howMany, const Args&... args) {
+        return array(HTML5_CALL(this->v, splice, index, howMany, to_val(args)...));
     };
     template<typename... Args> unsigned long unshift(const Args& ...args) {
         return HTML5_CALLi(this->v, unshift, unsigned long, to_val(args)...);
@@ -123,7 +123,7 @@ public:
     
 private:
     emscripten::val to_val(Object *o) { return o->v; };
-    emscripten::val to_val(const Array &o) { return o.v; };
+    emscripten::val to_val(const array &o) { return o.v; };
     emscripten::val to_val(const Element &o) { return o.v; };
     emscripten::val to_val(std::string o) {
 #if ENABLE_EMSCRIPTEN

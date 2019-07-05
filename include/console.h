@@ -2,6 +2,7 @@
 
 #include "libhtml5.h"
 #include "html5_string.h"
+#include "array.h"
 
 NAMESPACE_HTML5_BEGIN;
 
@@ -60,7 +61,7 @@ public:
 
 private:
     emscripten::val to_val(Object *o) { return o->v; };
-    emscripten::val to_val(const Array &o) { return o.v; };
+    emscripten::val to_val(const array &o) { return o.v; };
     emscripten::val to_val(const html5::string &s) {
         return s.v;
     }

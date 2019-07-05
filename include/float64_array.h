@@ -33,7 +33,7 @@ public:
     static Float64Array *create(ArrayBuffer *buffer, unsigned long byteOffset);
     static Float64Array *create(ArrayBuffer *buffer, unsigned long byteOffset, unsigned long length);
     double get(unsigned long index);
-    void set(Array *array, unsigned long offset = 0);
+    void set(const array &array, unsigned long offset = 0);
     Float64Array *subarray(long start, long end);
     double operator[](std::size_t index) const;
     doubleWrapType operator[](std::size_t index);

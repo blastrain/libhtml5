@@ -4,7 +4,7 @@
 
 NAMESPACE_HTML5_BEGIN;
 
-class Array;
+class array;
 class regexp;
 
 class string : public Object {
@@ -49,15 +49,15 @@ public:
     int lastIndexOf(const std::string &searchstring);
     int lastIndexOf(const std::string &searchstring, int position);
     int localCompare(const std::string &that);
-    Array match(const regexp &re);
+    array match(const regexp &re);
     string repeat(int count);
     string replace(const regexp &searchValue, const std::string &replaceValue);
     string replace(const std::string &searchValue, const std::string &replaceValue);
     int search(const regexp &regexp);
     string slice(int start, int end);
-    Array split();
-    Array split(const std::string &separator);
-    Array split(const std::string &separator, int limit);
+    array split();
+    array split(const std::string &separator);
+    array split(const std::string &separator, int limit);
     bool startsWith(const std::string &searchstring, int position = 0);
     string substr(int start);
     string substr(int start, int length);

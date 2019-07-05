@@ -1,8 +1,8 @@
 emscripten:
-  build: .
+  image: knocknote/wasm:latest
   container_name: 'libhtml5'
   environment:
-    TZ: "Asia/Tokyo"
     ROOT_PATH: "/src/emscripten"
+  entrypoint: tail -f /dev/null
   volumes:
     - ".:/src/emscripten"

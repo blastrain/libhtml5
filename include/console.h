@@ -60,8 +60,19 @@ public:
 
 private:
     emscripten::val to_val(Object *o) { return o->v; };
+    emscripten::val to_val(const Array &o) { return o.v; };
     emscripten::val to_val(const html5::string &s) {
         return s.v;
+    }
+    emscripten::val to_val(const std::string &s) {
+#if ENABLE_EMSCRIPTEN
+        return emscripten::val(s);
+#else
+        return emscripten::val();
+#endif
+    }
+    emscripten::val to_val(const char *s) {
+        return to_val(std::string(s));
     }
     emscripten::val to_val(int o) {
 #if ENABLE_EMSCRIPTEN

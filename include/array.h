@@ -62,6 +62,9 @@ public:
     iterator end() { return iterator(this, this->length); };
 
     Array(emscripten::val v);
+    template<typename... Args> Array(const Args&... args) : Object(HTML5_NEW_PRIMITIVE_INSTANCE(Array)) {
+        push(args...);
+    };
     virtual ~Array();
     static Array *create(emscripten::val v);
     static Array *create(unsigned long length = 0);
@@ -120,6 +123,7 @@ public:
     
 private:
     emscripten::val to_val(Object *o) { return o->v; };
+    emscripten::val to_val(const Array &o) { return o.v; };
     emscripten::val to_val(const Element &o) { return o.v; };
     emscripten::val to_val(std::string o) {
 #if ENABLE_EMSCRIPTEN
@@ -128,6 +132,7 @@ private:
         return emscripten::val();
 #endif
     }
+    emscripten::val to_val(const char *o) { return to_val(std::string(o)); };
     emscripten::val to_val(int o) {
 #if ENABLE_EMSCRIPTEN
         return emscripten::val(o);

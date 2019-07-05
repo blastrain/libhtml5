@@ -164,7 +164,7 @@ public:
     std::string prompt(std::string message, std::string _default);
     long requestAnimationFrame(std::function<void(double)> *callback);
     long setInterval(std::function<void(void)> *handler, long timeout);
-    long setTimeout(std::function<void(void)> *handler, long timeout);
+    long setTimeout(std::function<void(void)> handler, long timeout);
     void stop();
 
     void requestAnimationFrameCallback(double time);
@@ -173,7 +173,7 @@ public:
 private:
     std::function<void(double)> *_requestAnimationFrameFn;
     std::function<void(void)> *_setIntervalFn;
-    std::function<void(void)> *_setTimeoutFn;
+    std::function<void(void)> _setTimeoutFn;
 };
 
 class WindowProxy : public Window {

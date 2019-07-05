@@ -35,6 +35,7 @@ public:
     static array values(Object *o);
     static array entries(Object *o);
     virtual emscripten::val getValue() const { return this->v; };
+    virtual void setValue(emscripten::val v) { this->v = v; };
     bool hasOwnProperty(std::string prop);
     bool isPrototypeOf(Object *o);
     bool propertyIsEnumerable(std::string s);

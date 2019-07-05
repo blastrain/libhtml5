@@ -106,7 +106,7 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     }                                                                   \
     static emscripten::class_<klassname> klass = emscripten::class_<klassname>(#klassname); \
     EMSCRIPTEN_BINDINGS(klassname ## _to ## klassname) { function(__to_text__(to ## klassname), &to ## klassname, emscripten::allow_raw_pointers()); } \
-    EMSCRIPTEN_BINDINGS(klassname ## _getValue) { klass.property("_value", &klassname::getValue); }
+    EMSCRIPTEN_BINDINGS(klassname ## _getsetValue) { klass.property("_value", &klassname::getValue, &klassname::setValue); }
 
 #define HTML5_BIND_METHOD(klassname, method) EMSCRIPTEN_BINDINGS(klassname ## method) { klass.function(#method, &klassname::method); }
 

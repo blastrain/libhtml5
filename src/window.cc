@@ -193,8 +193,8 @@ long Window::setInterval(std::function<void(void)> *handler, long timeout)
         var w = Module['toWindow']($0);
         return window['setInterval'](function() {
             w['setIntervalCallback']();
-        }, timeout);
-    }, this);
+        }, $1);
+    }, this, timeout);
 }
 
 void Window::setIntervalCallback()
@@ -204,22 +204,22 @@ void Window::setIntervalCallback()
     (*this->_setIntervalFn)();
 }
 
-long Window::setTimeout(std::function<void(void)> *handler, long timeout)
+long Window::setTimeout(std::function<void(void)> handler, long timeout)
 {
     this->_setTimeoutFn = handler;
     return EM_ASM_INT({
         var w = Module['toWindow']($0);
         return window['setTimeout'](function() {
             w['setTimeoutCallback']();
-        }, timeout);
-    }, this);
+        }, $1);
+    }, this, timeout);
 }
 
 void Window::setTimeoutCallback()
 {
     if (!this->_setTimeoutFn) return;
 
-    (*this->_setTimeoutFn)();
+    this->_setTimeoutFn();
 }
 
 void Window::stop()

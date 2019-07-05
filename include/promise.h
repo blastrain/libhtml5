@@ -5,6 +5,13 @@
 
 NAMESPACE_HTML5_BEGIN;
 
+typedef std::function<void()> chainVoid;
+typedef std::function<void(const std::string&)> chainString;
+
+typedef std::function<void(chainVoid, chainVoid)> executor;
+typedef std::function<void(chainString, chainVoid)> executorString;
+
+
 class Promise : public Object {
 public:
 
@@ -12,14 +19,21 @@ public:
 
     Promise(emscripten::val v);
     virtual ~Promise();
-    static Promise *create(std::function<Promise*(std::function<void*>,std::function<void*>)> fn);
+    static Promise *create(executor fn);
+    static Promise *create(executorString fn);
     static Promise *create(emscripten::val v);
     Promise *all(std::vector<Promise *> iterable);
     Promise *race(std::vector<Promise *> iterable);
     Promise *reject(std::string reason);
     Promise *resolve(void *value);
     Promise *pcatch(std::function<Promise*(Promise*)> onRejected);
-    Promise *then(std::function<Promise*(Promise*)> onFulfilled);
+    Promise *then(chainString onFulfilled);
+
+    executorString execStr;
+    std::vector<chainString> chainFns;
+
+    void executeString(emscripten::val resolve, emscripten::val reject);
+    void callbackThenString(emscripten::val resolve);
 };
 
 NAMESPACE_HTML5_END;

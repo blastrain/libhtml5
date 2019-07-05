@@ -128,7 +128,7 @@ long setInterval(std::function<void(void)> *handler, long timeout)
     return window->setInterval(handler, timeout);
 }
 
-long setTimeout(std::function<void(void)> *handler, long timeout)
+long setTimeout(std::function<void(void)> handler, long timeout)
 {
     return window->setTimeout(handler, timeout);
 }

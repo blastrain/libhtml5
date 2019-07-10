@@ -51,6 +51,7 @@ extern Promise *createImageBitmap(Blob *image, long sx, long sy, long sw, long s
 extern Promise *createImageBitmap(ImageData *image, long sx, long sy, long sw, long sh);
 extern Promise *createImageBitmap(CanvasRenderingContext2D *image, long sx, long sy, long sw, long sh);
 extern Promise *createImageBitmap(ImageBitmap *image, long sx, long sy, long sw, long sh);
+extern Promise *fetch(const std::string &url);
 extern void focus();
 extern CSSStyleDeclaration *getComputedStyle(Element *elt, std::string pseudoElt);
 extern WindowProxy *getter(void *indexName);

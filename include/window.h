@@ -155,6 +155,7 @@ public:
     Promise *createImageBitmap(ImageData *image, long sx, long sy, long sw, long sh);
     Promise *createImageBitmap(CanvasRenderingContext2D *image, long sx, long sy, long sw, long sh);
     Promise *createImageBitmap(ImageBitmap *image, long sx, long sy, long sw, long sh);
+    Promise *fetch(const std::string &url);
     void focus();
     CSSStyleDeclaration *getComputedStyle(Element *elt, std::string pseudoElt);
     WindowProxy *getter(void *indexName);

@@ -373,6 +373,33 @@ template<typename T> std::vector<T *> toObjectArray(emscripten::val v)
     }                                                                   \
     HTML5_BIND_METHOD(klass, callback_ ## name);
 
+#define HTML5_EVENT_HANDLER_PROPERTY_IMPL_NEW(klass, type, name)        \
+    type klass::get_ ## name() const                                    \
+    {                                                                   \
+        HTML5_PROPERTY_TRACE_GETTER(name);                              \
+        return this->_ ## name;                                         \
+    }                                                                   \
+                                                                        \
+    void klass::set_ ## name(type value)                                \
+    {                                                                   \
+        HTML5_PROPERTY_TRACE_SETTER(name);                              \
+        this->_ ## name = value;                                        \
+        const char *key = __to_text__(to ## klass);                     \
+        const char *callbackFnName = __to_text__(callback_ ## name);    \
+        EM_ASM_({                                                       \
+                var key = Module['toString']($1);                       \
+                var callbackFnName = Module['toString']($2);            \
+                var elem = Module[key]($0);                             \
+                elem['_value'][#name] = function(e) { elem[callbackFnName](e); }; \
+            }, this, key, callbackFnName);                              \
+    }                                                                   \
+    void klass::callback_ ## name(emscripten::val e)                    \
+    {                                                                   \
+        if (!this->_ ## name) return;                                   \
+        (this->_ ## name)(Event::create(e));                            \
+    }                                                                   \
+    HTML5_BIND_METHOD(klass, callback_ ## name);
+
 #define HTML5_ERROR_HANDLER_PROPERTY_IMPL(klass, type, name)            \
     type klass::get_ ## name() const                                    \
     {                                                                   \

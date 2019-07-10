@@ -83,6 +83,11 @@ Promise *createImageBitmap(ImageBitmap *image, long sx, long sy, long sw, long s
     return window->createImageBitmap(image, sx, sy, sw, sh);
 }
 
+Promise *fetch(const std::string &url)
+{
+    return window->fetch(url);
+}
+
 void focus()
 {
     window->focus();

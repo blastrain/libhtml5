@@ -1086,7 +1086,7 @@ Promise *Promise::then(PromiseStringPromiseFunction onFulfilled, PromiseObjectPr
     }, this);
     return this;
 }
-
+/*
 Promise *Promise::then(PromiseObjectFunction onFulfilled)
 {
     auto fn = new PromiseChainFunction();
@@ -1098,7 +1098,7 @@ Promise *Promise::then(PromiseObjectFunction onFulfilled)
     }, this); 
     return this;
 }
-
+*/
 Promise *Promise::then(PromiseObjectFunction onFulfilled, PromiseVoidFunction onRejected)
 {
     auto fn = new PromiseChainFunction();

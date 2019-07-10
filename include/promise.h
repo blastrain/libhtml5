@@ -102,12 +102,12 @@ public:
     Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseDoublePromiseFunction onRejected);
     Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseStringPromiseFunction onRejected);
     Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseObjectPromiseFunction onRejected);
-    Promise *then(PromiseObjectFunction onFulfilled);
     Promise *then(PromiseObjectFunction onFulfilled, PromiseVoidFunction onRejected);
     Promise *then(PromiseObjectFunction onFulfilled, PromiseDoubleFunction onRejected);
     Promise *then(PromiseObjectFunction onFulfilled, PromiseStringFunction onRejected);
     Promise *then(PromiseObjectFunction onFulfilled, PromiseObjectFunction onRejected);
     Promise *then(PromiseObjectPromiseFunction onFulfilled);
+    //Promise *then(PromiseObjectFunction onFulfilled);
     Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseVoidFunction onRejected);
     Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseDoubleFunction onRejected);
     Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseStringFunction onRejected);

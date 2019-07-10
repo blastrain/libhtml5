@@ -1413,6 +1413,9 @@ emscripten::val Promise::callbackThenOP(emscripten::val v)
     Promise *p = func(Object(v));
     this->chains.erase(this->chains.begin());
     delete chain;
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
     return p->v;
 }
 

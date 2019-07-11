@@ -18,11 +18,10 @@ static void promiseTest()
     html5::window->console->log(promise);
 }
 
-static void fetchTest()
+static void fetchImageTest(const std::string &imageURL)
 {
     HTML5_INIT();
-    std::string url = "http://localhost/test/free.jpg";
-    html5::fetch(url)->then<html5::Response *>([](html5::Response *response) {
+    html5::fetch(imageURL)->then<html5::Response *>([](html5::Response *response) {
         return response->blob();
     })->then<html5::Blob *>([](html5::Blob *blob) {
         auto reader = html5::FileReader::create();
@@ -45,5 +44,5 @@ static void fetchTest()
 
 EMSCRIPTEN_BINDINGS(Promise) {
     emscripten::function("promiseTest", &promiseTest);
-    emscripten::function("fetchTest", &fetchTest);
+    emscripten::function("fetchImageTest", &fetchImageTest);
 }

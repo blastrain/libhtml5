@@ -10,6 +10,7 @@ static void promiseTest()
     });
     promise->then([](const std::string &value) {
         html5::window->console->log(value);
+        return nullptr;
     });
     html5::window->console->log(promise);
 }
@@ -18,11 +19,9 @@ static void fetchTest()
 {
     HTML5_INIT();
     std::string url = "http://localhost/test/free.jpg";
-    html5::fetch(url)->then([](const html5::Object &_response)->html5::Promise* {
-        auto response = (html5::Response *)(&_response);
+    html5::fetch(url)->then<html5::Response *>([](html5::Response *response) {
         return response->blob();
-    })->then([](const html5::Object &_blob)->html5::Promise* {
-        auto blob = (html5::Blob *)(&_blob);
+    })->then<html5::Blob *>([](html5::Blob *blob) {
         auto reader = html5::FileReader::create();
         reader->onload = [reader](html5::Event *event) {
             std::string data = reader->result;

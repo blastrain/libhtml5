@@ -439,82 +439,6 @@ HTML5_BIND_METHOD(Promise, callbackOD);
 HTML5_BIND_METHOD(Promise, callbackOS);
 HTML5_BIND_METHOD(Promise, callbackOO);
 
-Promise *Promise::then(PromiseVoidFunction onFulfilled)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.v = onFulfilled;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(function() { elem.callbackThenV(); });
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseVoidFunction onFulfilled, PromiseVoidFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.v = onFulfilled;
-    fn->onRejected.v = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function() { elem.callbackThenV(); },
-            function() { elem.callbackRejectV(); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseVoidFunction onFulfilled, PromiseDoubleFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.v = onFulfilled;
-    fn->onRejected.d = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function() { elem.callbackThenV(); },
-            function(v) { elem.callbackRejectD(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseVoidFunction onFulfilled, PromiseStringFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.v = onFulfilled;
-    fn->onRejected.s = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function() { elem.callbackThenV(); },
-            function(v) { elem.callbackRejectS(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseVoidFunction onFulfilled, PromiseObjectFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.v = onFulfilled;
-    fn->onRejected.o = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function() { elem.callbackThenV(); },
-            function(v) { elem.callbackRejectO(v); }
-        );
-    }, this);
-    return this;
-}
-
 Promise *Promise::then(PromiseVoidPromiseFunction onFulfilled)
 {
     auto fn = new PromiseChainFunction();
@@ -523,70 +447,6 @@ Promise *Promise::then(PromiseVoidPromiseFunction onFulfilled)
     EM_ASM_({
         var elem = Module['toPromise']($0);
         elem._value = elem._value.then(function() { return elem.callbackThenVP(); });
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseVoidPromiseFunction onFulfilled, PromiseVoidFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.vp = onFulfilled;
-    fn->onRejected.v = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function() { return elem.callbackThenVP(); },
-            function() { elem.callbackRejectV(); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseVoidPromiseFunction onFulfilled, PromiseDoubleFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.vp = onFulfilled;
-    fn->onRejected.d = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function() { return elem.callbackThenVP(); },
-            function(v) { elem.callbackRejectD(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseVoidPromiseFunction onFulfilled, PromiseStringFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.vp = onFulfilled;
-    fn->onRejected.s = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function() { return elem.callbackThenVP(); },
-            function(v) { elem.callbackRejectS(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseVoidPromiseFunction onFulfilled, PromiseObjectFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.vp = onFulfilled;
-    fn->onRejected.o = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function() { return elem.callbackThenVP(); },
-            function(v) { elem.callbackRejectO(v); }
-        );
     }, this);
     return this;
 }
@@ -655,82 +515,6 @@ Promise *Promise::then(PromiseVoidPromiseFunction onFulfilled, PromiseObjectProm
     return this;
 }
 
-Promise *Promise::then(PromiseDoubleFunction onFulfilled)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.d = onFulfilled;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(function(v) { elem.callbackThenD(v); });
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseDoubleFunction onFulfilled, PromiseVoidFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.d = onFulfilled;
-    fn->onRejected.v = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenD(v); },
-            function() { elem.callbackRejectV(); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseDoubleFunction onFulfilled, PromiseDoubleFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.d = onFulfilled;
-    fn->onRejected.d = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenD(v); },
-            function(v) { elem.callbackRejectD(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseDoubleFunction onFulfilled, PromiseStringFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.d = onFulfilled;
-    fn->onRejected.s = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenD(v); },
-            function(v) { elem.callbackRejectS(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseDoubleFunction onFulfilled, PromiseObjectFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.d = onFulfilled;
-    fn->onRejected.o = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenD(v); },
-            function(v) { elem.callbackRejectO(v); }
-        );
-    }, this);
-    return this;
-}
-
 Promise *Promise::then(PromiseDoublePromiseFunction onFulfilled)
 {
     auto fn = new PromiseChainFunction();
@@ -739,70 +523,6 @@ Promise *Promise::then(PromiseDoublePromiseFunction onFulfilled)
     EM_ASM_({
         var elem = Module['toPromise']($0);
         elem._value = elem._value.then(function(v) { return elem.callbackThenDP(v); });
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseDoublePromiseFunction onFulfilled, PromiseVoidFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.dp = onFulfilled;
-    fn->onRejected.v = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenDP(v); },
-            function() { elem.callbackRejectV(); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseDoublePromiseFunction onFulfilled, PromiseDoubleFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.dp = onFulfilled;
-    fn->onRejected.d = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenDP(v); },
-            function(v) { elem.callbackRejectD(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseDoublePromiseFunction onFulfilled, PromiseStringFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.dp = onFulfilled;
-    fn->onRejected.s = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenDP(v); },
-            function(v) { elem.callbackRejectS(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseDoublePromiseFunction onFulfilled, PromiseObjectFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.dp = onFulfilled;
-    fn->onRejected.o = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenDP(v); },
-            function(v) { elem.callbackRejectO(v); }
-        );
     }, this);
     return this;
 }
@@ -871,82 +591,6 @@ Promise *Promise::then(PromiseDoublePromiseFunction onFulfilled, PromiseObjectPr
     return this;
 }
 
-Promise *Promise::then(PromiseStringFunction onFulfilled)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.s = onFulfilled;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(function(v) { elem.callbackThenS(v); });
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseStringFunction onFulfilled, PromiseVoidFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.s = onFulfilled;
-    fn->onRejected.v = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenS(v); },
-            function() { elem.callbackRejectV(); }
-        );
-    }, this);  
-    return this;
-}
-
-Promise *Promise::then(PromiseStringFunction onFulfilled, PromiseDoubleFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.s = onFulfilled;
-    fn->onRejected.d = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenS(v); },
-            function(v) { elem.callbackRejectD(v); }
-        );
-    }, this); 
-    return this;
-}
-
-Promise *Promise::then(PromiseStringFunction onFulfilled, PromiseStringFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.s = onFulfilled;
-    fn->onRejected.s = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenS(v); },
-            function(v) { elem.callbackRejectS(v); }
-        );
-    }, this); 
-    return this;
-}
-
-Promise *Promise::then(PromiseStringFunction onFulfilled, PromiseObjectFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.s = onFulfilled;
-    fn->onRejected.o = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenS(v); },
-            function(v) { elem.callbackRejectO(v); }
-        );
-    }, this);
-    return this;
-}
-
 Promise *Promise::then(PromiseStringPromiseFunction onFulfilled)
 {
     auto fn = new PromiseChainFunction();
@@ -959,69 +603,7 @@ Promise *Promise::then(PromiseStringPromiseFunction onFulfilled)
     return this;
 }
 
-Promise *Promise::then(PromiseStringPromiseFunction onFulfilled, PromiseVoidFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.sp = onFulfilled;
-    fn->onRejected.v = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenSP(v); },
-            function() { elem.callbackRejectV(); }
-        );
-    }, this);
-    return this;
-}
 
-Promise *Promise::then(PromiseStringPromiseFunction onFulfilled, PromiseDoubleFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.sp = onFulfilled;
-    fn->onRejected.d = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenSP(v); },
-            function(v) { elem.callbackRejectD(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseStringPromiseFunction onFulfilled, PromiseStringFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.sp = onFulfilled;
-    fn->onRejected.s = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenSP(v); },
-            function(v) { elem.callbackRejectS(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseStringPromiseFunction onFulfilled, PromiseObjectFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.sp = onFulfilled;
-    fn->onRejected.o = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenSP(v); },
-            function(v) { elem.callbackRejectO(v); }
-        );
-    }, this);
-    return this;
-}
 
 Promise *Promise::then(PromiseStringPromiseFunction onFulfilled, PromiseVoidPromiseFunction onRejected)
 {
@@ -1086,295 +668,6 @@ Promise *Promise::then(PromiseStringPromiseFunction onFulfilled, PromiseObjectPr
     }, this);
     return this;
 }
-/*
-Promise *Promise::then(PromiseObjectFunction onFulfilled)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.o = onFulfilled;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(function(v) { elem.callbackThenO(v); });
-    }, this); 
-    return this;
-}
-*/
-Promise *Promise::then(PromiseObjectFunction onFulfilled, PromiseVoidFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.o = onFulfilled;
-    fn->onRejected.v = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenO(v); },
-            function() { elem.callbackRejectV(); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectFunction onFulfilled, PromiseDoubleFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.o = onFulfilled;
-    fn->onRejected.d = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenO(v); },
-            function(v) { elem.callbackRejectD(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectFunction onFulfilled, PromiseStringFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.o = onFulfilled;
-    fn->onRejected.s = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenO(v); },
-            function(v) { elem.callbackRejectS(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectFunction onFulfilled, PromiseObjectFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.o = onFulfilled;
-    fn->onRejected.o = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value.then(
-            function(v) { elem.callbackThenO(v); },
-            function(v) { elem.callbackRejectO(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectPromiseFunction onFulfilled)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.op = onFulfilled;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(function(v) { return elem.callbackThenOP(v); });
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectPromiseFunction onFulfilled, PromiseVoidFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.op = onFulfilled;
-    fn->onRejected.v = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenOP(v); },
-            function() { elem.callbackRejectV(); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectPromiseFunction onFulfilled, PromiseDoubleFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.op = onFulfilled;
-    fn->onRejected.d = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenOP(v); },
-            function(v) { elem.callbackRejectD(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectPromiseFunction onFulfilled, PromiseStringFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.op = onFulfilled;
-    fn->onRejected.s = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenOP(v); },
-            function(v) { elem.callbackRejectS(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectPromiseFunction onFulfilled, PromiseObjectFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.op = onFulfilled;
-    fn->onRejected.o = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenOP(v); },
-            function(v) { elem.callbackRejectO(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectPromiseFunction onFulfilled, PromiseVoidPromiseFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.op = onFulfilled;
-    fn->onRejected.vp = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenOP(v); },
-            function() { return elem.callbackRejectVP(); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectPromiseFunction onFulfilled, PromiseDoublePromiseFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.op = onFulfilled;
-    fn->onRejected.dp = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenOP(v); },
-            function(v) { return elem.callbackRejectDP(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectPromiseFunction onFulfilled, PromiseStringPromiseFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.op = onFulfilled;
-    fn->onRejected.sp = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenOP(v); },
-            function(v) { return elem.callbackRejectSP(v); }
-        );
-    }, this);
-    return this;
-}
-
-Promise *Promise::then(PromiseObjectPromiseFunction onFulfilled, PromiseObjectPromiseFunction onRejected)
-{
-    auto fn = new PromiseChainFunction();
-    fn->onFulfilled.op = onFulfilled;
-    fn->onRejected.op = onRejected;
-    this->chains.push_back(fn);
-    EM_ASM_({
-        var elem = Module['toPromise']($0);
-        elem._value = elem._value.then(
-            function(v) { return elem.callbackThenOP(); },
-            function(v) { return elem.callbackRejectOP(v); }
-        );
-    }, this);
-    return this;
-}
-
-void Promise::callbackThenV()
-{
-    PromiseChainFunction *chain = this->chains[0];
-    PromiseVoidFunction func = chain->onFulfilled.v;
-    func();
-    this->chains.erase(this->chains.begin());
-    delete chain;
-}
-
-void Promise::callbackThenD(emscripten::val v)
-{
-    PromiseChainFunction *chain = this->chains[0];
-    auto func = chain->onFulfilled.d;
-    func(v.as<double>());
-    this->chains.erase(this->chains.begin());
-    delete chain;
-}
-
-void Promise::callbackThenS(emscripten::val v)
-{
-    PromiseChainFunction *chain = this->chains[0];
-    auto func = chain->onFulfilled.s;
-    func(v.as<std::string>());
-    this->chains.erase(this->chains.begin());
-    delete chain;
-}
-
-void Promise::callbackThenO(emscripten::val v)
-{
-    PromiseChainFunction *chain = this->chains[0];
-    auto func = chain->onFulfilled.o;
-    func(Object(v));
-    this->chains.erase(this->chains.begin());
-    delete chain;
-}
-
-void Promise::callbackRejectV()
-{
-    PromiseChainFunction *chain = this->chains[0];
-    PromiseVoidFunction func = chain->onRejected.v;
-    func();
-    this->chains.erase(this->chains.begin());
-    delete chain;
-}
-
-void Promise::callbackRejectD(emscripten::val v)
-{
-    PromiseChainFunction *chain = this->chains[0];
-    auto func = chain->onRejected.d;
-    func(v.as<double>());
-    this->chains.erase(this->chains.begin());
-    delete chain;
-}
-
-
-void Promise::callbackRejectS(emscripten::val v)
-{
-    PromiseChainFunction *chain = this->chains[0];
-    auto func = chain->onRejected.s;
-    func(v.as<std::string>());
-    this->chains.erase(this->chains.begin());
-    delete chain;
-}
-
-void Promise::callbackRejectO(emscripten::val v)
-{
-    PromiseChainFunction *chain = this->chains[0];
-    auto func = chain->onRejected.o;
-    func(Object(v));
-    this->chains.erase(this->chains.begin());
-    delete chain;
-}
 
 emscripten::val Promise::callbackThenVP()
 {
@@ -1383,6 +676,9 @@ emscripten::val Promise::callbackThenVP()
     Promise *p = func();
     this->chains.erase(this->chains.begin());
     delete chain;
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
     return p->v;
 }
 
@@ -1393,6 +689,9 @@ emscripten::val Promise::callbackThenDP(emscripten::val v)
     Promise *p = func(v.as<double>());
     this->chains.erase(this->chains.begin());
     delete chain;
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
     return p->v;
 }
 
@@ -1403,6 +702,9 @@ emscripten::val Promise::callbackThenSP(emscripten::val v)
     Promise *p = func(v.as<std::string>());
     this->chains.erase(this->chains.begin());
     delete chain;
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
     return p->v;
 }
 
@@ -1426,6 +728,9 @@ emscripten::val Promise::callbackRejectVP()
     Promise *p = func();
     this->chains.erase(this->chains.begin());
     delete chain;
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
     return p->v;
 }
 
@@ -1436,6 +741,9 @@ emscripten::val Promise::callbackRejectDP(emscripten::val v)
     Promise *p = func(v.as<double>());
     this->chains.erase(this->chains.begin());
     delete chain;
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
     return p->v;
 }
 
@@ -1446,6 +754,9 @@ emscripten::val Promise::callbackRejectSP(emscripten::val v)
     Promise *p = func(v.as<std::string>());
     this->chains.erase(this->chains.begin());
     delete chain;
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
     return p->v;
 }
 
@@ -1456,17 +767,12 @@ emscripten::val Promise::callbackRejectOP(emscripten::val v)
     Promise *p = func(Object(v));
     this->chains.erase(this->chains.begin());
     delete chain;
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
     return p->v;
 }
 
-HTML5_BIND_METHOD(Promise, callbackThenV);
-HTML5_BIND_METHOD(Promise, callbackThenD);
-HTML5_BIND_METHOD(Promise, callbackThenS);
-HTML5_BIND_METHOD(Promise, callbackThenO);
-HTML5_BIND_METHOD(Promise, callbackRejectV);
-HTML5_BIND_METHOD(Promise, callbackRejectD);
-HTML5_BIND_METHOD(Promise, callbackRejectS);
-HTML5_BIND_METHOD(Promise, callbackRejectO);
 HTML5_BIND_METHOD(Promise, callbackThenVP);
 HTML5_BIND_METHOD(Promise, callbackThenDP);
 HTML5_BIND_METHOD(Promise, callbackThenSP);

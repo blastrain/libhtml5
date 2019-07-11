@@ -35,7 +35,6 @@ typedef std::function<void(PromiseObjectFunction, PromiseDoubleFunction)> Promis
 typedef std::function<void(PromiseObjectFunction, PromiseStringFunction)> PromiseObjectStringPairFunction;
 typedef std::function<void(PromiseObjectFunction, PromiseObjectFunction)> PromiseObjectObjectPairFunction;
 
-
 class Promise : public Object {
 public:
 
@@ -60,62 +59,102 @@ public:
     static Promise *create(PromiseObjectStringPairFunction fn);
     static Promise *create(PromiseObjectObjectPairFunction fn);
     static Promise *create(emscripten::val v);
-    Promise *then(PromiseVoidFunction onFulfilled);
-    Promise *then(PromiseVoidFunction onFulfilled, PromiseVoidFunction onRejected);
-    Promise *then(PromiseVoidFunction onFulfilled, PromiseDoubleFunction onRejected);
-    Promise *then(PromiseVoidFunction onFulfilled, PromiseStringFunction onRejected);
-    Promise *then(PromiseVoidFunction onFulfilled, PromiseObjectFunction onRejected);
     Promise *then(PromiseVoidPromiseFunction onFulfilled);
-    Promise *then(PromiseVoidPromiseFunction onFulfilled, PromiseVoidFunction onRejected);
-    Promise *then(PromiseVoidPromiseFunction onFulfilled, PromiseDoubleFunction onRejected);
-    Promise *then(PromiseVoidPromiseFunction onFulfilled, PromiseStringFunction onRejected);
-    Promise *then(PromiseVoidPromiseFunction onFulfilled, PromiseObjectFunction onRejected);
     Promise *then(PromiseVoidPromiseFunction onFulfilled, PromiseVoidPromiseFunction onRejected);
     Promise *then(PromiseVoidPromiseFunction onFulfilled, PromiseDoublePromiseFunction onRejected);
     Promise *then(PromiseVoidPromiseFunction onFulfilled, PromiseStringPromiseFunction onRejected);
     Promise *then(PromiseVoidPromiseFunction onFulfilled, PromiseObjectPromiseFunction onRejected);
-    Promise *then(PromiseDoubleFunction onFulfilled);
-    Promise *then(PromiseDoubleFunction onFulfilled, PromiseVoidFunction onRejected);
-    Promise *then(PromiseDoubleFunction onFulfilled, PromiseDoubleFunction onRejected);
-    Promise *then(PromiseDoubleFunction onFulfilled, PromiseStringFunction onRejected);
-    Promise *then(PromiseDoubleFunction onFulfilled, PromiseObjectFunction onRejected);
     Promise *then(PromiseDoublePromiseFunction onFulfilled);
-    Promise *then(PromiseDoublePromiseFunction onFulfilled, PromiseVoidFunction onRejected);
-    Promise *then(PromiseDoublePromiseFunction onFulfilled, PromiseDoubleFunction onRejected);
-    Promise *then(PromiseDoublePromiseFunction onFulfilled, PromiseStringFunction onRejected);
-    Promise *then(PromiseDoublePromiseFunction onFulfilled, PromiseObjectFunction onRejected);
     Promise *then(PromiseDoublePromiseFunction onFulfilled, PromiseVoidPromiseFunction onRejected);
     Promise *then(PromiseDoublePromiseFunction onFulfilled, PromiseDoublePromiseFunction onRejected);
     Promise *then(PromiseDoublePromiseFunction onFulfilled, PromiseStringPromiseFunction onRejected);
     Promise *then(PromiseDoublePromiseFunction onFulfilled, PromiseObjectPromiseFunction onRejected);
-    Promise *then(PromiseStringFunction onFulfilled);
-    Promise *then(PromiseStringFunction onFulfilled, PromiseVoidFunction onRejected);
-    Promise *then(PromiseStringFunction onFulfilled, PromiseDoubleFunction onRejected);
-    Promise *then(PromiseStringFunction onFulfilled, PromiseStringFunction onRejected);
-    Promise *then(PromiseStringFunction onFulfilled, PromiseObjectFunction onRejected);
     Promise *then(PromiseStringPromiseFunction onFulfilled);
-    Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseVoidFunction onRejected);
-    Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseDoubleFunction onRejected);
-    Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseStringFunction onRejected);
-    Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseObjectFunction onRejected);
     Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseVoidPromiseFunction onRejected);
     Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseDoublePromiseFunction onRejected);
     Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseStringPromiseFunction onRejected);
     Promise *then(PromiseStringPromiseFunction onFulfilled, PromiseObjectPromiseFunction onRejected);
-    Promise *then(PromiseObjectFunction onFulfilled, PromiseVoidFunction onRejected);
-    Promise *then(PromiseObjectFunction onFulfilled, PromiseDoubleFunction onRejected);
-    Promise *then(PromiseObjectFunction onFulfilled, PromiseStringFunction onRejected);
-    Promise *then(PromiseObjectFunction onFulfilled, PromiseObjectFunction onRejected);
-    Promise *then(PromiseObjectPromiseFunction onFulfilled);
-    //Promise *then(PromiseObjectFunction onFulfilled);
-    Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseVoidFunction onRejected);
-    Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseDoubleFunction onRejected);
-    Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseStringFunction onRejected);
-    Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseObjectFunction onRejected);
-    Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseVoidPromiseFunction onRejected);
-    Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseDoublePromiseFunction onRejected);
-    Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseStringPromiseFunction onRejected);
-    Promise *then(PromiseObjectPromiseFunction onFulfilled, PromiseObjectPromiseFunction onRejected);
+    template<typename T> Promise *then(std::function<Promise *(T)> onFulfilled) {
+      auto fn = new PromiseChainFunction();
+      PromiseObjectPromiseFunction f = [onFulfilled](const Object &o) {
+          return onFulfilled((T)(&o));
+      };
+      fn->onFulfilled.op = f;
+      this->chains.push_back(fn);
+      EM_ASM_({
+        var elem = Module['toPromise']($0);
+        elem._value = elem._value.then(function(v) { return elem.callbackThenOP(v); });
+      }, this);
+      return this;
+    };
+    template<typename T> Promise *then(std::function<Promise *(T)> onFulfilled, PromiseVoidPromiseFunction onRejected) {
+      auto fn = new PromiseChainFunction();
+      PromiseObjectPromiseFunction f = [onFulfilled](const Object &o) {
+          return onFulfilled((T)(&o));
+      };
+      fn->onFulfilled.op = f;
+      fn->onRejected.vp = onRejected;
+      this->chains.push_back(fn);
+      EM_ASM_({
+        var elem = Module['toPromise']($0);
+        elem._value = elem._value.then(
+            function(v) { return elem.callbackThenOP(v); },
+            function() { return elem.callbackRejectVP(); }
+        );
+      }, this);
+      return this;
+    };
+    template<typename T> Promise *then(std::function<Promise *(T)> onFulfilled, PromiseDoublePromiseFunction onRejected) {
+      auto fn = new PromiseChainFunction();
+      PromiseObjectPromiseFunction f = [onFulfilled](const Object &o) {
+          return onFulfilled((T)(&o));
+      };
+      fn->onFulfilled.op = f;
+      fn->onRejected.dp = onRejected;
+      this->chains.push_back(fn);
+      EM_ASM_({
+        var elem = Module['toPromise']($0);
+        elem._value = elem._value.then(
+            function(v) { return elem.callbackThenOP(v); },
+            function(v) { return elem.callbackRejectDP(v); }
+        );
+      }, this);
+      return this;
+    };
+    template<typename T> Promise *then(std::function<Promise *(T)> onFulfilled, PromiseStringPromiseFunction onRejected) {
+      auto fn = new PromiseChainFunction();
+      PromiseObjectPromiseFunction f = [onFulfilled](const Object &o) {
+          return onFulfilled((T)(&o));
+      };
+      fn->onFulfilled.op = f;
+      fn->onRejected.sp = onRejected;
+      this->chains.push_back(fn);
+      EM_ASM_({
+        var elem = Module['toPromise']($0);
+        elem._value = elem._value.then(
+            function(v) { return elem.callbackThenOP(v); },
+            function(v) { return elem.callbackRejectSP(v); }
+        );
+      }, this);
+      return this;
+    };
+    template<typename T> Promise *then(std::function<Promise *(T)> onFulfilled, PromiseObjectPromiseFunction onRejected) {
+      auto fn = new PromiseChainFunction();
+      PromiseObjectPromiseFunction f = [onFulfilled](const Object &o) {
+          return onFulfilled((T)(&o));
+      };
+      fn->onFulfilled.op = f;
+      fn->onRejected.op = onRejected;
+      this->chains.push_back(fn);
+      EM_ASM_({
+        var elem = Module['toPromise']($0);
+        elem._value = elem._value.then(
+            function(v) { return elem.callbackThenOP(); },
+            function(v) { return elem.callbackRejectOP(v); }
+        );
+      }, this);
+      return this;
+    };
     Promise *all(std::vector<Promise *> iterable);
     Promise *race(std::vector<Promise *> iterable);
     Promise *reject(std::string reason);
@@ -140,15 +179,11 @@ public:
     PromiseObjectObjectPairFunction ooPairFn;
 
     union PromiseFunction {
-        PromiseVoidFunction v;
-        PromiseDoubleFunction d;
-        PromiseStringFunction s;
-        PromiseObjectFunction o;
         PromiseVoidPromiseFunction vp;
         PromiseDoublePromiseFunction dp;
         PromiseStringPromiseFunction sp;
         PromiseObjectPromiseFunction op;
-        PromiseFunction() : v([]{}) {};
+        PromiseFunction() : vp([]{return nullptr;}) {};
         ~PromiseFunction(){};
     };
 

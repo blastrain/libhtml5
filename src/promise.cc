@@ -782,5 +782,117 @@ HTML5_BIND_METHOD(Promise, callbackRejectDP);
 HTML5_BIND_METHOD(Promise, callbackRejectSP);
 HTML5_BIND_METHOD(Promise, callbackRejectOP);
 
+
+Promise *Promise::catchError(PromiseVoidPromiseFunction onRejected)
+{
+    this->catchErrorFn.vp = onRejected;
+    EM_ASM_({
+        var elem = Module['toPromise']($0);
+        elem._value = elem._value.catch(
+            function() { return elem.callbackCatchVP(); }
+        );
+    }, this);
+    return this;
+}
+
+Promise *Promise::catchError(PromiseDoublePromiseFunction onRejected)
+{
+    this->catchErrorFn.dp = onRejected;
+    EM_ASM_({
+        var elem = Module['toPromise']($0);
+        elem._value = elem._value.catch(
+            function(v) { return elem.callbackCatchDP(v); }
+        );
+    }, this);
+    return this;
+}
+
+Promise *Promise::catchError(PromiseStringPromiseFunction onRejected)
+{
+    this->catchErrorFn.sp = onRejected;
+    EM_ASM_({
+        var elem = Module['toPromise']($0);
+        elem._value = elem._value.catch(
+            function(v) { return elem.callbackCatchSP(v); }
+        );
+    }, this);
+    return this;
+}
+    
+Promise *Promise::catchError(PromiseObjectPromiseFunction onRejected)
+{
+    this->catchErrorFn.op = onRejected;
+    EM_ASM_({
+        var elem = Module['toPromise']($0);
+        elem._value = elem._value.catch(
+            function(v) { return elem.callbackCatchOP(v); }
+        );
+    }, this);
+    return this;
+}
+
+Promise *Promise::finally(PromiseVoidPromiseFunction onFinally)
+{
+    this->finallyFn.vp = onFinally;
+    EM_ASM_({
+        var elem = Module['toPromise']($0);
+        elem._value = elem._value.finally(
+            function() { return elem.callbackFinally(); }
+        );
+    }, this);
+    return this;
+}
+
+emscripten::val Promise::callbackCatchVP()
+{
+    Promise *p = this->catchErrorFn.vp();
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
+    return p->v;
+}
+
+emscripten::val Promise::callbackCatchDP(emscripten::val v)
+{
+    Promise *p = this->catchErrorFn.dp(v.as<double>());
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
+    return p->v;
+}
+
+emscripten::val Promise::callbackCatchSP(emscripten::val v)
+{
+    Promise *p = this->catchErrorFn.sp(v.as<std::string>());
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
+    return p->v;
+}
+
+emscripten::val Promise::callbackCatchOP(emscripten::val v)
+{
+    Promise *p = this->catchErrorFn.op(Object(v));
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
+    return p->v;
+}
+
+emscripten::val Promise::callbackFinally()
+{
+    Promise *p = this->finallyFn.vp();
+    if (p == nullptr) {
+        return emscripten::val(0);
+    }
+    return p->v;
+}
+
+HTML5_BIND_METHOD(Promise, callbackCatchVP);
+HTML5_BIND_METHOD(Promise, callbackCatchDP);
+HTML5_BIND_METHOD(Promise, callbackCatchSP);
+HTML5_BIND_METHOD(Promise, callbackCatchOP);
+HTML5_BIND_METHOD(Promise, callbackFinally);
+
 HTML5_PROPERTY_IMPL(Promise, unsigned long, length);
 

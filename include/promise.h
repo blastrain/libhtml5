@@ -155,6 +155,11 @@ public:
       }, this);
       return this;
     };
+    Promise *catchError(PromiseVoidPromiseFunction onRejected);
+    Promise *catchError(PromiseDoublePromiseFunction onRejected);
+    Promise *catchError(PromiseStringPromiseFunction onRejected);
+    Promise *catchError(PromiseObjectPromiseFunction onRejected);
+    Promise *finally(PromiseVoidPromiseFunction onFinally);
     Promise *all(std::vector<Promise *> iterable);
     Promise *race(std::vector<Promise *> iterable);
     Promise *reject(std::string reason);
@@ -196,6 +201,8 @@ public:
     };
 
     std::vector<PromiseChainFunction *> chains;
+    PromiseFunction catchErrorFn;
+    PromiseFunction finallyFn;
     void callbackVV(emscripten::val resolve, emscripten::val reject);
     void callbackVD(emscripten::val resolve, emscripten::val reject);
     void callbackVS(emscripten::val resolve, emscripten::val reject);
@@ -228,6 +235,11 @@ public:
     emscripten::val callbackRejectDP(emscripten::val v);
     emscripten::val callbackRejectSP(emscripten::val v);
     emscripten::val callbackRejectOP(emscripten::val v);
+    emscripten::val callbackCatchVP();
+    emscripten::val callbackCatchDP(emscripten::val v);
+    emscripten::val callbackCatchSP(emscripten::val v);
+    emscripten::val callbackCatchOP(emscripten::val v);
+    emscripten::val callbackFinally();
 };
 
 NAMESPACE_HTML5_END;

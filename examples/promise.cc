@@ -31,6 +31,12 @@ static void fetchTest()
         };
         reader->readAsDataURL(blob);
         return nullptr;
+    })->catchError([]{
+        html5::window->console->log("catch");
+        return nullptr;
+    })->finally([]{
+        html5::window->console->log("finally");
+        return nullptr;
     });
 }
 

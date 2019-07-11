@@ -10,7 +10,10 @@ static void promiseTest()
     });
     promise->then([](const std::string &value) {
         html5::window->console->log(value);
-        return nullptr;
+        return html5::Promise::resolve("bar");
+    })->then([](const std::string &value) {
+        html5::window->console->log(value);
+        return html5::Promise::resolve(0.0);
     });
     html5::window->console->log(promise);
 }

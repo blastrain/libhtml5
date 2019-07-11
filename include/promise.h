@@ -160,11 +160,17 @@ public:
     Promise *catchError(PromiseStringPromiseFunction onRejected);
     Promise *catchError(PromiseObjectPromiseFunction onRejected);
     Promise *finally(PromiseVoidPromiseFunction onFinally);
-    Promise *all(std::vector<Promise *> iterable);
-    Promise *race(std::vector<Promise *> iterable);
-    Promise *reject(std::string reason);
-    Promise *resolve(void *value);
-    Promise *pcatch(std::function<Promise*(Promise*)> onRejected);
+
+    static Promise *all(std::vector<Promise *> iterable);
+    static Promise *race(std::vector<Promise *> iterable);
+    static Promise *reject();
+    static Promise *reject(double value);
+    static Promise *reject(const std::string &value);
+    static Promise *reject(Object *value);
+    static Promise *resolve();
+    static Promise *resolve(double value);
+    static Promise *resolve(const std::string &value);
+    static Promise *resolve(Object *value);
 
     PromiseVoidVoidPairFunction vvPairFn;
     PromiseVoidDoublePairFunction vdPairFn;

@@ -894,5 +894,68 @@ HTML5_BIND_METHOD(Promise, callbackCatchSP);
 HTML5_BIND_METHOD(Promise, callbackCatchOP);
 HTML5_BIND_METHOD(Promise, callbackFinally);
 
+
+Promise *Promise::all(std::vector<Promise *> iterable)
+{
+    emscripten::val array = toJSArray<Promise *>(iterable);
+    auto promise = HTML5_STATIC_PRIMITIVE_INSTANCE(Promise);
+    return Promise::create(HTML5_CALLv(promise, all, array));
+}
+
+Promise *Promise::race(std::vector<Promise *> iterable)
+{
+    emscripten::val array = toJSArray<Promise *>(iterable);
+    auto promise = HTML5_STATIC_PRIMITIVE_INSTANCE(Promise);
+    return Promise::create(HTML5_CALLv(promise, race, array));
+}
+
+Promise *Promise::reject()
+{
+    auto promise = HTML5_STATIC_PRIMITIVE_INSTANCE(Promise);
+    return Promise::create(HTML5_CALLv(promise, reject));
+}
+
+Promise *Promise::reject(double value)
+{
+    auto promise = HTML5_STATIC_PRIMITIVE_INSTANCE(Promise);
+    return Promise::create(HTML5_CALLv(promise, reject, value));
+}
+
+Promise *Promise::reject(const std::string &value)
+{
+    auto promise = HTML5_STATIC_PRIMITIVE_INSTANCE(Promise);
+    return Promise::create(HTML5_CALLv(promise, reject, value));
+}
+
+Promise *Promise::reject(Object *value)
+{
+    auto promise = HTML5_STATIC_PRIMITIVE_INSTANCE(Promise);
+    return Promise::create(HTML5_CALLv(promise, reject, value->v));
+}
+
+Promise *Promise::resolve()
+{
+    auto promise = HTML5_STATIC_PRIMITIVE_INSTANCE(Promise);
+    return Promise::create(HTML5_CALLv(promise, resolve));
+}
+
+Promise *Promise::resolve(double value)
+{
+    auto promise = HTML5_STATIC_PRIMITIVE_INSTANCE(Promise);
+    return Promise::create(HTML5_CALLv(promise, resolve, value));
+}
+
+Promise *Promise::resolve(const std::string &value)
+{
+    auto promise = HTML5_STATIC_PRIMITIVE_INSTANCE(Promise);
+    return Promise::create(HTML5_CALLv(promise, resolve, value));
+}
+
+Promise *Promise::resolve(Object *value)
+{
+    auto promise = HTML5_STATIC_PRIMITIVE_INSTANCE(Promise);
+    return Promise::create(HTML5_CALLv(promise, resolve, value->v));
+}
+
 HTML5_PROPERTY_IMPL(Promise, unsigned long, length);
 

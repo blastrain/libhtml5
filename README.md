@@ -10,7 +10,7 @@ Interface may change without notice.
 
 ## 1. Convert existing JavaScript into WebAssembly
 
-Of course, we know story about JavaScript => TypeScript => AssemblyScript . It is good solution !  
+Of course, we know story about JavaScript => TypeScript => AssemblyScript => WebAssembly . It is good solution !  
 Similarly, we feel the possibility in Emscripten. It can transpile to pure JavaScript ( with `asm.js` ) or WebAssembly.  
 Also, Emscripten supports bindings for Web Browser APIs, but not easy to use it.  
 

@@ -36,6 +36,7 @@ set(SOURCES src/application_cache.cc
 	src/event_target.cc
 	src/export.cc
 	src/external.cc
+	src/file_reader.cc
 	src/float32_array.cc
 	src/float64_array.cc
 	src/history.cc
@@ -93,6 +94,7 @@ set(SOURCES src/application_cache.cc
 	src/range.cc
 	src/regexp.cc
 	src/rendering_context.cc
+	src/response.cc
 	src/storage.cc
 	src/string.cc
 	src/style_sheet.cc

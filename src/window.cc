@@ -134,6 +134,11 @@ Promise *Window::createImageBitmap(ImageBitmap *image, long sx, long sy, long sw
     return Promise::create(HTML5_CALLv(this->v, createImageBitmap, image->v, sx, sy, sw, sh));
 }
 
+Promise *Window::fetch(const std::string &url)
+{
+    return Promise::create(HTML5_CALLv(this->v, fetch, url));
+}
+
 void Window::focus()
 {
     HTML5_CALL(this->v, focus);

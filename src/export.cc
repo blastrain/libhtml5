@@ -1,9 +1,12 @@
 #include "libhtml5.h"
 #include "window.h"
+#include "console.h"
 
 NAMESPACE_HTML5_BEGIN;
 
 Window *window;
+Console *console;
+Document *document;
 
 static bool g_initialized = false;
 
@@ -14,6 +17,10 @@ public:
 
         window = Window::create();
         window->retain();
+        console = window->console;
+        console->retain();
+        document = window->document;
+        document->retain();
         g_initialized = true;
     }
 };

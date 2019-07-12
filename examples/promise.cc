@@ -3,16 +3,16 @@
 static void promiseTest()
 {
     auto promise = html5::Promise::create([](std::function<void(const std::string &)> resolve, std::function<void()> reject) {
-        html5::window->setTimeout([resolve](){ resolve("foo"); }, 300);
+        html5::setTimeout([resolve](){ resolve("foo"); }, 300);
     });
     promise->then([](const std::string &value) {
-        html5::window->console->log(value);
+        html5::console->log(value);
         return html5::Promise::resolve("bar");
     })->then([](const std::string &value) {
-        html5::window->console->log(value);
+        html5::console->log(value);
         return html5::Promise::resolve(0.0);
     });
-    html5::window->console->log(promise);
+    html5::console->log(promise);
 }
 
 static void fetchImageTest(const std::string &imageURL)
@@ -25,15 +25,15 @@ static void fetchImageTest(const std::string &imageURL)
             std::string data = reader->result;
             auto image = html5::HTMLImageElement::create();
             image->src = data;
-            html5::window->document->body->appendChild(image);
+            html5::document->body->appendChild(image);
         };
         reader->readAsDataURL(blob);
         return nullptr;
     })->catchError([]{
-        html5::window->console->log("catch");
+        html5::console->log("catch");
         return nullptr;
     })->finally([]{
-        html5::window->console->log("finally");
+        html5::console->log("finally");
         return nullptr;
     });
 }

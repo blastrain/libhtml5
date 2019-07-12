@@ -5,7 +5,7 @@ static void stringTest()
     {
         html5::string s = "hello world";
         std::cout << s << std::endl;
-        html5::window->console->log(s);
+        html5::console->log(s);
     }
     {
         std::string s = "hello";

@@ -59,7 +59,7 @@ extern void print();
 extern std::string prompt(std::string message, std::string _default);
 extern long requestAnimationFrame(std::function<void(double)> *callback);
 extern long setInterval(std::function<void(void)> *handler, long timeout);
-extern long setTimeout(std::function<void(void)> *handler, long timeout);
+extern long setTimeout(std::function<void(void)> handler, long timeout);
 extern void stop();
 
 NAMESPACE_HTML5_END;

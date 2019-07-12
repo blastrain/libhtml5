@@ -62,7 +62,7 @@ public:
     iterator end() { return iterator(this, this->length); };
 
     array(emscripten::val v);
-    template<typename... Args> array(const Args&... args) : Object(HTML5_NEW_PRIMITIVE_INSTANCE(array)) {
+    template<typename... Args> array(const Args&... args) : Object(HTML5_NEW_PRIMITIVE_INSTANCE(Array)) {
         push(args...);
     };
     virtual ~array();

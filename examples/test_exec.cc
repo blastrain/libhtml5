@@ -4,6 +4,7 @@
 #include "image.cc"
 #include "style_sheet.cc"
 #include "video.cc"
+#include "runtime.h"
 
 static void executeTest()
 {

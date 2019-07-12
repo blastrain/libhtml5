@@ -1,12 +1,11 @@
 #include "libhtml5.h"
 #include "class.h"
 #include <iostream>
+#include "runtime.h"
 
 using namespace html5;
 
 static void addStyleSheet() {
-    HTML5_INIT();
-
     auto document = window->document;
     auto sheets = window->document->styleSheets;
     if (sheets->length == 0) {

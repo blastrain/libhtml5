@@ -48,7 +48,7 @@ Can use `console.log` for debug.
 Of course, also can use print debugging in C++ feature ( `std::cout` ).
 
 ```cpp
-html5::window->console->log(html5::HTMLImageElement::create());
+html5::console->log(html5::HTMLImageElement::create());
 ```
 
 ## String
@@ -83,7 +83,7 @@ image->onload = [](html5::Event *e){
     std::cout << "onload" << std::endl;
 };
 image->src = url;
-html5::window->document->body->appendChild(image);
+html5::document->body->appendChild(image);
 ```
 
 ## Promise
@@ -97,15 +97,15 @@ html5::fetch(imageURL)->then<html5::Response *>([](html5::Response *response) {
         std::string data = reader->result;
         auto image = html5::HTMLImageElement::create();
         image->src = data;
-        html5::window->document->body->appendChild(image);
+        html5::document->body->appendChild(image);
     };
     reader->readAsDataURL(blob);
     return nullptr;
 })->catchError([]{
-    html5::window->console->log("catch");
+    html5::console->log("catch");
     return nullptr;
 })->finally([]{
-    html5::window->console->log("finally");
+    html5::console->log("finally");
     return nullptr;
 });
 ```
@@ -162,8 +162,7 @@ Generated `libhtml5_example.js`
 Open Developer Console, and executes the following.
 
 - `Module.arrayTest()`
-- `Module.createImage("image url")`
-- `Module.createVideo("video url")`
+- `Module.executeTest()`
 - `Module.stringTest()`
 - `Module.promiseTest()`
 - `Module.fetchImageTest("image url")`

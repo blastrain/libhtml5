@@ -1,10 +1,7 @@
 #include "libhtml5.h"
-#include "class.h"
 
 static void promiseTest()
 {
-    HTML5_INIT();
-
     auto promise = html5::Promise::create([](std::function<void(const std::string &)> resolve, std::function<void()> reject) {
         html5::window->setTimeout([resolve](){ resolve("foo"); }, 300);
     });
@@ -20,7 +17,6 @@ static void promiseTest()
 
 static void fetchImageTest(const std::string &imageURL)
 {
-    HTML5_INIT();
     html5::fetch(imageURL)->then<html5::Response *>([](html5::Response *response) {
         return response->blob();
     })->then<html5::Blob *>([](html5::Blob *blob) {

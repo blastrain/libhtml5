@@ -1,10 +1,7 @@
 #include "libhtml5.h"
-#include "class.h"
 
 static void stringTest()
 {
-    HTML5_INIT();
-
     {
         html5::string s = "hello world";
         std::cout << s << std::endl;

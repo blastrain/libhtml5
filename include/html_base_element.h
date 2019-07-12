@@ -1,6 +1,6 @@
 #pragma once
 
-#include "libhtml5.h"
+#include "html5.h"
 #include "html_element.h"
 
 NAMESPACE_HTML5_BEGIN;

@@ -1,10 +1,8 @@
 #include "libhtml5.h"
-#include "class.h"
 #include <iostream>
 
 static void createVideo(std::string url)
 {
-    HTML5_INIT();
     html5::HTMLVideoElement *video   = html5::HTMLVideoElement::create();
     html5::HTMLSourceElement *source = html5::HTMLSourceElement::create();
     source->src = url;

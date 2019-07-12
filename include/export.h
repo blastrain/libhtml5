@@ -33,8 +33,6 @@ class Performance;
 class WindowProxy;
 class Console;
 
-extern Window *window;
-
 extern void alert(std::string message);
 extern std::string atob(std::string atob);
 extern void blur();
@@ -65,5 +63,3 @@ extern long setTimeout(std::function<void(void)> *handler, long timeout);
 extern void stop();
 
 NAMESPACE_HTML5_END;
-
-extern void HTML5_INIT();

@@ -3,6 +3,23 @@
 
 NAMESPACE_HTML5_BEGIN;
 
+Window *window;
+
+static bool g_initialized = false;
+
+class __runtime__ {
+public:
+    __runtime__() {
+        if (g_initialized) return;
+
+        window = Window::create();
+        window->retain();
+        g_initialized = true;
+    }
+};
+
+static __runtime__ r;
+
 void alert(std::string message)
 {
     return window->alert(message);

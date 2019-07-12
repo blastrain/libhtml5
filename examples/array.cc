@@ -1,11 +1,8 @@
 #include "libhtml5.h"
-#include "class.h"
 #include <math.h>
 
 static void arrayTest()
 {
-    HTML5_INIT();
-
     html5::array subarray;
     html5::array array = {
         1, M_PI, "hello", subarray, html5::Object::create(),

@@ -1,5 +1,4 @@
 #include "libhtml5.h"
-#include "class.h"
 
 #include "image.cc"
 #include "style_sheet.cc"

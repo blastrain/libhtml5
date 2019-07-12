@@ -1,6 +1,4 @@
 #include "libhtml5.h"
-#include "class.h"
-#include "runtime.h"
 
 static void promiseTest()
 {

@@ -1,7 +1,5 @@
 #include "libhtml5.h"
-#include "class.h"
 #include <iostream>
-#include "runtime.h"
 
 static void createImage(std::string url)
 {

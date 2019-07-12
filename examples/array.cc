@@ -1,7 +1,5 @@
 #include "libhtml5.h"
-#include "class.h"
 #include <math.h>
-#include "runtime.h"
 
 static void arrayTest()
 {

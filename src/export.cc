@@ -7,6 +7,7 @@ NAMESPACE_HTML5_BEGIN;
 Window *window;
 Console *console;
 Document *document;
+Navigator *navigator;
 
 static bool g_initialized = false;
 
@@ -21,6 +22,8 @@ public:
         console->retain();
         document = window->document;
         document->retain();
+        navigator = window->navigator;
+        navigator->retain();
         g_initialized = true;
     }
 };

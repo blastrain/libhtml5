@@ -150,17 +150,17 @@ std::string prompt(std::string message, std::string _default)
     return window->prompt(message, _default);
 }
 
-long requestAnimationFrame(std::function<void(double)> *callback)
+long requestAnimationFrame(const std::function<void(double)> &callback)
 {
     return window->requestAnimationFrame(callback);
 }
 
-long setInterval(std::function<void(void)> *handler, long timeout)
+long setInterval(const std::function<void(void)> &handler, long timeout)
 {
     return window->setInterval(handler, timeout);
 }
 
-long setTimeout(std::function<void(void)> handler, long timeout)
+long setTimeout(const std::function<void(void)> &handler, long timeout)
 {
     return window->setTimeout(handler, timeout);
 }

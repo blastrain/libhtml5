@@ -57,9 +57,9 @@ extern WindowProxy *open(std::string url, std::string target, std::string featur
 extern void postMessage(void *message, std::string targetOrigin, std::vector<Transferable *> transfer);
 extern void print();
 extern std::string prompt(std::string message, std::string _default);
-extern long requestAnimationFrame(std::function<void(double)> *callback);
-extern long setInterval(std::function<void(void)> *handler, long timeout);
-extern long setTimeout(std::function<void(void)> handler, long timeout);
+extern long requestAnimationFrame(const std::function<void(double)> &callback);
+extern long setInterval(const std::function<void(void)> &handler, long timeout);
+extern long setTimeout(const std::function<void(void)> &handler, long timeout);
 extern void stop();
 
 NAMESPACE_HTML5_END;

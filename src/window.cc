@@ -173,7 +173,7 @@ std::string Window::prompt(std::string message, std::string _default)
     return HTML5_CALLs(this->v, prompt, message, _default);
 }
 
-long Window::requestAnimationFrame(std::function<void(double)> *callback)
+long Window::requestAnimationFrame(const std::function<void(double)> &callback)
 {
     this->_requestAnimationFrameFn = callback;
     return EM_ASM_INT({
@@ -186,12 +186,12 @@ long Window::requestAnimationFrame(std::function<void(double)> *callback)
 
 void Window::requestAnimationFrameCallback(double time)
 {
-    if (!this->_requestAnimationFrameFn) return;
+    if (this->_requestAnimationFrameFn == nullptr) return;
 
-    (*this->_requestAnimationFrameFn)(time);
+    this->_requestAnimationFrameFn(time);
 }
 
-long Window::setInterval(std::function<void(void)> *handler, long timeout)
+long Window::setInterval(const std::function<void(void)> &handler, long timeout)
 {
     this->_setIntervalFn = handler;
     return EM_ASM_INT({
@@ -204,12 +204,12 @@ long Window::setInterval(std::function<void(void)> *handler, long timeout)
 
 void Window::setIntervalCallback()
 {
-    if (!this->_setIntervalFn) return;
+    if (this->_setIntervalFn == nullptr) return;
 
-    (*this->_setIntervalFn)();
+    this->_setIntervalFn();
 }
 
-long Window::setTimeout(std::function<void(void)> handler, long timeout)
+long Window::setTimeout(const std::function<void(void)> &handler, long timeout)
 {
     this->_setTimeoutFn = handler;
     return EM_ASM_INT({
@@ -222,7 +222,7 @@ long Window::setTimeout(std::function<void(void)> handler, long timeout)
 
 void Window::setTimeoutCallback()
 {
-    if (!this->_setTimeoutFn) return;
+    if (this->_setTimeoutFn == nullptr) return;
 
     this->_setTimeoutFn();
 }

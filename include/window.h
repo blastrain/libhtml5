@@ -163,17 +163,17 @@ public:
     void postMessage(void *message, std::string targetOrigin, std::vector<Transferable *> transfer);
     void print();
     std::string prompt(std::string message, std::string _default);
-    long requestAnimationFrame(std::function<void(double)> *callback);
-    long setInterval(std::function<void(void)> *handler, long timeout);
-    long setTimeout(std::function<void(void)> handler, long timeout);
+    long requestAnimationFrame(const std::function<void(double)> &callback);
+    long setInterval(const std::function<void(void)> &handler, long timeout);
+    long setTimeout(const std::function<void(void)> &handler, long timeout);
     void stop();
 
     void requestAnimationFrameCallback(double time);
     void setIntervalCallback();
     void setTimeoutCallback();
 private:
-    std::function<void(double)> *_requestAnimationFrameFn;
-    std::function<void(void)> *_setIntervalFn;
+    std::function<void(double)> _requestAnimationFrameFn;
+    std::function<void(void)> _setIntervalFn;
     std::function<void(void)> _setTimeoutFn;
 };
 

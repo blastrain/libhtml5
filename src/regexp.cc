@@ -67,9 +67,13 @@ bool regexp::test(std::string s)
     return HTML5_CALLb(this->v, test, s);
 }
 
-array *regexp::exec(std::string s)
+std::vector<html5::string> regexp::exec(std::string s)
 {
-    return array::create(HTML5_CALLv(this->v, exec, s));
+    auto v = HTML5_CALLv(this->v, exec, s);
+    if (v.isNull()) {
+        return std::vector<html5::string>();
+    }
+    return toArray<html5::string>(v);
 }
 
 HTML5_PROPERTY_IMPL(regexp, bool, global);

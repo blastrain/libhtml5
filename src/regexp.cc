@@ -67,7 +67,7 @@ bool regexp::test(std::string s)
     return HTML5_CALLb(this->v, test, s);
 }
 
-std::vector<html5::string> regexp::exec(std::string s)
+std::vector<html5::string> regexp::exec(const std::string &s)
 {
     auto v = HTML5_CALLv(this->v, exec, s);
     if (v.isNull()) {

@@ -25,6 +25,7 @@ public:
     static regexp *create(std::string pattern);
     static regexp *create(std::string pattern, std::string flags);
     bool test(std::string s);
+    array *exec(std::string s);
 };
 
 NAMESPACE_HTML5_END;

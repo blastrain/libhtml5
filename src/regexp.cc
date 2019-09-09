@@ -67,6 +67,11 @@ bool regexp::test(std::string s)
     return HTML5_CALLb(this->v, test, s);
 }
 
+array *regexp::exec(std::string s)
+{
+    return array::create(HTML5_CALLv(this->v, exec, s));
+}
+
 HTML5_PROPERTY_IMPL(regexp, bool, global);
 HTML5_PROPERTY_IMPL(regexp, bool, ignoreCase);
 HTML5_PROPERTY_IMPL(regexp, int, lastIndex);

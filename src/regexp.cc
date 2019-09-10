@@ -67,6 +67,15 @@ bool regexp::test(std::string s)
     return HTML5_CALLb(this->v, test, s);
 }
 
+std::vector<html5::string> regexp::exec(const std::string &s)
+{
+    auto v = HTML5_CALLv(this->v, exec, s);
+    if (v.isNull()) {
+        return std::vector<html5::string>();
+    }
+    return toArray<html5::string>(v);
+}
+
 HTML5_PROPERTY_IMPL(regexp, bool, global);
 HTML5_PROPERTY_IMPL(regexp, bool, ignoreCase);
 HTML5_PROPERTY_IMPL(regexp, int, lastIndex);
